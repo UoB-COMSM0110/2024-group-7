@@ -1,9 +1,9 @@
 # Group7: Bomberman
 
-<figure style="text-align: center;">
-    <img src="Assets/Images/group_meeting.png"
+<figure>
+    <img src="Assets/Images/group_meeting.jpg"
          alt="Group members sitting behind a paper prototype of the game">
-   <figcaption>05.02.2024</figcaption>
+   <figcaption style="text-align: center;">05.02.2024</figcaption>
 </figure>
 
 ## Members
