@@ -28,3 +28,25 @@ Most games in the Bomberman franchise largely revolve around two modes of play; 
 
 Singleplayer roguelite dungeon crawling mode
 FEATURES: Meta-progression powerups, new bomb variants
+
+## Requirements
+
+Stakeholders
+1.User
+2.Developer
+3.Product manager
+
+User stores
+As a user, I want to win the game, so that I can get pleasure during the game.
+As a developer, I want to desing the game well, so that the game will be playable.
+As a product manager, I want to have a better user experience, so that I can capture more users.
+
+Case specification
+As a user, I want to win the game, so that I can get pleasure during the game.
+1.Set keys
+2.Return to the homepage
+3.Select start option
+4.PLAYING: move/set bombs
+5.P1 win or P2 win
+6.Exit or Restart
+
