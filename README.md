@@ -54,5 +54,5 @@ As a game maker, I want to have a better player experience, so that I can captur
 7.Exit or Restart  
 
 
-### Case use diagram  
+### Use-Case Diagram  
 TODO
