@@ -21,32 +21,38 @@
 -Zora Chen, <fg23262@bristol.ac.uk>, fg23262
 
 ## ABOUT
-
 Most games in the Bomberman franchise largely revolve around two modes of play; single player campaigns where the player must defeat enemies and reach an exit to progress through levels, and multiplayer modes where players must attempt to eliminate each other and be the last one standing. Gameplay involves strategically placing down bombs, which explode in multiple directions after a certain amount of time, in order to destroy obstacles and kill enemies and other players. The player can pick up various power-ups, giving them benefits such as larger explosions or the ability to place more bombs down at a time. The player is killed if they touch an enemy or get caught up in a bomb's explosion, including their own, requiring players to be cautious of their own bomb placement. In addition to the main maze-based Bomberman games, some spin-off titles involve adventure, platformer, puzzle, and kart racing gameplay.
 
 ## TWIST
-
-Singleplayer roguelite dungeon crawling mode
-FEATURES: Meta-progression powerups, new bomb variants
+Singleplayer roguelite dungeon crawling mode  
+FEATURES: Meta-progression powerups, new bomb variants  
 
 ## Requirements
 
-Stakeholders
-1.User
-2.Developer
-3.Product manager
+### Stakeholders  
+1.Player  
+2.Game Maker    
 
-User stores
-As a user, I want to win the game, so that I can get pleasure during the game.
-As a developer, I want to desing the game well, so that the game will be playable.
-As a product manager, I want to have a better user experience, so that I can capture more users.
 
-Case specification
-As a user, I want to win the game, so that I can get pleasure during the game.
-1.Set keys
-2.Return to the homepage
-3.Select start option
-4.PLAYING: move/set bombs
-5.P1 win or P2 win
-6.Exit or Restart
+### User stores
+As a player, I want to clarify the game rules, so that I can play the game well.  
+As a player, I want to know how to control the character, so that I can experience the game.  
+As a player, I want to win the game, so that I can get pleasure during the game.  
+As a player, I want to know what ability and live I have, so that I can make game strategy.  
+As a game maker, I want to design the game successfully, so that I can learn much program skills.  
+As a game maker, I want to desing the game well, so that the game will be playable.  
+As a game maker, I want to have a better player experience, so that I can capture more users.  
 
+
+### Case specification
+1.Select setting  
+2.Set keyboards  
+3.Return to the homepage  
+4.Select start option  
+5.PLAYING: move/set bombs/get game items  
+6.P1 win or P2 win  
+7.Exit or Restart  
+
+
+### Case use diagram  
+TODO
