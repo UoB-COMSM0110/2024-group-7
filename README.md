@@ -38,10 +38,10 @@ FEATURES: Meta-progression powerups, new bomb variants
 As a player, I want to clarify the game rules, so that I can play the game well.  
 As a player, I want to know how to control the character, so that I can experience the game.  
 As a player, I want to win the game, so that I can get pleasure during the game.  
-As a player, I want to know what ability and live I have, so that I can make game strategy.  
+As a player, I want to know what ability and how many live I have, so that I can make game strategy.  
 As a game maker, I want to design the game successfully, so that I can learn much program skills.  
 As a game maker, I want to desing the game well, so that the game will be playable.  
-As a game maker, I want to have a better player experience, so that I can capture more users.  
+As a game maker, I want to have a better player experience, so that I can capture more players.  
 
 
 ### Case specification
