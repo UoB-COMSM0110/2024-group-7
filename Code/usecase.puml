@@ -1,0 +1,81 @@
+@startuml
+top to bottom direction
+actor "Gamer" as gmr
+rectangle Menu {
+  usecase "Play" as M1
+  usecase "Select Character" as M2
+  usecase "Achievements" as M3
+  usecase "Settings" as M4
+  usecase "Exit" as M5
+  usecase "Reset" as M6
+  usecase "Mode/Timer" as S1
+  usecase "Resolution" as S2
+  usecase "Keybindings" as S3
+}
+
+rectangle Action {
+  usecase "Walk" as A1
+  usecase "Bomb" as A2
+}
+
+rectangle Consequence {
+  usecase "Bomb Walls" as C1
+  usecase "Bomb Enemy" as C2
+  usecase "Bomb Yourself" as C3
+  usecase "Walk into Enemy" as C4
+}
+
+rectangle Reward{
+  usecase "Key" as I1
+  usecase "Points" as I2
+  usecase "Door" as I3
+  usecase "Boss" as I4
+  usecase "Powerup" as I5
+}
+
+rectangle Powers{
+  usecase "Bomb Range" as P1
+  usecase "Bomb Strength" as P2
+  usecase "Bomb Timer" as P3
+  usecase "Extra Bomb" as P4
+  usecase "Walking Speed" as P5
+  usecase "Extra Life" as P6
+}
+
+gmr --> M1
+gmr --> M2
+gmr --> M3
+gmr --> M4
+gmr --> M5
+M3 --> M6
+
+M4 --> S1
+M4 --> S2
+M4 --> S3
+
+M1 --> A1
+M1 --> A2
+
+A1 --> C4
+A2 --> C1
+A2 --> C2
+A2 --> C3
+
+C3 --> (Die) #line:red;line.bold
+C4 --> (Die) #line:red;line.bold
+
+C2 --> I1
+C2 --> I2
+C1 --> I3
+I3 --> I4
+I3 --> I5
+I4 --> C2
+
+I5 --> P1
+I5 --> P2
+I5 --> P3
+I5 --> P4
+I5 --> P5
+I5 --> P6
+
+@enduml
