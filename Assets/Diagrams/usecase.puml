@@ -1,4 +1,4 @@
-@startuml Bomberman Dungeon
+@startuml Use Case Diagram
 left to right direction
 actor "Gamer" as gmr
 rectangle Menu {
@@ -7,7 +7,7 @@ rectangle Menu {
   usecase "Select Character" as M2
   usecase "Achievements" as M3
   usecase "Reset" as M6
-  usecase "Mode/Timer" as S1
+  usecase "Mode" as S1
   usecase "Resolution" as S2
   usecase "Keybindings" as S3
   usecase "Play" as M1
@@ -60,8 +60,9 @@ A2 --> C1
 A2 --> C2
 A2 --> C3
 
-C3 --> (Die) #line:red;line.bold
-C4 --> (Die) #line:red;line.bold
+C3 --> (Lose Life) #line:red;line.bold
+C4 --> (Lose Life) #line:red;line.bold
+(Lose Life) --> (Game Over) #red;line.dashed
 
 C2 --> R1
 C2 --> R3
@@ -75,4 +76,5 @@ R2 --> P4
 R2 --> P5
 R2 --> P6
 
+note right of S1: Timed games end after 5 minutes. Untimed games spawn harder enemies as time progresses.
 @enduml
