@@ -1,4 +1,4 @@
-@startuml
+@startuml Bomberman Dungeon
 top to bottom direction
 actor "Gamer" as gmr
 rectangle Menu {
