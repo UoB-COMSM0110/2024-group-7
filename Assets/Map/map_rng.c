@@ -6,7 +6,7 @@
 
 #define ROWS 12
 #define COLS 14
-#define GENS 90
+#define GENS 100
 #define BLANK 32
 #define WALL 219
 #define DUNGEON 176
