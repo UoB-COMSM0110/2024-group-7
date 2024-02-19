@@ -1,0 +1,68 @@
+@startuml class
+
+class Window
+class Map
+class Character
+class Settings
+Interface "Event Listener"
+abstract Wall
+abstract Interactable
+abstract Items
+class Key
+class Door
+class Health
+class Points
+abstract Achievements
+abstract "Power-up"
+abstract Enemies
+class Player
+class Bomb
+class Slime
+abstract Menu
+class "Bomb-up"
+class "Fire-up"
+class "Speed-up"
+class "Health-up"
+class "Unbreakable Wall"
+class "Breakable Wall"
+class "Explosion Radius"
+
+Window --o "Event Listener"
+"Event Listener" --* Settings
+Window *--* Settings
+Character *-- Player
+Window *-- Map
+Map *-- Interactable
+
+
+
+
+"Event Listener" o-- Player
+Player --|> Interactable
+Interactable <|-- Bomb
+Interactable <|-- Enemies
+Interactable <|-- Wall
+Interactable <|-- Items
+Items <|-- Key
+Items <|-- Door
+Items <|-- "Power-up"
+"Power-up" <|-- "Bomb-up"
+"Power-up" <|-- "Fire-up"
+"Power-up" <|-- "Speed-up"
+"Power-up" <|-- "Health-up"
+
+Bomb *-- "Explosion Radius"
+"Explosion Radius" -- "Breakable Wall"
+
+Wall <|-- "Unbreakable Wall"
+Wall <|-- "Breakable Wall"
+
+Enemies <|-- Slime
+Enemies -- "Explosion Radius"
+Points --o "Explosion Radius"
+Health --o "Explosion Radius"
+
+Achievements --* Points
+Achievements --* "Power-up"
+
+@enduml

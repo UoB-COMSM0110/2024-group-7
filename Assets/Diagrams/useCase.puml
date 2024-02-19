@@ -1,4 +1,4 @@
-@startuml Use Case Diagram
+@startuml useCase
 left to right direction
 actor "Gamer" as gmr
 rectangle Menu {

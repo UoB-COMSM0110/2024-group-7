@@ -3,7 +3,7 @@ import processing.core.PApplet;
 import processing.core.PFont;
 
 public class Bomberman extends PApplet{
-    boolean menu=true, play=false,  up=false, down=false, left=false, right=false;
+    boolean menu=true, play=false,  up=false, down=false, left=false, right=false, bomb=false;
     int width=960, height=540;
     public void settings() {
         size(width, height);
@@ -37,6 +37,14 @@ public class Bomberman extends PApplet{
             square(px,py, 30);
         }
     }
+    /*
+    public class Bomb{
+        Bomb(int x, int y){
+            fill(233, 56, 136);
+            square(px,py, 30);
+        }
+    }
+    */
     Player one = new Player(45, 105);
     public void draw() {
         if(menu) {
@@ -61,13 +69,10 @@ public class Bomberman extends PApplet{
         }
         if(play){
             menu=false;
-            background(87, 108, 164);
-            fill(165, 165, 165);
+            background(165, 165, 165);
+            fill(87, 108, 164);
             noStroke();
-            rect(0, 0, width, 75);
-            rect(0, 75, 15, 465);
-            rect(945, 75, 15, 465);
-            rect(0, 525, width, 15);
+            rect(15, 75, 930, 450);
             fill(93, 88, 95);
             for (int i = 15; i < width - 15; i += 30) {
                 square(i, 75, 30);
@@ -121,6 +126,9 @@ public class Bomberman extends PApplet{
         }
         if (key =='d'){
             right=true;
+        }
+        if (keyCode == SHIFT){
+            bomb=true;
         }
     }
     public static void main(String[] args){
