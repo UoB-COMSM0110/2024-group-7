@@ -38,9 +38,9 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 ### USER STORIES
 
->"As a player, I want intuitive and reconfigurable controls." (physical impairment)
+>"As a player, I want intuitive and reconfigurable controls." (Physical Impairment)
 
->"As a player, I want sprites to be distingushable based on shape, not colour." (visual impairment)
+>"As a player, I want sprites to be distingushable based on shape, not colour." (Visual Impairment)
 
 >"As a player, I want to customise my character."
 
@@ -76,13 +76,25 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 ### CASE SPECIFICATIONS
 
-1. Select setting  
-2. Set keyboards  
-3. Return to the homepage  
-4. Select start option  
-5. PLAYING: move/set bombs/get game items  
-6. P1 win or P2 win  
-7. Exit or Restart  
+| Basic Flow | Alternative Flow |
+| ----- | ----- |
+| | Rebind Keys |
+| | Change Character |
+| | Choose Mode |
+| | Reset Achievements |
+| Play Untimed| Exit |
+| Explore Dungeon | Walk into Wall|
+| Bomb Breakable Wall | <span style="color:red;"> Bomb Yourself: Game over </span> |
+| <span style="color:green;"> Find Door </span> | |
+| Spot Enemy | <span style="color:red;"> Walk into Enemy: Game Over </span> |
+| Bomb Enemy | <span style="color:red;"> Bomb Yourself: Game Over </span> |
+| <span style="color:green;"> Receve Points </span> | |
+| <span style="color:green;"> Receve Key </span> | |
+| Open Door | Explore more ~~or get lost~~ |
+| Choose ' Health Up' Power up | Choose other Power Up ~~or none~~ |
+| <span style="color:orange;"> Walk into Enemy: Lose Life </span> | Spot Enemy |
+| <span style="color:red;"> Bomb Yourself: Game Over </span> | ~~Or be better at the Game~~ |
+| Restart with Meta Progression  | Try other Mode instead ~~or exit~~|
 
 ### USE CASE DIAGRAM  
 
@@ -95,7 +107,8 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 ### RREFLECTION
 
-(300 w)
+This exercise has helped us explore actions and options that need 
+to be implemented within our game.
 
 ## DESIGN
 
@@ -108,7 +121,7 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 </figure>
 </center>
 
-### COMMUNICATION Diagram
+### COMMUNICATION DIAGRAM
 
 <center>
 <figure>
@@ -116,6 +129,11 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
             alt="Communication Diagram">
 </figure>
 </center>
+
+### RREFLECTION
+
+This exercise has helped us structure our codeand assgign tasks 
+within the group.
 
 ## IMPLEMENTATION
 
@@ -131,14 +149,14 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 ## PROCESS
 
-### Tools
+### TOOLS
 
 - [Slack](https://bombermandungeon.slack.com/ssb/redirect)
 - [Jira](https://bomberman-dungeon.atlassian.net/jira/software/projects/BOM/boards/1)
 - IntelliJ
 - Github Flow
 
-### Code Style
+### CODE STYLE
 
 ```java
 public class Bomberman extends PApplet {
@@ -150,6 +168,8 @@ public class Bomberman extends PApplet {
    }
 }
 ```
+
+### MEMBERS
 
 <center>
 
