@@ -76,6 +76,8 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 ### CASE SPECIFICATIONS
 
+<center>
+
 | Basic Flow | Alternative Flow |
 | ----- | ----- |
 | | Rebind Keys |
@@ -95,6 +97,8 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 | <span style="color:orange;"> Walk into Enemy: Lose Life </span> | Spot Enemy |
 | <span style="color:red;"> Bomb Yourself: Game Over </span> | ~~Or be better at the Game~~ |
 | Restart with Meta Progression  | Try other Mode instead ~~or exit~~|
+
+</center>
 
 ### USE CASE DIAGRAM  
 
