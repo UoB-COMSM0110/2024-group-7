@@ -32,17 +32,32 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 ### STAKEHOLDERS
 
-TBA
+- Players
+- Developers
+- Markers
 
 ### USER STORIES
 
-- As a player, I want to clarify the game rules, so that I can play the game well.  
-- As a player, I want to know how to control the character, so that I can experience the game.  
-- As a player, I want to win the game, so that I can get pleasure during the game.  
-- As a player, I want to know what ability and how many live I have, so that I can make game strategy.  
-- As a game maker, I want to design the game successfully, so that I can learn much program skills.  
-- As a game maker, I want to desing the game well, so that the game will be playable.  
-- As a game maker, I want to have a better player experience, so that I can capture more players.  
+>"As a player, I want intuitive and reconfigurable controls." (physical impairment)
+>"As a player, I want sprites to be distingushable based on shape, not colour." (visual impairment)
+>"As a player, I want to customise my character."
+>"As a player, I want a clear understanding of the game mechanics."
+>"As a player, I want achievable yet challenging goals."  
+>"As a player, I want a straightforward HUD to efffectively strategize."
+>"As a player, I want a to keep track of my achievements."
+>"As a player, I want replayability and a sense of progression."
+>"As a player, I want to explore different game modes and difficultiy levels"
+>"As a player, I want to relive the nostalgia of 8-bit games on a CRT."
+>"As a player, I want to blow up my friends, even if they are far away."
+
+>"As a developer, I want to gain industry relevant skills"
+>"As a developer, I want to work well as part of a team"
+>"As a developer, I want to plan my time well and do my fair share of work."
+>"As a developer, I want to set a good example for the next cohort."
+
+>"As a marker, I want to experience all core game mechanics within 5 minutes."
+>"As a marker, I want to feel compelled to play the game in my own time."
+>"As a marker, I want to not be bored by a generic game clone."
 
 ### CASE SPECIFICATIONS
 
