@@ -1,4 +1,4 @@
-# Group7: Bomberman1
+# Group7: Bomberman
 
 <figure>
     <p align="center">
