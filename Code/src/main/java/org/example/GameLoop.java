@@ -2,12 +2,12 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PFont;
 
-public class Bomberman extends PApplet{
+public class GameLoop extends PApplet{
     boolean menu=true, play=false,  up=false, down=false, left=false, right=false, bomb=false;
     int width=960, height=540;
     public void settings() {
         size(width, height);
-        //surface.setTitle("BOMBERMAN DUNGEON");
+        //surface.setTitle("GameLoop DUNGEON");
         //noLoop();
     }
     public class Player{
@@ -132,8 +132,8 @@ public class Bomberman extends PApplet{
         }
     }
     public static void main(String[] args){
-        String[] processingArgs = {"Bomberman"};
-        Bomberman dungeon = new Bomberman();
+        String[] processingArgs = {"GameLoop"};
+        GameLoop dungeon = new GameLoop();
         PApplet.runSketch(processingArgs, dungeon);
     }
 }
