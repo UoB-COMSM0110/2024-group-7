@@ -1,8 +1,9 @@
 package org.example;
 import processing.core.PApplet;
 import processing.core.PFont;
+import processing.core.PImage;
 
-public class Bomberman extends PApplet{
+public class Bomberman extends PApplet {
     boolean menu=true, play=false,  up=false, down=false, left=false, right=false, bomb=false;
     int width=960, height=540;
     public void settings() {
@@ -10,47 +11,24 @@ public class Bomberman extends PApplet{
         //surface.setTitle("BOMBERMAN DUNGEON");
         //noLoop();
     }
-    public class Player{
-        int px, py;
-        Player(int x, int y){
-            px=x;
-            py=y;
-        }
-        void render(){
-            fill(233, 56, 136);
-            square(px,py, 30);
-        }
-        void up(){
-            py-=30;
-            square(px,py, 30);
-        }
-        void down(){
-            py+=30;
-            square(px,py, 30);
-        }
-        void left(){
-            px-=30;
-            square(px,py, 30);
-        }
-        void right(){
-            px+=30;
-            square(px,py, 30);
-        }
+
+    //define variables
+    PImage  player1Image;
+    Player one;
+
+    //load variables
+    public void setup(){
+        player1Image = loadImage("images/player.png");
+        one = new Player(45, 105,this, player1Image);
+        println("Setup complete.");
     }
-    /*
-    public class Bomb{
-        Bomb(int x, int y){
-            fill(233, 56, 136);
-            square(px,py, 30);
-        }
-    }
-    */
-    Player one = new Player(45, 105);
+
+
     public void draw() {
         if(menu) {
             background(87, 108, 164);
-            PFont Cherry = createFont("Cherry Bomb One Regular", 60);
-            PFont Daruma = createFont("Darumadrop One Regular", 60);
+            PFont Cherry = createFont("CherryBombOne-Regular.ttf", 60);
+            PFont Daruma = createFont("DarumadropOne-Regular.ttf", 60);
             //String[] fontList = PFont.list();
             //printArray(fontList);
             textFont(Cherry, 150);
@@ -132,8 +110,9 @@ public class Bomberman extends PApplet{
         }
     }
     public static void main(String[] args){
-        String[] processingArgs = {"Bomberman"};
-        Bomberman dungeon = new Bomberman();
-        PApplet.runSketch(processingArgs, dungeon);
+//        String[] processingArgs = {"Bomberman"};
+//        Bomberman dungeon = new Bomberman();
+//        PApplet.runSketch(processingArgs, dungeon);
+        PApplet.main("org.example.Bomberman");
     }
 }
