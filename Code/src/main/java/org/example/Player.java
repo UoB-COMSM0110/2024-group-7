@@ -15,7 +15,6 @@ public class Player{
     }
     void render(){
         parent.image(playerImage,px,py,30,30);
-
     }
     void up(){
         py-=30;
@@ -29,4 +28,7 @@ public class Player{
     void right(){
         px+=30;
     }
+
+    int x(){return px;}
+    int y(){return py;}
 }
