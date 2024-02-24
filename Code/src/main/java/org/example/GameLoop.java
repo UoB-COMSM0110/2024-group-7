@@ -1,6 +1,7 @@
 package org.example;
 import processing.core.PApplet;
 import processing.core.PFont;
+import processing.core.PImage;
 
 public class GameLoop extends PApplet{
     boolean menu=true, play=false,  up=false, down=false, left=false, right=false, bomb=false;
@@ -49,8 +50,8 @@ public class GameLoop extends PApplet{
     public void draw() {
         if(menu) {
             background(87, 108, 164);
-            PFont Cherry = createFont("Cherry Bomb One Regular", 60);
-            PFont Daruma = createFont("Darumadrop One Regular", 60);
+            PFont Cherry = createFont("CherryBombOne-Regular.ttf", 60);
+            PFont Daruma = createFont("DarumadropOne-Regular.ttf", 60);
             //String[] fontList = PFont.list();
             //printArray(fontList);
             textFont(Cherry, 150);
@@ -132,6 +133,10 @@ public class GameLoop extends PApplet{
         }
     }
     public static void main(String[] args){
+//        String[] processingArgs = {"Bomberman"};
+//        Bomberman dungeon = new Bomberman();
+//        PApplet.runSketch(processingArgs, dungeon);
+        PApplet.main("org.example.Bomberman");
         String[] processingArgs = {"GameLoop"};
         GameLoop dungeon = new GameLoop();
         PApplet.runSketch(processingArgs, dungeon);
