@@ -133,12 +133,9 @@ public class GameLoop extends PApplet{
         }
     }
     public static void main(String[] args){
-//        String[] processingArgs = {"Bomberman"};
-//        Bomberman dungeon = new Bomberman();
-//        PApplet.runSketch(processingArgs, dungeon);
-        PApplet.main("org.example.Bomberman");
-        String[] processingArgs = {"GameLoop"};
-        GameLoop dungeon = new GameLoop();
-        PApplet.runSketch(processingArgs, dungeon);
+        //String[] processingArgs = {"GameLoop"};
+        //GameLoop dungeon = new GameLoop();
+        //PApplet.runSketch(processingArgs, dungeon);
+        PApplet.main("org.example.GameLoop");
     }
 }
