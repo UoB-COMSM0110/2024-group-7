@@ -5,53 +5,38 @@ import processing.core.PImage;
 
 public class GameLoop extends PApplet{
     boolean menu=true, play=false,  up=false, down=false, left=false, right=false, bomb=false;
-    int width=960, height=540;
+    int width=960, height=540, bx=0, by=0, frameCount=0, uWallsCounter=0, uWallsTotal=0, bombsTotal=0, enemiesTotal=1;
     public void settings() {
         size(width, height);
         //surface.setTitle("GameLoop DUNGEON");
         //noLoop();
     }
-    public class Player{
-        int px, py;
-        Player(int x, int y){
-            px=x;
-            py=y;
-        }
-        void render(){
-            fill(233, 56, 136);
-            square(px,py, 30);
-        }
-        void up(){
-            py-=30;
-            square(px,py, 30);
-        }
-        void down(){
-            py+=30;
-            square(px,py, 30);
-        }
-        void left(){
-            px-=30;
-            square(px,py, 30);
-        }
-        void right(){
-            px+=30;
-            square(px,py, 30);
-        }
+    PImage player1Image;
+    PImage bomb1Image;
+    PImage uWall;
+
+    PImage enemy1Image;
+    Player pone;
+    Bomb [] bombs = new Bomb [3];
+    int[] bombTimer ={0,0,0};
+    Wall [] uWalls = new Wall [200];
+    Enemy [] enemies = new Enemy [200];
+
+    //load variables
+    public void setup(){
+        frameRate(60);
+        player1Image = loadImage("images/player.png");
+        pone = new Player(45, 105,this, player1Image);
+        bomb1Image = loadImage("images/bomb.png");
+        uWall = loadImage("images/unbreakable_wall.png");
+        enemy1Image =loadImage("images/red_mob.png");
+        enemies[0]= new Enemy(225, 105,this, enemy1Image);
     }
-    /*
-    public class Bomb{
-        Bomb(int x, int y){
-            fill(233, 56, 136);
-            square(px,py, 30);
-        }
-    }
-    */
-    Player one = new Player(45, 105);
     public void draw() {
         if(menu) {
             background(87, 108, 164);
-            PFont Cherry = createFont("CherryBombOne-Regular.ttf", 60);
-            PFont Daruma = createFont("DarumadropOne-Regular.ttf", 60);
+            PFont Cherry = createFont("fonts/CherryBombOne-Regular.ttf", 60);
+            PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
             //String[] fontList = PFont.list();
             //printArray(fontList);
             textFont(Cherry, 150);
@@ -76,35 +61,155 @@ public class GameLoop extends PApplet{
             rect(15, 75, 930, 450);
             fill(93, 88, 95);
             for (int i = 15; i < width - 15; i += 30) {
-                square(i, 75, 30);
-                square(i, height - 15 - 30, 30);
+                uWalls[uWallsCounter] = new Wall(i, 75, this, uWall);
+                uWalls[uWallsCounter].render();
+                uWallsCounter++;
+                uWalls[uWallsCounter] = new Wall(i, height-15-30, this, uWall);
+                uWalls[uWallsCounter].render();
+                uWallsCounter++;
+                //square(i, 75, 30);
+                //square(i, height - 15 - 30, 30);
             }
             for (int j = 75; j < height - 15; j += 30) {
-                square(15, j, 30);
-                square(width - 15-30, j, 30);
+                uWalls[uWallsCounter] = new Wall(15, j, this, uWall);
+                uWalls[uWallsCounter].render();
+                uWallsCounter++;
+                uWalls[uWallsCounter] = new Wall(width-15-30, j, this, uWall);
+                uWalls[uWallsCounter].render();
+                uWallsCounter++;
+                //square(15, j, 30);
+                //square(width - 15-30, j, 30);
             }
             for (int i = 75; i < width - 15-30; i += 60) {
                 for (int j = 135; j < height - 15-30; j += 60) {
-                    square(i, j, 30);
+                    uWalls[uWallsCounter] = new Wall(i, j, this, uWall);
+                    uWalls[uWallsCounter].render();
+                    uWallsCounter++;
+                    //square(i, j, 30);
                 }
             }
-            one.render();
+            uWallsTotal=uWallsCounter;
+            uWallsCounter=0;
+            pone.render();
+            enemies[0].render();
         }
         if(up){
-            one.up();
+            boolean collision=false;
+            for (int i =0; i < uWallsTotal; i++) {
+                if (pone.x()==uWalls[i].x() && pone.y()-30==uWalls[i].y()){
+                    collision=true;
+                }
+            }
+            for (int i =0; i < bombsTotal; i++) {
+                if (pone.x()==bombs[i].x() && pone.y()-30==bombs[i].y()){
+                    collision=true;
+                }
+            }
+            for (int i =0; i < enemiesTotal; i++) {
+                if (pone.x()==enemies[i].x() && pone.y()-30==enemies[i].y()){
+                    collision=true;
+                }
+            }
+            if (!collision){
+                pone.up();
+            }
             up=false;
         }
         if(down){
-            one.down();
+            boolean collision=false;
+            for (int i =0; i < uWallsTotal; i++) {
+                if (pone.x()==uWalls[i].x() && pone.y()+30==uWalls[i].y()){
+                    collision=true;
+                }
+            }
+            for (int i =0; i < bombsTotal; i++) {
+                if (pone.x()==bombs[i].x() && pone.y()+30==bombs[i].y()){
+                    collision=true;
+                }
+            }
+            for (int i =0; i < enemiesTotal; i++) {
+                if (pone.x()==enemies[i].x() && pone.y()+30==enemies[i].y()){
+                    collision=true;
+                }
+            }
+            if (!collision){
+                pone.down();
+            }
             down=false;
         }
         if(left){
-            one.left();
+            boolean collision=false;
+            for (int i =0; i < uWallsTotal; i++) {
+                if (pone.x() - 30 == uWalls[i].x() && pone.y() == uWalls[i].y()) {
+                    collision = true;
+                }
+            }
+            for (int i =0; i < bombsTotal; i++) {
+                if (pone.x() - 30 == bombs[i].x() && pone.y() == bombs[i].y()) {
+                    collision = true;
+                }
+            }
+            for (int i =0; i < enemiesTotal; i++) {
+                if (pone.x() - 30 == enemies[i].x() && pone.y() == enemies[i].y()) {
+                    collision = true;
+                }
+            }
+            if (!collision){
+                pone.left();
+            }
             left=false;
         }
         if(right){
-            one.right();
+            boolean collision=false;
+            for (int i =0; i < uWallsTotal; i++) {
+                if (pone.x()+30==uWalls[i].x() && pone.y()==uWalls[i].y()){
+                    collision=true;
+                }
+            }
+            for (int i =0; i < bombsTotal; i++) {
+                if (pone.x()+30==bombs[i].x() && pone.y()==bombs[i].y()){
+                    collision=true;
+                }
+            }
+            for (int i =0; i < enemiesTotal; i++) {
+                if (pone.x()+30==enemies[i].x() && pone.y()==enemies[i].y()){
+                    collision=true;
+                }
+            }
+            if (!collision){
+                pone.right();
+            }
             right=false;
+        }
+        if(bomb){
+            //println(bombsTotal);
+            if (bombsTotal<3) {
+                bombs[bombsTotal] = new Bomb(bx, by, this, bomb1Image);
+                bombs[bombsTotal].render();
+                bombTimer[bombsTotal]=240;
+                bombsTotal++;
+            }
+            bomb=false;
+        }
+        if (bombsTotal>0) {
+            println(bombsTotal, bombTimer[0], bombTimer[1], bombTimer[2], "\n");
+            for (int i = 0; i < bombsTotal; i++) {
+                if (bombTimer[i] > 0) {
+                    bombTimer[i]--;
+                    bombs[i].render();
+                }
+                if (bombTimer[i] == 0 && i+1 == bombsTotal) {
+                    bombsTotal--;
+                }
+                if (bombTimer[i] == 0 && i + 1 < bombsTotal) {
+                    for( int j=i; j<bombsTotal-1; j++) {
+                        bombs[j] = bombs[j+1];
+                        bombTimer[j] = bombTimer[j+1];
+                        bombTimer[j+1]=0;
+                    }
+                    bombsTotal--;
+                }
+            }
         }
     }
     public void mouseClicked() {
@@ -130,6 +235,8 @@ public class GameLoop extends PApplet{
         }
         if (keyCode == SHIFT){
             bomb=true;
+            bx=pone.x();
+            by=pone.y();
         }
     }
     public static void main(String[] args){
