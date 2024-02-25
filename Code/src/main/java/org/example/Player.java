@@ -17,16 +17,16 @@ public class Player{
         parent.image(playerImage,px,py,30,30);
     }
     void up(){
-        py-=30;
+        py-=5;
     }
-    void down(){
-        py+=30;
+    void down() {
+        py+=5;
     }
-    void left(){
-        px-=30;
+    void left() {
+        px-=5;
     }
-    void right(){
-        px+=30;
+    void right() {
+        px+=5;
     }
 
     int x(){return px;}
