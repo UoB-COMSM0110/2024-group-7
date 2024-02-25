@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Code</artifactId>
+    <artifactId>GameLoop</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -13,11 +13,27 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>org.example.GameLoop</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
   <dependencies>
       <dependency>
          <groupId>processing</groupId>
          <artifactId>processing</artifactId>
-         <scope>system</scope>
+         <scope>compile</scope>
          <version>3.4</version>
          <systemPath>${basedir}/src/lib/core.jar</systemPath>
       </dependency>

@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomberman.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomberman.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/2024-group-7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2024-group-7.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/core.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Code/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Code/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,25 +47,30 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Application.Bomberman.executor": "Run",
+    "Application.Code.org.example.GameLoop.executor": "Run",
+    "Application.GameLoop.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "base-render",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/Code/2024-group-7/Code",
+    "last_opened_file_path": "/home/Lea/Documents/Bomberman/2024-group-7",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "configurable.group.editor",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="Bomberman" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.Bomberman" />
+    <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="org.example.GameLoop" />
       <module name="2024-group-7" />
       <extension name="coverage">
         <pattern>
@@ -73,7 +84,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Bomberman" />
+        <item itemvalue="Application.GameLoop" />
       </list>
     </recent_temporary>
   </component>
@@ -102,5 +113,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/2024_group_7$GameLoop.ic" NAME="GameLoop Coverage Results" MODIFIED="1708819313184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>org.example.*</FILTER>
+    </SUITE>
   </component>
 </project>
