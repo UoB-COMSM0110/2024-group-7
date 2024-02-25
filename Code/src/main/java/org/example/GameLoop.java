@@ -162,6 +162,7 @@ public class GameLoop extends PApplet{
                 }
             }
         }
+        elapsedFrames++;
     }
     public void mouseClicked() {
         if (mouseX>=150 && mouseX<350) {
