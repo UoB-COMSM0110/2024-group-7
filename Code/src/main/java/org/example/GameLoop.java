@@ -3,32 +3,48 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 
+import java.util.Objects;
+
+import static java.util.Objects.nonNull;
+
+
 public class GameLoop extends PApplet{
     public static final int tile=30;
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
-    boolean menu=true, play=false,  move=false, up=false, down=false, left=false, right=false, bomb=false;
-    int speed=5, cntGrid=0, totGrid=0, maxBombs=3, totBombs=0, totEnemies=1;
-    PImage pinkBomber, basicBomb, unbreakable, redEnemy;
+    public static final int rows=12;
+    public static final int cols=14;
+    public static final int margin=15;
+    public static final int hud=75;
+    boolean activeStack=false, collision=false, menu=true, play=false,  move=false, up=false, down=false, left=false, right=false, bomb=false, placed=false, topLeft=true, firstCollision=true;
+    public int stackIndex=0, speed=5, maxBombs=3, totBombs=0, totEnemies=1, offsetX=(49*tile), offsetY=(33*tile), topLeftR=0, topLeftC=0, cntCollision=0, CornerR=0, CornerC=0, corner=1;
+    String currentMove="", lastMove="";
+    PImage pinkBomber, basicBomb, wall, rock, crystal, redEnemy;
     Player [] players = new Player [2];
     Bomb [] bombs = new Bomb [maxBombs];
     int[] bombTimer ={0,0,0};
-    Wall [] grid = new Wall [200];
+    Tile [][] tiles = new Tile[rows*9][cols*9];
     Enemy [] enemies = new Enemy [200];
+    String [] stack = new String[12];
 
     public void settings() {
         size(width, height);
     }
     public void setup(){
         frameRate(fps);
-        unbreakable = loadImage("images/unbreakable_wall.png");
+        wall = loadImage("images/unbreakable_wall.png");
+        rock = loadImage("images/rock.png");
+        crystal = loadImage("images/crystal.png");
         pinkBomber = loadImage("images/player.png");
         basicBomb = loadImage("images/bomb.png");
         redEnemy =loadImage("images/red_mob.png");
-        players[0] = new Player(45, 105,this, pinkBomber);
-        enemies[0]= new Enemy(225, 105,this, redEnemy);
+        players[0] = new Player(15+offsetX+14*tile, 75+offsetY+5*tile,this, pinkBomber);
+        enemies[0]= new Enemy(255+offsetX, 105+offsetY,this, redEnemy);
+        Map map = new Map(this, wall, rock, crystal, redEnemy);
+        tiles = map.instructions();
     }
+
     public void draw() {
         if(menu) {
             background(87, 108, 164);
@@ -50,40 +66,38 @@ public class GameLoop extends PApplet{
         }
         if(play){
             menu = false;
-            background(165, 165, 165);
-            fill(87, 108, 164);
-            noStroke();
-            rect(15, 75, 930, 450);
-            fill(93, 88, 95);
-            for (int i = 15; i < width - 15; i += tile) {
-                grid[cntGrid] = new Wall(i, 75, this, unbreakable);
-                grid[cntGrid].render();
-                cntGrid++;
-                grid[cntGrid] = new Wall(i, height-15-tile, this, unbreakable);
-                grid[cntGrid].render();
-                cntGrid++;
-            }
-            for (int j = 75; j < height - 15; j += tile) {
-                grid[cntGrid] = new Wall(15, j, this, unbreakable);
-                grid[cntGrid].render();
-                cntGrid++;
-                grid[cntGrid] = new Wall(width-15-tile, j, this, unbreakable);
-                grid[cntGrid].render();
-                cntGrid++;
-            }
-            for (int i = 75; i < width - 15-tile; i += 60) {
-                for (int j = 135; j < height - 15-tile; j += 60) {
-                    grid[cntGrid] = new Wall(i, j, this, unbreakable);
-                    grid[cntGrid].render();
-                    cntGrid++;
+            background(85, 85, 85);
+            translate(-offsetX, -offsetY);
+            for(int j=0; j<rows*8; j++){
+                for(int k=0; k<cols*8; k++){
+                    if(tiles[j][k]!=null && tiles[j][k].px>offsetX-tile && tiles[j][k].px<offsetX+width && tiles[j][k].py>offsetY+hud-tile && tiles[j][k].py<offsetY+height){
+                        tiles[j][k].render();
+                        if (topLeft) {
+                            topLeftR = j;
+                            topLeftC = k;
+                            topLeft=false;
+                        }
+                    }
                 }
             }
-            totGrid=cntGrid;
-            cntGrid=0;
             players[0].render();
-            enemies[0].render();
+            for (int i = 0; i < totEnemies; i++) {
+                if ( nonNull(enemies[i]) && enemies[i].x()>offsetX && enemies[i].x()<offsetX+width-margin && enemies[i].y()>offsetY+hud && enemies[i].y()<offsetY+height){
+                    enemies[i].render();
+                }
+            }
         }
-        if (move){
+        fill(165, 165, 165);
+        noStroke();
+        rect(offsetX, offsetY, width, hud);
+        rect(offsetX, offsetY+hud, margin, height-hud);
+        rect(offsetX+width-margin, offsetY+hud, margin, height-hud);
+        rect(offsetX, offsetY+height-margin, width, margin);
+        if (activeStack){
+            stackIndex--;
+
+        }
+        if (move && !activeStack){
             int x=0, y=0;
             if (up) {
                 x=players[0].x()+tile/2;
@@ -101,38 +115,126 @@ public class GameLoop extends PApplet{
                 x=players[0].x()+tile/2+speed;
                 y=players[0].y()+tile/2;
             }
-            boolean collision = false;
-            for (int i = 0; i < 200; i++) {
-                if (i < totGrid && dist(x, y, grid[i].x()+ (float) tile /2, grid[i].y()+ (float) tile /2)<tile){
-                    collision = true;
+            for (int i = 0; i < 15; i++) {
+                for (int k = 0; k < 31; k++) {
+                    if (!Objects.equals(tiles[topLeftR + i][topLeftC + k].type(), "floor") && dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + (float) tile / 2, tiles[topLeftR + i][topLeftC + k].y() + (float) tile / 2) < tile) {
+                        if (dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + (float) tile / 2, tiles[topLeftR + i][topLeftC + k].y() + (float) tile / 2) < tile) {
+                            collision = true;
+                            cntCollision++;
+                            if (firstCollision) {
+                                CornerR = topLeftR + i;
+                                CornerC = topLeftC + k;
+                                firstCollision = false;
+                            }
+                        }
+                    }
+                    if (Objects.equals(tiles[topLeftR + i][topLeftC + k].type(), "floor") && tiles[topLeftR + i][topLeftC + k].crossRoads) {
+                        boolean a=dist(x, y, tiles[topLeftR + i][topLeftC + k].x() , tiles[topLeftR + i][topLeftC + k].y()) < (float) tile /2, b=dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + tile, tiles[topLeftR + i][topLeftC + k].y()) < (float) tile /2, c=dist(x, y, tiles[topLeftR + i][topLeftC + k].x(), tiles[topLeftR + i][topLeftC + k].y() + tile) < (float) tile /2, d=dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + tile, tiles[topLeftR + i][topLeftC + k].y() + tile) < (float) tile /2;
+                        if (a||b||c||d) {
+                            collision = true;
+                        }
+                    }
                 }
-                if ( i < totBombs && dist(x, y, bombs[i].x()+ (float) tile /2, bombs[i].y()+ (float) tile /2)<tile){
+                if ( i < totBombs && dist(x, y, bombs[i].x()+ (float) tile /2, bombs[i].y()+ (float) tile /2)<tile && !placed){
                     collision = true;
+                    cntCollision++;
                 }
                 if ( i < totEnemies && dist(x, y, enemies[i].x()+ (float) tile /2, enemies[i].y()+ (float) tile /2)<tile){
                     collision = true;
+                    cntCollision++;
+                }
+            }
+            if (cntCollision==1 && !currentMove.equals(lastMove)){
+                if (up || down) {
+                    int dx = players[0].x() + tile / 2 - tiles[CornerR][CornerC].x() - tile / 2;
+                    if (lastMove.equals("left") && dx <0) {
+                        corner=abs((tile+dx))/speed;
+                        for (int i = 0; i <corner; i++) {
+                            players[0].left();
+                            offsetX-=speed;
+                        }
+                        collision = false;
+                        corner=6;
+                    }
+                    if (lastMove.equals("right") && dx > 0) {
+                        corner=abs((tile - dx))/speed;
+                        for (int i=0; i<corner; i++){
+                            players[0].right();
+                            offsetX+=speed;
+                        }
+                        collision = false;
+                        corner=6;
+                    }
+                }
+                if (left || right) {
+                    int dy = players[0].y() + tile / 2 - tiles[CornerR][CornerC].y() - tile / 2;
+                    if (lastMove.equals("up") && dy<0) {
+                        corner=abs((tile+dy))/speed;
+                        for (int i=0; i<corner; i++){
+                            players[0].up();
+                            offsetY-=speed;
+                        }
+                        collision = false;
+                        corner=6;
+                    }
+                    if (lastMove.equals("down") && dy>0) {
+                        corner=abs((tile-dy))/speed;
+                        for (int i=0; i<corner; i++){
+                            players[0].down();
+                            offsetY+=speed;
+                        }
+                        collision = false;
+                        corner=6;
+                    }
                 }
             }
             if (!collision){
                 if (up) {
-                    players[0].up();
+                    for (int i = 0; i < corner; i++) {
+                        players[0].up();
+                        offsetY -= speed;
+                    }
+                    lastMove="up";
                 }
                 if (down) {
-                    players[0].down();
+                    for (int i = 0; i < corner; i++) {
+                        players[0].down();
+                        offsetY += speed;
+                    }
+                    lastMove="down";
                 }
                 if (left) {
-                    players[0].left();
+                    for (int i = 0; i < corner; i++) {
+                        players[0].left();
+                        offsetX -= speed;
+                    }
+                    lastMove="left";
                 }
                 if (right) {
-                    players[0].right();
+                    for (int i = 0; i < corner; i++) {
+                        players[0].right();
+                        offsetX += speed;
+                    }
+                    lastMove="right";
 
                 }
             }
+            collision=false;
+            cntCollision=0;
+            corner=1;
             up=false;
             down=false;
             left=false;
             right=false;
             move=false;
+            topLeft=true;
+            firstCollision=true;
+            topLeftR=0;
+            topLeftC=0;
+            // Maybe make bomb only appear after moving
+            if (totBombs>=1 && dist(x, y, bombs[totBombs-1].x()+ (float) tile /2, bombs[totBombs-1].y()+ (float) tile /2)>tile){
+                placed=false;
+            }
         }
         if(bomb){
             if (totBombs<maxBombs) {
@@ -162,7 +264,6 @@ public class GameLoop extends PApplet{
                 }
             }
         }
-        elapsedFrames++;
     }
     public void mouseClicked() {
         if (mouseX>=150 && mouseX<350) {
@@ -174,23 +275,28 @@ public class GameLoop extends PApplet{
     }
     public void keyPressed(){
         if (key=='w' && !move) {
+            currentMove="up";
             up=true;
             move=true;
         }
         if (key == 's' && !move){
+            currentMove="down";
             down=true;
             move=true;
         }
         if (key =='a' && !move){
+            currentMove="left";
             left=true;
             move=true;
         }
         if (key =='d' && !move){
+            currentMove="right";
             right=true;
             move=true;
         }
         if (keyCode == SHIFT){
             bomb=true;
+            placed=true;
         }
     }
     public static void main(String[] args){

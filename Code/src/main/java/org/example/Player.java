@@ -1,7 +1,6 @@
 package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
-
 public class Player{
     PApplet parent;
     int px, py;

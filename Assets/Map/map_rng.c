@@ -10,6 +10,8 @@
 #define BLANK 32
 #define WALL 219
 #define DUNGEON 176
+#define ROCK 174
+#define CRYSTAL 169
 
 void generator(int room[ROWS][COLS]);
 void translator(int room[ROWS][COLS]);
@@ -88,12 +90,14 @@ void generator(int room[ROWS][COLS]) {
 }
 
 void translator(int room[ROWS][COLS]) {
+   // Initialise all tiles to blank
    int tiles[ROWS*9][COLS*9];
    for(int l=0; l<ROWS*9; l++){
       for(int m=0; m<COLS*9; m++){
          tiles[l][m]=BLANK;
       }
    }   
+   // Fill floor + top and right outside walls
    for(int h=0; h<ROWS; h++){
       for(int i=0; i<COLS; i++){
          if(room[h][i]==1){
@@ -105,6 +109,7 @@ void translator(int room[ROWS][COLS]) {
          }
       }
    }
+// bottom and left walls
    for(int j=0; j<ROWS*8; j++){
       for(int k=0; k<COLS*8; k++){
          if(tiles[j][k]==WALL){
@@ -114,6 +119,7 @@ void translator(int room[ROWS][COLS]) {
          }
       }
    }
+   // floor inside
    for(int j=0; j<ROWS*8; j++){
       for(int k=0; k<COLS*8; k++){
          if(j-1>=0 && k-1>=0 && j+1<(ROWS*8) && k+1<(COLS*8) && tiles[j-1][k-1]!=BLANK && tiles[j-1][k]!=BLANK && tiles[j-1][k+1]!=BLANK
@@ -122,10 +128,38 @@ void translator(int room[ROWS][COLS]) {
          }
       }
    }
+   // grid walls
    for(int j=0; j<ROWS*8; j++){
       for(int k=0; k<COLS*8; k++){
          if(tiles[j][k]==DUNGEON && tiles[j-1][k]==DUNGEON && tiles[j][k-1]==DUNGEON && tiles[j-1][k-1]==DUNGEON){
             tiles[j][k]=WALL;
+         }
+      }
+   }
+   time_t tt=time(NULL);
+   srand(tt);
+   // breakable walls (rock tiles)
+   for(int a=0; a<GENS/5; a++){
+      for(int j=0; j<ROWS*8; j++){
+         for(int k=0; k<COLS*8; k++){
+            int r=rand()%100;
+            if(tiles[j][k]==ROCK && r<3){
+               tiles[j][k]=ROCK;
+            }
+            if(tiles[j][k]==DUNGEON && r<2){
+               tiles[j][k]=ROCK;
+            }
+         }
+      }
+   }
+   // breakable walls (crystal tiles)
+   for(int a=0; a<GENS/6; a++){
+      for(int j=0; j<ROWS*8; j++){
+         for(int k=0; k<COLS*8; k++){
+            int r=rand()%100;
+            if(tiles[j][k]==ROCK && r<2){
+               tiles[j][k]=CRYSTAL;
+            }
          }
       }
    }
@@ -148,6 +182,7 @@ void translator(int room[ROWS][COLS]) {
       }
       fprintf(r, "\n");
    }
+   int counter=0;
    FILE *t=fopen("tiles.txt", "w");
    for(int l=0; l<ROWS*8; l++){
       for(int m=0; m<COLS*8; m++){
@@ -156,14 +191,22 @@ void translator(int room[ROWS][COLS]) {
          }
          if(tiles[l][m]==WALL){
             fprintf(t, "#");
+            counter++;
          }
          if(tiles[l][m]==DUNGEON){
             fprintf(t, "░");
+         }
+         if(tiles[l][m]==ROCK){
+            fprintf(t, "®");
+         }
+         if(tiles[l][m]==CRYSTAL){
+            fprintf(t, "©");
          }
       }
       fprintf(t, "\n");
    }
    fclose(t);
    fclose(r);
+   printf("%i\n", counter);
    return;
 }

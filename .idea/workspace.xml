@@ -4,7 +4,51 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable" />
+    <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/BasicMap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/output/cond.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Map/output/output/cond" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Map.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Tile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/beauty_bomberman.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/blast_radius.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/bomb_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/crystal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/door.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/fire_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/frog_enemy.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/health_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/key.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/piercing_bomb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/rock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/skull_bomb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/speed_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/2024-group-7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2024-group-7.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Map/map_rng.c" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/map_rng.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Map/output/map_rng" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/map_rng" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Map/output/rooms.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/rooms.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Map/output/tiles.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/tiles.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Map/output/unbreakable_wall.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/unbreakable_wall.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Code/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Wall.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/beauty_bomberman.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/blast_radius.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/bomb_up.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/crystal.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/door.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/fire_up.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/frog_enemy.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/health_up.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/key.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/piercing_bomb.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/rock.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/skull_bomb.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/speed_up.PNG" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +67,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -40,8 +87,14 @@
     &quot;Application.Bomberman.executor&quot;: &quot;Run&quot;,
     &quot;Application.Code.org.example.GameLoop.executor&quot;: &quot;Run&quot;,
     &quot;Application.GameLoop.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.ide.FileNotInSourceRootChecker.no.check&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;base-render&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/Lea/Documents/Bomberman/2024-group-7&quot;,
@@ -50,18 +103,14 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Console Colors&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="org.example.GameLoop" />
     <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -79,7 +128,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameLoop" />
         <item itemvalue="Application.GameLoop" />
       </list>
     </recent_temporary>
@@ -123,6 +171,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
