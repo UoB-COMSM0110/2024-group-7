@@ -5,49 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Map/BasicMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Map/output/cond.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Map/output/output/cond" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Map.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Tile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/beauty_bomberman.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/blast_radius.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/bomb_up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/crystal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/door.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/fire_up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/frog_enemy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/health_up.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/key.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/piercing_bomb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/rock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/skull_bomb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/speed_up.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/2024-group-7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2024-group-7.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/map_rng.c" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/map_rng.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/output/map_rng" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/map_rng" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/output/rooms.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/rooms.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/output/tiles.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/tiles.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Map/output/unbreakable_wall.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Map/output/unbreakable_wall.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Code/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Wall.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/beauty_bomberman.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/blast_radius.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/bomb_up.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/crystal.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/door.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/fire_up.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/frog_enemy.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/health_up.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/key.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/piercing_bomb.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/rock.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/skull_bomb.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/resources/images/speed_up.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Map.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,6 +139,16 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="smooth motion, better variable names" />
     <option name="LAST_COMMIT_MESSAGE" value="smooth motion, better variable names" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/2024_group_7$GameLoop.ic" NAME="GameLoop Coverage Results" MODIFIED="1708819313184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

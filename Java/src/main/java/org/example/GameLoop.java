@@ -10,15 +10,15 @@ import static java.util.Objects.nonNull;
 
 public class GameLoop extends PApplet{
     public static final int tile=30;
-    public static final int fps=60;
+    public static final int fps=120;
     public static final int width=960;
     public static final int height=540;
     public static final int rows=12;
     public static final int cols=14;
     public static final int margin=15;
     public static final int hud=75;
-    boolean activeStack=false, collision=false, menu=true, play=false,  move=false, up=false, down=false, left=false, right=false, bomb=false, placed=false, topLeft=true, firstCollision=true;
-    public int stackIndex=0, speed=5, maxBombs=3, totBombs=0, totEnemies=1, offsetX=(49*tile), offsetY=(33*tile), topLeftR=0, topLeftC=0, cntCollision=0, CornerR=0, CornerC=0, corner=1;
+    boolean ready=true, activeStack=false, collision=false, menu=true, play=false,  move=false, up=false, down=false, left=false, right=false, bomb=false, placed=false, topLeft=true, firstCollision=true;
+    public int stackIndex=0, stackCounter=0, speed=5, maxBombs=3, totBombs=0, totEnemies=1, offsetX=(49*tile), offsetY=(33*tile), topLeftR=0, topLeftC=0, cntCollision=0, CornerR=0, CornerC=0, corner=1;
     String currentMove="", lastMove="";
     PImage pinkBomber, basicBomb, wall, rock, crystal, redEnemy;
     Player [] players = new Player [2];
@@ -26,7 +26,7 @@ public class GameLoop extends PApplet{
     int[] bombTimer ={0,0,0};
     Tile [][] tiles = new Tile[rows*9][cols*9];
     Enemy [] enemies = new Enemy [200];
-    String [] stack = new String[12];
+    String [] stack = new String[20];
 
     public void settings() {
         size(width, height);
@@ -94,10 +94,38 @@ public class GameLoop extends PApplet{
         rect(offsetX+width-margin, offsetY+hud, margin, height-hud);
         rect(offsetX, offsetY+height-margin, width, margin);
         if (activeStack){
+            //ready=false;
+            println(players[0].x(), players[0].y());
+            if (Objects.equals(stack[stackCounter], "up")) {
+                players[0].up();
+                offsetY -= speed;
+                lastMove="up";
+            }
+            if (Objects.equals(stack[stackCounter], "down")) {
+                players[0].down();
+                offsetY += speed;
+                lastMove="down";
+            }
+            if (Objects.equals(stack[stackCounter], "left")) {
+                players[0].left();
+                offsetX -= speed;
+                lastMove="left";
+            }
+            if (Objects.equals(stack[stackCounter], "right")) {
+                players[0].right();
+                offsetX += speed;
+                lastMove="right";
+            }
+            stackCounter++;
             stackIndex--;
-
+            if (stackIndex==0){
+                activeStack=false;
+                stackCounter=0;
+                //ready=true;
+            }
         }
-        if (move && !activeStack){
+        if (move && !activeStack){ //&& !ready
+            println(players[0].x(), players[0].y());
             int x=0, y=0;
             if (up) {
                 x=players[0].x()+tile/2;
@@ -115,21 +143,21 @@ public class GameLoop extends PApplet{
                 x=players[0].x()+tile/2+speed;
                 y=players[0].y()+tile/2;
             }
-            for (int i = 0; i < 15; i++) {
-                for (int k = 0; k < 31; k++) {
-                    if (!Objects.equals(tiles[topLeftR + i][topLeftC + k].type(), "floor") && dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + (float) tile / 2, tiles[topLeftR + i][topLeftC + k].y() + (float) tile / 2) < tile) {
-                        if (dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + (float) tile / 2, tiles[topLeftR + i][topLeftC + k].y() + (float) tile / 2) < tile) {
+            for (int i = 0; i < 3; i++) {
+                for (int k = 0; k < 3; k++) {
+                    if (!Objects.equals(tiles[topLeftR+4+i][topLeftC+14+k].type(), "floor") && dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + (float) tile / 2, tiles[topLeftR+4+i][topLeftC+14+k].y() + (float) tile / 2) < tile) {
+                        if (dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + (float) tile / 2, tiles[topLeftR+4+i][topLeftC+14+k].y() + (float) tile / 2) < tile) {
                             collision = true;
                             cntCollision++;
                             if (firstCollision) {
-                                CornerR = topLeftR + i;
-                                CornerC = topLeftC + k;
+                                CornerR = topLeftR+4+i;
+                                CornerC = topLeftC+14+k;
                                 firstCollision = false;
                             }
                         }
                     }
-                    if (Objects.equals(tiles[topLeftR + i][topLeftC + k].type(), "floor") && tiles[topLeftR + i][topLeftC + k].crossRoads) {
-                        boolean a=dist(x, y, tiles[topLeftR + i][topLeftC + k].x() , tiles[topLeftR + i][topLeftC + k].y()) < (float) tile /2, b=dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + tile, tiles[topLeftR + i][topLeftC + k].y()) < (float) tile /2, c=dist(x, y, tiles[topLeftR + i][topLeftC + k].x(), tiles[topLeftR + i][topLeftC + k].y() + tile) < (float) tile /2, d=dist(x, y, tiles[topLeftR + i][topLeftC + k].x() + tile, tiles[topLeftR + i][topLeftC + k].y() + tile) < (float) tile /2;
+                    if (Objects.equals(tiles[topLeftR+4+i][topLeftC+14+k].type(), "floor") && tiles[topLeftR+4+i][topLeftC+14+k].crossRoads) {
+                        boolean a=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() , tiles[topLeftR+4+i][topLeftC+14+k].y()) < (float) tile /2, b=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + tile, tiles[topLeftR+4+i][topLeftC+14+k].y()) < (float) tile /2, c=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x(), tiles[topLeftR+4+i][topLeftC+14+k].y() + tile) < (float) tile /2, d=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + tile, tiles[topLeftR+4+i][topLeftC+14+k].y() + tile) < (float) tile /2;
                         if (a||b||c||d) {
                             collision = true;
                         }
@@ -150,20 +178,16 @@ public class GameLoop extends PApplet{
                     if (lastMove.equals("left") && dx <0) {
                         corner=abs((tile+dx))/speed;
                         for (int i = 0; i <corner; i++) {
-                            players[0].left();
-                            offsetX-=speed;
+                            stack[stackIndex] = "left";
+                            stackIndex++;
                         }
-                        collision = false;
-                        corner=6;
                     }
                     if (lastMove.equals("right") && dx > 0) {
                         corner=abs((tile - dx))/speed;
                         for (int i=0; i<corner; i++){
-                            players[0].right();
-                            offsetX+=speed;
+                            stack[stackIndex] = "right";
+                            stackIndex++;
                         }
-                        collision = false;
-                        corner=6;
                     }
                 }
                 if (left || right) {
@@ -171,57 +195,57 @@ public class GameLoop extends PApplet{
                     if (lastMove.equals("up") && dy<0) {
                         corner=abs((tile+dy))/speed;
                         for (int i=0; i<corner; i++){
-                            players[0].up();
-                            offsetY-=speed;
+                            stack[stackIndex] = "up";
+                            stackIndex++;
                         }
-                        collision = false;
-                        corner=6;
                     }
                     if (lastMove.equals("down") && dy>0) {
                         corner=abs((tile-dy))/speed;
                         for (int i=0; i<corner; i++){
-                            players[0].down();
-                            offsetY+=speed;
+                            stack[stackIndex] = "down";
+                            stackIndex++;
                         }
-                        collision = false;
-                        corner=6;
                     }
                 }
-            }
-            if (!collision){
-                if (up) {
-                    for (int i = 0; i < corner; i++) {
-                        players[0].up();
-                        offsetY -= speed;
+                if (stackIndex >=1) {
+                    activeStack = true;
+                    for (int i=0; i<6; i++){
+                        stack[stackIndex+i]=currentMove;
+                        stackIndex++;
                     }
+                    //ready=true;
+                }
+            }
+            if (!collision && !activeStack) {
+                if (up) {
+                    players[0].up();
+                    offsetY -= speed;
                     lastMove="up";
                 }
                 if (down) {
-                    for (int i = 0; i < corner; i++) {
-                        players[0].down();
-                        offsetY += speed;
-                    }
+                    players[0].down();
+                    offsetY += speed;
                     lastMove="down";
                 }
                 if (left) {
-                    for (int i = 0; i < corner; i++) {
-                        players[0].left();
-                        offsetX -= speed;
-                    }
+                    players[0].left();
+                    offsetX -= speed;
                     lastMove="left";
                 }
                 if (right) {
-                    for (int i = 0; i < corner; i++) {
-                        players[0].right();
-                        offsetX += speed;
-                    }
+                    players[0].right();
+                    offsetX += speed;
                     lastMove="right";
 
                 }
             }
+            /*
+            if (!activeStack) {
+                ready=true;
+            }
+            */
             collision=false;
             cntCollision=0;
-            corner=1;
             up=false;
             down=false;
             left=false;
@@ -274,30 +298,33 @@ public class GameLoop extends PApplet{
         }
     }
     public void keyPressed(){
-        if (key=='w' && !move) {
-            currentMove="up";
-            up=true;
-            move=true;
-        }
-        if (key == 's' && !move){
-            currentMove="down";
-            down=true;
-            move=true;
-        }
-        if (key =='a' && !move){
-            currentMove="left";
-            left=true;
-            move=true;
-        }
-        if (key =='d' && !move){
-            currentMove="right";
-            right=true;
-            move=true;
-        }
-        if (keyCode == SHIFT){
-            bomb=true;
-            placed=true;
-        }
+        //if (!ready) {
+            if (key == 'w' && !move) {
+                currentMove = "up";
+                up = true;
+                move = true;
+            }
+            if (key == 's' && !move) {
+                currentMove = "down";
+                down = true;
+                move = true;
+            }
+            if (key == 'a' && !move) {
+                currentMove = "left";
+                left = true;
+                move = true;
+            }
+            if (key == 'd' && !move) {
+                currentMove = "right";
+                right = true;
+                move = true;
+            }
+            if (keyCode == SHIFT) {
+                bomb = true;
+                placed = true;
+            }
+        //}
+        //ready=false;
     }
     public static void main(String[] args){
         PApplet.main("org.example.GameLoop");
