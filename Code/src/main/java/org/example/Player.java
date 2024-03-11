@@ -5,13 +5,14 @@ import processing.core.PImage;
 public class Player{
     PApplet parent;
     int px, py;
-
+    int health;
     PImage playerImage;
     Player(int x, int y, PApplet parent, PImage playerImage){
         this.parent =parent;
         this.px=x;
         this.py=y;
         this.playerImage = playerImage;
+        this.health = 3;
     }
     void render(){
         parent.image(playerImage,px,py,30,30);
