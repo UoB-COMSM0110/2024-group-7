@@ -4,6 +4,7 @@ import processing.core.PFont;
 import processing.core.PImage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GameLoop extends PApplet{
     public static final int tile=30;
@@ -21,6 +22,13 @@ public class GameLoop extends PApplet{
     ArrayList<Wall> walls;
     ArrayList<BreakableRock> rocks;
     Enemy [] enemies = new Enemy [200];
+    DoorKey doorKey;
+    Door door;
+    ArrayList<BombPowerUp> powerUps = new ArrayList<BombPowerUp>();
+    int powerUp_items = 5;
+    ArrayList<ExtraBomb> extraBombs = new ArrayList<ExtraBomb>();
+    int extraBomb_items = 5;
+    boolean gameWon = false;
 
     public void settings() {
         size(width, height);
@@ -38,6 +46,44 @@ public class GameLoop extends PApplet{
         rocks = generateRocks(rows,cols,chanceOfRock);
         initializeBombs();
         initializeFlames();
+
+        int keyRockIndex = (int) random(rocks.size()); // Key hided at a random breakableRock
+        BreakableRock keyRock = rocks.get(keyRockIndex);
+        keyRock.setHideKey(true);
+        // Initialize key but is not visible
+        doorKey = new DoorKey(keyRock.x(), keyRock.y(), this);
+        doorKey.setVisible(false);
+
+        int doorRockIndex;
+        do {
+            doorRockIndex = (int) random(rocks.size());
+        } while (doorRockIndex == keyRockIndex); // Make sure the door and key are not under the same rock
+
+        BreakableRock doorRock = rocks.get(doorRockIndex);
+        doorRock.setHideDoor(true);
+        door = new Door(doorRock.x(), doorRock.y(), this);
+        door.setVisible(false);
+
+        // Randomly select 5 rocks to place bomb firepower enhancement items
+        for (int i=0; i<powerUp_items; i++) {
+            int powerUpIndex = (int) random(rocks.size());
+            BreakableRock powerUpRock = rocks.get(powerUpIndex);
+            BombPowerUp powerUp = new BombPowerUp(powerUpRock.x(), powerUpRock.y(), this);
+            powerUpRock.setHidePowerUp(true);
+            powerUpRock.setHiddenPowerUp(powerUp); // Associate BombPowerUp and BreakableRock
+            powerUps.add(powerUp);
+        }
+
+        // Randomly select 5 rocks to hide ExtraBomb items
+        for (int i=0; i<extraBomb_items; i++) {
+            int extraBombIndex = (int) random(rocks.size());
+            BreakableRock extraBombRock = rocks.get(extraBombIndex);
+            ExtraBomb extraBomb = new ExtraBomb(extraBombRock.x(), extraBombRock.y(), this);
+            extraBombRock.setHideExtraBomb(true);
+            extraBombRock.setHiddenExtraBomb(extraBomb);
+            extraBombs.add(extraBomb);
+        }
+
     }
     public void draw() {
         if(menu) {
@@ -81,6 +127,57 @@ public class GameLoop extends PApplet{
                     }
                 }
             }
+            if (doorKey != null && !doorKey.collected) {
+                Player player = players[0];
+                float distance = dist(player.px, player.py, doorKey.x, doorKey.y);
+                if (distance<30) {
+                    doorKey.setCollected();
+                }
+            }
+
+            if(doorKey != null & !doorKey.collected) {
+                doorKey.render(this);
+            }
+
+            if (door != null && door.visible) {
+                door.render(this);
+            }
+
+            if (doorKey != null && doorKey.collected && !gameWon) {
+                Player player = players[0];
+                float distanceToDoor = dist(player.px, player.py, door.x, door.y);
+                if (distanceToDoor<30) {
+                    gameWon = true;
+                    println("You've won the game!");
+                }
+            }
+
+            for (BombPowerUp powerUp : powerUps) {
+                if (powerUp.visible) {
+                    powerUp.render(this);
+                    // Check if player collects it
+                    Player player = players[0];
+                    float distanceToPowerUp = dist(player.px, player.py, powerUp.x, powerUp.y);
+                    if (distanceToPowerUp<30) {
+                        powerUp.setVisible(false);
+                        players[0].increasePower();
+                    }
+                }
+            }
+
+            for (ExtraBomb extraBomb : extraBombs) {
+                if (extraBomb.visible) {
+                    extraBomb.render(this);
+                    // Check if player collects it
+                    Player player = players[0];
+                    float distanceToPowerUp = dist(player.px, player.py, extraBomb.x, extraBomb.y);
+                    if (distanceToPowerUp<30) {
+                        extraBomb.setVisible(false);
+                        players[0].increaseMaxBomb();
+                    }
+                }
+            }
+
             players[0].render();
             enemies[0].render();
             for (Bomb [] row :bombs) {
@@ -92,7 +189,8 @@ public class GameLoop extends PApplet{
                     if (packedNumber != 0){
                         int x = packedNumber / 10000;
                         int y = packedNumber % 10000;
-                        creatFlame(x,y,explosionDistance);
+                        //creatFlame(x,y,explosionDistance);
+                        creatFlame(x,y);
                         packedNumber = 0;
                     }
                 }
@@ -105,6 +203,7 @@ public class GameLoop extends PApplet{
                     flame.update();
                 }
             }
+            checkRockDestruction();
 
         }
         if (move){
@@ -194,7 +293,7 @@ public class GameLoop extends PApplet{
             }
         }
         if(bomb){
-            if (totBombs<maxBombs) {
+            if (totBombs<players[0].getMaxBombs()) {
                 int x = players[0].x(), y = players[0].y();
                 int col = (x - 15)/tile, row = (y - 75)/tile;
                 bombs[col][row].showed = true ;
@@ -267,7 +366,7 @@ public class GameLoop extends PApplet{
             }
         }
     }
-    void creatFlame(int x, int y, int explosionDistance){
+    /*void creatFlame(int x, int y, int explosionDistance){
         int col = (x - 15)/tile;
         int row = (y - 15)/tile-2;
         flames[col][row].appear();
@@ -291,7 +390,38 @@ public class GameLoop extends PApplet{
             }
         }
 
+    }*/
+
+    void creatFlame (int x, int y) {
+        // Get the player's current explosion range
+        int explosionDistance = players[0].getExplosionDistance();
+
+        int col = (x - 15)/tile;
+        int row = (y - 75)/tile; // Adjusted to match the game grid's offset
+
+        flames[col][row].appear();
+        for (int i = 1; i <= explosionDistance; i++) {
+            // Modify the grids to the left
+            if (col - i >= 0) {
+                flames[col - i][row].appear();
+            }
+            // Modify the grids to the right
+            if (col + i < cols) {
+                flames[col + i][row].appear();
+            }
+            // Modify the grids upside
+            if (row - i >= 0) {
+                flames[col][row - i].appear();
+
+            }
+//            // Modify the grids downside
+            if (row + i < rows) {
+                flames[col][row + i].appear();
+            }
+        }
     }
+
+
     // Check if flame exist in a position
     boolean flameCheck(int x,int y){
         int col = (x - 15)/tile;
@@ -307,7 +437,7 @@ public class GameLoop extends PApplet{
         }
     }
     public void keyPressed(){
-        if (key=='w' && !move) {
+        if (key =='w' && !move) {
             up=true;
             move=true;
         }
@@ -325,6 +455,37 @@ public class GameLoop extends PApplet{
         }
         if (key == 'c'){
             bomb=true;
+        }
+    }
+
+    public void checkRockDestruction() {
+        for(BreakableRock rock : rocks) {
+            if (!rock.rockExist) {
+                if (rock.hideKey) {
+                    doorKey.setVisible(true);
+                    rock.setHideKey(false);
+                    System.out.println("A key has been revealed at position: x=" + doorKey.x + ", y=" + doorKey.y);
+                }
+                if (rock.hideDoor) {
+                    door.setVisible(true);
+                    rock.setHideDoor(false);
+                    System.out.println("A door has been revealed at position: x=" + door.x + ", y=" + door.y);
+                }
+                if (rock.hidePowerUp) {
+                    BombPowerUp powerUp = rock.getAssociatedPowerUp();
+                    if (powerUp != null) {
+                        powerUp.setVisible(true);
+                    }
+                    rock.setHidePowerUp(false);
+                }
+                if (rock.hideExtraBomb) {
+                    ExtraBomb extraBomb = rock.getAssociatedExtraBomb();
+                    if (extraBomb != null) {
+                        extraBomb.setVisible(true);
+                    }
+                    rock.setHideExtraBomb(false);
+                }
+            }
         }
     }
     public static void main(String[] args){
