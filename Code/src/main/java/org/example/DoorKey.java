@@ -28,7 +28,7 @@ public class DoorKey {
     }
 
     public void setVisible(boolean visible) {
-        this.visible = !visible;
+        this.visible = visible;
         System.out.println("Key visible: " + visible);
     }
 }

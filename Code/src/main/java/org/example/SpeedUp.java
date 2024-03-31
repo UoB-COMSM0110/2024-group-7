@@ -3,27 +3,28 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class ExtraBomb {
+public class SpeedUp {
     int x, y;
     boolean visible = false;
     boolean markedForRemoval = false;
-    PImage extraBombImage;
-    public ExtraBomb(int x, int y, PApplet parent) {
+    PImage speedUpImage;
+
+    public SpeedUp(int x, int y, PApplet parent) {
         this.x = x;
         this.y = y;
-        this.extraBombImage = parent.loadImage("images/bomb_up.PNG");
-        System.out.println("BombUp: " + x + ", " + y);
+        this.speedUpImage = parent.loadImage("images/speed_up.PNG");
+        System.out.println("SpeedUp: " + x + ", " + y);
     }
 
     public void render(PApplet parent) {
         if(visible) {
-            parent.image(this.extraBombImage, this.x, this.y, 30, 30);
+            parent.image(this.speedUpImage, this.x, this.y, 30, 30);
         }
     }
 
     public void setVisible(boolean visible) {
         this.visible = visible;
-        System.out.println("bombup item visible: " + visible);
+        System.out.println("speedUp item visible: " + visible);
     }
 
     public boolean isVisible() {

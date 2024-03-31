@@ -10,8 +10,11 @@ public class BreakableRock extends Wall{
     boolean hideDoor = false;
     boolean hidePowerUp = false;
     boolean hideExtraBomb = false;
-    private BombPowerUp hiddenPowerUp;
-    private ExtraBomb hiddenExtraBomb;
+    boolean hideSpeedUp = false;
+    public BombPowerUp hiddenPowerUp;
+    public ExtraBomb hiddenExtraBomb;
+    public SpeedUp hiddenSpeedUp;
+    boolean markedForRemoval = false;
     BreakableRock(int x, int y, PApplet parent, PImage rock) {
         super(x, y, parent, rock);
         this.health = 1;
@@ -26,13 +29,13 @@ public class BreakableRock extends Wall{
         this.hideDoor = hideDoor;
     }
 
-    public void setHidePowerUp(boolean hidePowerUp) {
-        this.hidePowerUp = hidePowerUp;
+    public void setHideSpeedUp(boolean hideSpeedUp) {
+        this.hideSpeedUp = hideSpeedUp;
     }
 
     // Method to set the hidden power-up
-    public void setHiddenPowerUp(BombPowerUp powerUp) {
-        this.hiddenPowerUp = powerUp;
+    public void setHiddenSpeedUp(SpeedUp SpeedUp) {
+        this.hiddenSpeedUp = SpeedUp;
     }
 
     // Method to get the associated power-up
@@ -52,6 +55,23 @@ public class BreakableRock extends Wall{
     // Method to get the associated extraBomb
     public ExtraBomb getAssociatedExtraBomb() {
         return this.hiddenExtraBomb;
+    }
+
+    public void setHidePowerUp(boolean hidePowerUp) {
+        this.hidePowerUp = hidePowerUp;
+    }
+
+    // Method to set the hidden power-up
+    public void setHiddenPowerUp(BombPowerUp powerUp) {
+        this.hiddenPowerUp = powerUp;
+    }
+
+    public void markForRemoval() {
+        this.markedForRemoval = true;
+    }
+
+    public boolean isMarkedForRemoval() {
+        return this.markedForRemoval;
     }
 
 

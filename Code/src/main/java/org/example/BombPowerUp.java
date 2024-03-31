@@ -6,6 +6,7 @@ import processing.core.PImage;
 public class BombPowerUp {
     int x, y;
     boolean visible = false;
+    boolean markedForRemoval = false;
     PImage powerUpImage;
 
     public BombPowerUp(int x, int y, PApplet parent) {
@@ -28,5 +29,13 @@ public class BombPowerUp {
 
     public boolean isVisible() {
         return visible;
+    }
+
+    public void markForRemoval() {
+        this.markedForRemoval = true;
+    }
+
+    public boolean isMarkedForRemoval() {
+        return this.markedForRemoval;
     }
 }

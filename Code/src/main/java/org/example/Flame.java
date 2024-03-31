@@ -35,4 +35,9 @@ public class Flame {
     }
     int x(){return px;}
     int y(){return py;}
+
+    public boolean isActive() {
+        return showed;
+    }
+
 }
