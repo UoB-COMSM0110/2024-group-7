@@ -1,4 +1,5 @@
 package org.example;
+
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -6,14 +7,16 @@ import processing.core.PImage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Random;
 
 public class GameLoop extends PApplet{
     public static final int tile=30;
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
-    boolean menu=true, play=false,  move=false, up=false, down=false, left=false, right=false, bomb=false;
-    int speed=5, maxBombs=3, totBombs=0, totEnemies=1, explosionDistance = 1;
+    public boolean menu=true, play=false,  move=false, up=false, down=false, left=false, right=false, bomb=false;
+    int totBombs=0, totEnemies=1;
+    int enemyNumber = 5;
     int rows = 15, cols = 31;
     float chanceOfRock = 0.5F;
     PImage pinkBomber, basicBomb, unbreakable, redEnemy, rock, flame;
@@ -22,7 +25,7 @@ public class GameLoop extends PApplet{
     Flame [][] flames = new Flame[cols][rows];
     ArrayList<Wall> walls;
     ArrayList<BreakableRock> rocks;
-    Enemy [] enemies = new Enemy [200];
+    ArrayList<Enemy> enemies;
     DoorKey doorKey;
     Door door;
     ArrayList<BombPowerUp> powerUps = new ArrayList<BombPowerUp>();
@@ -33,6 +36,8 @@ public class GameLoop extends PApplet{
     ArrayList<SpeedUp> speedUps = new ArrayList<SpeedUp>();
     int speedUp_items = 5;
     boolean gameWon = false;
+
+    boolean[][] obstacleGrid;
 
     public void settings() {
         size(width, height);
@@ -45,11 +50,20 @@ public class GameLoop extends PApplet{
         redEnemy =loadImage("images/red_mob.png");
         rock =loadImage("images/rock.png");
         flame = loadImage("images/fire.png");
-        players[0] = new Player(45, 105,this, pinkBomber);
-        enemies[0]= new Enemy(225, 105,this, redEnemy);
+        players[0] = new Player(45, 105, this, pinkBomber);
         rocks = generateRocks(rows,cols,chanceOfRock);
         initializeBombs();
         initializeFlames();
+
+        //generate walls
+        walls = generateWalls(rows, cols);
+
+        initializeObstacleGrid(rows, cols);
+
+        /*enemies[0]= new Enemy(225, 105,this, redEnemy);*/
+        enemies = generateEnemyies();
+
+
 
         HashSet<Integer> chosenIndexes = new HashSet<>();
 
@@ -116,8 +130,7 @@ public class GameLoop extends PApplet{
 
     }
     public void draw() {
-
-        //updateGame();
+        System.out.println("x: "+ players[0].x() + ",    y: " + players[0].y());
 
         if (menu) {
             background(87, 108, 164);
@@ -137,6 +150,7 @@ public class GameLoop extends PApplet{
             textSize(100);
             text("Dungeon", 0, 250, width, 100);
         }
+
         if (play) {
             menu = false;
             background(165, 165, 165);
@@ -144,9 +158,11 @@ public class GameLoop extends PApplet{
             noStroke();
             rect(15, 75, 930, 450);
             fill(93, 88, 95);
-            walls = generateWalls(rows, cols);
             for (Wall wall : walls) {
                 wall.render();
+            }
+            for (Enemy enemy : enemies) {
+                enemy.render();
             }
 
             for (BreakableRock rock : rocks) {
@@ -227,7 +243,12 @@ public class GameLoop extends PApplet{
             }
 
             players[0].render();
-            enemies[0].render();
+
+            //generate enemies
+            for(Enemy singleEnemy : enemies){
+                singleEnemy.render();
+            }
+
             for (Bomb[] row : bombs) {
                 for (Bomb bomb : row) {
                     int packedNumber = bomb.update();
@@ -237,9 +258,7 @@ public class GameLoop extends PApplet{
                     if (packedNumber != 0) {
                         int x = packedNumber / 10000;
                         int y = packedNumber % 10000;
-                        //creatFlame(x,y,explosionDistance);
                         creatFlame(x, y);
-                        packedNumber = 0;
                     }
                 }
             }
@@ -253,9 +272,8 @@ public class GameLoop extends PApplet{
                 }
             }
             removeMarkedObjects();
-
-
         }
+
         if (move) {
             int x = 0, y = 0;
             if (up) {
@@ -276,24 +294,26 @@ public class GameLoop extends PApplet{
             }
             //Collision detection
             boolean collision = false;
+
             for (Wall wall : walls) {
                 if (dist(x, y, wall.x() + (float) tile / 2, wall.y() + (float) tile / 2) < tile) {
                     collision = true;
+                    move = false;
+                    break;
                 }
             }
             for (BreakableRock rock : rocks) {
-//                if (!rock.rockExist){
-//                    collision = false;
-//                }
                 if (rock.rockExist && dist(x, y, rock.x() + (float) tile / 2, rock.y() + (float) tile / 2) < tile) {
                     collision = true;
+                    move = false;
+                    break;
                 }
             }
-            for (int i = 0; i < 200; i++) {
-                if (i < totEnemies && dist(x, y, enemies[i].x() + (float) tile / 2, enemies[i].y() + (float) tile / 2) < tile) {
+            /*for (int i = 0; i < enemyNumber; i++) {
+                if (i < totEnemies && dist(x, y, enemies.get(i).x() + (float) tile / 2, enemies.get(i).y() + (float) tile / 2) < tile) {
                     collision = true;
                 }
-            }
+            }*/
             for (Bomb[] row : bombs) {
                 for (Bomb bomb : row) {
                     if (bomb.showed && !bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) >= tile) {
@@ -317,49 +337,22 @@ public class GameLoop extends PApplet{
                 if (right) {
                     players[0].right();
                 }
-            }
-            up = false;
-            down = false;
-            left = false;
-            right = false;
-            move = false;
-            // Hurt Check
-            boolean hurt = false;
-            for (Flame[] row : flames) {
-                for (Flame flame : row) {
-                    if (flame.showed && dist(x, y, flame.x() + (float) tile / 2, flame.y() + (float) tile / 2) < tile) {
-                        hurt = true;
-                    }
-                }
-            }
-            for (int i = 0; i < 200; i++) {
-                if (i < totEnemies && dist(x, y, enemies[i].x() + (float) tile / 2, enemies[i].y() + (float) tile / 2) < tile) {
-                    hurt = true;
-                }
-            }
-            if (hurt) {
-                players[0].health -= 1;
-                hurt = false;
+            }else {
+                up = false;
+                down = false;
+                left = false;
+                right = false;
+                move = false;
             }
         }
+
         if (bomb) {
-            /*if (totBombs<players[0].getMaxBombs()) {
-                int x = players[0].x(), y = players[0].y();
-                int col = (x - 15)/tile, row = (y - 75)/tile;
-                bombs[col][row].showed = true ;
-                bombs[col][row].timer = 3.0;
-                totBombs++;
-            }
-            bomb=false;*/
             if (totBombs < players[0].getMaxBombs()) {
                 int playerCenterX = players[0].x() + tile / 2;
                 int playerCenterY = players[0].y() + tile / 2;
 
                 int col = (playerCenterX - 15) / tile;
                 int row = (playerCenterY - 75) / tile;
-
-                //int bombX = col * tile + 15;
-                //int bombY = row * tile + 75;
 
                 bombs[col][row].showed = true;
                 bombs[col][row].timer = 3.0;
@@ -379,8 +372,11 @@ public class GameLoop extends PApplet{
                 }
             }
         }
+        if(!(up || right || left || down)) {
+            players[0].px = Math.round(players[0].px / 15.0f) * 15;
+            players[0].py = Math.round(players[0].py / 15.0f) * 15;
+        }
     }
-
 
     ArrayList<Wall> generateWalls(int rows, int cols) {
         ArrayList<Wall> walls = new ArrayList<Wall>();
@@ -397,8 +393,9 @@ public class GameLoop extends PApplet{
         }
         return walls;
     }
+
     ArrayList<BreakableRock> generateRocks(int rows, int cols, float chanceOfRock) {
-        ArrayList<BreakableRock> rocks = new ArrayList<BreakableRock>();
+        ArrayList<BreakableRock> rocks = new ArrayList<>();
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 // Randomly decide whether to place a rock in this grid cell
@@ -412,6 +409,33 @@ public class GameLoop extends PApplet{
         }
         return rocks;
     }
+
+    ArrayList<Enemy> generateEnemyies() {
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        int number =0;
+        Random random = new Random();
+        while(number < enemyNumber){
+            int randomX = random.nextInt(cols);
+            int randomY = random.nextInt(rows);
+            if (!(randomX <4 && randomY <4)) {
+                int x = 15 + randomX * tile;
+                int y = 75 + randomY * tile;
+                if(!areThereRocks(x,y) /*&& !isWallAt(x, y)*/){
+                    enemies.add(new Enemy(x, y, this, redEnemy));
+                    number ++;
+                    System.out.println(number);
+                }
+            }
+        }
+        return enemies;
+    }
+
+    boolean areThereRocks(int x, int y) {
+        int gridX = (x - 15) / tile;
+        int gridY = (y - 75) / tile;
+        return obstacleGrid[gridX][gridY];
+    }
+
     boolean isWallAt(int i, int j) {
         return i == 0 || j == 0 || i == cols - 1 || j == rows - 1 || (i % 2 == 0 && j % 2 == 0);
     }
@@ -433,60 +457,6 @@ public class GameLoop extends PApplet{
             }
         }
     }
-    /*void creatFlame(int x, int y, int explosionDistance){
-        int col = (x - 15)/tile;
-        int row = (y - 15)/tile-2;
-        flames[col][row].appear();
-        for (int i = 1; i <= explosionDistance; i++) {
-            // Modify the grids to the left
-            if (col - i >= 0) {
-                flames[col - i][row].appear();
-            }
-            // Modify the grids to the right
-            if (col + i < rows) {
-                flames[col + i][row].appear();
-            }
-            // Modify the grids upside
-            if (row - i >= 0) {
-                flames[col][row - i].appear();
-
-            }
-//            // Modify the grids downside
-            if (row + i < cols) {
-                flames[col][row + i].appear();
-            }
-        }
-
-    }*/
-
-    /*void creatFlame (int x, int y) {
-        // Get the player's current explosion range
-        int explosionDistance = players[0].getExplosionDistance();
-
-        int col = (x - 15)/tile;
-        int row = (y - 75)/tile; // Adjusted to match the game grid's offset
-
-        flames[col][row].appear();
-        for (int i = 1; i <= explosionDistance; i++) {
-            // Modify the grids to the left
-            if (col - i >= 0) {
-                flames[col - i][row].appear();
-            }
-            // Modify the grids to the right
-            if (col + i < cols) {
-                flames[col + i][row].appear();
-            }
-            // Modify the grids upside
-            if (row - i >= 0) {
-                flames[col][row - i].appear();
-
-            }
-//            // Modify the grids downside
-            if (row + i < rows) {
-                flames[col][row + i].appear();
-            }
-        }
-    }*/
 
     void creatFlame(int x, int y) {
         int explosionDistance = players[0].getExplosionDistance();
@@ -638,7 +608,6 @@ public class GameLoop extends PApplet{
         // 如果有其他類型的物件也需要被移除，繼續在這裡添加相應的邏輯
     }
 
-
     // Check if flame exist in a position
     boolean flameCheck(int x,int y){
         int col = (x - 15)/tile;
@@ -653,62 +622,39 @@ public class GameLoop extends PApplet{
             play=true;
         }
     }
-    public void keyPressed(){
-        if (key =='w' && !move) {
-            up=true;
-            move=true;
-        }
-        if (key == 's' && !move){
-            down=true;
-            move=true;
-        }
-        if (key =='a' && !move){
-            left=true;
-            move=true;
-        }
-        if (key =='d' && !move){
-            right=true;
-            move=true;
-        }
-        if (key == 'c'){
-            bomb=true;
 
-
+    public void keyPressed() {
+        switch (key) {
+            case 'w': up = true; break;
+            case 's': down = true; break;
+            case 'a': left = true; break;
+            case 'd': right = true; break;
+            case 'c': bomb = true; break;
         }
+        move = up || down || left || right;
     }
 
-
-    /*public void checkRockDestruction() {
-        for(BreakableRock rock : rocks) {
-            if (!rock.rockExist) {
-                if (rock.hideKey) {
-                    doorKey.setVisible(true);
-                    rock.setHideKey(false);
-                    System.out.println("A key has been revealed at position: x=" + doorKey.x + ", y=" + doorKey.y);
-                }
-                if (rock.hideDoor) {
-                    door.setVisible(true);
-                    rock.setHideDoor(false);
-                    System.out.println("A door has been revealed at position: x=" + door.x + ", y=" + door.y);
-                }
-                if (rock.hidePowerUp) {
-                    BombPowerUp powerUp = rock.getAssociatedPowerUp();
-                    if (powerUp != null) {
-                        powerUp.setVisible(true);
-                    }
-                    rock.setHidePowerUp(false);
-                }
-                if (rock.hideExtraBomb) {
-                    ExtraBomb extraBomb = rock.getAssociatedExtraBomb();
-                    if (extraBomb != null) {
-                        extraBomb.setVisible(true);
-                    }
-                    rock.setHideExtraBomb(false);
-                }
-            }
+    public void keyReleased() {
+        switch (key) {
+            case 'w': up = false; break;
+            case 's': down = false; break;
+            case 'a': left = false; break;
+            case 'd': right = false; break;
         }
-    }*/
-    public static void main(String[] args){
-        PApplet.main("org.example.GameLoop");
+        move = up || down || left || right;
+    }
+
+    void initializeObstacleGrid(int rows, int cols) {
+        obstacleGrid = new boolean[50][50];//need to be fixed!!!!!
+        for (BreakableRock rock : rocks) {
+            int gridX = (rock.x() - 15) / tile;
+            int gridY = (rock.y() - 75) / tile;
+            obstacleGrid[gridX][gridY] = true;
+        }
+        for (Wall wall : walls) {
+            int gridX = (wall.x() - 15) / tile;
+            int gridY = (wall.y() - 75) / tile;
+            obstacleGrid[gridX][gridY] = true;
+        }
     }
 }
