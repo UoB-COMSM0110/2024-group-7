@@ -2,135 +2,63 @@ package org.example;
 
 import processing.core.PApplet;
 import processing.core.PFont;
-import processing.core.PImage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Random;
+
+//还差炸弹跟消除道具
 
 public class GameLoop extends PApplet{
     public static final int tile=30;
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
-    public boolean menu=true, play=false,  move=false, up=false, down=false, left=false, right=false, bomb=false;
+    public static boolean menu=true, play=false, move=false, up=false, down=false, left=false, right=false, bomb=false;
     int totBombs=0, totEnemies=1;
-    int enemyNumber = 5;
-    int rows = 15, cols = 31;
-    float chanceOfRock = 0.5F;
-    PImage pinkBomber, basicBomb, unbreakable, redEnemy, rock, flame;
-    Player [] players = new Player [2];
-    Bomb [][] bombs = new Bomb [cols][rows];
+    public static int rows = 15, cols = 31;
+    public static Bomb [][] bombs = new Bomb [cols][rows];
     Flame [][] flames = new Flame[cols][rows];
-    ArrayList<Wall> walls;
-    ArrayList<BreakableRock> rocks;
-    ArrayList<Enemy> enemies;
-    DoorKey doorKey;
-    Door door;
-    ArrayList<BombPowerUp> powerUps = new ArrayList<BombPowerUp>();
-    int powerUp_items = 5;
-    ArrayList<ExtraBomb> extraBombs = new ArrayList<ExtraBomb>();
-    int extraBomb_items = 5;
-
-    ArrayList<SpeedUp> speedUps = new ArrayList<SpeedUp>();
-    int speedUp_items = 5;
     boolean gameWon = false;
-
-    boolean[][] obstacleGrid;
 
     public void settings() {
         size(width, height);
     }
     public void setup(){
         frameRate(fps);
-        unbreakable = loadImage("images/unbreakable_wall.png");
-        pinkBomber = loadImage("images/player.png");
-        basicBomb = loadImage("images/bomb.png");
-        redEnemy =loadImage("images/red_mob.png");
-        rock =loadImage("images/rock.png");
-        flame = loadImage("images/fire.png");
-        players[0] = new Player(45, 105, this, pinkBomber);
-        rocks = generateRocks(rows,cols,chanceOfRock);
+
+        ResourceManager.loadAllImages(this);
+
+        //generate walls
+        Obstacle.walls = Wall.generateWalls(rows, cols, this);
+
+        //generate rocks
+        Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this);
+
         initializeBombs();
         initializeFlames();
 
-        //generate walls
-        walls = generateWalls(rows, cols);
+        Obstacle.initializeObstacleGrid(rows, cols);
 
-        initializeObstacleGrid(rows, cols);
+        Character.enemies = Enemy.generateEnemies(this);
 
-        /*enemies[0]= new Enemy(225, 105,this, redEnemy);*/
-        enemies = generateEnemyies();
+        Character.players = Player.setPlayer1(this);
 
+        Items.doorKey = new DoorKey(0,0,this);
+        Items.doorKey.setKey(this);
 
+        Items.door = new Door(0,0,this);
+        Items.door.setDoor(this);
 
-        HashSet<Integer> chosenIndexes = new HashSet<>();
+        BombPowerUp.setPowerUps(this);
 
-        int keyRockIndex = (int) random(rocks.size()); // Key hided at a random breakableRock
-        while (!chosenIndexes.add(keyRockIndex)) {
-            keyRockIndex = (int) random(rocks.size());
-        }
-        BreakableRock keyRock = rocks.get(keyRockIndex);
-        keyRock.setHideKey(true);
-        // Initialize key but is not visible
-        doorKey = new DoorKey(keyRock.x(), keyRock.y(), this);
-        doorKey.setVisible(false);
+        ExtraBomb.setExtraBombs(this);
 
-        /*int doorRockIndex;
-        do {
-            doorRockIndex = (int) random(rocks.size());
-        } while (doorRockIndex == keyRockIndex);*/ // Make sure the door and key are not under the same rock
-        int doorRockIndex = (int) random(rocks.size());
-        while (!chosenIndexes.add(doorRockIndex)) {
-            doorRockIndex = (int) random(rocks.size());
-        }
-        BreakableRock doorRock = rocks.get(doorRockIndex);
-        doorRock.setHideDoor(true);
-        door = new Door(doorRock.x(), doorRock.y(), this);
-        door.setVisible(false);
-
-        // Randomly select 5 rocks to place bomb firepower enhancement items
-        for (int i=0; i<powerUp_items; i++) {
-            int powerUpIndex = (int) random(rocks.size());
-            while (!chosenIndexes.add(powerUpIndex)) {
-                powerUpIndex = (int) random(rocks.size());
-            }
-            BreakableRock powerUpRock = rocks.get(powerUpIndex);
-            BombPowerUp powerUp = new BombPowerUp(powerUpRock.x(), powerUpRock.y(), this);
-            powerUpRock.setHidePowerUp(true);
-            powerUpRock.setHiddenPowerUp(powerUp); // Associate BombPowerUp and BreakableRock
-            powerUps.add(powerUp);
-        }
-
-        // Randomly select 5 rocks to hide ExtraBomb items
-        for (int i=0; i<extraBomb_items; i++) {
-            int extraBombIndex = (int) random(rocks.size());
-            while (!chosenIndexes.add(extraBombIndex)) {
-                extraBombIndex = (int) random(rocks.size());
-            }
-            BreakableRock extraBombRock = rocks.get(extraBombIndex);
-            ExtraBomb extraBomb = new ExtraBomb(extraBombRock.x(), extraBombRock.y(), this);
-            extraBombRock.setHideExtraBomb(true);
-            extraBombRock.setHiddenExtraBomb(extraBomb);
-            extraBombs.add(extraBomb);
-        }
-
-        for (int i=0; i<speedUp_items; i++) {
-            int speedUpIndex = (int) random(rocks.size());
-            while (!chosenIndexes.add(speedUpIndex)) {
-                speedUpIndex = (int) random(rocks.size());
-            }
-            BreakableRock speedUpRock = rocks.get(speedUpIndex);
-            SpeedUp speedUp = new SpeedUp(speedUpRock.x(), speedUpRock.y(), this);
-            speedUpRock.setHideSpeedUp(true);
-            speedUpRock.setHiddenSpeedUp(speedUp);
-            speedUps.add(speedUp);
-        }
+        SpeedUp.setSpeedUps(this);
 
     }
     public void draw() {
-        System.out.println("x: "+ players[0].x() + ",    y: " + players[0].y());
+        System.out.println("x: "+ Character.players.get(0).x() + ",    y: " + Character.players.get(0).y());
 
         if (menu) {
             background(87, 108, 164);
@@ -158,14 +86,14 @@ public class GameLoop extends PApplet{
             noStroke();
             rect(15, 75, 930, 450);
             fill(93, 88, 95);
-            for (Wall wall : walls) {
+            for (Wall wall : Obstacle.walls) {
                 wall.render();
             }
-            for (Enemy enemy : enemies) {
+            for (Enemy enemy : Character.enemies) {
                 enemy.render();
             }
 
-            for (BreakableRock rock : rocks) {
+            for (BreakableRock rock : Obstacle.rocks) {
                 if (rock.rockExist) {
                     rock.render();
                 }
@@ -178,74 +106,41 @@ public class GameLoop extends PApplet{
                 }
             }
 
-
-            if (doorKey != null && !doorKey.collected && doorKey.visible) {
-                Player player = players[0];
-                float distance = dist(player.px, player.py, doorKey.x, doorKey.y);
+            if (Items.doorKey != null && !Items.doorKey.collected && Items.doorKey.visible) {
+                Player player = Character.players.get(0);
+                float distance = dist(player.px, player.py, Items.doorKey.x, Items.doorKey.y);
                 if (distance < 30) {
-                    doorKey.setCollected();
+                    Items.doorKey.setCollected();
                 }
             }
 
-            if (doorKey != null && doorKey.visible) {
-                doorKey.render(this);
+            if (Items.doorKey != null && Items.doorKey.visible) {
+                Items.doorKey.render(this);
             }
 
-            if (door != null && door.visible) {
-                door.render(this);
+            if (Items.door != null && Items.door.visible) {
+                Items.door.render(this);
             }
 
-            if (doorKey != null && doorKey.collected && !gameWon) {
-                Player player = players[0];
-                float distanceToDoor = dist(player.px, player.py, door.x, door.y);
+            if (Items.doorKey != null && Items.doorKey.collected && !gameWon) {
+                Player player = Character.players.get(0);
+                float distanceToDoor = dist(player.px, player.py, Items.door.x, Items.door.y);
                 if (distanceToDoor < 30) {
                     gameWon = true;
                     println("You've won the game!");
                 }
             }
 
-            for (BombPowerUp powerUp : powerUps) {
-                if (powerUp.visible) {
-                    powerUp.render(this);
-                    // Check if player collects it
-                    Player player = players[0];
-                    float distanceToPowerUp = dist(player.px, player.py, powerUp.x, powerUp.y);
-                    if (distanceToPowerUp < 30) {
-                        powerUp.setVisible(false);
-                        players[0].increasePower();
-                    }
-                }
-            }
+            BombPowerUp.getPowerUp(this);
 
-            for (ExtraBomb extraBomb : extraBombs) {
-                if (extraBomb.visible) {
-                    extraBomb.render(this);
-                    // Check if player collects it
-                    Player player = players[0];
-                    float distanceToPowerUp = dist(player.px, player.py, extraBomb.x, extraBomb.y);
-                    if (distanceToPowerUp < 30) {
-                        extraBomb.setVisible(false);
-                        players[0].increaseMaxBomb();
-                    }
-                }
-            }
+            ExtraBomb.getExtraBomb(this);
 
-            for (SpeedUp speedUp : speedUps) {
-                if (speedUp.isVisible()) {
-                    speedUp.render(this);
-                    Player player = players[0];
-                    float distanceToSpeedUp = dist(player.px, player.py, speedUp.x, speedUp.y);
-                    if (distanceToSpeedUp < 30) {
-                        speedUp.setVisible(false);
-                        players[0].increaseSpeed();
-                    }
-                }
-            }
+            SpeedUp.getSpeedUp(this);
 
-            players[0].render();
+            Character.players.get(0).render();
 
             //generate enemies
-            for(Enemy singleEnemy : enemies){
+            for(Enemy singleEnemy : Character.enemies){
                 singleEnemy.render();
             }
 
@@ -271,85 +166,19 @@ public class GameLoop extends PApplet{
                     flame.update();
                 }
             }
-            removeMarkedObjects();
+            Items.removeMarkedObjects();
         }
 
         if (move) {
-            int x = 0, y = 0;
-            if (up) {
-                x = players[0].x() + tile / 2;
-                y = players[0].y() + tile / 2 - players[0].getSpeed();
-            }
-            if (down) {
-                x = players[0].x() + tile / 2;
-                y = players[0].y() + tile / 2 + players[0].getSpeed();
-            }
-            if (left) {
-                x = players[0].x() + tile / 2 - players[0].getSpeed();
-                y = players[0].y() + tile / 2;
-            }
-            if (right) {
-                x = players[0].x() + tile / 2 + players[0].getSpeed();
-                y = players[0].y() + tile / 2;
-            }
-            //Collision detection
-            boolean collision = false;
-
-            for (Wall wall : walls) {
-                if (dist(x, y, wall.x() + (float) tile / 2, wall.y() + (float) tile / 2) < tile) {
-                    collision = true;
-                    move = false;
-                    break;
-                }
-            }
-            for (BreakableRock rock : rocks) {
-                if (rock.rockExist && dist(x, y, rock.x() + (float) tile / 2, rock.y() + (float) tile / 2) < tile) {
-                    collision = true;
-                    move = false;
-                    break;
-                }
-            }
-            /*for (int i = 0; i < enemyNumber; i++) {
-                if (i < totEnemies && dist(x, y, enemies.get(i).x() + (float) tile / 2, enemies.get(i).y() + (float) tile / 2) < tile) {
-                    collision = true;
-                }
-            }*/
-            for (Bomb[] row : bombs) {
-                for (Bomb bomb : row) {
-                    if (bomb.showed && !bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) >= tile) {
-                        bomb.bombActive = true;
-                    }
-                    if (bomb.showed && bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) < tile) {
-                        collision = true;
-                    }
-                }
-            }
-            if (!collision) {
-                if (up) {
-                    players[0].up();
-                }
-                if (down) {
-                    players[0].down();
-                }
-                if (left) {
-                    players[0].left();
-                }
-                if (right) {
-                    players[0].right();
-                }
-            }else {
-                up = false;
-                down = false;
-                left = false;
-                right = false;
-                move = false;
+            if(Character.players.get(0).collisionDetect()) {
+                Character.players.get(0).playerMove();
             }
         }
 
         if (bomb) {
-            if (totBombs < players[0].getMaxBombs()) {
-                int playerCenterX = players[0].x() + tile / 2;
-                int playerCenterY = players[0].y() + tile / 2;
+            if (totBombs < Character.players.get(0).getMaxBombs()) {
+                int playerCenterX = Character.players.get(0).x() + tile / 2;
+                int playerCenterY = Character.players.get(0).y() + tile / 2;
 
                 int col = (playerCenterX - 15) / tile;
                 int row = (playerCenterY - 75) / tile;
@@ -373,78 +202,17 @@ public class GameLoop extends PApplet{
             }
         }
         if(!(up || right || left || down)) {
-            players[0].px = Math.round(players[0].px / 15.0f) * 15;
-            players[0].py = Math.round(players[0].py / 15.0f) * 15;
+            Character.players.get(0).px = Math.round(Character.players.get(0).px / 15.0f) * 15;
+            Character.players.get(0).py = Math.round(Character.players.get(0).py / 15.0f) * 15;
         }
     }
 
-    ArrayList<Wall> generateWalls(int rows, int cols) {
-        ArrayList<Wall> walls = new ArrayList<Wall>();
-        // Generate walls in a grid pattern
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
-                // Add wall to the outer border and every other grid cell
-                if (i == 0 || j == 0 || i == cols - 1 || j == rows - 1 || (i % 2 == 0 && j % 2 == 0)) {
-                    int x = 15 + i * tile;
-                    int y = 75 + j * tile;
-                    walls.add(new Wall(x, y, this, unbreakable));
-                }
-            }
-        }
-        return walls;
-    }
-
-    ArrayList<BreakableRock> generateRocks(int rows, int cols, float chanceOfRock) {
-        ArrayList<BreakableRock> rocks = new ArrayList<>();
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
-                // Randomly decide whether to place a rock in this grid cell
-                // Exclude the area around where player initially stand
-                if (random(1) < chanceOfRock && !isWallAt(i, j) && !(i <4 && j <4)) {
-                    int x = 15 + i * tile;
-                    int y = 75 + j * tile;
-                    rocks.add(new BreakableRock(x, y, this,rock));
-                }
-            }
-        }
-        return rocks;
-    }
-
-    ArrayList<Enemy> generateEnemyies() {
-        ArrayList<Enemy> enemies = new ArrayList<>();
-        int number =0;
-        Random random = new Random();
-        while(number < enemyNumber){
-            int randomX = random.nextInt(cols);
-            int randomY = random.nextInt(rows);
-            if (!(randomX <4 && randomY <4)) {
-                int x = 15 + randomX * tile;
-                int y = 75 + randomY * tile;
-                if(!areThereRocks(x,y) /*&& !isWallAt(x, y)*/){
-                    enemies.add(new Enemy(x, y, this, redEnemy));
-                    number ++;
-                    System.out.println(number);
-                }
-            }
-        }
-        return enemies;
-    }
-
-    boolean areThereRocks(int x, int y) {
-        int gridX = (x - 15) / tile;
-        int gridY = (y - 75) / tile;
-        return obstacleGrid[gridX][gridY];
-    }
-
-    boolean isWallAt(int i, int j) {
-        return i == 0 || j == 0 || i == cols - 1 || j == rows - 1 || (i % 2 == 0 && j % 2 == 0);
-    }
     void initializeBombs(){
         for (int row =0; row < rows; row++){
             for (int col = 0; col < cols; col++){
                 int x = 15 + col * tile;
                 int y = 75 + row * tile;
-                bombs[col][row] = new Bomb(x,y,this,basicBomb);
+                bombs[col][row] = new Bomb(x,y,this,ResourceManager.basicBomb);
             }
         }
     }
@@ -453,13 +221,13 @@ public class GameLoop extends PApplet{
             for (int col = 0; col < cols; col++){
                 int x = 15 + col * tile;
                 int y = 75 + row * tile;
-                flames[col][row] = new Flame(x,y,this,flame);
+                flames[col][row] = new Flame(x,y,this,ResourceManager.flame);
             }
         }
     }
 
     void creatFlame(int x, int y) {
-        int explosionDistance = players[0].getExplosionDistance();
+        int explosionDistance = Character.players.get(0).getExplosionDistance();
 
         int col = (x-15)/tile;
         int row = (y-75)/tile;
@@ -475,7 +243,7 @@ public class GameLoop extends PApplet{
                 int newCol = col + direction[0]*i;
                 int newRow = row + direction[1]*i;
 
-                if (isWallAt(newCol, newRow)) break;
+                if (Wall.isWallAt(newCol, newRow)) break;
 
                 // Otherwise, place flame
                 flames[newCol][newRow].appear();
@@ -489,14 +257,14 @@ public class GameLoop extends PApplet{
     }
 
     boolean isDoorOrKeyAt(int col, int row) {
-        return (door.x == col*tile+15 && door.y == row*tile+75) ||
-                (doorKey.x == col*tile+15 && doorKey.y == row*tile+75);
+        return (Items.door.x == col*tile+15 && Items.door.y == row*tile+75) ||
+                (Items.doorKey.x == col*tile+15 && Items.doorKey.y == row*tile+75);
     }
 
     boolean checkAndHandleBreakable(int col, int row) {
         boolean handled = false;
 
-        for (BreakableRock rock : rocks) {
+        for (BreakableRock rock : Obstacle.rocks) {
             int rockCol = (rock.x() - 15) / tile;
             int rockRow = (rock.y() - 75) / tile;
             if (rockCol == col && rockRow == row && rock.rockExist) {
@@ -505,11 +273,11 @@ public class GameLoop extends PApplet{
                 handled = true;
                 // Reveal any hidden items under the rock
                 if (rock.hideDoor) {
-                    door.setVisible(true); // 設置門為可見
+                    Items.door.setVisible(true); // 設置門為可見
                     rock.hideDoor = false; // 更新岩石的狀態，表示門已經不再隱藏
                 }
                 if (rock.hideKey) {
-                    doorKey.setVisible(true); // 設置鑰匙為可見
+                    Items.doorKey.setVisible(true); // 設置鑰匙為可見
                     rock.hideKey = false; // 更新岩石的狀態，表示鑰匙已經不再隱藏
                 }
                 if (rock.hidePowerUp && rock.hiddenPowerUp != null) {
@@ -534,7 +302,7 @@ public class GameLoop extends PApplet{
         boolean itemDestroyed = false;
 
         // Check and mark power-ups for removal
-        for (BombPowerUp powerUp : powerUps) {
+        for (BombPowerUp powerUp : Items.powerUps) {
             int powerUpCol = (powerUp.x - 15) / tile;
             int powerUpRow = (powerUp.y - 75) / tile;
             if (powerUpCol == col && powerUpRow == row && powerUp.isVisible()) {
@@ -544,7 +312,7 @@ public class GameLoop extends PApplet{
             }
         }
 
-        for (SpeedUp speedUp : speedUps) {
+        for (SpeedUp speedUp : Items.speedUps) {
             int speedUpCol = (speedUp.x - 15) / tile;
             int speedUpRow = (speedUp.y - 75) / tile;
             if (speedUpCol == col && speedUpRow == row && speedUp.isVisible()) {
@@ -556,7 +324,7 @@ public class GameLoop extends PApplet{
 
         // Check and mark extra bombs for removal
         if (!itemDestroyed) {
-            for (ExtraBomb extraBomb : extraBombs) {
+            for (ExtraBomb extraBomb : Items.extraBombs) {
                 int extraBombCol = (extraBomb.x - 15) / tile;
                 int extraBombRow = (extraBomb.y - 75) / tile;
                 if (extraBombCol == col && extraBombRow == row && extraBomb.isVisible()) {
@@ -567,45 +335,6 @@ public class GameLoop extends PApplet{
             }
         }
         return itemDestroyed;
-    }
-
-    void removeMarkedObjects() {
-        // 移除被標記的岩石
-        Iterator<BreakableRock> rockIterator = rocks.iterator();
-        while (rockIterator.hasNext()) {
-            BreakableRock rock = rockIterator.next();
-            if (rock.isMarkedForRemoval()) {
-                rockIterator.remove();
-            }
-        }
-
-        // 移除被標記的增強道具
-        Iterator<BombPowerUp> powerUpIterator = powerUps.iterator();
-        while (powerUpIterator.hasNext()) {
-            BombPowerUp powerUp = powerUpIterator.next();
-            if (powerUp.isMarkedForRemoval()) {
-                powerUpIterator.remove();
-            }
-        }
-
-        // 移除被標記的額外炸彈
-        Iterator<ExtraBomb> extraBombIterator = extraBombs.iterator();
-        while (extraBombIterator.hasNext()) {
-            ExtraBomb extraBomb = extraBombIterator.next();
-            if (extraBomb.isMarkedForRemoval()) {
-                extraBombIterator.remove();
-            }
-        }
-
-        Iterator<SpeedUp> speedUpIterator = speedUps.iterator();
-        while (speedUpIterator.hasNext()) {
-            SpeedUp speedUp = speedUpIterator.next();
-            if (speedUp.isMarkedForRemoval()) {
-                speedUpIterator.remove();
-            }
-        }
-
-        // 如果有其他類型的物件也需要被移除，繼續在這裡添加相應的邏輯
     }
 
     // Check if flame exist in a position
@@ -642,19 +371,5 @@ public class GameLoop extends PApplet{
             case 'd': right = false; break;
         }
         move = up || down || left || right;
-    }
-
-    void initializeObstacleGrid(int rows, int cols) {
-        obstacleGrid = new boolean[50][50];//need to be fixed!!!!!
-        for (BreakableRock rock : rocks) {
-            int gridX = (rock.x() - 15) / tile;
-            int gridY = (rock.y() - 75) / tile;
-            obstacleGrid[gridX][gridY] = true;
-        }
-        for (Wall wall : walls) {
-            int gridX = (wall.x() - 15) / tile;
-            int gridY = (wall.y() - 75) / tile;
-            obstacleGrid[gridX][gridY] = true;
-        }
     }
 }

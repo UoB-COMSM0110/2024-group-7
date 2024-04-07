@@ -2,14 +2,19 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Player{
-    PApplet parent;
+import javax.print.CancelablePrintJob;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class Player extends Character {
+    /*PApplet parent;
     int px, py;
     int health;
+    PImage playerImage;*/
     PImage playerImage;
     private int explosionDistance;
     private int maxBombs;
-    int speed;
+
     Player(int x, int y, PApplet parent, PImage playerImage){
         this.parent =parent;
         this.px=x;
@@ -20,6 +25,30 @@ public class Player{
         this.maxBombs = 1;
         this.speed = 3;
     }
+
+    public static ArrayList<Player> setPlayer1(PApplet parent) {
+        ArrayList<Player> players = new ArrayList<>();
+        int x = 15 + tile;
+        int y = 15 + 3*tile;
+        players.add(new Player(x, y, parent, ResourceManager.pinkBomber));
+        return players;
+    }
+
+    public void playerMove(){
+            if (up) {
+                this.up();
+            }
+            if (down) {
+                this.down();
+            }
+            if (left) {
+                this.left();
+            }
+            if (right) {
+                this.right();
+            }
+    }
+
     void render(){
         parent.image(playerImage,px,py,30,30);
     }
@@ -41,8 +70,8 @@ public class Player{
         px += speed;
     }
 
-    int x(){return px;}
-    int y(){return py;}
+    /*int x(){return px;}
+    int y(){return py;}*/
 
     public void increasePower() {
         this.explosionDistance +=1;
@@ -62,7 +91,7 @@ public class Player{
 
     public void increaseSpeed() {this.speed +=1; }
 
-    public int getSpeed() {
+    /*public int getSpeed() {
         return this.speed;
-    }
+    }*/
 }

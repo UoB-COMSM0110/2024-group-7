@@ -3,10 +3,12 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class DoorKey {
-    int x,y;
+import java.util.HashSet;
+
+public class DoorKey extends Items{
+   /* int x,y;*/
     PImage keyImage;
-    boolean visible = false;
+    /*boolean visible = false;*/
     boolean collected = false;
 
     public DoorKey(int x, int y, PApplet parent) {
@@ -30,5 +32,18 @@ public class DoorKey {
     public void setVisible(boolean visible) {
         this.visible = visible;
         System.out.println("Key visible: " + visible);
+    }
+
+    public void setKey(PApplet parent){
+        HashSet<Integer> chosenIndexes = new HashSet<>();
+        int keyRockIndex = (int) random(Obstacle.rocks.size()); // Key hided at a random breakableRock
+        while (!chosenIndexes.add(keyRockIndex)) {
+            keyRockIndex = (int) random(Obstacle.rocks.size());
+        }
+        BreakableRock keyRock = Obstacle.rocks.get(keyRockIndex);
+        keyRock.setHideKey(true);
+        // Initialize key but is not visible
+        doorKey = new DoorKey(keyRock.x(), keyRock.y(), parent);
+        doorKey.setVisible(false);
     }
 }

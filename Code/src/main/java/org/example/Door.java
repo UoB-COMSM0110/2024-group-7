@@ -3,9 +3,11 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Door {
-    int x, y;
-    boolean visible = false;
+import java.util.HashSet;
+
+public class Door extends Items{
+    /*int x, y;
+    boolean visible = false;*/
     PImage doorImage;
 
     public Door(int x, int y, PApplet parent) {
@@ -24,5 +26,21 @@ public class Door {
     public void setVisible(boolean visible) {
         this.visible = visible;
         System.out.println("Door visible: " + visible);
+    }
+
+    public void setDoor(PApplet parent){
+        HashSet<Integer> chosenIndexes = new HashSet<>();
+        /*int doorRockIndex;
+        do {
+            doorRockIndex = (int) random(rocks.size());
+        } while (doorRockIndex == keyRockIndex);*/ // Make sure the door and key are not under the same rock
+        int doorRockIndex = (int) random(Obstacle.rocks.size());
+        while (!chosenIndexes.add(doorRockIndex)) {
+            doorRockIndex = (int) random(Obstacle.rocks.size());
+        }
+        BreakableRock doorRock = Obstacle.rocks.get(doorRockIndex);
+        doorRock.setHideDoor(true);
+        door = new Door(doorRock.x(), doorRock.y(), parent);
+        door.setVisible(false);
     }
 }
