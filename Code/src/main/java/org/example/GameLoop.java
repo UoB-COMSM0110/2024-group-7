@@ -26,7 +26,7 @@ public class GameLoop extends PApplet{
         //generate rocks
         Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this);
 
-        Bomb.initializeBombs(this);
+        //Bomb.initializeBombs(this);
 
         Flame.initializeFlames(this);
 
@@ -50,7 +50,7 @@ public class GameLoop extends PApplet{
 
     }
     public void draw() {
-        System.out.println("x: "+ Character.players.get(0).x() + ",    y: " + Character.players.get(0).y());
+        //System.out.println("x: "+ Character.players.get(0).x() + ",    y: " + Character.players.get(0).y());
 
         if (menu) {
             background(87, 108, 164);
@@ -105,7 +105,7 @@ public class GameLoop extends PApplet{
         }
         Player.absorbToIntersection();
 
-        Bomb.setBombIfPossible();
+        Bomb.setBombIfPossible(this);
     }
 
     public void mouseClicked() {
@@ -118,12 +118,16 @@ public class GameLoop extends PApplet{
     }
 
     public void keyPressed() {
-        switch (key) {
-            case 'w': up = true; break;
-            case 's': down = true; break;
-            case 'a': left = true; break;
-            case 'd': right = true; break;
-            case 'c': Objects.bomb = true; break;
+        if (key == 'w') {
+            up = true;
+        } else if (key == 's') {
+            down = true;
+        } else if (key == 'a') {
+            left = true;
+        } else if (key == 'd') {
+            right = true;
+        } else if (key == 'c' && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber()) {
+            Objects.bomb = true;
         }
         move = up || down || left || right;
     }

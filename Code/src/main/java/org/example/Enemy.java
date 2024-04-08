@@ -15,7 +15,7 @@ public class Enemy extends Character{
         this.px=x;
         this.py=y;
         this.enemyImage = enemy;
-        this.health = 3;
+        this.health = 1;
         this.speed = 3;
     }
 

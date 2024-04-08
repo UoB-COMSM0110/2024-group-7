@@ -2,12 +2,12 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-
 public class Bomb extends Objects{
     PApplet parent;
     PImage bombImage;
     boolean bombActive;
     double timer;
+    double setupTime;
     int duration = 3000;
     int attack = 1;
     boolean showed;
@@ -17,67 +17,48 @@ public class Bomb extends Objects{
         this.y=y;
         this.bombImage = bombImage;
         this.bombActive = false;
-        this.showed = false;
+        this.showed = true;
         this.timer = 3.0;
+        this.setupTime = parent.millis();
+
     }
 
-    public static void initializeBombs(PApplet parent){
-        for (int row =0; row < rows; row++){
-            for (int col = 0; col < cols; col++){
-                int x = 15 + col * tile;
-                int y = 75 + row * tile;
-                bombs[col][row] = new Bomb(x,y,parent,ResourceManager.basicBomb);
-            }
-        }
-    }
     void render(){
         parent.image(bombImage,x,y,30,30);
     }
 
-    public static void setBombIfPossible(){
+    public static void setBombIfPossible(PApplet parent){
         if (bomb) {
-            if (totBombs < Character.players.get(0).getMaxBombs()) {
-                int playerCenterX = Character.players.get(0).x() + tile / 2;
-                int playerCenterY = Character.players.get(0).y() + tile / 2;
-
-                int col = (playerCenterX - 15) / tile;
-                int row = (playerCenterY - 75) / tile;
-
-                bombs[col][row].showed = true;
-                bombs[col][row].timer = 3.0;
-                totBombs++;
+            if (findCurrentBombsNumber() < Character.players.get(0).getMaxBombs()) {
+                int playerCenterX = Character.players.get(0).x() + tile / 2 - 15;
+                int playerCenterY = Character.players.get(0).y() + tile / 2 - 15;
+                bombs.add(new Bomb(playerCenterX, playerCenterY, parent, ResourceManager.basicBomb));
             }
             bomb = false;
         }
-        if (totBombs>0) {
-            for (Bomb[] row : bombs) {
-                for (Bomb bomb : row) {
-                    if (!bomb.hasExpired()) {
-                        bomb.render();
-                    } else {
-                        bomb.showed = false;
-                        totBombs--;
-                    }
+        if (findCurrentBombsNumber()>0) {
+            for (Bomb bomb : bombs) {
+                if (!bomb.hasExpired()) {
+                    bomb.render();
+                } else {
+                    bomb.showed = false;
                 }
             }
         }
     }
+
     int update(){
-        if(showed && timer <= 0){
+        if(showed && parent.millis() - setupTime > duration){
             explode();
             //to return the coordinate with a single number
             return encodeCoordinate(this.x,this.y);
-        }
-        if (showed){
-            timer -= 1.0/parent.frameRate;
-            return 0;
         }
         return 0;
     }
 
     // Check if the bomb has reached the time to expired
     boolean hasExpired(){
-        return parent.millis() - timer > duration;
+        return parent.millis() - setupTime > duration;
     }
     void explode(){
         showed = false;
@@ -90,18 +71,26 @@ public class Bomb extends Objects{
     }
 
     public static void bombRender(){
-        for (Bomb[] row : bombs) {
-            for (Bomb bomb : row) {
-                int packedNumber = bomb.update();
-                if (bomb.showed) {
-                    bomb.render();
-                }
-                if (packedNumber != 0) {
-                    int x = packedNumber / 10000;
-                    int y = packedNumber % 10000;
-                    Flame.creatFlame(x, y);
-                }
+        for (Bomb bomb : bombs) {
+            int packedNumber = bomb.update();
+            if (bomb.showed) {
+                bomb.render();
+            }
+            if (packedNumber != 0) {
+                int x = packedNumber / 10000;
+                int y = packedNumber % 10000;
+                Flame.creatFlame(x, y);
             }
         }
+    }
+
+    public static int findCurrentBombsNumber(){
+        int number =0;
+        for(Bomb bomb : bombs){
+            if(bomb.showed){
+                number++;
+            }
+        }
+        return number;
     }
 }

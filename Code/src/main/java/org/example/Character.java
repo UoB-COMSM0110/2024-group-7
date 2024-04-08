@@ -56,18 +56,21 @@ public class Character extends GameLoop{
                 collision = true;
             }
         }*/
-        for (Bomb[] row : Objects.bombs) {
-            for (Bomb bomb : row) {
-                if (bomb.showed && !bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) >= tile) {
-                    bomb.bombActive = true;
-                }
-                if (bomb.showed && bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) < tile) {
-                    return false;
-                }
+        for (Bomb bomb : Objects.bombs) {
+            if (bomb.showed && !bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) >= tile) {
+                bomb.bombActive = true;
+            }
+            if (bomb.showed && bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) < tile) {
+                return false;
             }
         }
         return true;
     }
+
+    /*public static void playerAttackDetect(int x, int y){
+        if (bomb.showed && bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) < tile) {
+        }
+    }*/
 
     int x(){return px;}
     int y(){return py;}
