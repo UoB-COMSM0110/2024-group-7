@@ -33,9 +33,9 @@ public class DoorKey extends Items{
     }
 
     public void setKey(PApplet parent){
-        HashSet<Integer> chosenIndexes = new HashSet<>();
+        //HashSet<Integer> chosenIndexes = new HashSet<>();
         int keyRockIndex = (int) random(Obstacle.rocks.size()); // Key hided at a random breakableRock
-        while (!chosenIndexes.add(keyRockIndex)) {
+        while (!Items.chosenIndexes.add(keyRockIndex)) {
             keyRockIndex = (int) random(Obstacle.rocks.size());
         }
         BreakableRock keyRock = Obstacle.rocks.get(keyRockIndex);

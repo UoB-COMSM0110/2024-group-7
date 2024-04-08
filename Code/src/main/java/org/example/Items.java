@@ -5,6 +5,8 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import java.util.HashSet;
+
 public class Items extends Objects{
     boolean visible = false;
     public static DoorKey doorKey;
@@ -15,6 +17,10 @@ public class Items extends Objects{
     public static int extraBomb_items = 5;
     public static ArrayList<SpeedUp> speedUps = new ArrayList<>();
     public static int speedUp_items = 5;
+    public static ArrayList<ExtraLife> extraLives = new ArrayList<ExtraLife>();
+    public static int extraLife_items = 2;
+    public static HashSet<Integer> chosenIndexes = new HashSet<>();
+
 
     public static boolean isDoorOrKeyAt(int col, int row) {
         return (Items.door.x == col*tile+15 && Items.door.y == row*tile+75) ||
@@ -52,6 +58,10 @@ public class Items extends Objects{
                     rock.hiddenSpeedUp.setVisible(true);
                     rock.hideSpeedUp = false;
                 }
+                if(rock.hideExtraLife && rock.hiddenExtraLife != null) {
+                    rock.hiddenExtraLife.setVisible(true);
+                    rock.hideExtraLife = false;
+                }
                 break;
             }
         }
@@ -77,6 +87,16 @@ public class Items extends Objects{
             int speedUpRow = (speedUp.y - 75) / tile;
             if (speedUpCol == col && speedUpRow == row && speedUp.isVisible()) {
                 speedUp.markForRemoval();
+                itemDestroyed = true;
+                break;
+            }
+        }
+
+        for (ExtraLife extraLife : extraLives) {
+            int extraLifeCol = (extraLife.x - 15) / tile;
+            int extraLifeRow = (extraLife.y - 75) / tile;
+            if (extraLifeCol == col && extraLifeRow == row && extraLife.isVisible()) {
+                extraLife.markForRemoval();
                 itemDestroyed = true;
                 break;
             }
@@ -131,6 +151,14 @@ public class Items extends Objects{
             SpeedUp speedUp = speedUpIterator.next();
             if (speedUp.isMarkedForRemoval()) {
                 speedUpIterator.remove();
+            }
+        }
+
+        Iterator<ExtraLife> extraLifeIterator = extraLives.iterator();
+        while (extraLifeIterator.hasNext()) {
+            ExtraLife extraLife = extraLifeIterator.next();
+            if (extraLife.isMarkedForRemoval()) {
+                extraLifeIterator.remove();
             }
         }
 

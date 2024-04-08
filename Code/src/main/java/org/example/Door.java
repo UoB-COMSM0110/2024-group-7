@@ -29,13 +29,9 @@ public class Door extends Items{
     }
 
     public void setDoor(PApplet parent){
-        HashSet<Integer> chosenIndexes = new HashSet<>();
-        /*int doorRockIndex;
-        do {
-            doorRockIndex = (int) random(rocks.size());
-        } while (doorRockIndex == keyRockIndex);*/ // Make sure the door and key are not under the same rock
+        //HashSet<Integer> chosenIndexes = new HashSet<>();
         int doorRockIndex = (int) random(Obstacle.rocks.size());
-        while (!chosenIndexes.add(doorRockIndex)) {
+        while (!Items.chosenIndexes.add(doorRockIndex)) {
             doorRockIndex = (int) random(Obstacle.rocks.size());
         }
         BreakableRock doorRock = Obstacle.rocks.get(doorRockIndex);

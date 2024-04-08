@@ -14,9 +14,11 @@ public class BreakableRock extends Obstacle{
     boolean hidePowerUp = false;
     boolean hideExtraBomb = false;
     boolean hideSpeedUp = false;
+    boolean hideExtraLife = false;
     public BombPowerUp hiddenPowerUp;
     public ExtraBomb hiddenExtraBomb;
     public SpeedUp hiddenSpeedUp;
+    public ExtraLife hiddenExtraLife;
     boolean markedForRemoval = false;
     BreakableRock(int x, int y, PApplet parent, PImage rock) {
         /*super(x, y, parent, rock);*/
@@ -102,6 +104,13 @@ public class BreakableRock extends Obstacle{
     // Method to set the hidden power-up
     public void setHiddenPowerUp(BombPowerUp powerUp) {
         this.hiddenPowerUp = powerUp;
+    }
+    public void setHideExtraLife(boolean hideExtraLife) {
+        this.hideExtraLife = hideExtraLife;
+    }
+
+    public void setHiddenExtraLife(ExtraLife extraLife) {
+        this.hiddenExtraLife = extraLife;
     }
 
     public void markForRemoval() {

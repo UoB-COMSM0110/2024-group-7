@@ -29,11 +29,11 @@ public class ExtraBomb extends Items{
     }
 
     public static void setExtraBombs(PApplet parent){
-        HashSet<Integer> chosenIndexes = new HashSet<>();
+        //HashSet<Integer> chosenIndexes = new HashSet<>();
         // Randomly select 5 rocks to hide ExtraBomb items
         for (int i=0; i<extraBomb_items; i++) {
             int extraBombIndex = (int) parent.random(Obstacle.rocks.size());
-            while (!chosenIndexes.add(extraBombIndex)) {
+            while (!Items.chosenIndexes.add(extraBombIndex)) {
                 extraBombIndex = (int) parent.random(Obstacle.rocks.size());
             }
             BreakableRock extraBombRock = Obstacle.rocks.get(extraBombIndex);
@@ -50,8 +50,8 @@ public class ExtraBomb extends Items{
                 extraBomb.render(parent);
                 // Check if player collects it
                 Player player = Character.players.get(0);
-                float distanceToPowerUp = dist(player.px, player.py, extraBomb.x, extraBomb.y);
-                if (distanceToPowerUp < 30) {
+                float distanceToExtraBomb = dist(player.px, player.py, extraBomb.x, extraBomb.y);
+                if (distanceToExtraBomb < 30) {
                     extraBomb.setVisible(false);
                     Character.players.get(0).increaseMaxBomb();
                 }

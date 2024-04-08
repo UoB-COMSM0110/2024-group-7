@@ -93,6 +93,7 @@ public class Player extends Character {
     }
 
     public void increaseSpeed() {this.speed +=1; }
+    public void increaseLife() {this.health += 1;}
 
     public static void player1Render(){
         Character.players.get(0).render();

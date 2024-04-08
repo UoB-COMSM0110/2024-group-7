@@ -48,6 +48,8 @@ public class GameLoop extends PApplet{
 
         SpeedUp.setSpeedUps(this);
 
+        ExtraLife.setExtraLives(this);
+
     }
     public void draw() {
         //System.out.println("x: "+ Character.players.get(0).x() + ",    y: " + Character.players.get(0).y());
@@ -91,6 +93,7 @@ public class GameLoop extends PApplet{
             BombPowerUp.getPowerUp(this);
             ExtraBomb.getExtraBomb(this);
             SpeedUp.getSpeedUp(this);
+            ExtraLife.getExtraLife(this);
 
             Bomb.bombRender();
             Flame.flameRender();

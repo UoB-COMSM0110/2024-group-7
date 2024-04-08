@@ -30,11 +30,11 @@ public class BombPowerUp extends Items{
     }
 
     public static void setPowerUps(PApplet parent){
-        HashSet<Integer> chosenIndexes = new HashSet<>();
+        //HashSet<Integer> chosenIndexes = new HashSet<>();
         // Randomly select 5 rocks to place bomb firepower enhancement items
         for (int i=0; i<powerUp_items; i++) {
             int powerUpIndex = (int) parent.random(Obstacle.rocks.size());
-            while (!chosenIndexes.add(powerUpIndex)) {
+            while (!Items.chosenIndexes.add(powerUpIndex)) {
                 powerUpIndex = (int) parent.random(Obstacle.rocks.size());
             }
             BreakableRock powerUpRock = Obstacle.rocks.get(powerUpIndex);
