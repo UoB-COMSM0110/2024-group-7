@@ -45,6 +45,16 @@ public class BreakableRock extends Obstacle{
         return rocks;
     }
 
+    public void ifDestroyRock(){
+        //handle the interaction between rocks and flames
+        if (Flame.flameCheck(this.x(), this.y())) {
+            this.health -= 1;
+            if (this.health == 0) {
+                this.rockExist = false;
+            }
+        }
+    }
+
     void render(){
         parent.image(ResourceManager.rock,px,py,30,30);
     }
@@ -102,6 +112,12 @@ public class BreakableRock extends Obstacle{
         return this.markedForRemoval;
     }
 
-    int x(){return px;}
-    int y(){return py;}
+    public static void rocksRender(){
+        for (BreakableRock rock : rocks) {
+            if (rock.rockExist) {
+                rock.render();
+            }
+            rock.ifDestroyRock();
+        }
+    }
 }

@@ -5,21 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/ResourceManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Objects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/BombPowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/BombPowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Door.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/DoorKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/DoorKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/ExtraBomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/ExtraBomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Move.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/SpeedUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/SpeedUp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Wall.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,6 +124,8 @@
       <workItem from="1712208993105" duration="34428000" />
       <workItem from="1712471770953" duration="7000" />
       <workItem from="1712471824347" duration="17271000" />
+      <workItem from="1712566072288" duration="4774000" />
+      <workItem from="1712570861984" duration="62000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />

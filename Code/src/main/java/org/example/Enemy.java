@@ -8,7 +8,6 @@ import java.util.Random;
 public class Enemy extends Character{
     /*PApplet parent;*/
     PImage enemyImage;
-    public static int enemyNumber = 5;
 
     Enemy(int x, int y, PApplet parent, PImage enemy) {
         /*super(x, y, parent, enemy);*/
@@ -44,6 +43,9 @@ public class Enemy extends Character{
         parent.image(enemyImage,px,py,30,30);
     }
 
-    /*int x(){return px;}
-    int y(){return py;}*/
+    public static void enemiesRender(){
+        for (Enemy enemy : enemies) {
+            enemy.render();
+        }
+    }
 }

@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Player extends Character {
-    /*PApplet parent;
-    int px, py;
-    int health;
-    PImage playerImage;*/
     PImage playerImage;
     private int explosionDistance;
     private int maxBombs;
@@ -47,6 +43,13 @@ public class Player extends Character {
             if (right) {
                 this.right();
             }
+    }
+
+    public static void absorbToIntersection(){
+        if(!(up || right || left || down)) {
+            Character.players.get(0).px = Math.round(Character.players.get(0).px / 15.0f) * 15;
+            Character.players.get(0).py = Math.round(Character.players.get(0).py / 15.0f) * 15;
+        }
     }
 
     void render(){
@@ -91,7 +94,7 @@ public class Player extends Character {
 
     public void increaseSpeed() {this.speed +=1; }
 
-    /*public int getSpeed() {
-        return this.speed;
-    }*/
+    public static void player1Render(){
+        Character.players.get(0).render();
+    }
 }

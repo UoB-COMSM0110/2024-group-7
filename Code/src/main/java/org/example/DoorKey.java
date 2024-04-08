@@ -6,9 +6,7 @@ import processing.core.PImage;
 import java.util.HashSet;
 
 public class DoorKey extends Items{
-   /* int x,y;*/
     PImage keyImage;
-    /*boolean visible = false;*/
     boolean collected = false;
 
     public DoorKey(int x, int y, PApplet parent) {
@@ -45,5 +43,11 @@ public class DoorKey extends Items{
         // Initialize key but is not visible
         doorKey = new DoorKey(keyRock.x(), keyRock.y(), parent);
         doorKey.setVisible(false);
+    }
+
+    public static void doorKeyRender(PApplet parent){
+        if (Items.doorKey != null && doorKey.visible) {
+            Items.doorKey.render(parent);
+        }
     }
 }

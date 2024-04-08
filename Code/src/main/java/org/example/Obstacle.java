@@ -41,5 +41,6 @@ public class Obstacle extends GameLoop{
         int gridY = (y - 75) / tile;
         return obstacleGrid[gridX][gridY];
     }
-
+    int x(){return px;}
+    int y(){return py;}
 }

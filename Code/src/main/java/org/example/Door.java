@@ -43,4 +43,10 @@ public class Door extends Items{
         door = new Door(doorRock.x(), doorRock.y(), parent);
         door.setVisible(false);
     }
+
+    public static void doorRender(PApplet parent){
+        if (Items.door != null && door.visible) {
+            Items.door.render(parent);
+        }
+    }
 }

@@ -4,16 +4,14 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 // This class is used to creat the explosion frame after bomb bombs
-public class Flame {
-    int px,py;
+public class Flame extends Objects{
     PApplet parent;
     PImage frameImage;
     boolean showed;
-    double timer;
     int startTime, duration;
     Flame(int x, int y, PApplet parent, PImage frameImage){
-        this.px = x;
-        this.py = y;
+        this.x = x;
+        this.y = y;
         this.parent =parent;
         this.frameImage = frameImage;
         this.showed = false;
@@ -21,7 +19,7 @@ public class Flame {
     }
 
     void render(){
-        this.parent.image(frameImage,px,py,30,30);
+        this.parent.image(frameImage,x,y,30,30);
     }
     void appear(){
         this.startTime = parent.millis();
@@ -33,11 +31,66 @@ public class Flame {
             //System.out.println(this.px+" "+this.py+"switched");
         }
     }
-    int x(){return px;}
-    int y(){return py;}
+
+    public static void initializeFlames(PApplet parent){
+        for (int row =0; row < rows; row++){
+            for (int col = 0; col < cols; col++){
+                int x = 15 + col * tile;
+                int y = 75 + row * tile;
+                flames[col][row] = new Flame(x,y,parent,ResourceManager.flame);
+            }
+        }
+    }
+
+    public static void creatFlame(int x, int y) {
+        int explosionDistance = Character.players.get(0).getExplosionDistance();
+
+        int col = (x-15)/tile;
+        int row = (y-75)/tile;
+
+        // Mark the center position where the bomb is placed to explode
+        flames[col][row].appear();
+
+        // Direction to check: left, right, up, down
+        int[][] directions = {{-1,0}, {1,0}, {0,-1}, {0,1}};
+
+        for (int[] direction : directions) {
+            for (int i=1; i<=explosionDistance; i++) {
+                int newCol = col + direction[0]*i;
+                int newRow = row + direction[1]*i;
+
+                if (Wall.isWallAt(newCol, newRow)) break;
+
+                // Otherwise, place flame
+                flames[newCol][newRow].appear();
+
+                boolean stopSpreading = Items.checkAndHandleBreakable(newCol, newRow)
+                        || Items.isDoorOrKeyAt(newCol, newRow)
+                        || Items.checkAndDestroyExposedItems(newCol, newRow);
+                if(stopSpreading) break;
+            }
+        }
+    }
+
+    // Check if flame exist in a position
+    public static boolean flameCheck(int x,int y){
+        int col = (x - 15)/tile;
+        int row = (y - 15)/tile-2;
+        return flames[col][row].showed;
+    }
 
     public boolean isActive() {
         return showed;
     }
 
+    public static void flameRender(){
+        for (Flame[] row : flames) {
+            for (Flame flame : row) {
+                if (flame.showed) {
+                    flame.render();
+                }
+                flame.update();
+            }
+        }
+    }
 }

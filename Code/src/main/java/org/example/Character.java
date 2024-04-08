@@ -10,9 +10,8 @@ public class Character extends GameLoop{
     int health;
     int speed;
     public static ArrayList<Player> players;
-
     public static ArrayList<Enemy> enemies;
-
+    public static int enemyNumber = 5;
     public boolean collisionDetect() {
         int x = 0, y = 0;
         if (up) {
@@ -57,7 +56,7 @@ public class Character extends GameLoop{
                 collision = true;
             }
         }*/
-        for (Bomb[] row : bombs) {
+        for (Bomb[] row : Objects.bombs) {
             for (Bomb bomb : row) {
                 if (bomb.showed && !bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) >= tile) {
                     bomb.bombActive = true;
