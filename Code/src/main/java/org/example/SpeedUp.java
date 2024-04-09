@@ -30,10 +30,10 @@ public class SpeedUp extends Items{
     }
 
     public static void setSpeedUps(PApplet parent){
-        HashSet<Integer> chosenIndexes = new HashSet<>();
+        // HashSet<Integer> chosenIndexes = new HashSet<>();
         for (int i=0; i<speedUp_items; i++) {
             int speedUpIndex = (int) parent.random(Obstacle.rocks.size());
-            while (!chosenIndexes.add(speedUpIndex)) {
+            while (!Items.chosenIndexes.add(speedUpIndex)) {
                 speedUpIndex = (int) parent.random(Obstacle.rocks.size());
             }
             BreakableRock speedUpRock = Obstacle.rocks.get(speedUpIndex);
