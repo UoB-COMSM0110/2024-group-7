@@ -3,7 +3,9 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-// This class is used to creat the explosion frame after bomb bombs
+import java.util.Iterator;
+
+// This class is used to creat the explosion flame after bomb bombs
 public class Flame extends Objects{
     PApplet parent;
     PImage frameImage;
@@ -24,12 +26,15 @@ public class Flame extends Objects{
     void appear(){
         this.startTime = parent.millis();
         this.showed = true;
+        activeFlames.add(this);
+        //System.out.println("Flame active:" + this.x +", " + this.y);
     }
-    void update(){
+    public boolean update(){
         if (showed && parent.millis() - startTime >= duration){
             this.showed = false;
-            //System.out.println(this.px+" "+this.py+"switched");
+            return true;
         }
+        return false;
     }
 
     public static void initializeFlames(PApplet parent){
@@ -83,13 +88,14 @@ public class Flame extends Objects{
         return showed;
     }
 
-    public static void flameRender(){
-        for (Flame[] row : flames) {
-            for (Flame flame : row) {
-                if (flame.showed) {
-                    flame.render();
-                }
-                flame.update();
+    public  static void flameRender(){
+        Iterator<Flame> iterator = activeFlames.iterator();
+        while(iterator.hasNext()){
+            Flame flame = iterator.next();
+            flame.render();
+            if (flame.update()){
+                iterator.remove();
+                //System.out.println("Flame inactive:" + flame.x +", " + flame.y);
             }
         }
     }
