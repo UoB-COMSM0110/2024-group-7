@@ -42,7 +42,7 @@
     "Application.GameLoop.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "items",
+    "git-widget-placeholder": "enemyAI",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/zilouli/Engineering Project Game/2024-group-7",
     "node.js.detected.package.eslint": "true",
@@ -113,6 +113,7 @@
       <workItem from="1712570861984" duration="62000" />
       <workItem from="1712577108263" duration="9864000" />
       <workItem from="1712657261367" duration="622000" />
+      <workItem from="1712660308126" duration="742000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />
