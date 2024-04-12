@@ -10,10 +10,9 @@ public class Obstacle extends GameLoop{
     int py;
     public static ArrayList<Wall> walls;
     public static ArrayList<BreakableRock> rocks;
-    public static boolean[][]obstacleGrid = new boolean[50][50];//need to be fixed!!!!!
+    public static boolean[][]obstacleGrid = new boolean[cols][rows];//need to be fixed!!!!!
 
     public static void initializeObstacleGrid(int rows, int cols) {
-        /*obstacleGrid = new boolean[50][50];//need to be fixed!!!!!*/
         for (BreakableRock rock : Obstacle.rocks) {
             int gridX = (rock.x() - 15) / tile;
             int gridY = (rock.y() - 75) / tile;

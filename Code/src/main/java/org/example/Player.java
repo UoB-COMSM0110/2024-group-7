@@ -10,17 +10,19 @@ public class Player extends Character {
     PImage playerImage;
     private int explosionDistance;
     private int maxBombs;
+    /*public int direction; // 0 = up,1 = right,2 = down, 3 = left*/
 
     Player(int x, int y, PApplet parent, PImage playerImage){
         this.parent =parent;
         this.px=x;
         this.py=y;
         this.playerImage = playerImage;
-        this.health = 1;
+        this.health = 3;
         this.explosionDistance = 1;
         this.maxBombs = 1;
         this.speed = 3;
         this.exist = true;
+        this.direction = -1;
     }
 
     public static ArrayList<Player> setPlayer1(PApplet parent) {
@@ -32,18 +34,48 @@ public class Player extends Character {
     }
 
     public void playerMove(){
-            if (up) {
-                this.up();
+        /*if (direction == 0) {
+            this.up();
+        }
+        if (direction == 2) {
+            this.down();
+        }
+        if (direction == 3) {
+            this.left();
+        }
+        if (direction == 1) {
+            this.right();
+        }*/
+        if (up) {
+            this.up();
+        }
+        if (down) {
+            this.down();
+        }
+        if (left) {
+            this.left();
+        }
+        if (right) {
+            this.right();
+        }
+    }
+
+    private void playerBombActivation(){
+        for (Bomb bomb : Objects.bombs) {
+            if (bomb.showed && !bomb.bombActive &&
+                    dist(px + (float) tile / 2, py + (float) tile / 2, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) >= tile) {
+                bomb.bombActive = true;
+                /*System.out.println("the bomb is active");*/
             }
-            if (down) {
-                this.down();
-            }
-            if (left) {
-                this.left();
-            }
-            if (right) {
-                this.right();
-            }
+        }
+    }
+
+    public static void player1Movement(){
+        Character.players.get(0).playerBombActivation();
+        if(Character.players.get(0).collisionDetect()) {
+            Character.players.get(0).playerMove();
+//            System.out.println("x = " + Character.players.get(0).px + "  y = " + Character.players.get(0).py);
+        }
     }
 
     public static void absorbToIntersection(){
@@ -56,26 +88,6 @@ public class Player extends Character {
     void render(){
         parent.image(playerImage,px,py,30,30);
     }
-
-    // 更新移动方法以设置方向标志
-    void up() {
-        py -= speed;
-    }
-
-    void down() {
-        py += speed;
-    }
-
-    void left() {
-        px -= speed;
-    }
-
-    void right() {
-        px += speed;
-    }
-
-    /*int x(){return px;}
-    int y(){return py;}*/
 
     public void increasePower() {
         this.explosionDistance +=1;
@@ -96,8 +108,23 @@ public class Player extends Character {
     public void increaseSpeed() {this.speed +=1; }
     public void increaseLife() {this.health += 1;}
 
+    public void ifTouchEnemy(){
+        System.out.println("?");
+        for(Enemy enemy : enemies) {
+            if (dist(px, py, enemy.x(), enemy.y()) < (float) tile / 2
+                && parent.millis() - damageTime > 1000) {
+                health -= 1;
+                damageTime = parent.millis();
+                if (health == 0) {
+                    exist = false;
+                }
+            }
+        }
+    }
+
     public static void player1Render(){
         players.get(0).ifDamageCharacter();
+        players.get(0).ifTouchEnemy();
         if(Character.players.get(0).exist){
             Character.players.get(0).render();
         }else {

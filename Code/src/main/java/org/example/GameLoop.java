@@ -83,13 +83,14 @@ public class GameLoop extends PApplet{
             fill(93, 88, 95);
 
             Wall.wallsRender();
-            Enemy.enemiesRender();
+
             BreakableRock.rocksRender();
             DoorKey.doorKeyRender(this);
             Door.doorRender(this);
 
-            Player.player1Render();
+            Enemy.enemiesRender();
 
+            Player.player1Render();
 
             gameEndDetect();
 
@@ -102,16 +103,14 @@ public class GameLoop extends PApplet{
             Flame.flameRender();
 
             Items.removeMarkedObjects();
-        }
 
-        if (move) {
-            if(Character.players.get(0).collisionDetect()) {
-                Character.players.get(0).playerMove();
-            }
-        }
-        Player.absorbToIntersection();
+            Player.player1Movement(/*Player.players.get(0).direction*/);
+            Enemy.enemiesMove();
 
-        Bomb.setBombIfPossible(this);
+            Player.absorbToIntersection();
+
+            Bomb.setBombIfPossible(this);
+        }
     }
 
     public void mouseClicked() {
@@ -126,16 +125,21 @@ public class GameLoop extends PApplet{
     public void keyPressed() {
         if (key == 'w') {
             up = true;
+            Player.players.get(0).direction = 0;
         } else if (key == 's') {
             down = true;
+            Player.players.get(0).direction = 2;
         } else if (key == 'a') {
             left = true;
+            Player.players.get(0).direction = 3;
         } else if (key == 'd') {
             right = true;
+            Player.players.get(0).direction = 1;
         } else if (key == 'c' && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber()) {
             Objects.bomb = true;
         }
         move = up || down || left || right;
+
     }
 
     public void keyReleased() {
@@ -146,6 +150,9 @@ public class GameLoop extends PApplet{
             case 'd': right = false; break;
         }
         move = up || down || left || right;
+        /*if(key == 'w' || key == 's' || key == 'a' || key == 'd'){
+            Player.players.get(0).direction = -1;
+        }*/
     }
 
     private static void gameEndDetect(){

@@ -80,7 +80,7 @@ public class Flame extends Objects{
     // Check if flame exist in a position
     public static boolean flameCheck(int x,int y){
         int col = (x - 15)/tile;
-        int row = (y - 15)/tile-2;
+        int row = (y - 75)/tile;
         return flames[col][row].showed;
     }
 

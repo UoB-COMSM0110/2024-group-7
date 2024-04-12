@@ -10,6 +10,8 @@ public class Enemy extends Character{
     /*PApplet parent;*/
     PImage enemyImage;
 
+    /*int currentDirection;// 0 = up,1 = right,2 = down, 3 = left*/
+
     Enemy(int x, int y, PApplet parent, PImage enemy) {
         /*super(x, y, parent, enemy);*/
         this.parent = parent;
@@ -17,8 +19,9 @@ public class Enemy extends Character{
         this.py=y;
         this.enemyImage = enemy;
         this.health = 1;
-        this.speed = 3;
+        this.speed = 1;
         this.exist = true;
+        this.direction = new Random().nextInt(4);
     }
 
     public static ArrayList<Enemy> generateEnemies(PApplet parent) {
@@ -41,8 +44,23 @@ public class Enemy extends Character{
         return enemies;
     }
 
-    public void enemyMovement(){
+    public void handleEnemyMovement(){
+        if(collisionDetect()){
+            switch (direction) {
+                case 0: this.up(); break;
+                case 1: this.right(); break;
+                case 2: this.down(); break;
+                case 3: this.left(); break;
+            }
+        }else{
+            direction = new Random().nextInt(4);
+        }
+    }
 
+    public static void enemiesMove(){
+        for(Enemy enemy : enemies){
+            enemy.handleEnemyMovement();
+        }
     }
 
     void render(){
