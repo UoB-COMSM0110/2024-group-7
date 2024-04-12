@@ -2,6 +2,8 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.util.Iterator;
+
 public class Bomb extends Objects{
     PApplet parent;
     PImage bombImage;
@@ -71,10 +73,14 @@ public class Bomb extends Objects{
     }
 
     public static void bombRender(){
-        for (Bomb bomb : bombs) {
+        Iterator<Bomb> iterator = bombs.iterator();
+        while (iterator.hasNext()) {
+            Bomb bomb = iterator.next();
             int packedNumber = bomb.update();
             if (bomb.showed) {
                 bomb.render();
+            } else {
+                iterator.remove();  // 删除showed为false的元素
             }
             if (packedNumber != 0) {
                 int x = packedNumber / 10000;

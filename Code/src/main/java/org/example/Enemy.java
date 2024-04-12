@@ -3,6 +3,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class Enemy extends Character{
@@ -17,6 +18,7 @@ public class Enemy extends Character{
         this.enemyImage = enemy;
         this.health = 1;
         this.speed = 3;
+        this.exist = true;
     }
 
     public static ArrayList<Enemy> generateEnemies(PApplet parent) {
@@ -39,13 +41,24 @@ public class Enemy extends Character{
         return enemies;
     }
 
+    public void enemyMovement(){
+
+    }
+
     void render(){
         parent.image(enemyImage,px,py,30,30);
     }
 
-    public static void enemiesRender(){
-        for (Enemy enemy : enemies) {
-            enemy.render();
+    public static void enemiesRender() {
+        Iterator<Enemy> iterator = enemies.iterator();
+        while (iterator.hasNext()) {
+            Enemy enemy = iterator.next();
+            enemy.ifDamageCharacter();
+            if (enemy.exist) {
+                enemy.render();
+            } else {
+                iterator.remove();
+            }
         }
     }
 }

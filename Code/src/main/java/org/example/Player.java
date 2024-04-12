@@ -16,10 +16,11 @@ public class Player extends Character {
         this.px=x;
         this.py=y;
         this.playerImage = playerImage;
-        this.health = 3;
+        this.health = 1;
         this.explosionDistance = 1;
         this.maxBombs = 1;
         this.speed = 3;
+        this.exist = true;
     }
 
     public static ArrayList<Player> setPlayer1(PApplet parent) {
@@ -96,6 +97,11 @@ public class Player extends Character {
     public void increaseLife() {this.health += 1;}
 
     public static void player1Render(){
-        Character.players.get(0).render();
+        players.get(0).ifDamageCharacter();
+        if(Character.players.get(0).exist){
+            Character.players.get(0).render();
+        }else {
+            GameLoop.gameLost = true;
+        }
     }
 }

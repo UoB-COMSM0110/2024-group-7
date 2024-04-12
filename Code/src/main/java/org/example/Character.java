@@ -9,6 +9,7 @@ public class Character extends GameLoop{
     int px, py;
     int health;
     int speed;
+    boolean exist;
     public static ArrayList<Player> players;
     public static ArrayList<Enemy> enemies;
     public static int enemyNumber = 5;
@@ -71,6 +72,15 @@ public class Character extends GameLoop{
         if (bomb.showed && bomb.bombActive && dist(x, y, bomb.x() + (float) tile / 2, bomb.y() + (float) tile / 2) < tile) {
         }
     }*/
+    public void ifDamageCharacter(){
+        //handle the interaction between rocks and flames
+        if (Flame.flameCheck(this.x(), this.y())) {
+            this.health -= 1;
+            if (this.health == 0) {
+                this.exist = false;
+            }
+        }
+    }
 
     int x(){return px;}
     int y(){return py;}

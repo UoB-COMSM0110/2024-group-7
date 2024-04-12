@@ -12,6 +12,7 @@ public class GameLoop extends PApplet{
     public static boolean move=false, up=false, down=false, left=false, right=false;
     public static int rows = 15, cols = 31;
     public static boolean gameWon = false;
+    public static boolean gameLost = false;
 
     public void settings() {
         size(width, height);
@@ -86,7 +87,9 @@ public class GameLoop extends PApplet{
             BreakableRock.rocksRender();
             DoorKey.doorKeyRender(this);
             Door.doorRender(this);
+
             Player.player1Render();
+
 
             gameEndDetect();
 
@@ -146,6 +149,9 @@ public class GameLoop extends PApplet{
     }
 
     private static void gameEndDetect(){
+        if(gameLost){
+            System.out.println("GameOver");
+        }
         if (Items.doorKey != null && !Items.doorKey.collected && Items.doorKey.visible) {
             Player player = Character.players.get(0);
             float distance = dist(player.px, player.py, Items.doorKey.x, Items.doorKey.y);
