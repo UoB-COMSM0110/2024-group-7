@@ -50,7 +50,7 @@ public class Obstacle extends GameLoop{
     public static void removeRockFromObstacleGridPVP(BreakableRock rock) {
         int gridX = (rock.x() - 15) / tile;
         int gridY = (rock.y() - 75) / tile;
-        System.out.println("x = "+ gridX + "      y = "+ gridY);
+        //System.out.println("x = "+ gridX + "      y = "+ gridY);
         obstacleGridPVP[gridX][gridY] = false;
     }
 
