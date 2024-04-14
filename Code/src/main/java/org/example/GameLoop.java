@@ -79,11 +79,18 @@ public class GameLoop extends PApplet{
 
         if (PVE) {
             menu = false;
-            background(165, 165, 165);
+            /*background(165, 165, 165);
             fill(87, 108, 164);
             noStroke();
             rect(15, 75, 930, 450);
-            fill(93, 88, 95);
+            fill(93, 88, 95);*/
+            background(165, 165, 165);
+            translate((float) width / 2, (float) height / 2);
+            scale(2.5f);
+            translate(-Player.players.get(0).px, -Player.players.get(0).py);
+            fill(87, 108, 164);
+            noStroke();
+            rect(0, 0, 930, 450);
 
             Wall.wallsRender();
 
