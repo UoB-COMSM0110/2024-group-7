@@ -8,12 +8,13 @@ public class GameLoop extends PApplet{
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
-    public static boolean menu=true, play=false;
+    public static boolean menu=true, play=false, settings=false;
     public static boolean move=false, up=false, down=false, left=false, right=false;
     public static int rows = 15, cols = 31;
     public static boolean gameWon = false;
     public static boolean gameLost = false;
-
+    static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
+    static char upKey2 = 'i';static char downKey2 = 'k';static char leftKey2 = 'j';static char rightKey2 = 'l';static char bombKey2 = 'p';
     public void settings() {
         size(width, height);
     }
@@ -111,6 +112,48 @@ public class GameLoop extends PApplet{
 
             Bomb.setBombIfPossible(this);
         }
+        if (settings) {
+            menu = false;
+            play = false;
+
+            background(87, 108, 164);
+            Settings settingsMenu = new Settings(this);
+
+            settingsMenu.show();
+            // Background black color for the settings menu
+            PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
+            textFont(Daruma, 35);
+            fill(250, 236, 0);
+            text("Settings", 150, 30, (float) width / 4, height);
+            text("P1", 350, 30, (float) width / 4, height);
+            text("P2", 550, 30, (float) width / 4, height);
+
+            textSize(30);
+            fill(0); // Set color for dropdown text
+            text("UP KEY:", 150, 100, (float) width / 4, height); // Draw label for dropdown
+            text("DOWN KEY:", 150, 180, (float) width / 4, height);
+            text("LEFT KEY:", 150, 260, (float) width / 4, height);
+            text("RIGHT KEY:", 150, 340, (float) width / 4, height);
+            text("BOMB KEY:", 150, 420, (float) width / 4, height);
+
+            textSize(35);
+            fill(0);
+            text(String.valueOf(upKey1), 350, 100, (float) width / 4, height);
+            text(String.valueOf(downKey1), 350, 180, (float) width / 4, height);
+            text(String.valueOf(leftKey1), 350, 260, (float) width / 4, height);
+            text(String.valueOf(rightKey1), 350, 340, (float) width / 4, height);
+            text(String.valueOf(bombKey1), 350, 420, (float) width / 4, height);
+            text(String.valueOf(upKey2), 550, 100, (float) width / 4, height);
+            text(String.valueOf(downKey2), 550, 180, (float) width / 4, height);
+            text(String.valueOf(leftKey2), 550, 260, (float) width / 4, height);
+            text(String.valueOf(rightKey2), 550, 340, (float) width / 4, height);
+            text(String.valueOf(bombKey2), 550, 420, (float) width / 4, height);
+
+            textSize(30);
+            textAlign(CENTER);
+            fill(0, 0, 222);
+            text("←BACK", 0, 490, width, 500);
+        }
     }
 
     public void mouseClicked() {
@@ -120,22 +163,31 @@ public class GameLoop extends PApplet{
         if (mouseX>=0 && mouseX<(width/4) && mouseY>=450 && mouseY<540) {
             play=true;
         }
+        if (mouseX>=(3*width/4) && mouseX<width && mouseY>=450 && mouseY<540) {
+            settings=true;
+        }
+        int x = mouseX;
+        int y = mouseY;
+        Settings settingsMenu = new Settings(this);
+        String op = settingsMenu.settingsMouseClicked(x,y);
+        char keyInput = key;
+        settingsMenu.dealOperation(op,keyInput);
     }
 
     public void keyPressed() {
-        if (key == 'w') {
+        if (key == upKey1) {
             up = true;
             Player.players.get(0).direction = 0;
-        } else if (key == 's') {
+        } else if (key == downKey1) {
             down = true;
             Player.players.get(0).direction = 2;
-        } else if (key == 'a') {
+        } else if (key == leftKey1) {
             left = true;
             Player.players.get(0).direction = 3;
-        } else if (key == 'd') {
+        } else if (key == rightKey1) {
             right = true;
             Player.players.get(0).direction = 1;
-        } else if (key == 'c' && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber()) {
+        } else if (key == bombKey1 && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber()) {
             Objects.bomb = true;
         }
         move = up || down || left || right;
@@ -143,11 +195,14 @@ public class GameLoop extends PApplet{
     }
 
     public void keyReleased() {
-        switch (key) {
-            case 'w': up = false; break;
-            case 's': down = false; break;
-            case 'a': left = false; break;
-            case 'd': right = false; break;
+        if (key == upKey1) {
+            up = false;
+        } else if (key == downKey1) {
+            down = false;
+        } else if (key == leftKey1) {
+            left = false;
+        } else if (key == rightKey1) {
+            right = false;
         }
         move = up || down || left || right;
         /*if(key == 'w' || key == 's' || key == 'a' || key == 'd'){
