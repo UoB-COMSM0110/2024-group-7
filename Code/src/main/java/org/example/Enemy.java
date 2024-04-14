@@ -25,7 +25,6 @@ public class Enemy extends Character{
     }
 
     public static ArrayList<Enemy> generateEnemies(PApplet parent) {
-        ArrayList<Enemy> enemies = new ArrayList<>();
         int number =0;
         Random random = new Random();
         while(number < enemyNumber){
