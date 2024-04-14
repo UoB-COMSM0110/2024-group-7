@@ -109,7 +109,7 @@ public class Player extends Character {
     public void increaseLife() {this.health += 1;}
 
     public void ifTouchEnemy(){
-        System.out.println("?");
+        //System.out.println("?");
         for(Enemy enemy : enemies) {
             if (dist(px, py, enemy.x(), enemy.y()) < (float) tile / 2
                 && parent.millis() - damageTime > 1000) {
