@@ -42,9 +42,11 @@
     "Application.GameLoop.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+
     "git-widget-placeholder": "main",
+
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/zilouli/Engineering Project Game/2024-group-7",
+    "last_opened_file_path": "C:/浏览器下载/2024-group-7-1.0",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -92,7 +94,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
       </set>
     </attachedChunks>
   </component>
@@ -116,6 +118,7 @@
       <workItem from="1712660308126" duration="742000" />
       <workItem from="1712930112517" duration="1923000" />
       <workItem from="1712932200774" duration="17774000" />
+      <workItem from="1713104303338" duration="1156000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />
