@@ -41,42 +41,27 @@ public class Settings extends GameLoop {
                 System.out.println("changeUpKey1");
                 GameLoop.upKey1 = keyInput;
                 break;
-            case "changeUpKey2":
-                System.out.println("changeUpKey2");
-                GameLoop.upKey2 = keyInput;
-                break;
+
             case "changeDownKey1":
                 System.out.println("changeDownKey1");
                 GameLoop.downKey1 = keyInput;
                 break;
-            case "changeDownKey2":
-                System.out.println("changeDownKey2");
-                GameLoop.downKey2 = keyInput;
-                break;
+
             case "changeLeftKey1":
                 System.out.println("changeLeftKey1");
                 GameLoop.leftKey1 = keyInput;
                 break;
-            case "changeLeftKey2":
-                System.out.println("changeLeftKey2");
-                GameLoop.leftKey2 = keyInput;
-                break;
+
             case "changeRightKey1":
                 System.out.println("changeRightKey1");
                 GameLoop.rightKey1 = keyInput;
                 break;
-            case "changeRightKey2":
-                System.out.println("changeRightKey2");
-                GameLoop.rightKey2 = keyInput;
-                break;
+
             case "changeBombKey1":
                 System.out.println("changeBombKey1");
                 GameLoop.bombKey1 = keyInput;
                 break;
-            case "changeBombKey2":
-                System.out.println("changeBombKey2");
-                GameLoop.bombKey2 = keyInput;
-                break;
+
             default:
                 break;
         }
@@ -85,33 +70,23 @@ public class Settings extends GameLoop {
         if (x>=400 && x<550 && y>=90 && y<=130) {
             return "changeUpKey1";
         }
-        if (x>=600 && x<750 && y>=90 && y<=130) {
-            return "changeUpKey2";
-        }
+
         if (x>=400 && x<550 && y>=170 && y<=210) {
             return "changeDownKey1";
         }
-        if (x>=600 && x<750 && y>=170 && y<=210) {
-            return "changeDownKey2";
-        }
+
         if (x>=400 && x<550 && y>=250 && y<=290) {
             return "changeLeftKey1";
         }
-        if (x>=600 && x<750 && y>=250 && y<=290) {
-            return "changeLeftKey2";
-        }
+
         if (x>=400 && x<550 && y>=330 && y<=370) {
             return "changeRightKey1";
         }
-        if (x>=600 && x<750 && y>=330 && y<=370) {
-            return "changeRightKey2";
-        }
+
         if (x>=400 && x<550 && y>=410 && y<=450) {
             return "changeBombKey1";
         }
-        if (x>=600 && x<750 && y>=410 && y<=450) {
-            return "changeBombKey2";
-        }
+
         if (x>=420 && x<=560 && y>=480 && y<=520) {
             return "close";
         }

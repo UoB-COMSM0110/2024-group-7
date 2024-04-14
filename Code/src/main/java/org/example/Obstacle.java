@@ -9,10 +9,12 @@ public class Obstacle extends GameLoop{
     int px;
     int py;
     public static ArrayList<Wall> walls;
-    public static ArrayList<BreakableRock> rocks;
-    public static boolean[][]obstacleGrid = new boolean[cols][rows];//need to be fixed!!!!!
+    public static ArrayList<BreakableRock> rocks = new ArrayList<>();
+    public static ArrayList<BreakableRock> lessRocks = new ArrayList<>();
+    public static boolean[][]obstacleGrid = new boolean[cols][rows];
+    public static boolean[][]obstacleGridPVP = new boolean[cols][rows];
 
-    public static void initializeObstacleGrid(int rows, int cols) {
+    public static void initializeObstacleGrid() {
         for (BreakableRock rock : Obstacle.rocks) {
             int gridX = (rock.x() - 15) / tile;
             int gridY = (rock.y() - 75) / tile;
@@ -25,14 +27,31 @@ public class Obstacle extends GameLoop{
         }
     }
 
+    public static void initializeObstacleGridPVP() {
+        for (BreakableRock rock : Obstacle.lessRocks) {
+            int gridX = (rock.x() - 15) / tile;
+            int gridY = (rock.y() - 75) / tile;
+            obstacleGridPVP[gridX][gridY] = true;
+        }
+        for (Wall wall : Obstacle.walls) {
+            int gridX = (wall.x() - 15) / tile;
+            int gridY = (wall.y() - 75) / tile;
+            obstacleGridPVP[gridX][gridY] = true;
+        }
+    }
+
     public static void removeRockFromObstacleGrid(BreakableRock rock) {
         int gridX = (rock.x() - 15) / tile;
         int gridY = (rock.y() - 75) / tile;
 
-        // 确保坐标在辅助数组的范围内
-        /*if (gridX >= 0 && gridX < obstacleGrid.length && gridY >= 0 && gridY < obstacleGrid[gridX].length) {*/
-            obstacleGrid[gridX][gridY] = false; // 移除rock
-        /*}*/
+        obstacleGrid[gridX][gridY] = false;
+    }
+
+    public static void removeRockFromObstacleGridPVP(BreakableRock rock) {
+        int gridX = (rock.x() - 15) / tile;
+        int gridY = (rock.y() - 75) / tile;
+        //System.out.println("x = "+ gridX + "      y = "+ gridY);
+        obstacleGridPVP[gridX][gridY] = false;
     }
 
     public static boolean areThereRocks(int x, int y) {

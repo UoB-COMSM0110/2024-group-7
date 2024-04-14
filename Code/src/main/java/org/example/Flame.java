@@ -10,14 +10,14 @@ public class Flame extends Objects{
     PApplet parent;
     PImage frameImage;
     boolean showed;
-    int startTime, duration;
+    public int startTime, duration;
     Flame(int x, int y, PApplet parent, PImage frameImage){
         this.x = x;
         this.y = y;
         this.parent =parent;
         this.frameImage = frameImage;
         this.showed = false;
-        this.duration = 1000;
+        this.duration = 200;
     }
 
     void render(){

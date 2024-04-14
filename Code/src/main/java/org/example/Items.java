@@ -29,8 +29,13 @@ public class Items extends Objects{
 
     public static boolean checkAndHandleBreakable(int col, int row) {
         boolean handled = false;
-
-        for (BreakableRock rock : Obstacle.rocks) {
+        ArrayList<BreakableRock> theRocks = new ArrayList<>();
+        if(PVP){
+            theRocks = BreakableRock.lessRocks;
+        }else{
+            theRocks = BreakableRock.rocks;
+        }
+        for (BreakableRock rock : theRocks) {
             int rockCol = (rock.x() - 15) / tile;
             int rockRow = (rock.y() - 75) / tile;
             if (rockCol == col && rockRow == row && rock.rockExist) {

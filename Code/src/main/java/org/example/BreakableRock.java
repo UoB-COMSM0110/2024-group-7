@@ -4,6 +4,7 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class BreakableRock extends Obstacle{
     PImage rock;
@@ -30,14 +31,13 @@ public class BreakableRock extends Obstacle{
         this.rockExist = true;
     }
 
-    public static ArrayList<BreakableRock> generateRocks(int rows, int cols, PApplet parent) {
-        float chanceOfRock = 0.5F;
-        ArrayList<BreakableRock> rocks = new ArrayList<>();
+    public static ArrayList<BreakableRock> generateRocks(int rows, int cols, PApplet parent, float chanceOfRock) {
         for (int i = 0; i < cols; i++) {
             for (int j = 0; j < rows; j++) {
                 // Randomly decide whether to place a rock in this grid cell
                 // Exclude the area around where player initially stand
-                if (parent.random(1) < chanceOfRock && !Wall.isWallAt(i, j) && !(i <4 && j <4)) {
+                if (parent.random(1) < chanceOfRock && !Wall.isWallAt(i, j) &&
+                        !(i <= 4 && j <= 4) && !(i >= cols - 4 && j >= rows - 4)) {
                     int x = 15 + i * tile;
                     int y = 75 + j * tile;
                     rocks.add(new BreakableRock(x, y, parent, ResourceManager.rock));
@@ -46,6 +46,46 @@ public class BreakableRock extends Obstacle{
         }
         return rocks;
     }
+
+    public static ArrayList<BreakableRock> generateLessRocks(int rows, int cols, PApplet parent, float chanceOfRock) {
+        for (int i = 0; i < cols; i++) {
+            for (int j = 0; j < rows; j++) {
+                // Randomly decide whether to place a rock in this grid cell
+                // Exclude the area around where player initially stand
+                if (parent.random(1) < chanceOfRock && !Wall.isWallAt(i, j) &&
+                        !(i <= 4 && j <= 4) && !(i >= cols - 4 && j >= rows - 4)) {
+                    int x = 15 + i * tile;
+                    int y = 75 + j * tile;
+                    lessRocks.add(new BreakableRock(x, y, parent, ResourceManager.rock));
+                }
+            }
+        }
+        return lessRocks;
+    }
+
+    // 移除被標記的岩石
+    public static void removeRocks() {
+        Iterator<BreakableRock> rockIterator = Obstacle.rocks.iterator();
+        while (rockIterator.hasNext()) {
+            BreakableRock rock = rockIterator.next();
+            if (rock.isMarkedForRemoval()) {
+                Obstacle.removeRockFromObstacleGrid(rock);
+                rockIterator.remove();
+            }
+        }
+    }
+
+    public static void removeLessRocks() {
+        Iterator<BreakableRock> rockIterator = Obstacle.lessRocks.iterator();
+        while (rockIterator.hasNext()) {
+            BreakableRock rock = rockIterator.next();
+            if (rock.isMarkedForRemoval()) {
+                Obstacle.removeRockFromObstacleGridPVP(rock);
+                rockIterator.remove();
+            }
+        }
+    }
+
 
     public void ifDestroyRock(){
         //handle the interaction between rocks and flames
@@ -123,6 +163,15 @@ public class BreakableRock extends Obstacle{
 
     public static void rocksRender(){
         for (BreakableRock rock : rocks) {
+            if (rock.rockExist) {
+                rock.render();
+            }
+            rock.ifDestroyRock();
+        }
+    }
+
+    public static void lessRocksRender(){
+        for (BreakableRock rock : lessRocks) {
             if (rock.rockExist) {
                 rock.render();
             }

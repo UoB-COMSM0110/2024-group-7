@@ -8,13 +8,14 @@ public class GameLoop extends PApplet{
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
-    public static boolean menu=true, play=false, settings=false;
-    public static boolean move=false, up=false, down=false, left=false, right=false;
+    public static boolean menu=true, PVE=false, PVP=false, settings=false;
+//    public static boolean move=false, up=false, down=false, left=false, right=false;
     public static int rows = 15, cols = 31;
     public static boolean gameWon = false;
     public static boolean gameLost = false;
     static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
-    static char upKey2 = 'i';static char downKey2 = 'k';static char leftKey2 = 'j';static char rightKey2 = 'l';static char bombKey2 = 'p';
+
+
     public void settings() {
         size(width, height);
     }
@@ -26,17 +27,18 @@ public class GameLoop extends PApplet{
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
         //generate rocks
-        Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this);
-
-        //Bomb.initializeBombs(this);
+        Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
+        Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
 
         Flame.initializeFlames(this);
 
-        Obstacle.initializeObstacleGrid(rows, cols);
+        Obstacle.initializeObstacleGrid();
+        Obstacle.initializeObstacleGridPVP();
 
         Character.enemies = Enemy.generateEnemies(this);
 
         Character.players = Player.setPlayer1(this);
+        Character.players = Player.setPlayer2(this);
 
         Items.doorKey = new DoorKey(0,0,this);
         Items.doorKey.setKey(this);
@@ -67,15 +69,15 @@ public class GameLoop extends PApplet{
             textFont(Daruma, 35);
             textAlign(CENTER);
             fill(250, 236, 0);
-            text("Play", 0, 450, ((float) width / 4), 100);
-            text("Character", ((float) width / 4), 450, ((float) width / 4), 100);
+            text("PVE", 0, 450, ((float) width / 4), 100);
+            text("PVP", ((float) width / 4), 450, ((float) width / 4), 100);
             text("Achievements", ((float) width / 4 * 2), 450, ((float) width / 4), 100);
             text("Settings", ((float) width / 4 * 3), 450, ((float) width / 4), 100);
             textSize(100);
             text("Dungeon", 0, 250, width, 100);
         }
 
-        if (play) {
+        if (PVE) {
             menu = false;
             background(165, 165, 165);
             fill(87, 108, 164);
@@ -86,6 +88,7 @@ public class GameLoop extends PApplet{
             Wall.wallsRender();
 
             BreakableRock.rocksRender();
+
             DoorKey.doorKeyRender(this);
             Door.doorRender(this);
 
@@ -93,7 +96,7 @@ public class GameLoop extends PApplet{
 
             Player.player1Render();
 
-            gameEndDetect();
+            gameEndDetectPVE();
 
             BombPowerUp.getPowerUp(this);
             ExtraBomb.getExtraBomb(this);
@@ -103,18 +106,55 @@ public class GameLoop extends PApplet{
             Bomb.bombRender();
             Flame.flameRender();
 
+            BreakableRock.removeRocks();
             Items.removeMarkedObjects();
 
-            Player.player1Movement(/*Player.players.get(0).direction*/);
+            Player.player1Movement();
             Enemy.enemiesMove();
 
-            Player.absorbToIntersection();
+            Player.absorb1ToIntersection();
 
-            Bomb.setBombIfPossible(this);
+            Bomb.setBombIfPossible1(this);
         }
+
+        if(PVP){
+            menu = false;
+            background(165, 165, 165);
+            fill(87, 108, 164);
+            noStroke();
+            rect(15, 75, 930, 450);
+            fill(93, 88, 95);
+
+            Wall.wallsRender();
+            BreakableRock.lessRocksRender();
+
+            Player.player1Render();
+            Player.player2Render();
+
+            Player.players.get(0).PVPEnhancement();
+            Player.players.get(1).PVPEnhancement();
+
+            Bomb.bombRender();
+            Flame.flameRender();
+
+            BreakableRock.removeLessRocks();
+
+            Player.player1Movement();
+            Player.player2Movement();
+
+            Player.absorb1ToIntersection();
+            Player.absorb2ToIntersection();
+
+            Bomb.setBombIfPossible1(this);
+            Bomb.setBombIfPossible2(this);
+
+            gameEndDetectPVP();
+        }
+
         if (settings) {
             menu = false;
-            play = false;
+            PVE = false;
+            PVP = false;
 
             background(87, 108, 164);
             Settings settingsMenu = new Settings(this);
@@ -126,7 +166,6 @@ public class GameLoop extends PApplet{
             fill(250, 236, 0);
             text("Settings", 150, 30, (float) width / 4, height);
             text("P1", 350, 30, (float) width / 4, height);
-            text("P2", 550, 30, (float) width / 4, height);
 
             textSize(30);
             fill(0); // Set color for dropdown text
@@ -143,11 +182,7 @@ public class GameLoop extends PApplet{
             text(String.valueOf(leftKey1), 350, 260, (float) width / 4, height);
             text(String.valueOf(rightKey1), 350, 340, (float) width / 4, height);
             text(String.valueOf(bombKey1), 350, 420, (float) width / 4, height);
-            text(String.valueOf(upKey2), 550, 100, (float) width / 4, height);
-            text(String.valueOf(downKey2), 550, 180, (float) width / 4, height);
-            text(String.valueOf(leftKey2), 550, 260, (float) width / 4, height);
-            text(String.valueOf(rightKey2), 550, 340, (float) width / 4, height);
-            text(String.valueOf(bombKey2), 550, 420, (float) width / 4, height);
+
 
             textSize(30);
             textAlign(CENTER);
@@ -161,7 +196,10 @@ public class GameLoop extends PApplet{
             link("https://github.com/UoB-COMSM0110/2024-group-7");
         }
         if (mouseX>=0 && mouseX<(width/4) && mouseY>=450 && mouseY<540) {
-            play=true;
+            PVE=true;
+        }
+        if (mouseX>=(width/4) && mouseX<(width/2) && mouseY>=450 && mouseY<540) {
+            PVP=true;
         }
         if (mouseX>=(3*width/4) && mouseX<width && mouseY>=450 && mouseY<540) {
             settings=true;
@@ -176,41 +214,73 @@ public class GameLoop extends PApplet{
 
     public void keyPressed() {
         if (key == upKey1) {
-            up = true;
+            Player.players.get(0).up = true;
             Player.players.get(0).direction = 0;
         } else if (key == downKey1) {
-            down = true;
+            Player.players.get(0).down = true;
             Player.players.get(0).direction = 2;
         } else if (key == leftKey1) {
-            left = true;
+            Player.players.get(0).left = true;
             Player.players.get(0).direction = 3;
         } else if (key == rightKey1) {
-            right = true;
+            Player.players.get(0).right = true;
             Player.players.get(0).direction = 1;
-        } else if (key == bombKey1 && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber()) {
-            Objects.bomb = true;
+        } else if (key == bombKey1 && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber1()) {
+            Player.players.get(0).bomb = true;
         }
-        move = up || down || left || right;
+        Player.players.get(0).move = Player.players.get(0).up || Player.players.get(0).down
+                || Player.players.get(0).left || Player.players.get(0).right;
 
+        if(PVP) {
+            if (keyCode == UP) {
+                Player.players.get(1).up = true;
+                Player.players.get(1).direction = 0;
+            } else if (keyCode == DOWN) {
+                Player.players.get(1).down = true;
+                Player.players.get(1).direction = 2;
+            } else if (keyCode == LEFT) {
+                Player.players.get(1).left = true;
+                Player.players.get(1).direction = 3;
+            } else if (keyCode == RIGHT) {
+                Player.players.get(1).right = true;
+                Player.players.get(1).direction = 1;
+            } else if (keyCode == ENTER && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber2()) {
+                Player.players.get(1).bomb = true;
+            }
+            Player.players.get(1).move = Player.players.get(1).up || Player.players.get(1).down
+                    || Player.players.get(1).left || Player.players.get(1).right;
+        }
     }
 
     public void keyReleased() {
-        if (key == upKey1) {
-            up = false;
-        } else if (key == downKey1) {
-            down = false;
-        } else if (key == leftKey1) {
-            left = false;
-        } else if (key == rightKey1) {
-            right = false;
+        if (key==upKey1){
+            Player.players.get(0).up = false;
+        }else if (key==downKey1){
+            Player.players.get(0).down = false;
+        }else if (key==leftKey1){
+            Player.players.get(0).left = false;
+        }else if (key==rightKey1){
+            Player.players.get(0).right = false;
         }
-        move = up || down || left || right;
-        /*if(key == 'w' || key == 's' || key == 'a' || key == 'd'){
-            Player.players.get(0).direction = -1;
-        }*/
+        Player.players.get(0).move = Player.players.get(0).up || Player.players.get(0).down
+                || Player.players.get(0).left || Player.players.get(0).right;
+
+        if(PVP){
+            if (keyCode==UP){
+                Player.players.get(1).up = false;
+            }else if (keyCode==DOWN){
+                Player.players.get(1).down = false;
+            }else if (keyCode==LEFT){
+                Player.players.get(1).left = false;
+            }else if (keyCode==RIGHT){
+                Player.players.get(1).right = false;
+            }
+            Player.players.get(1).move = Player.players.get(1).up || Player.players.get(1).down
+                    || Player.players.get(1).left || Player.players.get(1).right;
+        }
     }
 
-    private static void gameEndDetect(){
+    private static void gameEndDetectPVE(){
         if(gameLost){
             System.out.println("GameOver");
         }
@@ -229,6 +299,14 @@ public class GameLoop extends PApplet{
                 gameWon = true;
                 println("You've won the game!");//Game finished menu need to be complete
             }
+        }
+    }
+
+    private static void gameEndDetectPVP() {
+        if(Player.players.get(0).otherPlayerWon){
+            System.out.println("Player 2 won!");
+        }else if(Player.players.get(1).otherPlayerWon){
+            System.out.println("Player 1 won!");
         }
     }
 }
