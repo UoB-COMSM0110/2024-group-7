@@ -8,7 +8,7 @@ public class Objects extends GameLoop{
     //public static boolean bomb=false;
 
     /* This array should be same with the map, and create flames when setup() runs
-        just used to ensure the tight position of
+        just used to ensure the right position of
      */
     public static Flame [][] flames = new Flame[cols][rows];
     //public static Bomb [][] bombs = new Bomb [cols][rows];
