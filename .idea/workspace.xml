@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
+      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Settings.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +47,7 @@
     &quot;Application.GameLoop.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;正在合并 main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/zilouli/Engineering Project Game/2024-group-7&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -125,8 +126,9 @@
       <workItem from="1713122505842" duration="12242000" />
       <workItem from="1713135070540" duration="39000" />
       <workItem from="1713135736550" duration="2366000" />
-      <workItem from="1713138910327" duration="724000" />
-      <workItem from="1713168561403" duration="2578000" />
+      <workItem from="1713138595229" duration="51000" />
+      <workItem from="1713138761062" duration="67000" />
+      <workItem from="1713215716205" duration="423000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />

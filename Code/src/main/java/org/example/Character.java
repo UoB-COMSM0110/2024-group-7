@@ -130,7 +130,7 @@ public class Character extends GameLoop{
     public void ifDamageCharacter(){
         //handle the interaction between rocks and flames
         if (Flame.flameCheck(px, py) && parent.millis() - damageTime > 1000) {
-            System.out.println(this.health);
+            //System.out.println(this.health);
             this.health -= 1;
             damageTime = parent.millis();
             if (this.health == 0) {

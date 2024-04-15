@@ -3,6 +3,8 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PFont;
 
+import static java.lang.String.*;
+
 public class GameLoop extends PApplet{
     public static final int tile=30;
     public static final int fps=60;
@@ -79,11 +81,19 @@ public class GameLoop extends PApplet{
 
         if (PVE) {
             menu = false;
-            background(165, 165, 165);
+            settings = false;
+            /*background(165, 165, 165);
             fill(87, 108, 164);
             noStroke();
             rect(15, 75, 930, 450);
-            fill(93, 88, 95);
+            fill(93, 88, 95);*/
+            background(165, 165, 165);
+            translate((float) width / 2, (float) height / 2);
+            scale(2.5f);
+            translate(-Player.players.get(0).px, -Player.players.get(0).py);
+            fill(87, 108, 164);
+            noStroke();
+            rect(0, 0, 930, 450);
 
             Wall.wallsRender();
 
@@ -119,6 +129,7 @@ public class GameLoop extends PApplet{
 
         if(PVP){
             menu = false;
+            settings = false;
             background(165, 165, 165);
             fill(87, 108, 164);
             noStroke();
@@ -177,11 +188,11 @@ public class GameLoop extends PApplet{
 
             textSize(35);
             fill(0);
-            text(String.valueOf(upKey1), 350, 100, (float) width / 4, height);
-            text(String.valueOf(downKey1), 350, 180, (float) width / 4, height);
-            text(String.valueOf(leftKey1), 350, 260, (float) width / 4, height);
-            text(String.valueOf(rightKey1), 350, 340, (float) width / 4, height);
-            text(String.valueOf(bombKey1), 350, 420, (float) width / 4, height);
+            text(valueOf(upKey1), 350, 100, (float) width / 4, height);
+            text(valueOf(downKey1), 350, 180, (float) width / 4, height);
+            text(valueOf(leftKey1), 350, 260, (float) width / 4, height);
+            text(valueOf(rightKey1), 350, 340, (float) width / 4, height);
+            text(valueOf(bombKey1), 350, 420, (float) width / 4, height);
 
             textSize(30);
             textAlign(CENTER);
