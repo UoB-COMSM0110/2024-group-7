@@ -23,6 +23,7 @@ public class Items extends Objects{
 
 
     public static boolean isDoorOrKeyAt(int col, int row) {
+        //When the map modified, the conversion between (col,row) and (x,y)should be modified 
         return (Items.door.x == col*tile+15 && Items.door.y == row*tile+75) ||
                 (Items.doorKey.x == col*tile+15 && Items.doorKey.y == row*tile+75);
     }

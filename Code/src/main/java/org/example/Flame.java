@@ -40,6 +40,7 @@ public class Flame extends Objects{
     public static void initializeFlames(PApplet parent){
         for (int row =0; row < rows; row++){
             for (int col = 0; col < cols; col++){
+                //When the map modified, the conversion between (col,row) and (x,y)should be modified
                 int x = 15 + col * tile;
                 int y = 75 + row * tile;
                 flames[col][row] = new Flame(x,y,parent,ResourceManager.flame);
