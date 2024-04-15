@@ -183,7 +183,6 @@ public class GameLoop extends PApplet{
             text(String.valueOf(rightKey1), 350, 340, (float) width / 4, height);
             text(String.valueOf(bombKey1), 350, 420, (float) width / 4, height);
 
-
             textSize(30);
             textAlign(CENTER);
             fill(0, 0, 222);

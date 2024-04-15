@@ -1,16 +1,18 @@
 package org.example;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 
-public class Settings extends GameLoop {
-    PApplet parent; // Reference to the parent PApplet
-    boolean visible;
+    public class Settings extends GameLoop {
+        PApplet parent; // Reference to the parent PApplet
+        boolean visible;
 
-    public Settings(PApplet p) {
-        super(); // 调用父类的构造函数
-        parent = p;
-        visible = false;
-    }
+        public Settings(PApplet p) {
+            super(); // 调用父类的构造函数
+            this.parent = p;
+            visible = false;
+        }
+
 
     // 重写 settings() 方法来设置窗口大小
     @Override
@@ -94,4 +96,5 @@ public class Settings extends GameLoop {
             return "none";
         }
     }
+
 }
