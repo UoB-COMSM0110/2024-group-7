@@ -1,16 +1,15 @@
 package org.example;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.core.PFont;
-
-import static java.lang.String.*;
 
 public class GameLoop extends PApplet{
     public static final int tile=30;
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
-    public static boolean menu=true, PVE=false, PVP=false, settings=false;
+    public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;;
 //    public static boolean move=false, up=false, down=false, left=false, right=false;
     public static int rows = 15, cols = 31;
     public static boolean gameWon = false;
@@ -81,7 +80,6 @@ public class GameLoop extends PApplet{
 
         if (PVE) {
             menu = false;
-            settings = false;
             /*background(165, 165, 165);
             fill(87, 108, 164);
             noStroke();
@@ -129,7 +127,6 @@ public class GameLoop extends PApplet{
 
         if(PVP){
             menu = false;
-            settings = false;
             background(165, 165, 165);
             fill(87, 108, 164);
             noStroke();
@@ -164,8 +161,6 @@ public class GameLoop extends PApplet{
 
         if (settings) {
             menu = false;
-            PVE = false;
-            PVP = false;
 
             background(87, 108, 164);
             Settings settingsMenu = new Settings(this);
@@ -188,38 +183,93 @@ public class GameLoop extends PApplet{
 
             textSize(35);
             fill(0);
-            text(valueOf(upKey1), 350, 100, (float) width / 4, height);
-            text(valueOf(downKey1), 350, 180, (float) width / 4, height);
-            text(valueOf(leftKey1), 350, 260, (float) width / 4, height);
-            text(valueOf(rightKey1), 350, 340, (float) width / 4, height);
-            text(valueOf(bombKey1), 350, 420, (float) width / 4, height);
+            text(String.valueOf(upKey1), 350, 100, (float) width / 4, height);
+            text(String.valueOf(downKey1), 350, 180, (float) width / 4, height);
+            text(String.valueOf(leftKey1), 350, 260, (float) width / 4, height);
+            text(String.valueOf(rightKey1), 350, 340, (float) width / 4, height);
+            text(String.valueOf(bombKey1), 350, 420, (float) width / 4, height);
 
             textSize(30);
             textAlign(CENTER);
             fill(0, 0, 222);
             text("←BACK", 0, 490, width, 500);
         }
+
+        //PVP wining window
+        if(Player.players.get(0).otherPlayerWon || Player.players.get(1).otherPlayerWon) {
+            PVPui.PVPuishow();
+            if(PVPui.PVPuivisible){
+                fill(165, 165, 165, 200); // 灰色半透明背景
+                rectMode(PConstants.CORNER);
+                rect(0, 0, width, height);
+
+                fill(87, 108, 164); // 蓝色矩形
+                float rectWidth = (float) width / 2;
+                float rectHeight = (float) height / 2;
+                float rectX = (width - rectWidth) / 2;
+                float rectY = (height - rectHeight) / 2;
+                rect(rectX, rectY, rectWidth, rectHeight);
+
+                fill(250, 236, 0); // yellow word
+                textAlign(PConstants.CENTER, PConstants.CENTER);
+                textSize(35);
+                if(Player.players.get(0).otherPlayerWon){
+                    String message = "P2 WON!";
+                    text(message, (float) width / 2, (float) height / 2);
+                    Player.players.get(0).otherPlayerWon = false;
+                }else{
+                    String message = "P1 WON!";
+                    text(message, (float) width / 2, (float) height / 2);
+                    Player.players.get(1).otherPlayerWon = false;
+                }
+                fill(0, 0, 222); // blue word
+                textAlign(PConstants.CENTER, PConstants.CENTER);
+                textSize(30);
+                text("←Back", 240,240,(float) width / 2 , (float) height / 2);
+            }
+        }
     }
 
     public void mouseClicked() {
-        if (mouseX>=150 && mouseX<350) {
+        System.out.println(mouseX);
+        System.out.println(mouseY);
+        /*if (mouseX>=150 && mouseX<350 && menu) {
             link("https://github.com/UoB-COMSM0110/2024-group-7");
-        }
-        if (mouseX>=0 && mouseX<(width/4) && mouseY>=450 && mouseY<540) {
+        }*/
+
+        if (mouseX>=0 && mouseX<180 && mouseY>=450 && mouseY<540 && menu) {
             PVE=true;
+            menu=false;
         }
-        if (mouseX>=(width/4) && mouseX<(width/2) && mouseY>=450 && mouseY<540) {
+
+        if (mouseX>=300 && mouseX<420 && mouseY>=450 && mouseY<540 && menu) {
             PVP=true;
+            menu=false;
         }
-        if (mouseX>=(3*width/4) && mouseX<width && mouseY>=450 && mouseY<540) {
+        if (PVP) {
+            if (mouseX>=420 && mouseX<=530 && mouseY>=350 && mouseY<390){
+                PVPui.PVPuihide();
+                PVP=false;
+                menu=true;
+            }
+        }
+
+        if (mouseX>=480 && mouseX<600 && mouseY>=450 && mouseY<540 && menu) {
+            Achievements=true;
+            menu=false;
+        }
+        if (mouseX>=760 && mouseX<width && mouseY>=450 && mouseY<540 && menu) {
             settings=true;
+            menu=false;
         }
-        int x = mouseX;
-        int y = mouseY;
-        Settings settingsMenu = new Settings(this);
-        String op = settingsMenu.settingsMouseClicked(x,y);
-        char keyInput = key;
-        settingsMenu.dealOperation(op,keyInput);
+        if(settings){
+            int x = mouseX;
+            int y = mouseY;
+            Settings settingsMenu = new Settings(this);
+            String op = settingsMenu.settingsMouseClicked(x,y);
+            char keyInput = key;
+            settingsMenu.dealOperation(op,keyInput);
+        }
     }
 
     public void keyPressed() {

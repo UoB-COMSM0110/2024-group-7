@@ -1,15 +1,14 @@
 package org.example;
 
 import processing.core.PApplet;
-import processing.core.PFont;
 
     public class Settings extends GameLoop {
         PApplet parent; // Reference to the parent PApplet
         boolean visible;
 
-        public Settings(PApplet p) {
-            super(); // 调用父类的构造函数
-            this.parent = p;
+        public Settings(PApplet parent) {
+            //super(); // 调用父类的构造函数
+            this.parent = parent;
             visible = false;
         }
 
