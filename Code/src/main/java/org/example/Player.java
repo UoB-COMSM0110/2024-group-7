@@ -185,4 +185,8 @@ public class Player extends Character {
             players.get(1).otherPlayerWon = true;
         }
     }
+
+    public int getHealth() {
+        return this.health;
+    }
 }

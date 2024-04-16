@@ -133,6 +133,16 @@ public class GameLoop extends PApplet{
             rect(15, 75, 930, 450);
             fill(93, 88, 95);
 
+            int player1Health = Character.players.get(0).getHealth();
+            int player2Health = Character.players.get(1).getHealth();
+            textSize(30);
+            fill(0);
+            text("P1 Life:", 25, 25, (float) width / 4, height);
+            text(String.valueOf(player1Health), 105, 25, (float) width / 4, height);
+            text("Time:∞", 330, 25, (float) width / 4, height);
+            text("P2 Life:", 650, 25, (float) width / 4, height);
+            text(String.valueOf(player2Health), 730, 25, (float) width / 4, height);
+
             Wall.wallsRender();
             BreakableRock.lessRocksRender();
 
