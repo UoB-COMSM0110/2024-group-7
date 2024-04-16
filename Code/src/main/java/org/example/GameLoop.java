@@ -91,7 +91,7 @@ public class GameLoop extends PApplet{
             translate(-Player.players.get(0).px, -Player.players.get(0).py);
             fill(87, 108, 164);
             noStroke();
-            rect(0, 0, 930, 450);
+            rect(15, 75, 930, 450);
 
             Wall.wallsRender();
 
