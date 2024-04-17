@@ -65,7 +65,7 @@ public class Flame extends Objects{
                 int newCol = col + direction[0]*i;
                 int newRow = row + direction[1]*i;
 
-                if (Wall.isWallAt(newCol, newRow)) break;
+                if (Wall.isWallAt(newCol, newRow) || Shop.isShopAt(newCol, newRow)) break;
 
                 // Otherwise, place flame
                 flames[newCol][newRow].appear();

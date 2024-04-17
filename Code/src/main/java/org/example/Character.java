@@ -9,6 +9,7 @@ public class Character extends GameLoop{
     int px, py;
     int health;
     int speed;
+    int coin;
     boolean exist;
     public int direction;
     public static ArrayList<Player> players = new ArrayList<>();

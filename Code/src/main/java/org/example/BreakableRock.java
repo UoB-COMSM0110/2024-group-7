@@ -16,10 +16,12 @@ public class BreakableRock extends Obstacle{
     boolean hideExtraBomb = false;
     boolean hideSpeedUp = false;
     boolean hideExtraLife = false;
+    boolean hideCoin = false;
     public BombPowerUp hiddenPowerUp;
     public ExtraBomb hiddenExtraBomb;
     public SpeedUp hiddenSpeedUp;
     public ExtraLife hiddenExtraLife;
+    public Coin hiddenCoin;
     boolean markedForRemoval = false;
     BreakableRock(int x, int y, PApplet parent, PImage rock) {
         /*super(x, y, parent, rock);*/
@@ -36,7 +38,7 @@ public class BreakableRock extends Obstacle{
             for (int j = 0; j < rows; j++) {
                 // Randomly decide whether to place a rock in this grid cell
                 // Exclude the area around where player initially stand
-                if (parent.random(1) < chanceOfRock && !Wall.isWallAt(i, j) &&
+                if (parent.random(1) < chanceOfRock && !Wall.isWallAt(i, j) && !Shop.isShopAt(i,j) && !Coin.isCoinsInEmptySpaceAt(i, j) &&
                         !(i <= 4 && j <= 4) && !(i >= cols - 4 && j >= rows - 4)) {
                     int x = 15 + i * tile;
                     int y = 75 + j * tile;
@@ -151,6 +153,14 @@ public class BreakableRock extends Obstacle{
 
     public void setHiddenExtraLife(ExtraLife extraLife) {
         this.hiddenExtraLife = extraLife;
+    }
+
+    public void setHideCoin(boolean hideCoin) {
+        this.hideCoin = hideCoin;
+    }
+
+    public void setHiddenCoin(Coin coin) {
+        this.hiddenCoin = coin;
     }
 
     public void markForRemoval() {

@@ -1,5 +1,6 @@
 package org.example;
 
+import java.awt.*;
 import java.util.ArrayList;
 import processing.core.PApplet;
 
@@ -11,6 +12,9 @@ public class Obstacle extends GameLoop{
     public static ArrayList<Wall> walls;
     public static ArrayList<BreakableRock> rocks = new ArrayList<>();
     public static ArrayList<BreakableRock> lessRocks = new ArrayList<>();
+    public static ArrayList<Shop> shops = new ArrayList<>();
+    public static ArrayList<Point> availableShopPositions = new ArrayList<Point>();
+    public static int shopsNum = 2;
     public static boolean[][]obstacleGrid = new boolean[cols][rows];
     public static boolean[][]obstacleGridPVP = new boolean[cols][rows];
 
@@ -25,6 +29,11 @@ public class Obstacle extends GameLoop{
             int gridY = (wall.y() - 75) / tile;
             obstacleGrid[gridX][gridY] = true;
         }
+        for (Shop shop : Obstacle.shops) {
+            int gridX = (shop.x() - 15) / tile;
+            int gridY = (shop.y() - 75) / tile;
+            obstacleGrid[gridX][gridY] = true;
+        }
     }
 
     public static void initializeObstacleGridPVP() {
@@ -37,6 +46,11 @@ public class Obstacle extends GameLoop{
             int gridX = (wall.x() - 15) / tile;
             int gridY = (wall.y() - 75) / tile;
             obstacleGridPVP[gridX][gridY] = true;
+        }
+        for (Shop shop : Obstacle.shops) {
+            int gridX = (shop.x() - 15) / tile;
+            int gridY = (shop.y() - 75) / tile;
+            obstacleGrid[gridX][gridY] = true;
         }
     }
 

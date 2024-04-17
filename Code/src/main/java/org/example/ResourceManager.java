@@ -10,6 +10,7 @@ public class ResourceManager{
     public static PImage redEnemy;
     public static PImage rock;
     public static PImage flame;
+    public static PImage shop;
 
     public static void loadAllImages(PApplet app) {
         unbreakable = app.loadImage("images/unbreakable_wall.png");
@@ -18,5 +19,6 @@ public class ResourceManager{
         redEnemy = app.loadImage("images/red_mob.png");
         rock = app.loadImage("images/rock.png");
         flame = app.loadImage("images/fire.png");
+        shop = app.loadImage("images/shop.png");
     }
 }

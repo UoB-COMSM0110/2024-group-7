@@ -31,6 +31,7 @@ public class Player extends Character {
         this.speed = 3;
         this.exist = true;
         this.direction = -1;
+        this.coin = 0;
     }
 
     public static ArrayList<Player> setPlayer1(PApplet parent) {
@@ -150,6 +151,7 @@ public class Player extends Character {
 
     public void increaseSpeed() {this.speed +=1; }
     public void increaseLife() {this.health += 1;}
+    public void increaseCoin() {this.coin += 1;}
 
     public void ifTouchEnemy(){
         //System.out.println("?");
