@@ -11,6 +11,7 @@ public class GameLoop extends PApplet{
     public static final int height=540;
     public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;
 //    public static boolean move=false, up=false, down=false, left=false, right=false;
+    public static boolean reset = false;
     public static int rows = 15, cols = 31;
     public static boolean gameWon = false;
     public static boolean gameLost = false;
@@ -67,6 +68,23 @@ public class GameLoop extends PApplet{
         //System.out.println("x: "+ Character.players.get(0).x() + ",    y: " + Character.players.get(0).y());
 
         if (menu) {
+            if(reset){
+                Character.players.get(0).health = 3;
+                Character.players.get(0).health = 3;
+
+                Character.players.get(0).px = 45;
+                Character.players.get(0).py = 105;
+
+                Character.players.get(1).px = 885;
+                Character.players.get(1).py = 465;
+
+                Player.players.get(0).otherPlayerWon = false;
+                Player.players.get(1).otherPlayerWon = false;
+                Player.players.get(0).exist = true;
+                Player.players.get(1).exist = true;
+                reset = false;
+            }
+            System.out.println("1 is: " + Player.players.get(0).health + "  2 is :" + Player.players.get(1).health);
             background(87, 108, 164);
             PFont Cherry = createFont("fonts/CherryBombOne-Regular.ttf", 60);
             PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
@@ -87,11 +105,6 @@ public class GameLoop extends PApplet{
 
         if (PVE) {
             menu = false;
-            /*background(165, 165, 165);
-            fill(87, 108, 164);
-            noStroke();
-            rect(15, 75, 930, 450);
-            fill(93, 88, 95);*/
             background(165, 165, 165);
             translate((float) width / 2, (float) height / 2);
             scale(2.5f);
@@ -223,6 +236,7 @@ public class GameLoop extends PApplet{
 
         //PVP wining window
         if(Player.players.get(0).otherPlayerWon || Player.players.get(1).otherPlayerWon) {
+            System.out.println("1 is: " + Player.players.get(0).otherPlayerWon + "  2 is :" + Player.players.get(1).otherPlayerWon);
             PVPui.PVPuishow();
             if(PVPui.PVPuivisible){
                 fill(165, 165, 165, 200); // 灰色半透明背景
@@ -241,15 +255,13 @@ public class GameLoop extends PApplet{
                 textSize(35);
                 if(Player.players.get(0).otherPlayerWon){
                     text("P2 WON!", (float) width / 2, (float) height / 2);
-                    Player.players.get(0).otherPlayerWon = false;
                 }else{
                     text("P1 WON!", (float) width / 2, (float) height / 2);
-                    Player.players.get(1).otherPlayerWon = false;
                 }
                 fill(0, 0, 222); // blue word
                 textAlign(PConstants.CENTER, PConstants.CENTER);
                 textSize(30);
-                text("←Back", 240,240,(float) width / 2 , (float) height / 2);
+                text("←Restart", 240,240,(float) width / 2 , (float) height / 2);
             }
         }
     }
@@ -272,9 +284,10 @@ public class GameLoop extends PApplet{
         }
         if (PVP) {
             if (mouseX>=420 && mouseX<=530 && mouseY>=350 && mouseY<390){
-                PVPui.PVPuihide();
+                PVPui.PVPUIHide();
                 PVP=false;
                 menu=true;
+                reset = true;
             }
         }
 

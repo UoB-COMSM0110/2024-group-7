@@ -15,7 +15,7 @@ public class PVPui {
         PVPuivisible = true;
     }
 
-    public static void PVPuihide() {
+    public static void PVPUIHide() {
         PVPuivisible = false;
     }
 
