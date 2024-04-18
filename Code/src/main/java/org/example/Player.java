@@ -175,6 +175,7 @@ public class Player extends Character {
         }else {
             GameLoop.gameLost = true;
             players.get(0).otherPlayerWon = true;
+            shrinkNumber = 1f;
         }
     }
 

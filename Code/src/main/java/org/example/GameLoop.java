@@ -9,6 +9,7 @@ public class GameLoop extends PApplet{
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
+    public static float shrinkNumber = 2.5f;
     public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;
 //    public static boolean move=false, up=false, down=false, left=false, right=false;
     public static boolean reset = false;
@@ -83,8 +84,9 @@ public class GameLoop extends PApplet{
                 Player.players.get(0).exist = true;
                 Player.players.get(1).exist = true;
                 reset = false;
+                shrinkNumber = 1.5f;
             }
-            System.out.println("1 is: " + Player.players.get(0).health + "  2 is :" + Player.players.get(1).health);
+            //System.out.println("1 is: " + Player.players.get(0).health + "  2 is :" + Player.players.get(1).health);
             background(87, 108, 164);
             PFont Cherry = createFont("fonts/CherryBombOne-Regular.ttf", 60);
             PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
@@ -107,7 +109,7 @@ public class GameLoop extends PApplet{
             menu = false;
             background(165, 165, 165);
             translate((float) width / 2, (float) height / 2);
-            scale(2.5f);
+            scale(shrinkNumber);
             translate(-Player.players.get(0).px, -Player.players.get(0).py);
             fill(87, 108, 164);
             noStroke();
@@ -235,8 +237,8 @@ public class GameLoop extends PApplet{
         }
 
         //PVP wining window
-        if(Player.players.get(0).otherPlayerWon || Player.players.get(1).otherPlayerWon) {
-            System.out.println("1 is: " + Player.players.get(0).otherPlayerWon + "  2 is :" + Player.players.get(1).otherPlayerWon);
+        if((Player.players.get(0).otherPlayerWon || Player.players.get(1).otherPlayerWon) && PVP) {
+            //System.out.println("1 is: " + Player.players.get(0).otherPlayerWon + "  2 is :" + Player.players.get(1).otherPlayerWon);
             PVPui.PVPuishow();
             if(PVPui.PVPuivisible){
                 fill(165, 165, 165, 200); // 灰色半透明背景
