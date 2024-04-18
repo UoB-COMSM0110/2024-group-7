@@ -70,7 +70,7 @@ public class GameLoop extends PApplet{
         if (menu) {
             if(reset){
                 Character.players.get(0).health = 3;
-                Character.players.get(0).health = 3;
+                Character.players.get(1).health = 3;
 
                 Character.players.get(0).px = 45;
                 Character.players.get(0).py = 105;
