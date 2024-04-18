@@ -30,10 +30,12 @@ public class GameLoop extends PApplet{
 
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
-        //generate shops
-        Obstacle.shops = Shop.generateShops(rows, cols, this);
-        //generate coins
-        Coin.setCoinsInEmptySpaces(this);
+        if (PVE) {
+            //generate shops
+            Obstacle.shops = Shop.generateShops(rows, cols, this);
+            //generate coins
+            Coin.setCoinsInEmptySpaces(this);
+        }
         //generate rocks
         Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
         Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
@@ -42,9 +44,9 @@ public class GameLoop extends PApplet{
 
         Obstacle.initializeObstacleGrid();
         Obstacle.initializeObstacleGridPVP();
-
-        Character.enemies = Enemy.generateEnemies(this);
-
+        if (PVE) {
+            Character.enemies = Enemy.generateEnemies(this);
+        }
         Character.players = Player.setPlayer1(this);
         Character.players = Player.setPlayer2(this);
 
