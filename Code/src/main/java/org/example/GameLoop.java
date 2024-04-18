@@ -14,6 +14,7 @@ public class GameLoop extends PApplet{
     public static int rows = 15, cols = 31;
     public static boolean gameWon = false;
     public static boolean gameLost = false;
+    public static boolean timeStarted = false;
     static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
 
 
@@ -135,6 +136,8 @@ public class GameLoop extends PApplet{
 
         if(PVP){
             menu = false;
+            background(87, 108, 164);
+            PVPui pvpui = new PVPui(this);
             background(165, 165, 165);
             fill(87, 108, 164);
             noStroke();
@@ -147,7 +150,12 @@ public class GameLoop extends PApplet{
             fill(0);
             text("P1 Life:", 25, 25, (float) width / 4, height);
             text(String.valueOf(player1Health), 105, 25, (float) width / 4, height);
-            text("Time:∞", 330, 25, (float) width / 4, height);
+            text("Time:", 330, 25, (float) width / 4, height);
+            if (PVP && !timeStarted) {
+                timeStarted = true;
+                new Thread(() -> pvpui.clock()).start();
+            }
+            text(String.valueOf(PVPui.seconds),400,25, 240, 540);
             text("P2 Life:", 650, 25, (float) width / 4, height);
             text(String.valueOf(player2Health), 730, 25, (float) width / 4, height);
 
@@ -232,12 +240,10 @@ public class GameLoop extends PApplet{
                 textAlign(PConstants.CENTER, PConstants.CENTER);
                 textSize(35);
                 if(Player.players.get(0).otherPlayerWon){
-                    String message = "P2 WON!";
-                    text(message, (float) width / 2, (float) height / 2);
+                    text("P2 WON!", (float) width / 2, (float) height / 2);
                     Player.players.get(0).otherPlayerWon = false;
                 }else{
-                    String message = "P1 WON!";
-                    text(message, (float) width / 2, (float) height / 2);
+                    text("P1 WON!", (float) width / 2, (float) height / 2);
                     Player.players.get(1).otherPlayerWon = false;
                 }
                 fill(0, 0, 222); // blue word
@@ -435,9 +441,9 @@ public class GameLoop extends PApplet{
 
     private static void gameEndDetectPVP() {
         if(Player.players.get(0).otherPlayerWon){
-            System.out.println("Player 2 won!");
+            //System.out.println("Player 2 won!");
         }else if(Player.players.get(1).otherPlayerWon){
-            System.out.println("Player 1 won!");
+            //System.out.println("Player 1 won!");
         }
     }
 }

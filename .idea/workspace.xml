@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Coin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Shop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/coin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/shop.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/ResourceManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +47,7 @@
     "Application.GameStarter.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "PVPui",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/zorachen/game_project/2024-group-7",
     "node.js.detected.package.eslint": "true",
@@ -75,7 +65,7 @@
     "应用程序.gameStarter.executor": "Run"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.GameStarter">
+  <component name="RunManager" selected="应用程序.GameStarter">
     <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -99,7 +89,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameStarter" />
+        <item itemvalue="应用程序.GameStarter" />
+        <item itemvalue="应用程序.GameLoop" />
       </list>
     </recent_temporary>
   </component>
@@ -169,15 +160,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="smooth motion, better variable names" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java</url>
-          <line>84</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="rock" language="JAVA" />
