@@ -65,7 +65,6 @@ public class GameLoop extends PApplet{
 
     }
     public void draw() {
-        //System.out.println("x: "+ Character.players.get(0).x() + ",    y: " + Character.players.get(0).y());
 
         if (menu) {
             if(reset){
