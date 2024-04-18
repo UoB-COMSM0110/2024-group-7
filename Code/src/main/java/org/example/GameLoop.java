@@ -9,7 +9,7 @@ public class GameLoop extends PApplet{
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
-    public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;;
+    public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;
 //    public static boolean move=false, up=false, down=false, left=false, right=false;
     public static int rows = 15, cols = 31;
     public static boolean gameWon = false;
@@ -27,6 +27,10 @@ public class GameLoop extends PApplet{
 
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
+        //generate shops
+        Obstacle.shops = Shop.generateShops(rows, cols, this);
+        //generate coins
+        Coin.setCoinsInEmptySpaces(this);
         //generate rocks
         Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
         Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
@@ -54,6 +58,8 @@ public class GameLoop extends PApplet{
         SpeedUp.setSpeedUps(this);
 
         ExtraLife.setExtraLives(this);
+
+        Coin.setCoins(this);
 
     }
     public void draw() {
@@ -94,10 +100,11 @@ public class GameLoop extends PApplet{
             rect(15, 75, 930, 450);
 
             Wall.wallsRender();
+            Shop.shopsRender();
 
             BreakableRock.rocksRender();
 
-            DoorKey.doorKeyRender(this);
+            //DoorKey.doorKeyRender(this);
             Door.doorRender(this);
 
             Enemy.enemiesRender();
@@ -110,6 +117,7 @@ public class GameLoop extends PApplet{
             ExtraBomb.getExtraBomb(this);
             SpeedUp.getSpeedUp(this);
             ExtraLife.getExtraLife(this);
+            Coin.getCoin(this);
 
             Bomb.bombRender();
             Flame.flameRender();
@@ -284,17 +292,41 @@ public class GameLoop extends PApplet{
 
     public void keyPressed() {
         if (key == upKey1) {
-            Player.players.get(0).up = true;
-            Player.players.get(0).direction = 0;
+            if (Shop.isShopAt((Player.players.get(0).px-15) / tile, ((Player.players.get(0).py-75) / tile) - 1)) {
+                enterShop();  // 如果上方有商店，则进入商店
+            } else {
+                Player.players.get(0).up = true;
+                Player.players.get(0).direction = 0;
+            }
+            //Player.players.get(0).up = true;
+            //Player.players.get(0).direction = 0;
         } else if (key == downKey1) {
-            Player.players.get(0).down = true;
-            Player.players.get(0).direction = 2;
+            if (Shop.isShopAt((Player.players.get(0).px-15) / tile, ((Player.players.get(0).py-75) / tile) + 1)) {
+                enterShop();  // 如果下方有商店，则进入商店
+            } else {
+                Player.players.get(0).down = true;
+                Player.players.get(0).direction = 2;
+            }
+            //Player.players.get(0).down = true;
+            //Player.players.get(0).direction = 2;
         } else if (key == leftKey1) {
-            Player.players.get(0).left = true;
-            Player.players.get(0).direction = 3;
+            if (Shop.isShopAt(((Player.players.get(0).px-15) / tile) - 1, (Player.players.get(0).py-75) / tile)) {
+                enterShop();  // 如果左方有商店，则进入商店
+            } else {
+                Player.players.get(0).left = true;
+                Player.players.get(0).direction = 3;
+            }
+            //Player.players.get(0).left = true;
+            //Player.players.get(0).direction = 3;
         } else if (key == rightKey1) {
-            Player.players.get(0).right = true;
-            Player.players.get(0).direction = 1;
+            if (Shop.isShopAt(((Player.players.get(0).px-15) / tile) + 1, (Player.players.get(0).py-75) / tile)) {
+                enterShop();  // 如果右方有商店，则进入商店
+            } else {
+                Player.players.get(0).right = true;
+                Player.players.get(0).direction = 1;
+            }
+            //Player.players.get(0).right = true;
+            //Player.players.get(0).direction = 1;
         } else if (key == bombKey1 && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber1()) {
             Player.players.get(0).bomb = true;
         }
@@ -303,23 +335,52 @@ public class GameLoop extends PApplet{
 
         if(PVP) {
             if (keyCode == UP) {
-                Player.players.get(1).up = true;
-                Player.players.get(1).direction = 0;
+                if (Shop.isShopAt((Player.players.get(1).px-15) / tile, ((Player.players.get(1).py-75) / tile) - 1)) {
+                    enterShop();  // 如果上方有商店，则进入商店
+                } else {
+                    Player.players.get(1).up = true;
+                    Player.players.get(1).direction = 0;
+                }
+                //Player.players.get(1).up = true;
+                //Player.players.get(1).direction = 0;
             } else if (keyCode == DOWN) {
-                Player.players.get(1).down = true;
-                Player.players.get(1).direction = 2;
+                if (Shop.isShopAt((Player.players.get(1).px-15) / tile, ((Player.players.get(1).py-75) / tile) + 1)) {
+                    enterShop();  // 如果下方有商店，则进入商店
+                } else {
+                    Player.players.get(1).down = true;
+                    Player.players.get(1).direction = 2;
+                }
+                //Player.players.get(1).down = true;
+                //Player.players.get(1).direction = 2;
             } else if (keyCode == LEFT) {
-                Player.players.get(1).left = true;
-                Player.players.get(1).direction = 3;
+                if (Shop.isShopAt(((Player.players.get(1).px-15) / tile) - 1, (Player.players.get(1).py-75) / tile)) {
+                    enterShop();  // 如果左方有商店，则进入商店
+                } else {
+                    Player.players.get(1).left = true;
+                    Player.players.get(1).direction = 3;
+                }
+                //Player.players.get(1).left = true;
+                //Player.players.get(1).direction = 3;
             } else if (keyCode == RIGHT) {
-                Player.players.get(1).right = true;
-                Player.players.get(1).direction = 1;
+                if (Shop.isShopAt(((Player.players.get(1).px-15) / tile) + 1, (Player.players.get(1).py-75) / tile)) {
+                    enterShop();  // 如果右方有商店，则进入商店
+                } else {
+                    Player.players.get(1).right = true;
+                    Player.players.get(1).direction = 1;
+                }
+                //Player.players.get(1).right = true;
+                //Player.players.get(1).direction = 1;
             } else if (keyCode == ENTER && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber2()) {
                 Player.players.get(1).bomb = true;
             }
             Player.players.get(1).move = Player.players.get(1).up || Player.players.get(1).down
                     || Player.players.get(1).left || Player.players.get(1).right;
         }
+    }
+
+    public void enterShop() {
+        System.out.println("Entering shop...");
+        // 顯示商店界面
     }
 
     public void keyReleased() {

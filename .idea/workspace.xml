@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
+      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Coin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Shop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/coin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Code/src/main/resources/images/shop.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/ResourceManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/ResourceManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,11 +54,12 @@
     &quot;Application.Bomberman.executor&quot;: &quot;Run&quot;,
     &quot;Application.Code.org.example.GameLoop.executor&quot;: &quot;Run&quot;,
     &quot;Application.GameLoop.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GameStarter.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/zilouli/Engineering Project Game/2024-group-7&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zorachen/game_project/2024-group-7&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -62,7 +75,7 @@
     &quot;应用程序.gameStarter.executor&quot;: &quot;Run&quot;
   }
 }</component>
-  <component name="RunManager" selected="应用程序.GameStarter">
+  <component name="RunManager" selected="应用程序.GameLoop">
     <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -84,17 +97,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="应用程序.GameStarter" />
-        <item itemvalue="应用程序.GameLoop" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="jdk-17.0.10-temurin-17.0.10-f644763e9732-2dd12e70" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-a81d5c7c" />
       </set>
     </attachedChunks>
   </component>
@@ -126,7 +134,6 @@
       <workItem from="1713138595229" duration="51000" />
       <workItem from="1713138761062" duration="67000" />
       <workItem from="1713276875678" duration="58000" />
-      <workItem from="1713344494673" duration="4049000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />
@@ -160,7 +167,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java</url>
-          <line>82</line>
+          <line>84</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

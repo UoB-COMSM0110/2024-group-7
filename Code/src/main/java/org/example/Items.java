@@ -19,6 +19,10 @@ public class Items extends Objects{
     public static int speedUp_items = 5;
     public static ArrayList<ExtraLife> extraLives = new ArrayList<ExtraLife>();
     public static int extraLife_items = 2;
+    public static ArrayList<Coin> coins = new ArrayList<Coin>();
+    public static int coinUnderRock_items = 20;
+    public static ArrayList<Coin> coinsInEmptySpace = new ArrayList<Coin>();
+    public static int coinInEmptySpace_items = 10;
     public static HashSet<Integer> chosenIndexes = new HashSet<>();
 
 
@@ -68,6 +72,10 @@ public class Items extends Objects{
                     rock.hiddenExtraLife.setVisible(true);
                     rock.hideExtraLife = false;
                 }
+                if(rock.hideCoin && rock.hiddenCoin != null) {
+                    rock.hiddenCoin.setVisible(true);
+                    rock.hideCoin = false;
+                }
                 break;
             }
         }
@@ -103,6 +111,26 @@ public class Items extends Objects{
             int extraLifeRow = (extraLife.y - 75) / tile;
             if (extraLifeCol == col && extraLifeRow == row && extraLife.isVisible()) {
                 extraLife.markForRemoval();
+                itemDestroyed = true;
+                break;
+            }
+        }
+
+        for (Coin coin : coins) {
+            int coinCol = (coin.x - 15) / tile;
+            int coinRow = (coin.y - 75) / tile;
+            if (coinCol == col && coinRow == row && coin.isVisible()) {
+                coin.markForRemoval();
+                itemDestroyed = true;
+                break;
+            }
+        }
+
+        for (Coin coinInEmptySpace : coinsInEmptySpace) {
+            int coinInEmptySpaceCol = (coinInEmptySpace.x - 15) / tile;
+            int coinInEmptySpaceRow = (coinInEmptySpace.y - 75) / tile;
+            if (coinInEmptySpaceCol == col && coinInEmptySpaceRow == row && coinInEmptySpace.isVisible()) {
+                coinInEmptySpace.markForRemoval();
                 itemDestroyed = true;
                 break;
             }
@@ -165,6 +193,22 @@ public class Items extends Objects{
             ExtraLife extraLife = extraLifeIterator.next();
             if (extraLife.isMarkedForRemoval()) {
                 extraLifeIterator.remove();
+            }
+        }
+
+        Iterator<Coin> coinIterator = coins.iterator();
+        while (coinIterator.hasNext()) {
+            Coin coin = coinIterator.next();
+            if (coin.isMarkedForRemoval()) {
+                coinIterator.remove();
+            }
+        }
+
+        Iterator<Coin> coinInEmptySpaceIterator = coinsInEmptySpace.iterator();
+        while (coinInEmptySpaceIterator.hasNext()) {
+            Coin coinInEmptySpace = coinInEmptySpaceIterator.next();
+            if (coinInEmptySpace.isMarkedForRemoval()) {
+                coinInEmptySpaceIterator.remove();
             }
         }
 
