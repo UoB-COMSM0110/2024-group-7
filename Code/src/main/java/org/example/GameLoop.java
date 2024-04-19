@@ -29,7 +29,10 @@ public class GameLoop extends PApplet{
 
         ResourceManager.loadAllImages(this);
 
-        //generate walls
+        Character.players = Player.setPlayer1(this);
+        Character.players = Player.setPlayer2(this);
+
+        /*//generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
 
         //generate shops
@@ -65,9 +68,66 @@ public class GameLoop extends PApplet{
 
         ExtraLife.setExtraLives(this);
 
-        Coin.setCoins(this);
+        Coin.setCoins(this);*/
 
     }
+
+    public void setupPVE() {
+        //generate walls
+        Obstacle.walls = Wall.generateWalls(rows, cols, this);
+        //generate shops
+        Obstacle.shops = Shop.generateShops(rows, cols, this);
+        //generate coins
+        Coin.setCoinsInEmptySpaces(this);
+        //generate rocks
+        Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
+        //Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
+
+        Flame.initializeFlames(this);
+
+        Obstacle.initializeObstacleGrid();
+        //Obstacle.initializeObstacleGridPVP();
+        Character.enemies = Enemy.generateEnemies(this);
+
+        //Items.doorKey = new DoorKey(0, 0, this);
+        //Items.doorKey.setKey(this);
+
+        Items.door = new Door(0, 0, this);
+        Items.door.setDoor(this);
+
+
+        BombPowerUp.setPowerUps(this);
+
+        ExtraBomb.setExtraBombs(this);
+
+        SpeedUp.setSpeedUps(this);
+
+        ExtraLife.setExtraLives(this);
+
+        Coin.setCoins(this);
+    }
+
+    public void setupPVP() {
+        //generate walls
+        Obstacle.walls = Wall.generateWalls(rows, cols, this);
+        //generate rocks
+        Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
+        Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
+
+        Flame.initializeFlames(this);
+
+        //Obstacle.initializeObstacleGrid();
+        Obstacle.initializeObstacleGridPVP();
+        //Character.enemies = Enemy.generateEnemies(this);
+
+        //Items.doorKey = new DoorKey(0, 0, this);
+        //Items.doorKey.setKey(this);
+
+        //Items.door = new Door(0, 0, this);
+        //Items.door.setDoor(this);
+
+    }
+
     public void draw() {
 
         if (menu) {
@@ -366,6 +426,7 @@ public class GameLoop extends PApplet{
         if (mouseX>=0 && mouseX<180 && mouseY>=450 && mouseY<540 && menu) {
             PVE=true;
             menu=false;
+            setupPVE();
         }
         if (PVE) {
             if (mouseX>=420 && mouseX<=530 && mouseY>=350 && mouseY<390){
@@ -387,6 +448,7 @@ public class GameLoop extends PApplet{
         if (mouseX>=300 && mouseX<420 && mouseY>=450 && mouseY<540 && menu) {
             PVP=true;
             menu=false;
+            setupPVP();
         }
         if (PVP) {
             if (mouseX>=420 && mouseX<=530 && mouseY>=350 && mouseY<390){
