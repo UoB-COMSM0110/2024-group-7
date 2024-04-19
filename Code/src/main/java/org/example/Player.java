@@ -8,7 +8,8 @@ import java.util.Random;
 
 public class Player extends Character {
     PImage playerImage;
-    public int playerNumber = 0;
+    public boolean ultimateAbility= true;
+    public boolean useAbility= false;
     private int explosionDistance;
     private int maxBombs;
     boolean bomb=false;
@@ -20,7 +21,6 @@ public class Player extends Character {
     public double setBombTime = 0;
 
     Player(int playerNumber, int x, int y, PApplet parent, PImage playerImage){
-        this.playerNumber = playerNumber;
         this.parent =parent;
         this.px=x;
         this.py=y;

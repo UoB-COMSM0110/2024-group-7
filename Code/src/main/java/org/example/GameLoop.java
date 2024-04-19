@@ -19,6 +19,7 @@ public class GameLoop extends PApplet{
     public static boolean timeStarted = false;
     static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
 
+    static char bombKey2 = 'x';
 
     public void settings() {
         size(width, height);
@@ -41,6 +42,7 @@ public class GameLoop extends PApplet{
         Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
 
         Flame.initializeFlames(this);
+        Flame.initializeUltimateFlames(this);
 
         Obstacle.initializeObstacleGrid();
         Obstacle.initializeObstacleGridPVP();
@@ -140,6 +142,8 @@ public class GameLoop extends PApplet{
             Bomb.bombRender();
             Flame.flameRender();
 
+            Flame.ultimateFlameRender();
+
             BreakableRock.removeRocks();
             Items.removeMarkedObjects();
 
@@ -149,6 +153,7 @@ public class GameLoop extends PApplet{
             Player.absorb1ToIntersection();
 
             Bomb.setBombIfPossible1(this);
+            UltimateAbilities.generateUltimateFire(Player.players.get(0),this);
         }
 
         if(PVP){
@@ -352,6 +357,8 @@ public class GameLoop extends PApplet{
             //Player.players.get(0).direction = 1;
         } else if (key == bombKey1 && Player.players.get(0).getMaxBombs() >= Bomb.findCurrentBombsNumber1()) {
             Player.players.get(0).bomb = true;
+        } else if (key == bombKey2) {
+            Player.players.get(0).useAbility = true;
         }
         Player.players.get(0).move = Player.players.get(0).up || Player.players.get(0).down
                 || Player.players.get(0).left || Player.players.get(0).right;
@@ -415,6 +422,8 @@ public class GameLoop extends PApplet{
             Player.players.get(0).left = false;
         }else if (key==rightKey1){
             Player.players.get(0).right = false;
+        }else if (key == bombKey2) {
+            Player.players.get(0).useAbility = false;
         }
         Player.players.get(0).move = Player.players.get(0).up || Player.players.get(0).down
                 || Player.players.get(0).left || Player.players.get(0).right;

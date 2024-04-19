@@ -29,6 +29,12 @@ public class Flame extends Objects{
         activeFlames.add(this);
         //System.out.println("Flame active:" + this.x +", " + this.y);
     }
+    void appearUltimate(){
+        this.startTime = parent.millis();
+        this.showed = true;
+        activeUltimateFlames.add(this);
+        //System.out.println("Flame active:" + this.x +", " + this.y);
+    }
     public boolean update(){
         if (showed && parent.millis() - startTime >= duration){
             this.showed = false;
@@ -44,6 +50,17 @@ public class Flame extends Objects{
                 int x = 15 + col * tile;
                 int y = 75 + row * tile;
                 flames[col][row] = new Flame(x,y,parent,ResourceManager.flame);
+            }
+        }
+    }
+
+    public static void initializeUltimateFlames(PApplet parent){
+        for (int row =0; row < rows; row++){
+            for (int col = 0; col < cols; col++){
+                //When the map modified, the conversion between (col,row) and (x,y)should be modified
+                int x = 15 + col * tile;
+                int y = 75 + row * tile;
+                ultimateFlames[col][row] = new Flame(x,y,parent,ResourceManager.flame);
             }
         }
     }
@@ -91,6 +108,18 @@ public class Flame extends Objects{
 
     public  static void flameRender(){
         Iterator<Flame> iterator = activeFlames.iterator();
+        while(iterator.hasNext()){
+            Flame flame = iterator.next();
+            flame.render();
+            if (flame.update()){
+                iterator.remove();
+                //System.out.println("Flame inactive:" + flame.x +", " + flame.y);
+            }
+        }
+    }
+
+    public  static void ultimateFlameRender(){
+        Iterator<Flame> iterator = activeUltimateFlames.iterator();
         while(iterator.hasNext()){
             Flame flame = iterator.next();
             flame.render();
