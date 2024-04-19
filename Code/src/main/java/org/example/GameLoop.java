@@ -17,6 +17,7 @@ public class GameLoop extends PApplet{
     public static boolean gameWon = false;
     public static boolean gameLost = false;
     public static boolean timeStarted = false;
+    public static boolean openShop = false;
     static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
 
 
@@ -30,12 +31,12 @@ public class GameLoop extends PApplet{
 
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
-        if (PVE) {
-            //generate shops
-            Obstacle.shops = Shop.generateShops(rows, cols, this);
-            //generate coins
-            Coin.setCoinsInEmptySpaces(this);
-        }
+
+        //generate shops
+        Obstacle.shops = Shop.generateShops(rows, cols, this);
+        //generate coins
+        Coin.setCoinsInEmptySpaces(this);
+
         //generate rocks
         Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
         Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
@@ -44,9 +45,9 @@ public class GameLoop extends PApplet{
 
         Obstacle.initializeObstacleGrid();
         Obstacle.initializeObstacleGridPVP();
-        if (PVE) {
-            Character.enemies = Enemy.generateEnemies(this);
-        }
+
+        Character.enemies = Enemy.generateEnemies(this);
+
         Character.players = Player.setPlayer1(this);
         Character.players = Player.setPlayer2(this);
 
@@ -84,8 +85,11 @@ public class GameLoop extends PApplet{
                 Player.players.get(1).otherPlayerWon = false;
                 Player.players.get(0).exist = true;
                 Player.players.get(1).exist = true;
+
+                gameLost = false;
+
                 reset = false;
-                shrinkNumber = 1.5f;
+                shrinkNumber = 2.5f;
             }
             //System.out.println("1 is: " + Player.players.get(0).health + "  2 is :" + Player.players.get(1).health);
             background(87, 108, 164);
@@ -109,12 +113,17 @@ public class GameLoop extends PApplet{
         if (PVE) {
             menu = false;
             background(165, 165, 165);
-            translate((float) width / 2, (float) height / 2);
-            scale(shrinkNumber);
-            translate(-Player.players.get(0).px, -Player.players.get(0).py);
+
+            if (!openShop && !gameWon && !gameLost) {
+                translate((float) width / 2, (float) height / 2);
+                scale(shrinkNumber);
+                translate(-Player.players.get(0).px, -Player.players.get(0).py);
+            }
+
             fill(87, 108, 164);
             noStroke();
             rect(15, 75, 930, 450);
+            fill(93, 88, 95);
 
             Wall.wallsRender();
             Shop.shopsRender();
@@ -148,6 +157,84 @@ public class GameLoop extends PApplet{
             Player.absorb1ToIntersection();
 
             Bomb.setBombIfPossible1(this);
+
+            float playerX = Player.players.get(0).px;
+            float playerY = Player.players.get(0).py;
+            int player1Health = Character.players.get(0).getHealth();
+            int coinNumber = Character.players.get(0).getCoin();
+
+            textSize(15);
+            fill(0);
+            text("Life:", playerX - 250 , playerY - 100 , 240, 540);
+            text(String.valueOf(player1Health), playerX - 220, playerY - 100, 240, 540);
+            text("Coin:", playerX - 170  , playerY - 100 , 240, 540);
+            text(String.valueOf(coinNumber),playerX - 140,playerY - 100, 240, 540);
+            text("Skill:", playerX - 90  , playerY - 100 , 240, 540);
+            text("Item", playerX - 40  , playerY - 100 , 240, 540);
+
+        }
+        //PVE wining window
+        if((gameWon || gameLost) && PVE) {
+            //System.out.println("1 is: " + Player.players.get(0).otherPlayerWon + "  2 is :" + Player.players.get(1).otherPlayerWon);
+            PVEui.PVEUIShow();
+
+            if (PVEui.PVEuivisible) {
+                fill(165, 165, 165, 200); // 灰色半透明背景
+                rectMode(PConstants.CORNER);
+                rect(0, 0, 960, 540);
+
+                fill(87, 108, 164); // 蓝色矩形
+                float rectWidth = 480;  //(float) width / 2
+                float rectHeight = 270; //(float) height / 2
+                float rectX = (960 - rectWidth) / 2;
+                float rectY = (540 - rectHeight) / 2;
+                rect(rectX, rectY, rectWidth, rectHeight);
+
+                fill(250, 236, 0); // yellow word
+                textAlign(PConstants.CENTER, PConstants.CENTER);
+                textSize(35);
+                if (gameWon) {
+                    text("YOUR WON!", 480, 270);
+                } else {
+                    text("YOUR LOST!", 480, 270);
+                }
+                fill(0, 0, 222); // blue word
+                textAlign(PConstants.CENTER, PConstants.CENTER);
+                textSize(30);
+                text("←Restart", 240, 240, 480, 270);
+            }
+        }
+        //PVE shop
+        if(openShop && PVE) {
+            background(87, 108, 164);
+            PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
+            textFont(Daruma, 35);
+            fill(250, 236, 0);
+            text("Shop", 350, 30, (float) width / 4, height);
+
+            int coinNumber = Character.players.get(0).getCoin();
+            textFont(Daruma, 30);
+            fill(0);
+            text("Coin", 600, 30, (float) width / 4, height);
+            text(String.valueOf(coinNumber), 650, 30, (float) width / 4, height);
+
+            textSize(30);
+            fill(0); // Set color for dropdown text
+            text("Item1", 250, 100, (float) width / 4, height);
+            text("Item2", 250, 180, (float) width / 4, height);
+            text("Item3", 250, 260, (float) width / 4, height);
+            text("Item4", 250, 340, (float) width / 4, height);
+            text("Item5", 250, 420, (float) width / 4, height);
+
+            textSize(30);
+            fill(0,0,222); // Set color for dropdown text
+            text("Buy", 450, 100, (float) width / 4, height);
+            text("Buy", 450, 180, (float) width / 4, height);
+            text("Buy", 450, 260, (float) width / 4, height);
+            text("Buy", 450, 340, (float) width / 4, height);
+            text("Buy", 450, 420, (float) width / 4, height);
+
+            text("←Close", 220,480,(float) width / 2 , (float) height / 2);
         }
 
         if(PVP){
@@ -200,6 +287,37 @@ public class GameLoop extends PApplet{
 
             gameEndDetectPVP();
         }
+        //PVP wining window
+        if((Player.players.get(0).otherPlayerWon || Player.players.get(1).otherPlayerWon) && PVP) {
+            //System.out.println("1 is: " + Player.players.get(0).otherPlayerWon + "  2 is :" + Player.players.get(1).otherPlayerWon);
+            PVPui.PVPuishow();
+            if(PVPui.PVPuivisible){
+                fill(165, 165, 165, 200); // 灰色半透明背景
+                rectMode(PConstants.CORNER);
+                rect(0, 0, width, height);
+
+                fill(87, 108, 164); // 蓝色矩形
+                float rectWidth = (float) width / 2;
+                float rectHeight = (float) height / 2;
+                float rectX = (width - rectWidth) / 2;
+                float rectY = (height - rectHeight) / 2;
+                rect(rectX, rectY, rectWidth, rectHeight);
+
+                fill(250, 236, 0); // yellow word
+                textAlign(PConstants.CENTER, PConstants.CENTER);
+                textSize(35);
+                if(Player.players.get(0).otherPlayerWon){
+                    text("P2 WON!", (float) width / 2, (float) height / 2);
+                }else{
+                    text("P1 WON!", (float) width / 2, (float) height / 2);
+                }
+                fill(0, 0, 222); // blue word
+                textAlign(PConstants.CENTER, PConstants.CENTER);
+                textSize(30);
+                text("←Restart", 240,240,(float) width / 2 , (float) height / 2);
+            }
+        }
+
 
         if (settings) {
             menu = false;
@@ -236,37 +354,6 @@ public class GameLoop extends PApplet{
             fill(0, 0, 222);
             text("←BACK", 0, 490, width, 500);
         }
-
-        //PVP wining window
-        if((Player.players.get(0).otherPlayerWon || Player.players.get(1).otherPlayerWon) && PVP) {
-            //System.out.println("1 is: " + Player.players.get(0).otherPlayerWon + "  2 is :" + Player.players.get(1).otherPlayerWon);
-            PVPui.PVPuishow();
-            if(PVPui.PVPuivisible){
-                fill(165, 165, 165, 200); // 灰色半透明背景
-                rectMode(PConstants.CORNER);
-                rect(0, 0, width, height);
-
-                fill(87, 108, 164); // 蓝色矩形
-                float rectWidth = (float) width / 2;
-                float rectHeight = (float) height / 2;
-                float rectX = (width - rectWidth) / 2;
-                float rectY = (height - rectHeight) / 2;
-                rect(rectX, rectY, rectWidth, rectHeight);
-
-                fill(250, 236, 0); // yellow word
-                textAlign(PConstants.CENTER, PConstants.CENTER);
-                textSize(35);
-                if(Player.players.get(0).otherPlayerWon){
-                    text("P2 WON!", (float) width / 2, (float) height / 2);
-                }else{
-                    text("P1 WON!", (float) width / 2, (float) height / 2);
-                }
-                fill(0, 0, 222); // blue word
-                textAlign(PConstants.CENTER, PConstants.CENTER);
-                textSize(30);
-                text("←Restart", 240,240,(float) width / 2 , (float) height / 2);
-            }
-        }
     }
 
     public void mouseClicked() {
@@ -280,6 +367,22 @@ public class GameLoop extends PApplet{
             PVE=true;
             menu=false;
         }
+        if (PVE) {
+            if (mouseX>=420 && mouseX<=530 && mouseY>=350 && mouseY<390){
+                PVEui.PVEUIHide();
+                PVE = false;
+                menu=true;
+                reset = true;
+            }
+            if (openShop) {
+                int x = mouseX;
+                int y = mouseY;
+                PVEui pveui = new PVEui(this);
+                String op = pveui.pveShopMouseClicked(x,y);
+                pveui.dealOperation(op);
+            }
+        }
+
 
         if (mouseX>=300 && mouseX<420 && mouseY>=450 && mouseY<540 && menu) {
             PVP=true;
@@ -294,10 +397,13 @@ public class GameLoop extends PApplet{
             }
         }
 
+
         if (mouseX>=480 && mouseX<600 && mouseY>=450 && mouseY<540 && menu) {
             Achievements=true;
             menu=false;
         }
+
+
         if (mouseX>=760 && mouseX<width && mouseY>=450 && mouseY<540 && menu) {
             settings=true;
             menu=false;
@@ -402,6 +508,7 @@ public class GameLoop extends PApplet{
 
     public void enterShop() {
         System.out.println("Entering shop...");
+        GameLoop.openShop=true;
         // 顯示商店界面
     }
 
@@ -450,16 +557,16 @@ public class GameLoop extends PApplet{
             float distanceToDoor = dist(player.px, player.py, Items.door.x, Items.door.y);
             if (distanceToDoor < 30) {
                 gameWon = true;
-                println("You've won the game!");//Game finished menu need to be complete
+                //println("You've won the game!");//Game finished menu need to be complete
             }
         }
     }
 
     private static void gameEndDetectPVP() {
         if(Player.players.get(0).otherPlayerWon){
-            //System.out.println("Player 2 won!");
+            System.out.println("Player 2 won!");
         }else if(Player.players.get(1).otherPlayerWon){
-            //System.out.println("Player 1 won!");
+            System.out.println("Player 1 won!");
         }
     }
 }
