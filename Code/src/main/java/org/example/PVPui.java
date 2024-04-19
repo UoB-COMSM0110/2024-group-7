@@ -21,7 +21,7 @@ public class PVPui {
 
     public static void clock() {
         while (seconds > 0 && GameLoop.PVP) {
-            System.out.println("Remaining: " + seconds + " seconds");
+            //System.out.println("Remaining: " + seconds + " seconds");
 
             try {
                 Thread.sleep(1000); // 等待1秒

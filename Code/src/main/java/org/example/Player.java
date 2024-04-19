@@ -192,4 +192,7 @@ public class Player extends Character {
     public int getHealth() {
         return this.health;
     }
+    public int getCoin() {
+        return this.coin;
+    }
 }

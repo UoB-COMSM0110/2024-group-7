@@ -9,8 +9,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Objects.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Objects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" afterDir="false" />
+>>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +58,11 @@
     "Application.GameStarter.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+<<<<<<< HEAD
     "git-widget-placeholder": "circle",
+=======
+    "git-widget-placeholder": "main",
+>>>>>>> main
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/zorachen/game_project/2024-group-7",
     "node.js.detected.package.eslint": "true",
@@ -71,7 +80,7 @@
     "应用程序.gameStarter.executor": "Run"
   }
 }]]></component>
-  <component name="RunManager" selected="应用程序.GameStarter">
+  <component name="RunManager" selected="Application.GameStarter">
     <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -95,14 +104,15 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="应用程序.GameStarter" />
+        <item itemvalue="Application.GameStarter" />
+        <item itemvalue="Application.GameLoop" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
       </set>
     </attachedChunks>
   </component>
@@ -137,7 +147,9 @@
       <workItem from="1713441924353" duration="3383000" />
       <workItem from="1713447229502" duration="29000" />
       <workItem from="1713447581521" duration="1293000" />
-      <workItem from="1713539668423" duration="4037000" />
+      <workItem from="1713536186779" duration="2590000" />
+      <workItem from="1713539389452" duration="4467000" />
+      <workItem from="1713561831543" duration="331000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />

@@ -47,11 +47,11 @@ public class Obstacle extends GameLoop{
             int gridY = (wall.y() - 75) / tile;
             obstacleGridPVP[gridX][gridY] = true;
         }
-        for (Shop shop : Obstacle.shops) {
+        /*for (Shop shop : Obstacle.shops) {
             int gridX = (shop.x() - 15) / tile;
             int gridY = (shop.y() - 75) / tile;
             obstacleGrid[gridX][gridY] = true;
-        }
+        }*/
     }
 
     public static void removeRockFromObstacleGrid(BreakableRock rock) {
