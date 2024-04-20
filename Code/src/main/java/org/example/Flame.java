@@ -56,6 +56,15 @@ public class Flame extends Objects{
         }
     }
 
+    public static void resetFlames(){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                Objects.flames[j][i].duration = 200;
+                Objects.flames[j][i].showed = false;
+            }
+        }
+    }
+
     public static void initializeUltimateFlames(PApplet parent){
         for (int row =0; row < rows; row++){
             for (int col = 0; col < cols; col++){
@@ -101,7 +110,7 @@ public class Flame extends Objects{
                 flames[newCol][newRow].appear();
 
                 boolean stopSpreading = Items.checkAndHandleBreakable(newCol, newRow)
-                        || Items.isDoorOrKeyAt(newCol, newRow)
+                        /*|| Items.isDoorOrKeyAt(newCol, newRow)*/
                         || Items.checkAndDestroyExposedItems(newCol, newRow);
                 if(stopSpreading) break;
             }

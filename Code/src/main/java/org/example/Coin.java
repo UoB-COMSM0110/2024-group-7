@@ -44,6 +44,22 @@ public class Coin extends Items {
         }
     }
 
+    public static void resetCoins(PApplet parent){
+        for(Coin coin : coins){
+            int coinIndex = (int) parent.random(Obstacle.rocks.size());
+            while (!Items.chosenIndexes.add(coinIndex)) {
+                coinIndex = (int) parent.random(Obstacle.rocks.size());
+            }
+            BreakableRock coinRock = Obstacle.rocks.get(coinIndex);
+            coin.x = coinRock.px;
+            coin.y = coinRock.py;
+            coinRock.hiddenCoin= coin;
+            coinRock.hideCoin = true;
+            coin.visible = false;
+            coin.markedForRemoval = false;
+        }
+    }
+
     public static ArrayList<Point> getAvailableSpacesForCoins(PApplet parent) {
         ArrayList<Point> availableSpaces = new ArrayList<>();
         for (int i = 0; i < cols; i++) {

@@ -40,6 +40,19 @@ public class Door extends Items{
         door.setVisible(false);
     }
 
+    public void resetDoor(){
+        //HashSet<Integer> chosenIndexes = new HashSet<>();
+        int doorRockIndex = (int) random(Obstacle.rocks.size());
+        while (!Items.chosenIndexes.add(doorRockIndex)) {
+            doorRockIndex = (int) random(Obstacle.rocks.size());
+        }
+        BreakableRock doorRock = Obstacle.rocks.get(doorRockIndex);
+        doorRock.setHideDoor(true);
+        door.x = doorRock.x();
+        door.y = doorRock.y();
+        door.setVisible(false);
+    }
+
     public static void doorRender(PApplet parent){
         if (Items.door != null && door.visible) {
             Items.door.render(parent);

@@ -13,6 +13,7 @@ public class GameLoop extends PApplet{
     public static final int height=540;
     public static float shrinkNumber = 2.5f;
     public static int worldDeepness = 5;
+    public static int currentWorldDeepness = 0;
     public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;
 //    public static boolean move=false, up=false, down=false, left=false, right=false;
     public static boolean reset = false;
@@ -24,6 +25,8 @@ public class GameLoop extends PApplet{
     static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
 
     static char bombKey2 = 'x';
+
+    public static double pvpStartTime;
 
     public void settings() {
         size(width, height);
@@ -80,24 +83,15 @@ public class GameLoop extends PApplet{
     public void setupPVE() {
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
-        /*for(int i =0; i<worldDeepness;i++) {
-            ArrayList<Wall> walls = new ArrayList<>();
-            walls = Wall.generateWalls(rows, cols, this);
-            Obstacle.manyWalls.add(walls);
-        }*/
 
         //generate shops
         Obstacle.shops = Shop.generateShops(rows, cols, this);
+
         //generate coins
         Coin.setCoinsInEmptySpaces(this);
 
         //generate rocks
         Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
-        /*for(int i =0; i<worldDeepness;i++) {
-            ArrayList<BreakableRock> rocks = new ArrayList<>();
-            rocks = BreakableRock.generateRocks(rows, cols, this,0.5f);
-            Obstacle.manyRocks.add(rocks);
-        }*/
 
         Flame.initializeFlames(this);
         Flame.initializeUltimateFlames(this);
@@ -107,11 +101,6 @@ public class GameLoop extends PApplet{
         //Obstacle.initializeObstacleGridPVP();
 
         Character.enemies = Enemy.generateEnemies(this);
-        /*for(int i =0; i<worldDeepness;i++) {
-            ArrayList<Enemy> enemies = new ArrayList<>();
-            enemies = Enemy.generateEnemies(this);
-            Enemy.manyEnemies.add(enemies);
-        }*/
 
         //Items.doorKey = new DoorKey(0, 0, this);
         //Items.doorKey.setKey(this);
@@ -172,6 +161,12 @@ public class GameLoop extends PApplet{
 
                 gameLost = false;
 
+                PVPui.seconds = 11;
+                UltimateAbilities.k = 0;
+                UltimateAbilities.pvpClock = false;
+                Flame.activeFlames.clear();
+                Flame.resetFlames();
+
                 reset = false;
                 shrinkNumber = 2.5f;
             }
@@ -198,11 +193,11 @@ public class GameLoop extends PApplet{
             menu = false;
             background(165, 165, 165);
 
-            /*if (!openShop && !gameWon && !gameLost) {
+            if (!openShop && !gameWon && !gameLost) {
                 translate((float) width / 2, (float) height / 2);
                 scale(shrinkNumber);
                 translate(-Player.players.get(0).px, -Player.players.get(0).py);
-            }*/
+            }
 
             fill(87, 108, 164);
             noStroke();
@@ -237,7 +232,7 @@ public class GameLoop extends PApplet{
             Items.checkAndHandleBreakableUltimate();
 
             BreakableRock.removeRocks();
-            Items.removeMarkedObjects();
+            //Items.removeMarkedObjects();
 
             Player.player1Movement();
             Enemy.enemiesMove();
@@ -247,6 +242,8 @@ public class GameLoop extends PApplet{
             Bomb.setBombIfPossible1(this);
 
             UltimateAbilities.generateUltimateFire(Player.players.get(0));
+
+            Player.players.get(0).ifEnterTheNextWorld();
 
             float playerX = Player.players.get(0).px;
             float playerY = Player.players.get(0).py;
@@ -355,6 +352,8 @@ public class GameLoop extends PApplet{
             Wall.wallsRender();
             BreakableRock.lessRocksRender();
 
+            pvpStartTime = millis();
+
             Player.player1Render();
             Player.player2Render();
 
@@ -374,6 +373,8 @@ public class GameLoop extends PApplet{
 
             Bomb.setBombIfPossible1(this);
             Bomb.setBombIfPossible2(this);
+
+            UltimateAbilities.generatePVPFlames();
 
             gameEndDetectPVP();
         }
@@ -486,7 +487,6 @@ public class GameLoop extends PApplet{
                 reset = true;
             }
         }
-
 
         if (mouseX>=480 && mouseX<600 && mouseY>=450 && mouseY<540 && menu) {
             Achievements=true;

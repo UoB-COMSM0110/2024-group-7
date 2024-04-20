@@ -71,8 +71,9 @@ public class BreakableRock extends Obstacle{
         while (rockIterator.hasNext()) {
             BreakableRock rock = rockIterator.next();
             if (rock.isMarkedForRemoval()) {
+                rock.rockExist = false;
                 Obstacle.removeRockFromObstacleGrid(rock);
-                rockIterator.remove();
+                //rockIterator.remove();
             }
         }
     }
@@ -84,6 +85,27 @@ public class BreakableRock extends Obstacle{
             if (rock.isMarkedForRemoval()) {
                 Obstacle.removeRockFromObstacleGridPVP(rock);
                 rockIterator.remove();
+            }
+        }
+    }
+
+
+    public static void updateRockPositions(PApplet parent) {
+        for (BreakableRock rock : rocks) {
+            boolean validPosition = false;
+            while (!validPosition) {
+                int i = (int) (parent.random(cols));
+                int j = (int) (parent.random(rows));
+
+                // 检查新位置是否符合条件：不在特殊区域内，不是墙也不是商店和不是硬币所在位置
+                if (!Wall.isWallAt(i, j) && !Shop.isShopAt(i, j) && !Coin.isCoinsInEmptySpaceAt(i, j) &&
+                        !(i <= 4 && j <= 4) && !(i >= cols - 4 && j >= rows - 4)) {
+                    rock.px = 15 + i * tile;
+                    rock.py = 75 + j * tile;
+                    rock.rockExist = true;
+                    rock.markedForRemoval = false;
+                    validPosition = true;
+                }
             }
         }
     }

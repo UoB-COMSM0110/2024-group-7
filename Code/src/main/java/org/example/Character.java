@@ -135,7 +135,7 @@ public class Character extends GameLoop{
             //System.out.println(this.health);
             this.health -= 1;
             damageTime = parent.millis();
-            if (this.health == 0) {
+            if (this.health <= 0) {
                 this.exist = false;
             }
         }
@@ -144,10 +144,10 @@ public class Character extends GameLoop{
     public void ifUltimateDamageCharacter(){
         //handle the interaction between rocks and flames
         if (Flame.ultimateFlameCheck(px, py) && parent.millis() - damageTime > 1000) {
-            //System.out.println(this.health);
+            System.out.println(this.health);
             this.health -= 1;
             damageTime = parent.millis();
-            if (this.health == 0) {
+            if (this.health <= 0) {
                 this.exist = false;
             }
         }

@@ -17,13 +17,20 @@ public class Obstacle extends GameLoop{
     public static ArrayList<BreakableRock> rocks = new ArrayList<>();
     public static ArrayList<BreakableRock> lessRocks = new ArrayList<>();
     public static ArrayList<Shop> shops = new ArrayList<>();
+    public static ArrayList<ArrayList<Shop>> manyShops = new ArrayList<>();
     public static ArrayList<Point> availableShopPositions = new ArrayList<Point>();
     public static int shopsNum = 2;
     public static boolean[][]obstacleGrid = new boolean[cols][rows];
-    public static ArrayList<Boolean[][]> manyObstacleGrid = new ArrayList<>();
+    public static ArrayList<boolean[][]> manyObstacleGrid = new ArrayList<>();
     public static boolean[][]obstacleGridPVP = new boolean[cols][rows];
 
     public static void initializeObstacleGrid() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                obstacleGrid[j][i] = false;
+            }
+        }
+
         for (BreakableRock rock : Obstacle.rocks) {
             int gridX = (rock.x() - 15) / tile;
             int gridY = (rock.y() - 75) / tile;

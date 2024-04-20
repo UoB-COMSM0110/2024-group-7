@@ -6,15 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Coin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Coin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Door.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/ExtraLife.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/ExtraLife.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Objects.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Objects.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/PVEui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/PVEui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Shop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Shop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,7 +60,7 @@
     "Application.GameStarter.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "正在合并 circle",
+    "git-widget-placeholder": "circle",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/zorachen/game_project/2024-group-7",
     "node.js.detected.package.eslint": "true",
@@ -104,7 +109,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
       </set>
     </attachedChunks>
   </component>
@@ -142,6 +147,7 @@
       <workItem from="1713536186779" duration="2590000" />
       <workItem from="1713539389452" duration="4467000" />
       <workItem from="1713561831543" duration="331000" />
+      <workItem from="1713583661954" duration="15716000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />

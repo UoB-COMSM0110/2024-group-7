@@ -11,7 +11,7 @@ public class Bomb extends Objects{
     boolean bombActive;
     double timer;
     double setupTime;
-    public static int duration = 3000;
+    public static int duration = 2000;
     int attack = 1;
     boolean showed;
     Bomb(int x, int y, PApplet parent, PImage bombImage){

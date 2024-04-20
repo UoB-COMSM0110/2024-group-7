@@ -3,7 +3,7 @@ package org.example;
 import processing.core.PApplet;
 
 public class PVPui {
-    public static int seconds = 10;
+    public static int seconds = 11;
     private static PApplet parent;
     static Boolean PVPuivisible = false;
 
@@ -33,7 +33,8 @@ public class PVPui {
         System.out.println("Countdown complete!");
         GameLoop.timeStarted = false;
         if (seconds == 0){
-            seconds = 10;
+            seconds = 11;
+            UltimateAbilities.pvpClock = true;
         }
     }
 }

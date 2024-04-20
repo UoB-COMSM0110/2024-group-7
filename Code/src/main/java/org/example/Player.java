@@ -8,8 +8,9 @@ import java.util.Random;
 
 public class Player extends Character {
     PImage playerImage;
+    int timer = 120;
     public boolean useAbility= false;
-    public boolean isHavingTheKey= false;
+    public boolean isHavingTheKey= true;//现在还不能买钥匙
     private int explosionDistance;
     private int maxBombs;
     boolean bomb=false;
@@ -31,7 +32,7 @@ public class Player extends Character {
         this.speed = 3;
         this.exist = true;
         this.direction = -1;
-        this.coin = 10;
+        this.coin = 0;
     }
 
     public static ArrayList<Player> setPlayer1(PApplet parent) {
@@ -186,6 +187,32 @@ public class Player extends Character {
             Character.players.get(1).render();
         }else {
             players.get(1).otherPlayerWon = true;
+        }
+    }
+
+    public void ifEnterTheNextWorld(){
+        if(!this.isHavingTheKey){
+            return;
+        }
+        int distance = (int)dist(Door.door.x, Door.door.y, this.px, this.py);
+        if(distance < 30){
+            timer -= 1;
+        }else{
+            timer = 120;
+        }
+        if(timer <= 0){
+            this.px = 45;
+            this.py = 105;
+            Shop.resetShops();
+            BreakableRock.updateRockPositions(parent);
+            Obstacle.initializeObstacleGrid();
+            Enemy.updateEnemiesPositions(parent);
+
+            Items.removeOtherItems();
+
+            ExtraLife.resetExtraLives(parent);
+            Coin.resetCoins(parent);
+            Door.door.resetDoor();
         }
     }
 

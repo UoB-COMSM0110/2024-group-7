@@ -43,6 +43,22 @@ public class ExtraLife extends Items{
         }
     }
 
+    public static void resetExtraLives(PApplet parent){
+        for(ExtraLife extraLife : extraLives){
+            int extraLifeIndex = (int) parent.random(Obstacle.rocks.size());
+            while (!Items.chosenIndexes.add(extraLifeIndex)) {
+                extraLifeIndex = (int) parent.random(Obstacle.rocks.size());
+            }
+            BreakableRock extraLifeRock = Obstacle.rocks.get(extraLifeIndex);
+            extraLife.x = extraLifeRock.px;
+            extraLife.y = extraLifeRock.py;
+            extraLifeRock.hiddenExtraLife = extraLife;
+            extraLifeRock.hideExtraLife = true;
+            extraLife.visible = false;
+            extraLife.markedForRemoval = false;
+        }
+    }
+
     public static void getExtraLife(PApplet parent){
         for (ExtraLife extraLife : Items.extraLives) {
             if (extraLife.visible) {

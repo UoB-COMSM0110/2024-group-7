@@ -196,14 +196,14 @@ public class Items extends Objects{
 
     public static void removeMarkedObjects() {
         // 移除被標記的岩石
-        Iterator<BreakableRock> rockIterator = Obstacle.rocks.iterator();
+        /*Iterator<BreakableRock> rockIterator = Obstacle.rocks.iterator();
         while (rockIterator.hasNext()) {
             BreakableRock rock = rockIterator.next();
             if (rock.isMarkedForRemoval()) {
                 Obstacle.removeRockFromObstacleGrid(rock);
                 rockIterator.remove();
             }
-        }
+        }*/
 
         // 移除被標記的增強道具
         Iterator<BombPowerUp> powerUpIterator = powerUps.iterator();
@@ -256,5 +256,13 @@ public class Items extends Objects{
         }
 
         // 如果有其他類型的物件也需要被移除，繼續在這裡添加相應的邏輯
+    }
+
+    public static void removeOtherItems(){
+        powerUps.clear();
+        extraBombs.clear();
+        speedUps.clear();
+        coinsInEmptySpace.clear();
+        chosenIndexes.clear();
     }
 }
