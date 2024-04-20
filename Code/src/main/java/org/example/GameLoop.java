@@ -4,12 +4,15 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
 
+import java.util.ArrayList;
+
 public class GameLoop extends PApplet{
     public static final int tile=30;
     public static final int fps=60;
     public static final int width=960;
     public static final int height=540;
     public static float shrinkNumber = 2.5f;
+    public static int worldDeepness = 5;
     public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;
 //    public static boolean move=false, up=false, down=false, left=false, right=false;
     public static boolean reset = false;
@@ -77,19 +80,38 @@ public class GameLoop extends PApplet{
     public void setupPVE() {
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
+        /*for(int i =0; i<worldDeepness;i++) {
+            ArrayList<Wall> walls = new ArrayList<>();
+            walls = Wall.generateWalls(rows, cols, this);
+            Obstacle.manyWalls.add(walls);
+        }*/
+
         //generate shops
         Obstacle.shops = Shop.generateShops(rows, cols, this);
         //generate coins
         Coin.setCoinsInEmptySpaces(this);
+
         //generate rocks
         Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
-        //Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
+        /*for(int i =0; i<worldDeepness;i++) {
+            ArrayList<BreakableRock> rocks = new ArrayList<>();
+            rocks = BreakableRock.generateRocks(rows, cols, this,0.5f);
+            Obstacle.manyRocks.add(rocks);
+        }*/
 
         Flame.initializeFlames(this);
+        Flame.initializeUltimateFlames(this);
+        Flame.initializeEnemyNoHarmFlames(this);
 
         Obstacle.initializeObstacleGrid();
         //Obstacle.initializeObstacleGridPVP();
+
         Character.enemies = Enemy.generateEnemies(this);
+        /*for(int i =0; i<worldDeepness;i++) {
+            ArrayList<Enemy> enemies = new ArrayList<>();
+            enemies = Enemy.generateEnemies(this);
+            Enemy.manyEnemies.add(enemies);
+        }*/
 
         //Items.doorKey = new DoorKey(0, 0, this);
         //Items.doorKey.setKey(this);
@@ -176,11 +198,11 @@ public class GameLoop extends PApplet{
             menu = false;
             background(165, 165, 165);
 
-            if (!openShop && !gameWon && !gameLost) {
+            /*if (!openShop && !gameWon && !gameLost) {
                 translate((float) width / 2, (float) height / 2);
                 scale(shrinkNumber);
                 translate(-Player.players.get(0).px, -Player.players.get(0).py);
-            }
+            }*/
 
             fill(87, 108, 164);
             noStroke();
@@ -212,6 +234,8 @@ public class GameLoop extends PApplet{
 
             Flame.ultimateFlameRender();
 
+            Items.checkAndHandleBreakableUltimate();
+
             BreakableRock.removeRocks();
             Items.removeMarkedObjects();
 
@@ -221,9 +245,8 @@ public class GameLoop extends PApplet{
             Player.absorb1ToIntersection();
 
             Bomb.setBombIfPossible1(this);
-<<<<<<< HEAD
-            UltimateAbilities.generateUltimateFire(Player.players.get(0),this);
-=======
+
+            UltimateAbilities.generateUltimateFire(Player.players.get(0));
 
             float playerX = Player.players.get(0).px;
             float playerY = Player.players.get(0).py;
@@ -287,11 +310,11 @@ public class GameLoop extends PApplet{
 
             textSize(30);
             fill(0); // Set color for dropdown text
-            text("Item1", 250, 100, (float) width / 4, height);
-            text("Item2", 250, 180, (float) width / 4, height);
-            text("Item3", 250, 260, (float) width / 4, height);
-            text("Item4", 250, 340, (float) width / 4, height);
-            text("Item5", 250, 420, (float) width / 4, height);
+            text("VerticalFlames", 250, 100, (float) width / 4, height);
+            text("RoundFlames", 250, 180, (float) width / 4, height);
+            text("MoveToTheDoor", 250, 260, (float) width / 4, height);
+            text("KillAllEnemies", 250, 340, (float) width / 4, height);
+            text("RemoveAllRocks", 250, 420, (float) width / 4, height);
 
             textSize(30);
             fill(0,0,222); // Set color for dropdown text
@@ -302,7 +325,6 @@ public class GameLoop extends PApplet{
             text("Buy", 450, 420, (float) width / 4, height);
 
             text("←Close", 220,480,(float) width / 2 , (float) height / 2);
->>>>>>> main
         }
 
         if(PVP){
@@ -386,7 +408,6 @@ public class GameLoop extends PApplet{
             }
         }
 
-
         if (settings) {
             menu = false;
 
@@ -451,7 +472,6 @@ public class GameLoop extends PApplet{
                 pveui.dealOperation(op);
             }
         }
-
 
         if (mouseX>=300 && mouseX<420 && mouseY>=450 && mouseY<540 && menu) {
             PVP=true;

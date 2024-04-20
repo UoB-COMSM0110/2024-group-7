@@ -71,6 +71,7 @@ public class Enemy extends Character{
         while (iterator.hasNext()) {
             Enemy enemy = iterator.next();
             enemy.ifDamageCharacter();
+            enemy.ifUltimateDamageCharacter();
             if (enemy.exist) {
                 enemy.render();
             } else {

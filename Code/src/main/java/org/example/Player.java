@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Player extends Character {
     PImage playerImage;
-    public boolean ultimateAbility= true;
     public boolean useAbility= false;
+    public boolean isHavingTheKey= false;
     private int explosionDistance;
     private int maxBombs;
     boolean bomb=false;
@@ -31,7 +31,7 @@ public class Player extends Character {
         this.speed = 3;
         this.exist = true;
         this.direction = -1;
-        this.coin = 0;
+        this.coin = 10;
     }
 
     public static ArrayList<Player> setPlayer1(PApplet parent) {

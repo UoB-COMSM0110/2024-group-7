@@ -14,6 +14,7 @@ public class Character extends GameLoop{
     public int direction;
     public static ArrayList<Player> players = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();
+    public static ArrayList<ArrayList<Enemy>> manyEnemies = new ArrayList<>();
     public static int enemyNumber = 5;
     double damageTime = 0;
     public boolean collisionDetect() {
@@ -131,6 +132,18 @@ public class Character extends GameLoop{
     public void ifDamageCharacter(){
         //handle the interaction between rocks and flames
         if (Flame.flameCheck(px, py) && parent.millis() - damageTime > 1000) {
+            //System.out.println(this.health);
+            this.health -= 1;
+            damageTime = parent.millis();
+            if (this.health == 0) {
+                this.exist = false;
+            }
+        }
+    }
+
+    public void ifUltimateDamageCharacter(){
+        //handle the interaction between rocks and flames
+        if (Flame.ultimateFlameCheck(px, py) && parent.millis() - damageTime > 1000) {
             //System.out.println(this.health);
             this.health -= 1;
             damageTime = parent.millis();

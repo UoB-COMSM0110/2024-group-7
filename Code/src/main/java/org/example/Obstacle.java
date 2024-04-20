@@ -9,6 +9,10 @@ public class Obstacle extends GameLoop{
     PApplet parent;
     int px;
     int py;
+
+    public static ArrayList<ArrayList<BreakableRock>> manyRocks = new ArrayList<>();
+    public static ArrayList<ArrayList<Wall>> manyWalls = new ArrayList<>();
+
     public static ArrayList<Wall> walls;
     public static ArrayList<BreakableRock> rocks = new ArrayList<>();
     public static ArrayList<BreakableRock> lessRocks = new ArrayList<>();
@@ -16,6 +20,7 @@ public class Obstacle extends GameLoop{
     public static ArrayList<Point> availableShopPositions = new ArrayList<Point>();
     public static int shopsNum = 2;
     public static boolean[][]obstacleGrid = new boolean[cols][rows];
+    public static ArrayList<Boolean[][]> manyObstacleGrid = new ArrayList<>();
     public static boolean[][]obstacleGridPVP = new boolean[cols][rows];
 
     public static void initializeObstacleGrid() {

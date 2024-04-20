@@ -5,17 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
-      <change afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Character.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Flame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
-<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Objects.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Objects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/PVPui.java" afterDir="false" />
->>>>>>> main
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/PVEui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/PVEui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +35,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-    &quot;associatedIndex&quot;: 7
-    }</component>
+        &quot;associatedIndex&quot;: 7
+        }</component>
   <component name="ProjectId" id="2ca2pqKS5Cv8Ap0RahpmvlI2tab" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -58,11 +55,7 @@
     "Application.GameStarter.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-<<<<<<< HEAD
-    "git-widget-placeholder": "circle",
-=======
-    "git-widget-placeholder": "main",
->>>>>>> main
+    "git-widget-placeholder": "正在合并 circle",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/zorachen/game_project/2024-group-7",
     "node.js.detected.package.eslint": "true",
@@ -80,7 +73,7 @@
     "应用程序.gameStarter.executor": "Run"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.GameStarter">
+  <component name="RunManager" selected="应用程序.GameStarter">
     <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -104,8 +97,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameStarter" />
-        <item itemvalue="Application.GameLoop" />
+        <item itemvalue="应用程序.GameStarter" />
       </list>
     </recent_temporary>
   </component>
@@ -179,19 +171,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="smooth motion, better variable names" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="rock" language="JAVA" />
         <watch expression="y" />
+        <watch expression="ultimateFlames[1][1]" />
       </configuration>
     </watches-manager>
   </component>

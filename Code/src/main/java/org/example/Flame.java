@@ -31,8 +31,10 @@ public class Flame extends Objects{
     }
     void appearUltimate(){
         this.startTime = parent.millis();
-        this.showed = true;
-        activeUltimateFlames.add(this);
+        if(!this.showed) {
+            this.showed = true;
+            activeUltimateFlames.add(this);
+        }
         //System.out.println("Flame active:" + this.x +", " + this.y);
     }
     public boolean update(){
@@ -61,6 +63,17 @@ public class Flame extends Objects{
                 int x = 15 + col * tile;
                 int y = 75 + row * tile;
                 ultimateFlames[col][row] = new Flame(x,y,parent,ResourceManager.flame);
+            }
+        }
+    }
+
+    public static void initializeEnemyNoHarmFlames(PApplet parent){
+        for (int row =0; row < rows; row++){
+            for (int col = 0; col < cols; col++){
+                //When the map modified, the conversion between (col,row) and (x,y)should be modified
+                int x = 15 + col * tile;
+                int y = 75 + row * tile;
+                enemyNoHarmFlames[col][row] = new Flame(x,y,parent,ResourceManager.flame);
             }
         }
     }
@@ -100,6 +113,18 @@ public class Flame extends Objects{
         int col = (x - 15)/tile;
         int row = (y - 75)/tile;
         return flames[col][row].showed;
+    }
+
+    public static boolean ultimateFlameCheck(int x,int y){
+        int col = (x - 15)/tile;
+        int row = (y - 75)/tile;
+        return ultimateFlames[col][row].showed;
+    }
+
+    public static boolean enemyNoHarmFlameCheck(int x,int y){
+        int col = (x - 15)/tile;
+        int row = (y - 75)/tile;
+        return enemyNoHarmFlames[col][row].showed;
     }
 
     public boolean isActive() {

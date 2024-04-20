@@ -20,23 +20,23 @@ public class PVEui {
     }
     public String pveShopMouseClicked(int x, int y) {
         if (x>=530 && x<610 && y>=90 && y<=130) {
-            return "buyItem1";
+            return "VerticalFlames";
         }
 
         if (x>=530 && x<610 && y>=170 && y<=210) {
-            return "buyItem2";
+            return "RoundFlames";
         }
 
         if (x>=530 && x<610 && y>=250 && y<=290) {
-            return "buyItem3";
+            return "MoveToTheDoor";
         }
 
         if (x>=530 && x<610 && y>=330 && y<=370) {
-            return "buyItem4";
+            return "KillAllEnemies";
         }
 
         if (x>=530 && x<610 && y>=410 && y<=450) {
-            return "buyItem5";
+            return "RemoveAllRocks";
         }
 
         if (x>=400 && x<=520 && y>=470 && y<=500) {
@@ -53,30 +53,53 @@ public class PVEui {
                 System.out.println("shop closed");
                 break;
 
-            case "buyItem1":
-                System.out.println("buyItem1");
+            case "VerticalFlames":
+                System.out.println("buy VerticalFlames");
+                if(Character.players.get(0).getCoin() >= 1){
+                    UltimateAbilities.abilitiesList.add(1);
+                    Character.players.get(0).coin -= 1;
+                }
+                    break;
 
+            case "RoundFlames":
+                System.out.println("buy RoundFlames");
+                if(Character.players.get(0).getCoin() >= 2){
+                    UltimateAbilities.abilitiesList.add(2);
+                    Character.players.get(0).coin -= 2;
+                }
                 break;
 
-            case "buyItem2":
-                System.out.println("buyItem2");
-
+            case "MoveToTheDoor":
+                System.out.println("buy MoveToTheDoor");
+                if(Character.players.get(0).getCoin() >= 3){
+                    UltimateAbilities.abilitiesList.add(3);
+                    Character.players.get(0).coin -= 3;
+                }
                 break;
 
-            case "buyItem3":
-                System.out.println("buyItem3");
-
+            case "KillAllEnemies":
+                System.out.println("buy KillAllEnemies");
+                if(Character.players.get(0).getCoin() >= 4){
+                    UltimateAbilities.abilitiesList.add(4);
+                    Character.players.get(0).coin -= 4;
+                }
                 break;
 
-            case "buyItem4":
-                System.out.println("buyItem4");
-
+            case "RemoveAllRocks":
+                System.out.println("buy RemoveAllRocks");
+                if(Character.players.get(0).getCoin() >= 5){
+                    UltimateAbilities.abilitiesList.add(5);
+                    Character.players.get(0).coin -= 5;
+                }
                 break;
 
-            case "buyItem5":
-                System.out.println("buyItem5");
-
-                break;
+            /*case "Key":
+                System.out.println("buy the key");
+                if(Character.players.get(0).getCoin() >= 1){
+                    Character.players.get(0).coin -= 1;
+                    Character.players.get(0).isHavingTheKey = true;
+                }
+                break;*/
 
             default:
                 break;

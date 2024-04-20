@@ -82,6 +82,49 @@ public class Items extends Objects{
         return handled;
     }
 
+    public static void checkAndHandleBreakableUltimate() {
+        ArrayList<BreakableRock> theRocks = new ArrayList<>();
+        theRocks = BreakableRock.rocks;
+        for (BreakableRock rock : theRocks) {
+            int rockCol = (rock.x() - 15) / tile;
+            int rockRow = (rock.y() - 75) / tile;
+            if ((ultimateFlames[rockCol][rockRow].showed || enemyNoHarmFlames[rockCol][rockRow].showed) && rock.rockExist) {
+                // Mark the rock for removal instead of immediately removing it
+                rock.markForRemoval();
+                // Reveal any hidden items under the rock
+                if (rock.hideDoor) {
+                    Items.door.setVisible(true); // 設置門為可見
+                    rock.hideDoor = false; // 更新岩石的狀態，表示門已經不再隱藏
+                }
+                if (rock.hideKey) {
+                    Items.doorKey.setVisible(true); // 設置鑰匙為可見
+                    rock.hideKey = false; // 更新岩石的狀態，表示鑰匙已經不再隱藏
+                }
+                if (rock.hidePowerUp && rock.hiddenPowerUp != null) {
+                    rock.hiddenPowerUp.setVisible(true);
+                    rock.hidePowerUp = false;
+                }
+                if (rock.hideExtraBomb && rock.hiddenExtraBomb != null) {
+                    rock.hiddenExtraBomb.setVisible(true);
+                    rock.hideExtraBomb = false;
+                }
+                if (rock.hideSpeedUp && rock.hiddenSpeedUp != null) {
+                    rock.hiddenSpeedUp.setVisible(true);
+                    rock.hideSpeedUp = false;
+                }
+                if(rock.hideExtraLife && rock.hiddenExtraLife != null) {
+                    rock.hiddenExtraLife.setVisible(true);
+                    rock.hideExtraLife = false;
+                }
+                if(rock.hideCoin && rock.hiddenCoin != null) {
+                    rock.hiddenCoin.setVisible(true);
+                    rock.hideCoin = false;
+                }
+                break;
+            }
+        }
+    }
+
     public static boolean checkAndDestroyExposedItems(int col, int row) {
         boolean itemDestroyed = false;
 

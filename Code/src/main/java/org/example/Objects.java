@@ -12,6 +12,7 @@ public class Objects extends GameLoop{
      */
     public static Flame [][] flames = new Flame[cols][rows];
     public static Flame [][] ultimateFlames = new Flame[cols][rows];
+    public static Flame [][] enemyNoHarmFlames = new Flame[cols][rows];
     public static ArrayList<Flame> activeFlames = new ArrayList<>();
     public static ArrayList<Flame> activeUltimateFlames = new ArrayList<>();
 

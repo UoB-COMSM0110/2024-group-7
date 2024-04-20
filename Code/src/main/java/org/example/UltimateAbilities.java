@@ -3,52 +3,97 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class UltimateAbilities extends GameLoop{
-    private static int lastUpdateTime; // 上次更新时间
-    private static final float span = 0; // 时间间隔，以毫秒为单位
+import java.util.ArrayList;
 
-    public static void generateUltimateFire(Player player, PApplet parent){
-        if(!player.ultimateAbility || !player.useAbility) {
+public class UltimateAbilities extends GameLoop{
+    public static ArrayList<Integer> abilitiesList = new ArrayList<>();
+
+    public static void generateUltimateFire(Player player){
+        if(!player.useAbility || abilitiesList.isEmpty()) {
             return;
         }
         int startX = ( player.px - 15 ) / tile;
         int startY = ( player.py - 75 ) / tile;
-        spiralFlames(startX, startY, cols, rows, Objects.ultimateFlames, parent);
+
+        switch(abilitiesList.get(0)){
+            case 1:
+                generateFlameVertical1(startX,startY);
+                break;
+            case 2:
+                generateFlameAround2(startX,startY, 3);
+                break;
+            case 3:
+                moveToTheDoor3(player);
+                break;
+            case 4:
+                killTheEnemies4();
+                break;
+            case 5:
+                removeTheRocks5();
+                break;
+        }
+        abilitiesList.remove(0);
     }
 
-    public static void spiralFlames(int startX, int startY, int cols, int rows, Flame[][] ultimateFlames, PApplet parent) {
-        boolean[][] visited = new boolean[cols][rows];
-        int[] dx = {0, 1, 0, -1}; // 右，下，左，上
-        int[] dy = {1, 0, -1, 0}; // 对应于dx的方向变化
-
-        int x = startX;
-        int y = startY;
-        int dir = 0; // 开始方向向右
-        int steps = cols * rows; // 最大步数
-
-        for (int i = 0; i < steps; i++) {
-            int currentTime = parent.millis();
-            if (currentTime - lastUpdateTime > span) {
-                if (x >= 0 && x < cols && y >= 0 && y < rows && !visited[x][y]) {
-                    ultimateFlames[x][y].appearUltimate(); // 调用 appear 方法
-                    visited[x][y] = true;
+    public static void generateFlameAround2(int startX, int startY, int flameRange) {
+        for (int i = Math.max(0, startX - flameRange); i <= Math.min(cols - 1, startX + flameRange); i++) {
+            for (int j = Math.max(0, startY - flameRange); j <= Math.min(rows - 1, startY + flameRange); j++) {
+                if (i != startX || j != startY) {
+                    if (i >= 0 && i < cols && j >= 0 && j < rows) {
+                        Objects.ultimateFlames[i][j].appearUltimate();
+                    }
                 }
-
-                // 计算下一个点的坐标
-                int nextX = x + dx[dir];
-                int nextY = y + dy[dir];
-
-                // 检查是否需要改变方向：下一个点越界或者已访问
-                if (nextX < 0 || nextX >= cols || nextY < 0 || nextY >= rows || visited[nextX][nextY]) {
-                    dir = (dir + 1) % 4; // 改变方向
-                    nextX = x + dx[dir];
-                    nextY = y + dy[dir];
-                }
-
-                x = nextX;
-                y = nextY;
-                lastUpdateTime = currentTime; // 更新最后更新时间
             }
         }
     }
+
+    public static void generateFlameVertical1(int startX, int startY) {
+        for (int i = 0; i <=cols-1; i++) {
+            if (i != startX) {
+                Objects.ultimateFlames[i][startY].appearUltimate();
+            }
+        }
+        for (int i = 0; i <=rows-1; i++) {
+            if (i != startY) {
+                Objects.ultimateFlames[startX][i].appearUltimate();
+            }
+        }
+    }
+
+    public static void moveToTheDoor3(Player player) {
+        for(BreakableRock rock : BreakableRock.rocks){
+            if(rock.hideDoor){
+                int x = (rock.px-15)/tile;
+                int y = (rock.py-75)/tile;
+                generateFlameAround2(x, y,1);
+                Objects.ultimateFlames[x][y].appearUltimate();
+                Objects.ultimateFlames[x][y].appearUltimate();
+                player.px = rock.px;
+                player.py = rock.py;
+                break;
+            }
+        }
+    }
+
+    public static void killTheEnemies4() {
+        for(Enemy enemy : Character.enemies){
+            if(enemy.exist) {
+                int x = (enemy.px - 15) / tile;
+                int y = (enemy.py - 75) / tile;
+                Objects.ultimateFlames[x][y].appearUltimate();
+            }
+        }
+    }
+
+    public static void removeTheRocks5() {
+        for(BreakableRock rock : Obstacle.rocks){
+            if(rock.rockExist) {
+                int x = (rock.px - 15) / tile;
+                int y = (rock.py - 75) / tile;
+                Objects.enemyNoHarmFlames[x][y].duration = 4000;
+                Objects.enemyNoHarmFlames[x][y].appearUltimate();
+            }
+        }
+    }
+
 }
