@@ -1,5 +1,6 @@
 # GROUP 7 💣  BOMBERMAN DUNGEON
 
+## 1. TEAM
 <center>
 <figure>
     <img src="Assets/Images/group_meeting.png"
@@ -16,15 +17,11 @@
 |[Zora Chen](htps://github.com/fg23262) | [fg23262@bristol.ac.uk](mailto:fg23262@bristol.ac.uk)|
 </center>
 
-## INTRODUCTION
+## 2. INTRODUCTION
 
 Our Bomberman game mainly revolves around two game modes: In the single-player mode, the player enters the next round of the game by getting the key to enter the door, and the player aims to pass more levels. We have innovatively added various props, shops and skills to the single-player mode, and set up two difficulties to make the game more playable. In the multiplayer game mode, players must try to eliminate each other and win the game. In order to increase the excitement of the game, a countdown function is creatively added to narrow the scope of the confrontation between the two parties. Gameplay involves strategically placing bombs that explode in multiple directions after a certain time to destroy obstacles and kill enemies and other players. Players can pick up various power-ups, giving them benefits such as greater explosive power or the ability to place more bombs at once. Players will be killed if they come into contact with an enemy or get caught in a bomb explosion (including their own), requiring players to be careful about where they place their bombs.
 
-### TWIST
-
-Singleplayer roguelite dungeon crawler featuring meta-progression powerups
-
-## REQUIREMENTS
+## 3. REQUIREMENTS
 
 The group evaluated 5+ options and decided to develop a game based on bomberman as it is a beloved classic that is not devalued by simple 2D graphics. The popularity of roguelite dungeon crawlers like [Hades](https://store.steampowered.com/appp1145360/Hades/) led us to believe that they wuld make a fun twist to Bomberman.
 
