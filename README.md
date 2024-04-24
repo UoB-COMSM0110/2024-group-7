@@ -75,16 +75,19 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 ### 3.3 Early Stages Design
 
+We first used brainstorming methods to come up with some ideas in the group, and then discussed these ideas. We conducted in-depth discussions mainly on technical issues, playability issues, innovative issues and reliability issues, and analyzed the innovative points of each idea. and challenges, and finally chose two options.
+
 ### 3.4 Ideation Process
 
-### 3.5 STAKEHOLDERS
+We used the methods we learned in class to make props to demonstrate the game, and drew a prototype of the game. After many discussions and game deductions, we had a relatively clear understanding of our project.Then we divided the tasks and used project management tools such as stack and jira.Finally, we started the project development, demo recording and other work.
+
+/*### STAKEHOLDERS
 
 - Players
 - Developers
-- Markers
+- Markers*/
 
-
-### 3.6 CASE SPECIFICATIONS
+### 3.5 CASE SPECIFICATIONS
 
 <center>
 
@@ -110,14 +113,16 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 </center>
 
-### RREFLECTION
+/*### RREFLECTION
 
 This exercise has helped us explore actions and options that need 
-to be implemented within our game.
+to be implemented within our game.*/
 
-## DESIGN
+## 4. DESIGN
 
-### CLASS DIAGRAM
+### 4.1 System Architecture
+
+### 4.2 Class Diagrams
 
 <center>
 <figure>
@@ -126,7 +131,7 @@ to be implemented within our game.
 </figure>
 </center>
 
-### COMMUNICATION DIAGRAM
+### 4.3 Behavioural Diagrams
 
 <center>
 <figure>
@@ -135,10 +140,10 @@ to be implemented within our game.
 </figure>
 </center>
 
-### RREFLECTION
+/*### RREFLECTION
 
 This exercise has helped us structure our codeand assgign tasks 
-within the group.
+within the group.*/
 
 ## IMPLEMENTATION
 
