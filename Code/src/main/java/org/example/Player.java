@@ -11,8 +11,8 @@ public class Player extends Character {
     int timer = 120;
     public boolean useAbility= false;
     public boolean isHavingTheKey= true;//现在还不能买钥匙
-    private int explosionDistance;
-    private int maxBombs;
+    public int explosionDistance;
+    public int maxBombs;
     boolean bomb=false;
     public ArrayList<Bomb> bombs = new ArrayList<>();
     boolean move=false, up=false, down=false, left=false, right=false;
@@ -29,7 +29,7 @@ public class Player extends Character {
         this.health = 3;
         this.explosionDistance = 1;
         this.maxBombs = 1;
-        this.speed = 3;
+        this.speed = 1;
         this.exist = true;
         this.direction = -1;
         this.coin = 0;

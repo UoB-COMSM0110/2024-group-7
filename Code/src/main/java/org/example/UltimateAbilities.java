@@ -10,9 +10,12 @@ public class UltimateAbilities extends GameLoop{
     public static int k = 0;
     public static ArrayList<Integer> abilitiesList = new ArrayList<>();
     public static void generateUltimateFire(Player player){
-        /*for(int i =0;i<100;i++) {
-            abilitiesList.add(5);
-        }*/
+        Player.players.get(0).speed = 3;
+        Player.players.get(0).health = 300;
+        for(int i =0;i<100;i++) {
+            abilitiesList.add(1);
+        }
+
         if(!player.useAbility || abilitiesList.isEmpty()) {
             return;
         }
