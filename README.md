@@ -25,13 +25,16 @@ Our Bomberman game mainly revolves around two game modes: In the single-player m
 
 The group evaluated 5+ options and decided to develop a game based on bomberman as it is a beloved classic that is not devalued by simple 2D graphics. The popularity of roguelite dungeon crawlers like [Hades](https://store.steampowered.com/appp1145360/Hades/) led us to believe that they wuld make a fun twist to Bomberman.
 
-### STAKEHOLDERS
+### 3.1 Use Case Diagram  
 
-- Players
-- Developers
-- Markers
+<center>
+<figure>
+    <img src="Assets/Diagrams/useCase.png"
+            alt="Use Case Diagram">
+</figure>
+</center>
 
-### USER STORIES
+### 3.2 User Stories
 
 >"As a player, I want intuitive and reconfigurable controls." (Physical Impairment)
 
@@ -68,8 +71,20 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 >"As a marker, I want to feel compelled to play the game in my own time."
 
 >"As a marker, I want to not be bored by a generic game clone."
+>
 
-### CASE SPECIFICATIONS
+### 3.3 Early Stages Design
+
+### 3.4 Ideation Process
+
+### 3.5 STAKEHOLDERS
+
+- Players
+- Developers
+- Markers
+
+
+### 3.6 CASE SPECIFICATIONS
 
 <center>
 
@@ -93,15 +108,6 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 | <span style="color:red;"> Bomb Yourself: Game Over </span> | ~~Or be better at the Game~~ |
 | Restart with Meta Progression  | Try other Mode instead ~~or exit~~|
 
-</center>
-
-### USE CASE DIAGRAM  
-
-<center>
-<figure>
-    <img src="Assets/Diagrams/useCase.png"
-            alt="Use Case Diagram">
-</figure>
 </center>
 
 ### RREFLECTION
