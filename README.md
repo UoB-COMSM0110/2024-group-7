@@ -81,7 +81,7 @@ We first used brainstorming methods to come up with some ideas in the group, and
 
 We used the methods we learned in class to make props to demonstrate the game, and drew a prototype of the game. After many discussions and game deductions, we had a relatively clear understanding of our project.Then we divided the tasks and used project management tools such as stack and jira.Finally, we started the project development, demo recording and other work.
 
-[//]: # (### STAKEHOLDERS
+[//]: # (### STAKEHOLDERS)
 
 - Players
 - Developers
