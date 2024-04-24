@@ -18,9 +18,7 @@
 
 ## INTRODUCTION
 
-GAMES CONSIDERED: Crossy Road, Doodle Jump, Downwell, Ice Sliding Puzzle, Bubble Boble, God of Light, Pico Park
-
-Most games in the Bomberman franchise largely revolve around two modes of play; single player campaigns where the player must defeat enemies and reach an exit to progress through levels, and multiplayer modes where players must attempt to eliminate each other and be the last one standing. Gameplay involves strategically placing down bombs, which explode in multiple directions after a certain amount of time, in order to destroy obstacles and kill enemies and other players. The player can pick up various power-ups, giving them benefits such as larger explosions or the ability to place more bombs down at a time. The player is killed if they touch an enemy or get caught up in a bomb's explosion, including their own, requiring players to be cautious of their own bomb placement. In addition to the main maze-based Bomberman games, some spin-off titles involve adventure, platformer, puzzle, and kart racing gameplay.
+Our Bomberman game mainly revolves around two game modes: In the single-player mode, the player enters the next round of the game by getting the key to enter the door, and the player aims to pass more levels. We have innovatively added various props, shops and skills to the single-player mode, and set up two difficulties to make the game more playable. In the multiplayer game mode, players must try to eliminate each other and win the game. In order to increase the excitement of the game, a countdown function is creatively added to narrow the scope of the confrontation between the two parties. Gameplay involves strategically placing bombs that explode in multiple directions after a certain time to destroy obstacles and kill enemies and other players. Players can pick up various power-ups, giving them benefits such as greater explosive power or the ability to place more bombs at once. Players will be killed if they come into contact with an enemy or get caught in a bomb explosion (including their own), requiring players to be careful about where they place their bombs.
 
 ### TWIST
 
