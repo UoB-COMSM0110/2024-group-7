@@ -19,24 +19,28 @@ public class PVEui {
         PVEuivisible = false;
     }
     public String pveShopMouseClicked(int x, int y) {
-        if (x>=530 && x<610 && y>=90 && y<=130) {
+        if (x>=530 && x<625 && y>=90 && y<=130) {
             return "VerticalFlames";
         }
 
-        if (x>=530 && x<610 && y>=170 && y<=210) {
+        if (x>=530 && x<625 && y>=155 && y<=195) {
             return "RoundFlames";
         }
 
-        if (x>=530 && x<610 && y>=250 && y<=290) {
+        if (x>=530 && x<625 && y>=220 && y<=260) {
             return "MoveToTheDoor";
         }
 
-        if (x>=530 && x<610 && y>=330 && y<=370) {
+        if (x>=530 && x<625 && y>=285 && y<=325) {
             return "KillAllEnemies";
         }
 
-        if (x>=530 && x<610 && y>=410 && y<=450) {
+        if (x>=530 && x<625 && y>=350 && y<=390) {
             return "RemoveAllRocks";
+        }
+
+        if (x>=530 && x<625 && y>=415 && y<=455) {
+            return "buyKey";
         }
 
         if (x>=400 && x<=520 && y>=470 && y<=500) {
@@ -93,16 +97,29 @@ public class PVEui {
                 }
                 break;
 
-            /*case "Key":
+            case "buyKey":
                 System.out.println("buy the key");
-                if(Character.players.get(0).getCoin() >= 1){
-                    Character.players.get(0).coin -= 1;
+                if(Character.players.get(0).getCoin() >= 6){
+                    Character.players.get(0).coin -= 6;
                     Character.players.get(0).isHavingTheKey = true;
                 }
-                break;*/
+                break;
 
             default:
                 break;
+        }
+    }
+    public static String getAbilityName(){
+        if(UltimateAbilities.abilitiesList.isEmpty()){
+            return "None";
+        }
+        switch(UltimateAbilities.abilitiesList.get(0)){
+            case 1: return "VerticalFlames";
+            case 2: return "RoundFlames";
+            case 3: return "MoveToTheDoor";
+            case 4: return "KillAllEnemies";
+            case 5: return "RemoveAllRocks";
+            default: return "None";
         }
     }
 }

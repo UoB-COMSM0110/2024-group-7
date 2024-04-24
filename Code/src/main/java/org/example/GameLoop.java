@@ -13,6 +13,11 @@ public class GameLoop extends PApplet{
     public static final int height=540;
     public static float shrinkNumber = 2.5f;
     public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;
+    public static boolean difficulty = false;
+    public static boolean ESCpressed = false;
+    public static int currentDeepness = 0;
+    public static int biggestDeepness = 0;
+    int m =0;
 //    public static boolean move=false, up=false, down=false, left=false, right=false;
     public static boolean reset = false;
     public static int rows = 15, cols = 31;
@@ -43,6 +48,11 @@ public class GameLoop extends PApplet{
     }
 
     public void setupPVE() {
+        Obstacle.shops.clear();
+        Obstacle.rocks.clear();
+        Character.enemies.clear();
+        Coin.coinsInEmptySpace.clear();
+        Items.chosenIndexes.clear();
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
 
@@ -67,14 +77,19 @@ public class GameLoop extends PApplet{
         Items.door.setDoor(this);
 
 
+        BombPowerUp.powerUps.clear();
         BombPowerUp.setPowerUps(this);
 
+        ExtraBomb.extraBombs.clear();
         ExtraBomb.setExtraBombs(this);
 
+        SpeedUp.speedUps.clear();
         SpeedUp.setSpeedUps(this);
 
+        ExtraLife.extraLives.clear();
         ExtraLife.setExtraLives(this);
 
+        Coin.coins.clear();
         Coin.setCoins(this);
     }
 
@@ -92,9 +107,10 @@ public class GameLoop extends PApplet{
     }
 
     public void draw() {
-
         if (menu) {
             if(reset){
+                Character.players.get(0).isHavingTheKey = false;
+
                 Character.players.get(0).health = 3;
                 Character.players.get(1).health = 3;
 
@@ -122,8 +138,15 @@ public class GameLoop extends PApplet{
                 Flame.activeFlames.clear();
                 Flame.resetFlames();
 
+                //Obstacle.rocks.clear();
+                //Obstacle.rocks.addAll(Obstacle.theOriginalRocks);
+
                 reset = false;
                 shrinkNumber = 2.5f;
+                if(currentDeepness >= biggestDeepness) {
+                    biggestDeepness = currentDeepness;
+                }
+                currentDeepness = 0;
             }
             background(87, 108, 164);
             PFont Cherry = createFont("fonts/CherryBombOne-Regular.ttf", 60);
@@ -135,34 +158,59 @@ public class GameLoop extends PApplet{
             textFont(Daruma, 35);
             textAlign(CENTER);
             fill(250, 236, 0);
-            text("PVE", 0, 450, ((float) width / 4), 100);
-            text("PVP", ((float) width / 4), 450, ((float) width / 4), 100);
-            text("Achievements", ((float) width / 4 * 2), 450, ((float) width / 4), 100);
+            text("One Player Easy", 0, 450, ((float) width / 4), 100);
+            text("One Player Hard", ((float) width / 4), 450, ((float) width / 4), 100);
+            text("Two Players", ((float) width / 4 * 2), 450, ((float) width / 4), 100);
             text("Settings", ((float) width / 4 * 3), 450, ((float) width / 4), 100);
             textSize(100);
             text("Dungeon", 0, 250, width, 100);
+            fill(0);
+            textSize(30);
+            text("The deepest level reached:  " + biggestDeepness, -50, 370, width, 100);
+        }
+
+
+        if(ESCpressed && !menu){
+            if(PVE){
+                PVE = false;
+                m = 1;
+            }else if(PVP){
+                PVP = false;
+                m = 2;
+            }
+            fill(165, 165, 165, 200); // 灰色半透明背景
+            //rectMode(PConstants.CORNER);
+            rect(0, 0, 960, 540);
+
+            fill(87, 108, 164); // 蓝色矩形
+            float rectWidth = 480;  //(float) width / 2
+            float rectHeight = 270; //(float) height / 2
+            float rectX = (960 - rectWidth) / 2;
+            float rectY = (540 - rectHeight) / 2;
+            rect(rectX, rectY, rectWidth, rectHeight);
+
+            fill(250, 236, 0); // yellow word
+            //textAlign(PConstants.CENTER, PConstants.CENTER);
+            textSize(35);
+            text("Do you want to quit?", 480, 270);
+
+            fill(0, 0, 222); // blue word
+            //textAlign(PConstants.CENTER, PConstants.CENTER);
+            textSize(30);
+            text("confirm", 120, 360, 480, 270);
+            text("cancel", 380, 360, 480, 270);
         }
 
         if (PVE) {
             menu = false;
             background(165, 165, 165);
 
-            /*if (!openShop && !gameWon && !gameLost) {
+            if (!openShop && !gameWon && !gameLost && difficulty) {
 
                 translate((float) width / 2, (float) height / 2);
                 scale(shrinkNumber);
                 translate(-Player.players.get(0).px, -Player.players.get(0).py);
-
-              *//*  // 获取角色的位置
-                float playerX = Player.players.get(0).px + 15;
-                float playerY = Player.players.get(0).py + 15;
-
-                // 设置绘制圆的半径
-                float radius = 150; // 可以根据需要调整半径大小
-
-                // 绘制圆，以角色位置为圆心
-                ellipse(playerX, playerY, radius * 2, radius * 2); // ellipse函数需要圆心坐标和直径*//*
-            }*/
+            }
 
             fill(87, 108, 164);
             noStroke();
@@ -180,7 +228,7 @@ public class GameLoop extends PApplet{
 
             Player.player1Render();
 
-            gameEndDetectPVE();
+            //gameEndDetectPVE();
 
             BombPowerUp.getPowerUp(this);
             ExtraBomb.getExtraBomb(this);
@@ -208,19 +256,45 @@ public class GameLoop extends PApplet{
 
             Player.players.get(0).ifEnterTheNextWorld();
 
-            float playerX = Player.players.get(0).px;
-            float playerY = Player.players.get(0).py;
-            int player1Health = Character.players.get(0).getHealth();
-            int coinNumber = Character.players.get(0).getCoin();
+            if(difficulty) {
+                float playerX = Player.players.get(0).px;
+                float playerY = Player.players.get(0).py;
+                int player1Health = Character.players.get(0).getHealth();
+                int coinNumber = Character.players.get(0).getCoin();
 
-            textSize(15);
-            fill(0);
-            text("Life:", playerX - 250 , playerY - 100 , 240, 540);
-            text(String.valueOf(player1Health), playerX - 220, playerY - 100, 240, 540);
-            text("Coin:", playerX - 170  , playerY - 100 , 240, 540);
-            text(String.valueOf(coinNumber),playerX - 140,playerY - 100, 240, 540);
-            text("Skill:", playerX - 90  , playerY - 100 , 240, 540);
-            text("Item", playerX - 40  , playerY - 100 , 240, 540);
+                textSize(15);
+                fill(0);
+                text("Life:", playerX - 290, playerY - 100, 240, 540);
+                text(String.valueOf(player1Health), playerX - 260, playerY - 100, 240, 540);
+                text("Coin:", playerX - 220, playerY - 100, 240, 540);
+                text(String.valueOf(coinNumber), playerX - 190, playerY - 100, 240, 540);
+                text("Skill:", playerX - 150, playerY - 100, 240, 540);
+                text(PVEui.getAbilityName(), playerX - 70, playerY - 100, 240, 540);
+                text("key:", playerX + 10, playerY - 100, 240, 540);
+                if (Player.players.get(0).isHavingTheKey) {
+                    text("Yes", playerX + 40, playerY - 100, 240, 540);
+                } else {
+                    text("No", playerX + 40, playerY - 100, 240, 540);
+                }
+            }else{
+                int player1Health = Character.players.get(0).getHealth();
+                int coinNumber = Character.players.get(0).getCoin();
+                textSize(30);
+                fill(0);
+                text("Life:", -70, 25, (float) width / 4, height);
+                text(String.valueOf(player1Health), 0, 25, (float) width / 4, height);
+                text("Coin:", 120, 25, (float) width / 4, height);
+                text(String.valueOf(coinNumber), 170, 25, (float) width / 4, height);
+                text("Skill:", 290, 25, (float) width / 4, height);
+                text(PVEui.getAbilityName(), 445, 25, (float) width / 4, height);
+                text("key:", 650, 25, (float) width / 4, height);
+                if (Player.players.get(0).isHavingTheKey) {
+                    text("Yes", 720, 25, (float) width / 4, height);
+                } else {
+                    text("No", 720, 25, (float) width / 4, height);
+                }
+            }
+
 
         }
         //PVE wining window
@@ -270,18 +344,20 @@ public class GameLoop extends PApplet{
             textSize(30);
             fill(0); // Set color for dropdown text
             text("VerticalFlames", 250, 100, (float) width / 4, height);
-            text("RoundFlames", 250, 180, (float) width / 4, height);
-            text("MoveToTheDoor", 250, 260, (float) width / 4, height);
-            text("KillAllEnemies", 250, 340, (float) width / 4, height);
-            text("RemoveAllRocks", 250, 420, (float) width / 4, height);
+            text("RoundFlames", 250, 165, (float) width / 4, height);
+            text("MoveToTheDoor", 250, 230, (float) width / 4, height);
+            text("KillAllEnemies", 250, 295, (float) width / 4, height);
+            text("RemoveAllRocks", 250, 360, (float) width / 4, height);
+            text("Key", 250, 425, (float) width / 4, height);
 
             textSize(30);
             fill(0,0,222); // Set color for dropdown text
-            text("Buy", 450, 100, (float) width / 4, height);
-            text("Buy", 450, 180, (float) width / 4, height);
-            text("Buy", 450, 260, (float) width / 4, height);
-            text("Buy", 450, 340, (float) width / 4, height);
-            text("Buy", 450, 420, (float) width / 4, height);
+            text("1 coin", 450, 100, (float) width / 4, height);
+            text("2 coins", 450, 165, (float) width / 4, height);
+            text("3 coins", 450, 230, (float) width / 4, height);
+            text("4 coins", 450, 295, (float) width / 4, height);
+            text("5 coins", 450, 360, (float) width / 4, height);
+            text("6 coins", 450, 425, (float) width / 4, height);
 
             text("←Close", 220,480,(float) width / 2 , (float) height / 2);
         }
@@ -387,34 +463,52 @@ public class GameLoop extends PApplet{
             textSize(30);
             fill(0); // Set color for dropdown text
             text("UP KEY:", 150, 100, (float) width / 4, height); // Draw label for dropdown
-            text("DOWN KEY:", 150, 180, (float) width / 4, height);
-            text("LEFT KEY:", 150, 260, (float) width / 4, height);
-            text("RIGHT KEY:", 150, 340, (float) width / 4, height);
-            text("BOMB KEY:", 150, 420, (float) width / 4, height);
+            text("DOWN KEY:", 150, 165, (float) width / 4, height);
+            text("LEFT KEY:", 150, 230, (float) width / 4, height);
+            text("RIGHT KEY:", 150, 295, (float) width / 4, height);
+            text("BOMB KEY:", 150, 360, (float) width / 4, height);
+            text("SKILL KEY:", 150, 425, (float) width / 4, height);
 
             textSize(35);
             fill(0);
             text(String.valueOf(upKey1), 350, 100, (float) width / 4, height);
-            text(String.valueOf(downKey1), 350, 180, (float) width / 4, height);
-            text(String.valueOf(leftKey1), 350, 260, (float) width / 4, height);
-            text(String.valueOf(rightKey1), 350, 340, (float) width / 4, height);
-            text(String.valueOf(bombKey1), 350, 420, (float) width / 4, height);
+            text(String.valueOf(downKey1), 350, 165, (float) width / 4, height);
+            text(String.valueOf(leftKey1), 350, 230, (float) width / 4, height);
+            text(String.valueOf(rightKey1), 350, 295, (float) width / 4, height);
+            text(String.valueOf(bombKey1), 350, 360, (float) width / 4, height);
+            text(String.valueOf(bombKey2), 350, 425, (float) width / 4, height);
 
             textSize(30);
             textAlign(CENTER);
             fill(0, 0, 222);
             text("←BACK", 0, 490, width, 500);
+
+            textSize(30);
+            textAlign(CENTER);
+            fill(250, 236, 0);
+            text("Tips:", 250, 180, width, 500);
+            fill(0);
+            text("Press the key first and then click the key you want to modify.", 600, 230, 280, 500);
         }
     }
 
     public void mouseClicked() {
         System.out.println(mouseX);
         System.out.println(mouseY);
-        if (mouseX>=0 && mouseX<180 && mouseY>=450 && mouseY<540 && menu) {
+        if (mouseX>=0 && mouseX<220 && mouseY>=440 && mouseY<540 && menu) {
             PVE=true;
             menu=false;
             setupPVE();
+            GameLoop.difficulty = false;
         }
+
+        if (mouseX>=300 && mouseX<420 && mouseY>=440 && mouseY<540 && menu) {
+            PVE=true;
+            menu=false;
+            setupPVE();
+            GameLoop.difficulty = true;
+        }
+
         if (PVE) {
             if (mouseX>=420 && mouseX<=530 && mouseY>=350 && mouseY<390){
                 PVEui.PVEUIHide();
@@ -431,7 +525,7 @@ public class GameLoop extends PApplet{
             }
         }
 
-        if (mouseX>=300 && mouseX<420 && mouseY>=450 && mouseY<540 && menu) {
+        if (mouseX>=490 && mouseX<720 && mouseY>=440 && mouseY<540 && menu) {
             PVP=true;
             menu=false;
             setupPVP();
@@ -445,12 +539,6 @@ public class GameLoop extends PApplet{
             }
         }
 
-        if (mouseX>=480 && mouseX<600 && mouseY>=450 && mouseY<540 && menu) {
-            Achievements=true;
-            menu=false;
-        }
-
-
         if (mouseX>=760 && mouseX<width && mouseY>=450 && mouseY<540 && menu) {
             settings=true;
             menu=false;
@@ -463,9 +551,34 @@ public class GameLoop extends PApplet{
             char keyInput = key;
             settingsMenu.dealOperation(op,keyInput);
         }
+
+        if (mouseX>=290 && mouseX<430 && mouseY>=350 && mouseY<395 && ESCpressed) {
+            reset = true;
+            menu=true;
+            PVE = false;
+            PVP = false;
+            ESCpressed = false;
+        }
+        if (mouseX>=560 && mouseX<670 && mouseY>=350 && mouseY<395 && ESCpressed) {
+            System.out.println(ESCpressed);
+            if(m == 1){
+                PVE = true;
+            }else if(m ==2) {
+                PVP = true;
+            }
+            ESCpressed = false;
+        }
     }
 
     public void keyPressed() {
+        if(key == '1'){
+            ESCpressed = !ESCpressed;
+            if(m == 1 && !ESCpressed){
+                PVE =true;
+            }else if (m == 2 && !ESCpressed){
+                PVP =true;
+            }
+        }
         if (key == upKey1) {
             if (Shop.isShopAt((Player.players.get(0).px-15) / tile, ((Player.players.get(0).py-75) / tile) - 1)) {
                 enterShop();  // 如果上方有商店，则进入商店

@@ -15,7 +15,7 @@ public class Character extends GameLoop{
     public static ArrayList<Player> players = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();
     public static ArrayList<ArrayList<Enemy>> manyEnemies = new ArrayList<>();
-    public static int enemyNumber = 5;
+    public static int enemyNumber = 8;
     double damageTime = 0;
     public boolean collisionDetect() {
         int x = px, y = py;

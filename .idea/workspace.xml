@@ -29,8 +29,8 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-        &quot;associatedIndex&quot;: 7
-        }</component>
+    &quot;associatedIndex&quot;: 7
+    }</component>
   <component name="ProjectId" id="2ca2pqKS5Cv8Ap0RahpmvlI2tab" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -40,7 +40,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
+    &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.Bomberman.executor&quot;: &quot;Run&quot;,
     &quot;Application.Code.org.example.GameLoop.executor&quot;: &quot;Run&quot;,
@@ -64,8 +64,8 @@
     &quot;应用程序.GameLoop.executor&quot;: &quot;Run&quot;,
     &quot;应用程序.GameStarter.executor&quot;: &quot;Run&quot;,
     &quot;应用程序.gameStarter.executor&quot;: &quot;Run&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="RunManager" selected="应用程序.GameStarter">
     <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />

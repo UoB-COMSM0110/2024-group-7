@@ -63,6 +63,11 @@ import processing.core.PApplet;
                 GameLoop.bombKey1 = keyInput;
                 break;
 
+            case "changeBombKey2":
+                System.out.println("changeSkillKey");
+                GameLoop.bombKey2 = keyInput;
+                break;
+
             default:
                 break;
         }
@@ -72,25 +77,31 @@ import processing.core.PApplet;
             return "changeUpKey1";
         }
 
-        if (x>=400 && x<550 && y>=170 && y<=210) {
+        if (x>=400 && x<550 && y>=155 && y<=195) {
             return "changeDownKey1";
         }
 
-        if (x>=400 && x<550 && y>=250 && y<=290) {
+        if (x>=400 && x<550 && y>=220 && y<=260) {
             return "changeLeftKey1";
         }
 
-        if (x>=400 && x<550 && y>=330 && y<=370) {
+        if (x>=400 && x<550 && y>=285 && y<=325) {
             return "changeRightKey1";
         }
 
-        if (x>=400 && x<550 && y>=410 && y<=450) {
+        if (x>=400 && x<550 && y>=350 && y<=390) {
             return "changeBombKey1";
+        }
+
+        if (x>=420 && x<=560 && y>=415 && y<=455) {
+            return "changeBombKey2";
         }
 
         if (x>=420 && x<=560 && y>=480 && y<=520) {
             return "close";
         }
+
+
         else {
             return "none";
         }

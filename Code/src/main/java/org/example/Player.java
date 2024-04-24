@@ -10,7 +10,7 @@ public class Player extends Character {
     PImage playerImage;
     int timer = 120;
     public boolean useAbility= false;
-    public boolean isHavingTheKey= true;//现在还不能买钥匙
+    public boolean isHavingTheKey= false;//现在还不能买钥匙
     public int explosionDistance;
     public int maxBombs;
     boolean bomb=false;
@@ -201,8 +201,10 @@ public class Player extends Character {
             timer = 120;
         }
         if(timer <= 0){
+            currentDeepness+=1;
             this.px = 45;
             this.py = 105;
+            Character.players.get(0).isHavingTheKey = false;
             Shop.resetShops();
             BreakableRock.updateRockPositions(parent);
             Obstacle.initializeObstacleGrid();

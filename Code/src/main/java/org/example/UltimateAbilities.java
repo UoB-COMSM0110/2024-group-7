@@ -11,9 +11,10 @@ public class UltimateAbilities extends GameLoop{
     public static ArrayList<Integer> abilitiesList = new ArrayList<>();
     public static void generateUltimateFire(Player player){
         Player.players.get(0).speed = 3;
-        Player.players.get(0).health = 300;
+        //Player.players.get(0).health = 300;
+        Player.players.get(0).isHavingTheKey = true;
         for(int i =0;i<100;i++) {
-            abilitiesList.add(1);
+            abilitiesList.add(3);
         }
 
         if(!player.useAbility || abilitiesList.isEmpty()) {
@@ -47,8 +48,13 @@ public class UltimateAbilities extends GameLoop{
             for (int j = Math.max(0, startY - flameRange); j <= Math.min(rows - 1, startY + flameRange); j++) {
                 if (i != startX || j != startY) {
                     if (i >= 0 && i < cols && j >= 0 && j < rows) {
-                        Objects.enemyNoHarmFlames[i][j].duration = 1000;
-                        Objects.ultimateFlames[i][j].appearUltimate();
+                        if(!(i==startX - flameRange && j == startY - flameRange) &&
+                                !(i==startX + flameRange && j == startY + flameRange) &&
+                                !(i==startX + flameRange && j == startY - flameRange) &&
+                                !(i==startX - flameRange && j == startY + flameRange)) {
+                            Objects.enemyNoHarmFlames[i][j].duration = 1000;
+                            Objects.ultimateFlames[i][j].appearUltimate();
+                        }
                     }
                 }
             }
@@ -107,7 +113,7 @@ public class UltimateAbilities extends GameLoop{
     }
 
     public static void generatePVPFlames() {
-        System.out.println(k);
+        //System.out.println(k);
         if(pvpClock){
             if(k < 7){
                 k++;
