@@ -164,7 +164,12 @@ The unique interaction method and appropriate system prompts make it easy to get
 
 ### 4.3 Behavioural diagrams
 
-
+<center>
+<figure>
+    <img src="Assets/Diagrams/Behavioural diagrams.png"
+            alt="Behavioural diagrams">
+</figure>
+</center>
 
 [//]: # (### communication Diagrams)
 
