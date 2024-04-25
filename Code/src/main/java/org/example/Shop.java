@@ -20,30 +20,6 @@ public class Shop extends Obstacle {
         parent.image(shopImage,px,py,30,30);
     }
 
-    public static ArrayList<Shop> generateShops(int rows, int cols, PApplet parent) {
-        // Step 1: Identify all potential positions for a shop
-        for (int i = 0; i < cols; i++) {
-            for (int j = 0; j < rows; j++) {
-                if (!Wall.isWallAt(i, j) &&
-                        !(i <= 4 && j <= 4) && !(i >= cols - 4 && j >= rows - 4)) {
-                    availableShopPositions.add(new Point(i, j));
-                }
-            }
-        }
-        // Step 2: Randomly pick two unique positions from the list of potential positions
-        Collections.shuffle(availableShopPositions); // Shuffle the list to randomize
-        if (availableShopPositions.size() >= shopsNum) { // Select the first two positions
-            for (int k = 0; k < shopsNum; k++) {
-                Point selected = availableShopPositions.get(k);
-                int x = 15 + selected.x * tile;
-                int y = 75 + selected.y * tile;
-                shops.add(new Shop(x, y, parent, ResourceManager.shop));
-                System.out.println("Shop is at:(" + x + "," + y + ")");
-            }
-        }
-        return shops;
-    }
-
     public static void resetShops(){
         // Step 1: Identify all potential positions for a shop
         for (int i = 0; i < cols; i++) {

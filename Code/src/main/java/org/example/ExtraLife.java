@@ -3,8 +3,6 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import java.util.HashSet;
-
 public class ExtraLife extends Items{
     boolean markedForRemoval = false;
     PImage extraLifeImage;
@@ -25,22 +23,6 @@ public class ExtraLife extends Items{
     public void setVisible(boolean visible) {
         this.visible = visible;
         System.out.println("extraLife item visible: " + visible);
-    }
-
-    public static void setExtraLives(PApplet parent){
-        //HashSet<Integer> chosenIndexes = new HashSet<>();
-        // Randomly select 2 rocks to place bomb firepower enhancement items
-        for (int i=0; i<extraLife_items; i++) {
-            int extraLifeIndex = (int) parent.random(Obstacle.rocks.size());
-            while (!Items.chosenIndexes.add(extraLifeIndex)) {
-                extraLifeIndex = (int) parent.random(Obstacle.rocks.size());
-            }
-            BreakableRock extraLifeRock = Obstacle.rocks.get(extraLifeIndex);
-            ExtraLife extraLife = new ExtraLife(extraLifeRock.x(), extraLifeRock.y(), parent);
-            extraLifeRock.setHideExtraLife(true);
-            extraLifeRock.setHiddenExtraLife(extraLife); // Associate ExtraLife and BreakableRock
-            extraLives.add(extraLife);
-        }
     }
 
     public static void resetExtraLives(PApplet parent){
@@ -64,11 +46,11 @@ public class ExtraLife extends Items{
             if (extraLife.visible) {
                 extraLife.render(parent);
                 // Check if player collects it
-                Player player = Character.players.get(0);
+                Player player = Characters.players.get(0);
                 float distanceToExtraLife = dist(player.px, player.py, extraLife.x, extraLife.y);
                 if (distanceToExtraLife < 30) {
                     extraLife.setVisible(false);
-                    Character.players.get(0).increaseLife();
+                    Characters.players.get(0).increaseLife();
                 }
             }
         }

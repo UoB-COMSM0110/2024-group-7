@@ -1,8 +1,5 @@
 package org.example;
 
-import processing.core.PApplet;
-import processing.core.PImage;
-
 import java.util.ArrayList;
 
 public class UltimateAbilities extends GameLoop{
@@ -86,7 +83,7 @@ public class UltimateAbilities extends GameLoop{
     }
 
     public static void killTheEnemies4() {
-        for(Enemy enemy : Character.enemies){
+        for(Enemy enemy : Characters.enemies){
             if(enemy.exist) {
                 int x = (enemy.px - 15) / tile;
                 int y = (enemy.py - 75) / tile;

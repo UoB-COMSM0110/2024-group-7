@@ -65,18 +65,6 @@ public class BreakableRock extends Obstacle{
         return lessRocks;
     }
 
-    // 移除被標記的岩石
-    public static void removeRocks() {
-        Iterator<BreakableRock> rockIterator = Obstacle.rocks.iterator();
-        while (rockIterator.hasNext()) {
-            BreakableRock rock = rockIterator.next();
-            if (rock.isMarkedForRemoval()) {
-                rock.rockExist = false;
-                Obstacle.removeRockFromObstacleGrid(rock);
-                //rockIterator.remove();
-            }
-        }
-    }
 
     public static void removeLessRocks() {
         Iterator<BreakableRock> rockIterator = Obstacle.lessRocks.iterator();

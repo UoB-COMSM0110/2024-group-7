@@ -55,41 +55,41 @@ public class PVEui {
 
             case "VerticalFlames":
                 System.out.println("buy VerticalFlames");
-                if(Character.players.get(0).getCoin() >= 1){
+                if(Characters.players.get(0).getCoin() >= 1){
                     UltimateAbilities.abilitiesList.add(1);
-                    Character.players.get(0).coin -= 1;
+                    Characters.players.get(0).coin -= 1;
                 }
                     break;
 
             case "RoundFlames":
                 System.out.println("buy RoundFlames");
-                if(Character.players.get(0).getCoin() >= 2){
+                if(Characters.players.get(0).getCoin() >= 2){
                     UltimateAbilities.abilitiesList.add(2);
-                    Character.players.get(0).coin -= 2;
+                    Characters.players.get(0).coin -= 2;
                 }
                 break;
 
             case "MoveToTheDoor":
                 System.out.println("buy MoveToTheDoor");
-                if(Character.players.get(0).getCoin() >= 3){
+                if(Characters.players.get(0).getCoin() >= 3){
                     UltimateAbilities.abilitiesList.add(3);
-                    Character.players.get(0).coin -= 3;
+                    Characters.players.get(0).coin -= 3;
                 }
                 break;
 
             case "KillAllEnemies":
                 System.out.println("buy KillAllEnemies");
-                if(Character.players.get(0).getCoin() >= 4){
+                if(Characters.players.get(0).getCoin() >= 4){
                     UltimateAbilities.abilitiesList.add(4);
-                    Character.players.get(0).coin -= 4;
+                    Characters.players.get(0).coin -= 4;
                 }
                 break;
 
             case "RemoveAllRocks":
                 System.out.println("buy RemoveAllRocks");
-                if(Character.players.get(0).getCoin() >= 5){
+                if(Characters.players.get(0).getCoin() >= 5){
                     UltimateAbilities.abilitiesList.add(5);
-                    Character.players.get(0).coin -= 5;
+                    Characters.players.get(0).coin -= 5;
                 }
                 break;
 

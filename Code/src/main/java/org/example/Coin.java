@@ -29,21 +29,6 @@ public class Coin extends Items {
         System.out.println("coin item visible: " + visible);
     }
 
-    public static void setCoins(PApplet parent){
-        // Randomly select 20 rocks to place coin items
-        for (int i=0; i<coinUnderRock_items; i++) {
-            int coinIndex = (int) parent.random(Obstacle.rocks.size());
-            while (!Items.chosenIndexes.add(coinIndex)) {
-                coinIndex = (int) parent.random(Obstacle.rocks.size());
-            }
-            BreakableRock coinRock = Obstacle.rocks.get(coinIndex);
-            Coin coin = new Coin(coinRock.x(), coinRock.y(), parent);
-            coinRock.setHideCoin(true);
-            coinRock.setHiddenCoin(coin); // Associate Coin and BreakableRock
-            coins.add(coin);
-        }
-    }
-
     public static void resetCoins(PApplet parent){
         for(Coin coin : coins){
             int coinIndex = (int) parent.random(Obstacle.rocks.size());
@@ -104,11 +89,11 @@ public class Coin extends Items {
             if (coin.visible) {
                 coin.render(parent);
                 // Check if player collects it
-                Player player = Character.players.get(0);
+                Player player = Characters.players.get(0);
                 float distanceToCoin = dist(player.px, player.py, coin.x, coin.y);
                 if (distanceToCoin < 30) {
                     coin.setVisible(false);
-                    Character.players.get(0).increaseCoin();
+                    Characters.players.get(0).increaseCoin();
                 }
             }
         }
@@ -116,11 +101,11 @@ public class Coin extends Items {
             if (coinInEmptySpace.visible) {
                 coinInEmptySpace.render(parent);
                 // Check if player collects it
-                Player player = Character.players.get(0);
+                Player player = Characters.players.get(0);
                 float distanceToCoin = dist(player.px, player.py, coinInEmptySpace.x, coinInEmptySpace.y);
                 if (distanceToCoin < 30) {
                     coinInEmptySpace.setVisible(false);
-                    Character.players.get(0).increaseCoin();
+                    Characters.players.get(0).increaseCoin();
                 }
             }
         }

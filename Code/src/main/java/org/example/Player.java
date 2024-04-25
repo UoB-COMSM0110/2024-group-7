@@ -2,15 +2,14 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import javax.print.CancelablePrintJob;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Objects;
 
-public class Player extends Character {
+public class Player extends Characters {
     PImage playerImage;
     int timer = 120;
     public boolean useAbility= false;
-    public boolean isHavingTheKey= true;//现在还不能买钥匙
+    public boolean isHavingTheKey= true;
     public int explosionDistance;
     public int maxBombs;
     boolean bomb=false;
@@ -21,7 +20,7 @@ public class Player extends Character {
 
     public double setBombTime = 0;
 
-    Player(int playerNumber, int x, int y, PApplet parent, PImage playerImage){
+    Player(int x, int y, PApplet parent, PImage playerImage){
         this.parent =parent;
         this.px=x;
         this.py=y;
@@ -35,19 +34,21 @@ public class Player extends Character {
         this.coin = 0;
     }
 
-    public static ArrayList<Player> setPlayer1(PApplet parent) {
-        int x = 15 + tile;
-        int y = 75 + tile;
-        players.add(new Player(1, x, y, parent, ResourceManager.pinkBomber));
-        return players;
+    void up(){
+        py-=5;
+    }
+    void down() {
+        py+=5;
+    }
+    void left() {
+        px-=5;
+    }
+    void right() {
+        px+=5;
     }
 
-    public static ArrayList<Player> setPlayer2(PApplet parent) {
-        int x = 885;
-        int y = 465;
-        players.add(new Player(2, x, y, parent, ResourceManager.pinkBomber));
-        return players;
-    }
+    int x(){return px;}
+    int y(){return py;}
 
     public void PVPEnhancement(){
         speed = 3;
@@ -96,13 +97,13 @@ public class Player extends Character {
     public static void player1Movement(){
         playerBombActivation();
         if(PVP) {
-            if (Character.players.get(0).collisionDetectPVP()) {
-                Character.players.get(0).playerMove();
+            if (Characters.players.get(0).collisionDetectPVP()) {
+                Characters.players.get(0).playerMove();
 //            System.out.println("x = " + Character.players.get(0).px + "  y = " + Character.players.get(0).py);
             }
         }else{
-            if (Character.players.get(0).collisionDetect()) {
-                Character.players.get(0).playerMove();
+            if (Characters.players.get(0).collisionDetect()) {
+                Characters.players.get(0).playerMove();
 //            System.out.println("x = " + Character.players.get(0).px + "  y = " + Character.players.get(0).py);
             }
         }
@@ -110,23 +111,23 @@ public class Player extends Character {
 
     public static void player2Movement(){
         playerBombActivation();
-        if(Character.players.get(1).collisionDetectPVP()) {
-            Character.players.get(1).playerMove();
+        if(Characters.players.get(1).collisionDetectPVP()) {
+            Characters.players.get(1).playerMove();
 //            System.out.println("x = " + Character.players.get(0).px + "  y = " + Character.players.get(0).py);
         }
     }
 
     public static void absorb1ToIntersection(){
         if(!(players.get(0).up || players.get(0).right || players.get(0).left || players.get(0).down)) {
-            players.get(0).px = Math.round(Character.players.get(0).px / 15.0f) * 15;
-            players.get(0).py = Math.round(Character.players.get(0).py / 15.0f) * 15;
+            players.get(0).px = Math.round(Characters.players.get(0).px / 15.0f) * 15;
+            players.get(0).py = Math.round(Characters.players.get(0).py / 15.0f) * 15;
         }
     }
 
     public static void absorb2ToIntersection(){
         if(!(players.get(1).up || players.get(1).right || players.get(1).left || players.get(1).down)) {
-            players.get(1).px = Math.round(Character.players.get(1).px / 15.0f) * 15;
-            players.get(1).py = Math.round(Character.players.get(1).py / 15.0f) * 15;
+            players.get(1).px = Math.round(Characters.players.get(1).px / 15.0f) * 15;
+            players.get(1).py = Math.round(Characters.players.get(1).py / 15.0f) * 15;
         }
     }
 
@@ -171,8 +172,8 @@ public class Player extends Character {
     public static void player1Render(){
         players.get(0).ifDamageCharacter();
         players.get(0).ifTouchEnemy();
-        if(Character.players.get(0).exist){
-            Character.players.get(0).render();
+        if(Characters.players.get(0).exist){
+            Characters.players.get(0).render();
         }else {
             GameLoop.gameLost = true;
             players.get(0).otherPlayerWon = true;
@@ -183,8 +184,8 @@ public class Player extends Character {
     public static void player2Render(){
         players.get(1).ifDamageCharacter();
         //players.get(1).ifTouchEnemy();
-        if(Character.players.get(1).exist){
-            Character.players.get(1).render();
+        if(Characters.players.get(1).exist){
+            Characters.players.get(1).render();
         }else {
             players.get(1).otherPlayerWon = true;
         }
@@ -221,5 +222,169 @@ public class Player extends Character {
     }
     public int getCoin() {
         return this.coin;
+    }
+
+
+    public void move() {
+        if (activeStack){
+            if (java.util.Objects.equals(stack[stackCounter], "up")) {
+                up();
+                offsetY -= speed;
+                lastMove="up";
+            }
+            if (java.util.Objects.equals(stack[stackCounter], "down")) {
+                down();
+                offsetY += speed;
+                lastMove="down";
+            }
+            if (java.util.Objects.equals(stack[stackCounter], "left")) {
+                left();
+                offsetX -= speed;
+                lastMove="left";
+            }
+            if (java.util.Objects.equals(stack[stackCounter], "right")) {
+                right();
+                offsetX += speed;
+                lastMove="right";
+            }
+            stackCounter++;
+            stackIndex--;
+            if (stackIndex==0){
+                activeStack=false;
+                stackCounter=0;
+                //ready=true;
+            }
+        }
+        if (move && !activeStack){ //&& !ready
+            println(x(), y());
+            int x=0, y=0;
+            if (up) {
+                x=x()+tile/2;
+                y=y()+tile/2-speed;
+            }
+            if (down) {
+                x=x()+tile/2;
+                y=y()+tile/2+speed;
+            }
+            if (left) {
+                x=x()+tile/2-speed;
+                y=y()+tile/2;
+            }
+            if (right) {
+                x=x()+tile/2+speed;
+                y=y()+tile/2;
+            }
+            for (int i = 0; i < 3; i++) {
+                for (int k = 0; k < 3; k++) {
+                    if (!java.util.Objects.equals(tiles[topLeftR+4+i][topLeftC+14+k].type(), "floor") && dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + (float) tile / 2, tiles[topLeftR+4+i][topLeftC+14+k].y() + (float) tile / 2) < tile) {
+                        if (dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + (float) tile / 2, tiles[topLeftR+4+i][topLeftC+14+k].y() + (float) tile / 2) < tile) {
+                            collision = true;
+                            cntCollision++;
+                            if (firstCollision) {
+                                CornerR = topLeftR+4+i;
+                                CornerC = topLeftC+14+k;
+                                firstCollision = false;
+                            }
+                        }
+                    }
+                    if (Objects.equals(tiles[topLeftR+4+i][topLeftC+14+k].type(), "floor") && tiles[topLeftR+4+i][topLeftC+14+k].crossRoads) {
+                        boolean a=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() , tiles[topLeftR+4+i][topLeftC+14+k].y()) < (float) tile /2, b=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + tile, tiles[topLeftR+4+i][topLeftC+14+k].y()) < (float) tile /2, c=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x(), tiles[topLeftR+4+i][topLeftC+14+k].y() + tile) < (float) tile /2, d=dist(x, y, tiles[topLeftR+4+i][topLeftC+14+k].x() + tile, tiles[topLeftR+4+i][topLeftC+14+k].y() + tile) < (float) tile /2;
+                        if (a||b||c||d) {
+                            collision = true;
+                        }
+                    }
+                }
+                if ( i < totBombs && dist(x, y, bombs[i].x()+ (float) tile /2, bombs[i].y()+ (float) tile /2)<tile && !placed){
+                    collision = true;
+                    cntCollision++;
+                }
+                if ( i < totEnemies && dist(x, y, enemies[i].x()+ (float) tile /2, enemies[i].y()+ (float) tile /2)<tile){
+                    collision = true;
+                    cntCollision++;
+                }
+            }
+            if (cntCollision==1 && !currentMove.equals(lastMove)){
+                if (up || down) {
+                    int dx = x() + tile / 2 - tiles[CornerR][CornerC].x() - tile / 2;
+                    if (lastMove.equals("left") && dx <0) {
+                        corner=abs((tile+dx))/speed;
+                        for (int i = 0; i <corner; i++) {
+                            stack[stackIndex] = "left";
+                            stackIndex++;
+                        }
+                    }
+                    if (lastMove.equals("right") && dx > 0) {
+                        corner=abs((tile - dx))/speed;
+                        for (int i=0; i<corner; i++){
+                            stack[stackIndex] = "right";
+                            stackIndex++;
+                        }
+                    }
+                }
+                if (left || right) {
+                    int dy = y() + tile / 2 - tiles[CornerR][CornerC].y() - tile / 2;
+                    if (lastMove.equals("up") && dy<0) {
+                        corner=abs((tile+dy))/speed;
+                        for (int i=0; i<corner; i++){
+                            stack[stackIndex] = "up";
+                            stackIndex++;
+                        }
+                    }
+                    if (lastMove.equals("down") && dy>0) {
+                        corner=abs((tile-dy))/speed;
+                        for (int i=0; i<corner; i++){
+                            stack[stackIndex] = "down";
+                            stackIndex++;
+                        }
+                    }
+                }
+                if (stackIndex >=1) {
+                    activeStack = true;
+                    for (int i=0; i<6; i++){
+                        stack[stackIndex+i]=currentMove;
+                        stackIndex++;
+                    }
+                    //ready=true;
+                }
+            }
+            if (!collision && !activeStack) {
+                if (up) {
+                    up();
+                    offsetY -= speed;
+                    lastMove="up";
+                }
+                if (down) {
+                    down();
+                    offsetY += speed;
+                    lastMove="down";
+                }
+                if (left) {
+                    left();
+                    offsetX -= speed;
+                    lastMove="left";
+                }
+                if (right) {
+                    right();
+                    offsetX += speed;
+                    lastMove="right";
+
+                }
+            }
+            /*
+            if (!activeStack) {
+                ready=true;
+            }
+            */
+            collision=false;
+            cntCollision=0;
+            up=false;
+            down=false;
+            left=false;
+            right=false;
+            move=false;
+            topLeft=true;
+            firstCollision=true;
+            topLeftR=0;
+            topLeftC=0;
     }
 }

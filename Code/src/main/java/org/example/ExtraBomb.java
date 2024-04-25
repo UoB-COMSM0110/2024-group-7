@@ -3,8 +3,6 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import java.util.HashSet;
-
 public class ExtraBomb extends Items{
     /*int x, y;
     boolean visible = false;*/
@@ -28,32 +26,16 @@ public class ExtraBomb extends Items{
         System.out.println("bombUp item visible: " + visible);
     }
 
-    public static void setExtraBombs(PApplet parent){
-        //HashSet<Integer> chosenIndexes = new HashSet<>();
-        // Randomly select 5 rocks to hide ExtraBomb items
-        for (int i=0; i<extraBomb_items; i++) {
-            int extraBombIndex = (int) parent.random(Obstacle.rocks.size());
-            while (!Items.chosenIndexes.add(extraBombIndex)) {
-                extraBombIndex = (int) parent.random(Obstacle.rocks.size());
-            }
-            BreakableRock extraBombRock = Obstacle.rocks.get(extraBombIndex);
-            ExtraBomb extraBomb = new ExtraBomb(extraBombRock.x(), extraBombRock.y(), parent);
-            extraBombRock.setHideExtraBomb(true);
-            extraBombRock.setHiddenExtraBomb(extraBomb);
-            extraBombs.add(extraBomb);
-        }
-    }
-
     public static void getExtraBomb(PApplet parent){
         for (ExtraBomb extraBomb : Items.extraBombs) {
             if (extraBomb.visible) {
                 extraBomb.render(parent);
                 // Check if player collects it
-                Player player = Character.players.get(0);
+                Player player = Characters.players.get(0);
                 float distanceToExtraBomb = dist(player.px, player.py, extraBomb.x, extraBomb.y);
                 if (distanceToExtraBomb < 30) {
                     extraBomb.setVisible(false);
-                    Character.players.get(0).increaseMaxBomb();
+                    Characters.players.get(0).increaseMaxBomb();
                 }
             }
         }

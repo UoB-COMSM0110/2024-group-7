@@ -3,199 +3,82 @@ package org.example;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PFont;
-import processing.core.PGraphics;
 
 public class GameLoop extends PApplet{
-    PGraphics mask;
-    public static final int tile=30;
-    public static final int fps=60;
-    public static final int width=960;
-    public static final int height=540;
+    public static final int fps=120, tile=30, width=960, height=540, rows=12, cols=14, margin=15, hud=75;
     public static float shrinkNumber = 2.5f;
-    public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false;
-//    public static boolean move=false, up=false, down=false, left=false, right=false;
-    public static boolean reset = false;
-    public static int rows = 15, cols = 31;
-    public static boolean gameWon = false;
-    public static boolean gameLost = false;
-    public static boolean timeStarted = false;
-    public static boolean openShop = false;
-    static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
-
-    static char bombKey2 = 'x';
-
     public static double pvpStartTime;
+    public static boolean menu=true, PVE=false, PVP=false, settings=false,Achievements=false, reset = false, gameWon = false, gameLost = false, timeStarted = false, openShop = false;
+    boolean activeStack=false;
+    boolean collision=false;
+    boolean play=false;
+    boolean move=false;
+    boolean up=false;
+    boolean down=false;
+    boolean left=false;
+    boolean right=false;
+    boolean bomb=false;
+    boolean placed=false;
+    static boolean topLeft=true;
+    boolean firstCollision=true;
+    static char upKey1 = 'w', downKey1 = 's', leftKey1 = 'a', rightKey1 = 'd', bombKey1 = 'c', bombKey2 = 'x';
+    public int stackIndex=0;
+    public int stackCounter=0;
+    public int speed=5;
+    public int maxBombs=3;
+    public int totBombs=0;
+    public int totEnemies=1;
+    public static int offsetX=(49*tile);
+    public static int offsetY=(33*tile);
+    public static int topLeftR=0;
+    public static int topLeftC=0;
+    public int cntCollision=0;
+    public int CornerR=0;
+    public int CornerC=0;
+    public int corner=1;
+    String currentMove="", lastMove="";
+    Tile [][] tiles = new Tile[rows*9][cols*9];
+    String [] stack = new String[20];
 
     public void settings() {
         size(width, height);
     }
     public void setup(){
-        mask = createGraphics(width, height);
         frameRate(fps);
-
-        ResourceManager.loadAllImages(this);
-
-        Character.players = Player.setPlayer1(this);
-        Character.players = Player.setPlayer2(this);
-
-        mask = createGraphics(width, height);
-
+        Sprites.load(this);
+        Characters.createPlayers(this);
     }
 
     public void setupPVE() {
-        //generate walls
-        Obstacle.walls = Wall.generateWalls(rows, cols, this);
-
-        //generate shops
-        Obstacle.shops = Shop.generateShops(rows, cols, this);
-
-        //generate coins
-        Coin.setCoinsInEmptySpaces(this);
-
-        //generate rocks
-        Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
-
-        Flame.initializeFlames(this);
-        Flame.initializeUltimateFlames(this);
-        Flame.initializeEnemyNoHarmFlames(this);
-
-        Obstacle.initializeObstacleGrid();
-
-        Character.enemies = Enemy.generateEnemies(this);
-
-        Items.door = new Door(0, 0, this);
-        Items.door.setDoor(this);
-
-
-        BombPowerUp.setPowerUps(this);
-
-        ExtraBomb.setExtraBombs(this);
-
-        SpeedUp.setSpeedUps(this);
-
-        ExtraLife.setExtraLives(this);
-
-        Coin.setCoins(this);
+        Map.generator();
+        tiles = Map.tiles;
     }
 
     public void setupPVP() {
-        //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
-        //generate rocks
         Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
         Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
-
         Flame.initializeFlames(this);
-
         Obstacle.initializeObstacleGridPVP();
-
     }
 
     public void draw() {
-
         if (menu) {
             if(reset){
-                Character.players.get(0).health = 3;
-                Character.players.get(1).health = 3;
-
-                Character.players.get(0).explosionDistance = 1;
-                Character.players.get(0).maxBombs = 1;
-                Character.players.get(0).speed = 1;
-                Character.players.get(0).coin = 0;
-
-                Character.players.get(0).px = 45;
-                Character.players.get(0).py = 105;
-
-                Character.players.get(1).px = 885;
-                Character.players.get(1).py = 465;
-
-                Player.players.get(0).otherPlayerWon = false;
-                Player.players.get(1).otherPlayerWon = false;
-                Player.players.get(0).exist = true;
-                Player.players.get(1).exist = true;
-
-                gameLost = false;
-
-                PVPui.seconds = 11;
-                UltimateAbilities.k = 0;
-                UltimateAbilities.pvpClock = false;
-                Flame.activeFlames.clear();
-                Flame.resetFlames();
-
-                reset = false;
-                shrinkNumber = 2.5f;
+                Settings.reset();
             }
-            background(87, 108, 164);
-            PFont Cherry = createFont("fonts/CherryBombOne-Regular.ttf", 60);
-            PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
-            textFont(Cherry, 150);
-            textAlign(CENTER);
-            fill(237, 87, 33);
-            text("ボンバーマン", 0, 150, width, 300);
-            textFont(Daruma, 35);
-            textAlign(CENTER);
-            fill(250, 236, 0);
-            text("PVE", 0, 450, ((float) width / 4), 100);
-            text("PVP", ((float) width / 4), 450, ((float) width / 4), 100);
-            text("Achievements", ((float) width / 4 * 2), 450, ((float) width / 4), 100);
-            text("Settings", ((float) width / 4 * 3), 450, ((float) width / 4), 100);
-            textSize(100);
-            text("Dungeon", 0, 250, width, 100);
+            Menu.render(this);
         }
-
         if (PVE) {
-            menu = false;
-            background(165, 165, 165);
-
-            /*if (!openShop && !gameWon && !gameLost) {
-
-                translate((float) width / 2, (float) height / 2);
-                scale(shrinkNumber);
-                translate(-Player.players.get(0).px, -Player.players.get(0).py);
-
-              *//*  // 获取角色的位置
-                float playerX = Player.players.get(0).px + 15;
-                float playerY = Player.players.get(0).py + 15;
-
-                // 设置绘制圆的半径
-                float radius = 150; // 可以根据需要调整半径大小
-
-                // 绘制圆，以角色位置为圆心
-                ellipse(playerX, playerY, radius * 2, radius * 2); // ellipse函数需要圆心坐标和直径*//*
-            }*/
-
-            fill(87, 108, 164);
-            noStroke();
-            rect(15, 75, 930, 450);
-            fill(93, 88, 95);
-
-            Wall.wallsRender();
-            Shop.shopsRender();
-
-            BreakableRock.rocksRender();
-
-            Door.doorRender(this);
-
-            Enemy.enemiesRender();
-
-            Player.player1Render();
-
+            Map.render(this);
             gameEndDetectPVE();
-
-            BombPowerUp.getPowerUp(this);
-            ExtraBomb.getExtraBomb(this);
-            SpeedUp.getSpeedUp(this);
-            ExtraLife.getExtraLife(this);
-            Coin.getCoin(this);
-
+            Characters.players.get(0).move();
+            Collision.test();
             Bomb.bombRender();
             Flame.flameRender();
+            //Flame.ultimateFlameRender();
+            //Items.checkAndHandleBreakableUltimate();
 
-            Flame.ultimateFlameRender();
-
-            Items.checkAndHandleBreakableUltimate();
-
-            BreakableRock.removeRocks();
 
             Player.player1Movement();
             Enemy.enemiesMove();
@@ -210,8 +93,8 @@ public class GameLoop extends PApplet{
 
             float playerX = Player.players.get(0).px;
             float playerY = Player.players.get(0).py;
-            int player1Health = Character.players.get(0).getHealth();
-            int coinNumber = Character.players.get(0).getCoin();
+            int player1Health = Characters.players.get(0).getHealth();
+            int coinNumber = Characters.players.get(0).getCoin();
 
             textSize(15);
             fill(0);
@@ -223,23 +106,22 @@ public class GameLoop extends PApplet{
             text("Item", playerX - 40  , playerY - 100 , 240, 540);
 
         }
-        //PVE wining window
         if((gameWon || gameLost) && PVE) {
             PVEui.PVEUIShow();
 
             if (PVEui.PVEuivisible) {
-                fill(165, 165, 165, 200); // 灰色半透明背景
+                fill(165, 165, 165, 200);
                 rectMode(PConstants.CORNER);
                 rect(0, 0, 960, 540);
 
-                fill(87, 108, 164); // 蓝色矩形
-                float rectWidth = 480;  //(float) width / 2
-                float rectHeight = 270; //(float) height / 2
+                fill(87, 108, 164);
+                float rectWidth = 480;
+                float rectHeight = 270;
                 float rectX = (960 - rectWidth) / 2;
                 float rectY = (540 - rectHeight) / 2;
                 rect(rectX, rectY, rectWidth, rectHeight);
 
-                fill(250, 236, 0); // yellow word
+                fill(250, 236, 0);
                 textAlign(PConstants.CENTER, PConstants.CENTER);
                 textSize(35);
                 if (gameWon) {
@@ -247,13 +129,12 @@ public class GameLoop extends PApplet{
                 } else {
                     text("YOUR LOST!", 480, 270);
                 }
-                fill(0, 0, 222); // blue word
+                fill(0, 0, 222);
                 textAlign(PConstants.CENTER, PConstants.CENTER);
                 textSize(30);
                 text("←Restart", 240, 240, 480, 270);
             }
         }
-        //PVE shop
         if(openShop && PVE) {
             background(87, 108, 164);
             PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
@@ -261,14 +142,14 @@ public class GameLoop extends PApplet{
             fill(250, 236, 0);
             text("Shop", 350, 30, (float) width / 4, height);
 
-            int coinNumber = Character.players.get(0).getCoin();
+            int coinNumber = Characters.players.get(0).getCoin();
             textFont(Daruma, 30);
             fill(0);
             text("Coin", 600, 30, (float) width / 4, height);
             text(String.valueOf(coinNumber), 650, 30, (float) width / 4, height);
 
             textSize(30);
-            fill(0); // Set color for dropdown text
+            fill(0);
             text("VerticalFlames", 250, 100, (float) width / 4, height);
             text("RoundFlames", 250, 180, (float) width / 4, height);
             text("MoveToTheDoor", 250, 260, (float) width / 4, height);
@@ -276,7 +157,7 @@ public class GameLoop extends PApplet{
             text("RemoveAllRocks", 250, 420, (float) width / 4, height);
 
             textSize(30);
-            fill(0,0,222); // Set color for dropdown text
+            fill(0,0,222);
             text("Buy", 450, 100, (float) width / 4, height);
             text("Buy", 450, 180, (float) width / 4, height);
             text("Buy", 450, 260, (float) width / 4, height);
@@ -296,8 +177,8 @@ public class GameLoop extends PApplet{
             rect(15, 75, 930, 450);
             fill(93, 88, 95);
 
-            int player1Health = Character.players.get(0).getHealth();
-            int player2Health = Character.players.get(1).getHealth();
+            int player1Health = Characters.players.get(0).getHealth();
+            int player2Health = Characters.players.get(1).getHealth();
             textSize(30);
             fill(0);
             text("P1 Life:", 25, 25, (float) width / 4, height);
@@ -340,22 +221,21 @@ public class GameLoop extends PApplet{
 
             gameEndDetectPVP();
         }
-        //PVP wining window
         if((Player.players.get(0).otherPlayerWon || Player.players.get(1).otherPlayerWon) && PVP) {
             PVPui.PVPuishow();
             if(PVPui.PVPuivisible){
-                fill(165, 165, 165, 200); // 灰色半透明背景
+                fill(165, 165, 165, 200);
                 rectMode(PConstants.CORNER);
                 rect(0, 0, width, height);
 
-                fill(87, 108, 164); // 蓝色矩形
+                fill(87, 108, 164);
                 float rectWidth = (float) width / 2;
                 float rectHeight = (float) height / 2;
                 float rectX = (width - rectWidth) / 2;
                 float rectY = (height - rectHeight) / 2;
                 rect(rectX, rectY, rectWidth, rectHeight);
 
-                fill(250, 236, 0); // yellow word
+                fill(250, 236, 0);
                 textAlign(PConstants.CENTER, PConstants.CENTER);
                 textSize(35);
                 if(Player.players.get(0).otherPlayerWon){
@@ -363,7 +243,7 @@ public class GameLoop extends PApplet{
                 }else{
                     text("P1 WON!", (float) width / 2, (float) height / 2);
                 }
-                fill(0, 0, 222); // blue word
+                fill(0, 0, 222);
                 textAlign(PConstants.CENTER, PConstants.CENTER);
                 textSize(30);
                 text("←Restart", 240,240,(float) width / 2 , (float) height / 2);
@@ -371,42 +251,9 @@ public class GameLoop extends PApplet{
         }
 
         if (settings) {
-            menu = false;
-
-            background(87, 108, 164);
-            Settings settingsMenu = new Settings(this);
-
-            settingsMenu.show();
-            // Background black color for the settings menu
-            PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
-            textFont(Daruma, 35);
-            fill(250, 236, 0);
-            text("Settings", 150, 30, (float) width / 4, height);
-            text("P1", 350, 30, (float) width / 4, height);
-
-            textSize(30);
-            fill(0); // Set color for dropdown text
-            text("UP KEY:", 150, 100, (float) width / 4, height); // Draw label for dropdown
-            text("DOWN KEY:", 150, 180, (float) width / 4, height);
-            text("LEFT KEY:", 150, 260, (float) width / 4, height);
-            text("RIGHT KEY:", 150, 340, (float) width / 4, height);
-            text("BOMB KEY:", 150, 420, (float) width / 4, height);
-
-            textSize(35);
-            fill(0);
-            text(String.valueOf(upKey1), 350, 100, (float) width / 4, height);
-            text(String.valueOf(downKey1), 350, 180, (float) width / 4, height);
-            text(String.valueOf(leftKey1), 350, 260, (float) width / 4, height);
-            text(String.valueOf(rightKey1), 350, 340, (float) width / 4, height);
-            text(String.valueOf(bombKey1), 350, 420, (float) width / 4, height);
-
-            textSize(30);
-            textAlign(CENTER);
-            fill(0, 0, 222);
-            text("←BACK", 0, 490, width, 500);
+            Settings.render(this);
         }
     }
-
     public void mouseClicked() {
         System.out.println(mouseX);
         System.out.println(mouseY);
@@ -468,28 +315,28 @@ public class GameLoop extends PApplet{
     public void keyPressed() {
         if (key == upKey1) {
             if (Shop.isShopAt((Player.players.get(0).px-15) / tile, ((Player.players.get(0).py-75) / tile) - 1)) {
-                enterShop();  // 如果上方有商店，则进入商店
+                enterShop();
             } else {
                 Player.players.get(0).up = true;
                 Player.players.get(0).direction = 0;
             }
         } else if (key == downKey1) {
             if (Shop.isShopAt((Player.players.get(0).px-15) / tile, ((Player.players.get(0).py-75) / tile) + 1)) {
-                enterShop();  // 如果下方有商店，则进入商店
+                enterShop();
             } else {
                 Player.players.get(0).down = true;
                 Player.players.get(0).direction = 2;
             }
         } else if (key == leftKey1) {
             if (Shop.isShopAt(((Player.players.get(0).px-15) / tile) - 1, (Player.players.get(0).py-75) / tile)) {
-                enterShop();  // 如果左方有商店，则进入商店
+                enterShop();
             } else {
                 Player.players.get(0).left = true;
                 Player.players.get(0).direction = 3;
             }
         } else if (key == rightKey1) {
             if (Shop.isShopAt(((Player.players.get(0).px-15) / tile) + 1, (Player.players.get(0).py-75) / tile)) {
-                enterShop();  // 如果右方有商店，则进入商店
+                enterShop();
             } else {
                 Player.players.get(0).right = true;
                 Player.players.get(0).direction = 1;
@@ -505,28 +352,28 @@ public class GameLoop extends PApplet{
         if(PVP) {
             if (keyCode == UP) {
                 if (Shop.isShopAt((Player.players.get(1).px-15) / tile, ((Player.players.get(1).py-75) / tile) - 1)) {
-                    enterShop();  // 如果上方有商店，则进入商店
+                    enterShop();
                 } else {
                     Player.players.get(1).up = true;
                     Player.players.get(1).direction = 0;
                 }
             } else if (keyCode == DOWN) {
                 if (Shop.isShopAt((Player.players.get(1).px-15) / tile, ((Player.players.get(1).py-75) / tile) + 1)) {
-                    enterShop();  // 如果下方有商店，则进入商店
+                    enterShop();
                 } else {
                     Player.players.get(1).down = true;
                     Player.players.get(1).direction = 2;
                 }
             } else if (keyCode == LEFT) {
                 if (Shop.isShopAt(((Player.players.get(1).px-15) / tile) - 1, (Player.players.get(1).py-75) / tile)) {
-                    enterShop();  // 如果左方有商店，则进入商店
+                    enterShop();
                 } else {
                     Player.players.get(1).left = true;
                     Player.players.get(1).direction = 3;
                 }
             } else if (keyCode == RIGHT) {
                 if (Shop.isShopAt(((Player.players.get(1).px-15) / tile) + 1, (Player.players.get(1).py-75) / tile)) {
-                    enterShop();  // 如果右方有商店，则进入商店
+                    enterShop();
                 } else {
                     Player.players.get(1).right = true;
                     Player.players.get(1).direction = 1;
@@ -542,7 +389,6 @@ public class GameLoop extends PApplet{
     public void enterShop() {
         System.out.println("Entering shop...");
         GameLoop.openShop=true;
-        // 顯示商店界面
     }
 
     public void keyReleased() {
@@ -580,7 +426,7 @@ public class GameLoop extends PApplet{
             System.out.println("GameOver");
         }
         if (Items.doorKey != null && !Items.doorKey.collected && Items.doorKey.visible) {
-            Player player = Character.players.get(0);
+            Player player = Characters.players.get(0);
             float distance = dist(player.px, player.py, Items.doorKey.x, Items.doorKey.y);
             if (distance < 30) {
                 Items.doorKey.setCollected();
@@ -588,7 +434,7 @@ public class GameLoop extends PApplet{
         }
 
         if (Items.doorKey != null && Items.doorKey.collected && !gameWon) {
-            Player player = Character.players.get(0);
+            Player player = Characters.players.get(0);
             float distanceToDoor = dist(player.px, player.py, Items.door.x, Items.door.y);
             if (distanceToDoor < 30) {
                 gameWon = true;
