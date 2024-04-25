@@ -38,7 +38,7 @@ public class Player extends Character {
     public static ArrayList<Player> setPlayer1(PApplet parent) {
         int x = 15 + tile;
         int y = 75 + tile;
-        players.add(new Player(1, x, y, parent, ResourceManager.pinkBomber));
+        players.add(new Player(1, x, y, parent, ResourceManager.blueBomber));
         return players;
     }
 

@@ -5,6 +5,8 @@ import processing.core.PConstants;
 import processing.core.PFont;
 import processing.core.PGraphics;
 
+import static org.example.ResourceManager.*;
+
 public class GameLoop extends PApplet{
     PGraphics mask;
     public static final int tile=30;
@@ -25,9 +27,10 @@ public class GameLoop extends PApplet{
     public static boolean gameLost = false;
     public static boolean timeStarted = false;
     public static boolean openShop = false;
-    static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'c';
+    public static boolean overRectButton1,overRectButton2,overRectButton3 = false;
+    static char upKey1 = 'w';static char downKey1 = 's';static char leftKey1 = 'a';static char rightKey1 = 'd';static char bombKey1 = 'j';
 
-    static char bombKey2 = 'x';
+    static char bombKey2 = 'k';
 
     public static double pvpStartTime;
 
@@ -148,25 +151,44 @@ public class GameLoop extends PApplet{
                 }
                 currentDeepness = 0;
             }
-            background(87, 108, 164);
-            PFont Cherry = createFont("fonts/CherryBombOne-Regular.ttf", 60);
+            background(mainMenu);
+            updateButton();
             PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
-            textFont(Cherry, 150);
+            stroke(250,250,250);
+            if(overRectButton1){
+                fill(233,233,233,200);
+            }else{
+                fill(211,211,211,200);
+            }
+            rect(330,160,300,40,30);
+            if(overRectButton2){
+                fill(233,233,233,200);
+            }else{
+                fill(211,211,211,200);
+            }
+            rect(330,230,300,40,30);
+            if(overRectButton3){
+                fill(233,233,233,200);
+            }else{
+                fill(211,211,211,200);
+            }
+            rect(330,300,300,40,30);
+            textFont(Daruma, 30);
+            fill(236,69,118);
+//            text("Dungeon", 80, 70, width, 100);
+            image(logo,380,-25,200,200);
             textAlign(CENTER);
-            fill(237, 87, 33);
-            text("ボンバーマン", 0, 150, width, 300);
-            textFont(Daruma, 35);
-            textAlign(CENTER);
-            fill(250, 236, 0);
-            text("One Player Easy", 0, 450, ((float) width / 4), 100);
-            text("One Player Hard", ((float) width / 4), 450, ((float) width / 4), 100);
-            text("Two Players", ((float) width / 4 * 2), 450, ((float) width / 4), 100);
-            text("Settings", ((float) width / 4 * 3), 450, ((float) width / 4), 100);
+            text("Single Player-Easy", 330, 170, 300, 40);
+            text("Single Player-Hard", 330, 240, 300, 40);
+            text("Two Players Duel", 330, 310, 300, 40);
+            text("Settings", ((float) width / 4 * 3)+50, 470, ((float) width / 4), 100);
+            image(gear,810,465,30,30);
             textSize(100);
-            text("Dungeon", 0, 250, width, 100);
-            fill(0);
+            fill(236,69,118);
             textSize(30);
-            text("The deepest level reached:  " + biggestDeepness, -50, 370, width, 100);
+            text("The deepest level reached: " + biggestDeepness, 20, 20, 200, 60);
+            textSize(60);
+            text(String.valueOf(biggestDeepness),20,80,200,60);
         }
 
 
@@ -203,7 +225,7 @@ public class GameLoop extends PApplet{
 
         if (PVE) {
             menu = false;
-            background(165, 165, 165);
+            background(9, 84, 159);
 
             if (!openShop && !gameWon && !gameLost && difficulty) {
 
@@ -212,7 +234,7 @@ public class GameLoop extends PApplet{
                 translate(-Player.players.get(0).px, -Player.players.get(0).py);
             }
 
-            fill(87, 108, 164);
+            fill(228, 197, 158);
             noStroke();
             rect(15, 75, 930, 450);
             fill(93, 88, 95);
@@ -495,14 +517,14 @@ public class GameLoop extends PApplet{
     public void mouseClicked() {
         System.out.println(mouseX);
         System.out.println(mouseY);
-        if (mouseX>=0 && mouseX<220 && mouseY>=440 && mouseY<540 && menu) {
+        if (mouseX>=330 && mouseX<630 && mouseY>=160 && mouseY<200 && menu) {
             PVE=true;
             menu=false;
             setupPVE();
             GameLoop.difficulty = false;
         }
 
-        if (mouseX>=300 && mouseX<420 && mouseY>=440 && mouseY<540 && menu) {
+        if (mouseX>=330 && mouseX<630 && mouseY>=230 && mouseY<270 && menu) {
             PVE=true;
             menu=false;
             setupPVE();
@@ -525,7 +547,7 @@ public class GameLoop extends PApplet{
             }
         }
 
-        if (mouseX>=490 && mouseX<720 && mouseY>=440 && mouseY<540 && menu) {
+        if (mouseX>=330 && mouseX<630 && mouseY>=300 && mouseY<340 && menu) {
             PVP=true;
             menu=false;
             setupPVP();
@@ -716,4 +738,25 @@ public class GameLoop extends PApplet{
             System.out.println("Player 1 won!");
         }
     }
+
+    public void updateButton(){
+        if(overRectButton(330,160,300,40)){
+            overRectButton1 = true;
+            overRectButton2 = false;
+            overRectButton3 = false;
+        } else if (overRectButton(330,230,300,40)) {
+            overRectButton1 = false;
+            overRectButton2 = true;
+            overRectButton3 = false;
+        } else if (overRectButton(330,300,300,40)) {
+            overRectButton1 = false;
+            overRectButton2 = false;
+            overRectButton3 = true;
+        }
+    }
+    public boolean overRectButton(int x, int y, int width, int height)  {
+        return mouseX >= x && mouseX <= x + width &&
+                mouseY >= y && mouseY <= y + height;
+    }
+
 }
