@@ -82,10 +82,9 @@ We first used brainstorming methods to come up with some ideas in the group, and
 We used the methods we learned in class to make props to demonstrate the game, and drew a prototype of the game. After many discussions and game deductions, we had a relatively clear understanding of our project.Then we divided the tasks and used project management tools such as stack and jira.Finally, we started the project development, demo recording and other work.
 
 [//]: # (### STAKEHOLDERS)
-
-- Players
-- Developers
-- Markers)
+[//]: # (- Players)
+[//]: # (- Developers)
+[//]: # (- Markers)
 
 ### 3.5 CASE SPECIFICATIONS
 
@@ -113,10 +112,9 @@ We used the methods we learned in class to make props to demonstrate the game, a
 
 </center>
 
-[//]: # (### RREFLECTION
-
-This exercise has helped us explore actions and options that need 
-to be implemented within our game.)
+[//]: # (### RREFLECTION)
+[//]: # (This exercise has helped us explore actions and options that need )
+[//]: # (to be implemented within our game.)
 
 ## 4. DESIGN
 
@@ -133,19 +131,19 @@ to be implemented within our game.)
 
 ### 4.3 Behavioural diagrams
 
-[//]: # (### communication Diagrams
+[//]: # (### communication Diagrams)
 
-<center>
-<figure>
-    <img src="Assets/Diagrams/communication.png"
-            alt="Communication Diagram">
-</figure>
-</center>)
+[//]: # (<center>)
+[//]: # (<figure>)
+[//]: # (    <img src="Assets/Diagrams/communication.png")
+[//]: # (            alt="Communication Diagram">)
+[//]: # (</figure>)
+[//]: # (</center>)
 
-[//]: # (### RREFLECTION
+[//]: # (### RREFLECTION)
 
-This exercise has helped us structure our codeand assgign tasks 
-within the group.)
+[//]: # (This exercise has helped us structure our codeand assgign tasks )
+[//]: # (within the group.)
 
 ## IMPLEMENTATION
 
