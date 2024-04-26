@@ -38,7 +38,7 @@ public class Player extends Character {
     public static ArrayList<Player> setPlayer1(PApplet parent) {
         int x = 15 + tile;
         int y = 75 + tile;
-        players.add(new Player(1, x, y, parent, ResourceManager.pinkBomber));
+        players.add(new Player(1, x, y, parent, ResourceManager.blueBomber));
         return players;
     }
 
@@ -159,11 +159,14 @@ public class Player extends Character {
         for(Enemy enemy : enemies) {
             if (dist(px, py, enemy.x(), enemy.y()) < (float) tile / 2
                 && parent.millis() - damageTime > 1000) {
-                health -= 1;
-                damageTime = parent.millis();
-                if (health == 0) {
-                    exist = false;
-                }
+                if (enemy.exist) {
+                    //System.out.println("Touch enemy");
+                    health -= 1;
+                    damageTime = parent.millis();
+                    if (health == 0) {
+                        exist = false;
+                    }
+                }    
             }
         }
     }

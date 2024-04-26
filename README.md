@@ -1,5 +1,6 @@
 # GROUP 7 💣  BOMBERMAN DUNGEON
 
+## 1. TEAM
 <center>
 <figure>
     <img src="Assets/Images/group_meeting.png"
@@ -16,27 +17,24 @@
 |[Zora Chen](htps://github.com/fg23262) | [fg23262@bristol.ac.uk](mailto:fg23262@bristol.ac.uk)|
 </center>
 
-## INTRODUCTION
+## 2. INTRODUCTION
 
-GAMES CONSIDERED: Crossy Road, Doodle Jump, Downwell, Ice Sliding Puzzle, Bubble Boble, God of Light, Pico Park
+Our Bomberman game mainly revolves around two game modes: In the single-player mode, the player enters the next round of the game by getting the key to enter the door, and the player aims to pass more levels. We have innovatively added various props, shops and skills to the single-player mode, and set up two difficulties to make the game more playable. In the multiplayer game mode, players must try to eliminate each other and win the game. In order to increase the excitement of the game, a countdown function is creatively added to narrow the scope of the confrontation between the two parties. Gameplay involves strategically placing bombs that explode in multiple directions after a certain time to destroy obstacles and kill enemies and other players. Players can pick up various power-ups, giving them benefits such as greater explosive power or the ability to place more bombs at once. Players will be killed if they come into contact with an enemy or get caught in a bomb explosion (including their own), requiring players to be careful about where they place their bombs.
 
-Most games in the Bomberman franchise largely revolve around two modes of play; single player campaigns where the player must defeat enemies and reach an exit to progress through levels, and multiplayer modes where players must attempt to eliminate each other and be the last one standing. Gameplay involves strategically placing down bombs, which explode in multiple directions after a certain amount of time, in order to destroy obstacles and kill enemies and other players. The player can pick up various power-ups, giving them benefits such as larger explosions or the ability to place more bombs down at a time. The player is killed if they touch an enemy or get caught up in a bomb's explosion, including their own, requiring players to be cautious of their own bomb placement. In addition to the main maze-based Bomberman games, some spin-off titles involve adventure, platformer, puzzle, and kart racing gameplay.
-
-### TWIST
-
-Singleplayer roguelite dungeon crawler featuring meta-progression powerups
-
-## REQUIREMENTS
+## 3. REQUIREMENTS
 
 The group evaluated 5+ options and decided to develop a game based on bomberman as it is a beloved classic that is not devalued by simple 2D graphics. The popularity of roguelite dungeon crawlers like [Hades](https://store.steampowered.com/appp1145360/Hades/) led us to believe that they wuld make a fun twist to Bomberman.
 
-### STAKEHOLDERS
+### 3.1 Use Case Diagram  
 
-- Players
-- Developers
-- Markers
+<center>
+<figure>
+    <img src="Assets/Diagrams/useCase.png"
+            alt="Use Case Diagram">
+</figure>
+</center>
 
-### USER STORIES
+### 3.2 User Stories
 
 >"As a player, I want intuitive and reconfigurable controls." (Physical Impairment)
 
@@ -73,8 +71,22 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 >"As a marker, I want to feel compelled to play the game in my own time."
 
 >"As a marker, I want to not be bored by a generic game clone."
+>
 
-### CASE SPECIFICATIONS
+### 3.3 Early Stages Design
+
+We first used brainstorming methods to come up with some ideas in the group, and then discussed these ideas. We conducted in-depth discussions mainly on technical issues, playability issues, innovative issues and reliability issues, and analyzed the innovative points of each idea. and challenges, and finally chose two options.
+
+### 3.4 Ideation Process
+
+We used the methods we learned in class to make props to demonstrate the game, and drew a prototype of the game. After many discussions and game deductions, we had a relatively clear understanding of our project.Then we divided the tasks and used project management tools such as stack and jira.Finally, we started the project development, demo recording and other work.
+
+[//]: # (### STAKEHOLDERS)
+[//]: # (- Players)
+[//]: # (- Developers)
+[//]: # (- Markers)
+
+### 3.5 CASE SPECIFICATIONS
 
 <center>
 
@@ -100,23 +112,48 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 </center>
 
-### USE CASE DIAGRAM  
+[//]: # (### RREFLECTION)
+[//]: # (This exercise has helped us explore actions and options that need )
+[//]: # (to be implemented within our game.)
 
-<center>
-<figure>
-    <img src="Assets/Diagrams/useCase.png"
-            alt="Use Case Diagram">
-</figure>
-</center>
+## 4. DESIGN
 
-### RREFLECTION
+### 4.1 System Architecture
 
-This exercise has helped us explore actions and options that need 
-to be implemented within our game.
+#### 4.1.1 Game Overview
 
-## DESIGN
+Our game has two modes, single-player mode and two-player mode. The single-player mode is divided into two difficulties. Players can get the key to find the door and enter the next level. Players aim to enter a deeper level; in the two-player mode , two players will compete against each other to defeat each other and achieve victory.
 
-### CLASS DIAGRAM
+#### 4.1.2 Game world
+
+Bomberman is a two-dimensional game. The game map has destructible and non-destructible walls as well as monsters and various props. It is very playable and has many innovations compared to the original version, such as various skills. The game is generally more casual and entertaining. The game may be a little difficult at the beginning, but as the game progresses, players will become stronger and stronger. Players can not only attack deeper levels in the game, but also enjoy the fun of confrontation with friends.
+
+#### 4.1.3 Game Characters
+
+The game character has some basic values, namely health and movement speed. The bombs placed by the character have bomb range and bomb quantity. These values can be improved by obtaining props in the single-player mode. However, for the sake of fair confrontation, in the two-player mode Fixed value. In addition, there is also the addition of a store, where keys and skills can be purchased, and the required gold coins need to be picked up by the characters on the map.
+
+#### 4.1.4 Game Mechanics
+
+In addition to operating the character to move up, down, left, and right, the player also has two keys. One is to place a bomb. The bomb will explode after a period of time. It can clear the monsters and destructible walls that the player comes into contact with. The health value will also be deducted. The other key is the skill key. Pressing it can trigger powerful effects, such as killing all monsters.
+In single-player mode, players need to get the key and enter the door. In the process, they can pick up props and purchase props in the mall. In two-player mode, players need to kill each other to win the game
+
+#### 4.1.5 Game system: Introduce various systems in the game, such as combat system, mission system, economic system, etc. Explain how systems work and relate to each other.
+
+The game's prop system can improve the various values ​​of characters and bombs, making players continuously stronger; the monster system is designed with action AI to make monsters move logically; in the combat system, players can place bombs and use skills to kill monsters or destroy them. Wall; in the economic system, players can pick up gold coins, which can be used to buy powerful skills and keys in the store; in the confrontation system, players from both sides can compete, and in order to ensure fairness, the values ​​are constant; Game key positions can be changed in the system settings. The prop system and combat system ensure the strength of the characters, and the economic system adds playability to the game.
+
+#### 4.1.6 Game content
+
+In the simple single-player mode, players need to pick up gold coins to improve the economy and pick up props to improve their own values. The props and gold coins are hidden in destructible walls. Different props can make each game experience different. At the same time, players should also avoid the pursuit of monsters or place bombs to kill monsters. Monsters will continue to move and cause interference to players. When the player accumulates enough gold coins and finds the location of the door, he can go to the store to buy a key and enter the door to enter the next level. If you want to play quickly, you can use accumulated gold coins to purchase powerful skills to speed up the game progress. In the difficult single-player mode, the player's field of view becomes smaller, which increases the difficulty of the game. In the two-player mode, the confrontation range will shrink every 10 seconds. If you step out of this range, your life will be reduced, and the party whose life value reaches zero first will lose.
+
+#### 4.1.7 Progress and Reward
+
+The game's economic system is a reward mode. Players can purchase powerful skills and keys by accumulating gold coins, such as destructible walls that can clear the screen, clear monsters, teleport to the door, super large bomb flames, etc. This can Speed up the progress of the game and enter deeper levels faster. This result will be recorded on the menu, which can satisfy those players who like to challenge themselves. In the confrontation mode, we use the joy of winning when players defeat each other as a reward mode.
+
+#### 4.1.8 Other features
+
+The unique interaction method and appropriate system prompts make it easy to get started with the game; achievements can be displayed on the desktop, giving users a sense of satisfaction after completing the level. The addition of skills and stores makes the game playable.
+
+### 4.2 Class Diagrams
 
 <center>
 <figure>
@@ -125,19 +162,28 @@ to be implemented within our game.
 </figure>
 </center>
 
-### COMMUNICATION DIAGRAM
+### 4.3 Behavioural diagrams
 
 <center>
 <figure>
-    <img src="Assets/Diagrams/communication.png"
-            alt="Communication Diagram">
+    <img src="Assets/Diagrams/Behavioural diagrams.png"
+            alt="Behavioural diagrams">
 </figure>
 </center>
 
-### RREFLECTION
+[//]: # (### communication Diagrams)
 
-This exercise has helped us structure our codeand assgign tasks 
-within the group.
+[//]: # (<center>)
+[//]: # (<figure>)
+[//]: # (    <img src="Assets/Diagrams/communication.png")
+[//]: # (            alt="Communication Diagram">)
+[//]: # (</figure>)
+[//]: # (</center>)
+
+[//]: # (### RREFLECTION)
+
+[//]: # (This exercise has helped us structure our codeand assgign tasks )
+[//]: # (within the group.)
 
 ## IMPLEMENTATION
 

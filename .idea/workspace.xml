@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable" />
+    <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,7 +37,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
+    &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Application.Bomberman.executor&quot;: &quot;Run&quot;,
     &quot;Application.Code.org.example.GameLoop.executor&quot;: &quot;Run&quot;,
@@ -45,7 +47,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/zorachen/game_project/2024-group-7&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/2024-group-7&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -59,8 +61,8 @@
     &quot;应用程序.GameLoop.executor&quot;: &quot;Run&quot;,
     &quot;应用程序.GameStarter.executor&quot;: &quot;Run&quot;,
     &quot;应用程序.gameStarter.executor&quot;: &quot;Run&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="RunManager" selected="应用程序.GameStarter">
     <configuration name="GameLoop" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-17-openjdk" />
@@ -92,7 +94,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-53826d6a" />
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
       </set>
     </attachedChunks>
   </component>
@@ -134,7 +136,11 @@
       <workItem from="1713971932225" duration="1265000" />
       <workItem from="1713974507695" duration="2574000" />
       <workItem from="1713995835994" duration="51000" />
-      <workItem from="1714088936224" duration="114000" />
+      <workItem from="1713995967805" duration="415000" />
+      <workItem from="1714036568722" duration="15000" />
+      <workItem from="1714058331218" duration="1285000" />
+      <workItem from="1714083781643" duration="3000" />
+      <workItem from="1714083797012" duration="5000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />
