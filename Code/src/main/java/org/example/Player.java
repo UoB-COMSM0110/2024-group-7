@@ -159,11 +159,14 @@ public class Player extends Character {
         for(Enemy enemy : enemies) {
             if (dist(px, py, enemy.x(), enemy.y()) < (float) tile / 2
                 && parent.millis() - damageTime > 1000) {
-                health -= 1;
-                damageTime = parent.millis();
-                if (health == 0) {
-                    exist = false;
-                }
+                if (enemy.exist) {
+                    //System.out.println("Touch enemy");
+                    health -= 1;
+                    damageTime = parent.millis();
+                    if (health == 0) {
+                        exist = false;
+                    }
+                }    
             }
         }
     }
