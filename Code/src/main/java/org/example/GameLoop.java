@@ -94,6 +94,11 @@ public class GameLoop extends PApplet{
     }
 
     public void setupPVP() {
+        Obstacle.shops.clear();
+        Obstacle.rocks.clear();
+        Character.enemies.clear();
+        Coin.coinsInEmptySpace.clear();
+        Items.chosenIndexes.clear();
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
         //generate rocks
