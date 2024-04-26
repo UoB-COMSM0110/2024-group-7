@@ -266,6 +266,7 @@ public class GameLoop extends PApplet{
             Items.checkAndHandleBreakableUltimate();
 
             BreakableRock.removeRocks();
+            Items.removeMarkedObjects();
 
             Player.player1Movement();
             Enemy.enemiesMove();
