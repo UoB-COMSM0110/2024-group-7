@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/processing_core_1_0_3__0_1_3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/2024-group-7.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2024-group-7.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code.zip" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/GameStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/GameStarter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +51,7 @@
     "Application.GameStarter.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "sound",
+    "git-widget-placeholder": "正在合并 main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/2024-group-7",
     "node.js.detected.package.eslint": "true",
@@ -56,7 +59,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "库",
+    "project.structure.last.edited": "SDK",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "configurable.group.editor",
@@ -144,8 +147,7 @@
       <workItem from="1714058331218" duration="1285000" />
       <workItem from="1714083781643" duration="3000" />
       <workItem from="1714083797012" duration="5000" />
-      <workItem from="1714096653561" duration="81000" />
-      <workItem from="1714096759497" duration="912000" />
+      <workItem from="1714097861950" duration="80000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />

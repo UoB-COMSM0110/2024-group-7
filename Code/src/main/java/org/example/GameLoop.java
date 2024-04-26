@@ -38,15 +38,12 @@ public class GameLoop extends PApplet{
         size(width, height);
     }
     public void setup(){
-        mask = createGraphics(width, height);
         frameRate(fps);
 
         ResourceManager.loadAllImages(this);
 
         Character.players = Player.setPlayer1(this);
         Character.players = Player.setPlayer2(this);
-
-        mask = createGraphics(width, height);
 
     }
 
@@ -102,6 +99,7 @@ public class GameLoop extends PApplet{
         //generate rocks
         Obstacle.lessRocks.clear();
         Obstacle.rocks.clear();
+
         /*Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);*/
         Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
         Obstacle.rocks = Obstacle.lessRocks;
@@ -425,7 +423,9 @@ public class GameLoop extends PApplet{
             Player.players.get(0).PVPEnhancement();
             Player.players.get(1).PVPEnhancement();
 
-            Bomb.bombRender();
+            /*Bomb.bombRender();*/
+            Bomb.bombRenderPVP1();
+            Bomb.bombRenderPVP2();
             Flame.flameRender();
 
             BreakableRock.removeLessRocks();

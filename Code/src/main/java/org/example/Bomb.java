@@ -31,7 +31,7 @@ public class Bomb extends Objects{
     }
 
     public static void setBombIfPossible1(PApplet parent){
-        if(parent.millis() - Player.players.get(0).setBombTime < 310){
+        if(parent.millis() - Player.players.get(0).setBombTime < 3100){
             return;
         }
         if (Player.players.get(0).bomb) {
@@ -107,6 +107,42 @@ public class Bomb extends Objects{
         list.addAll(Player.players.get(1).bombs);
 
         Iterator<Bomb> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Bomb bomb = iterator.next();
+            int packedNumber = bomb.update();
+            if (bomb.showed) {
+                bomb.render();
+            } else {
+                iterator.remove();  // 删除showed为false的元素
+            }
+            if (packedNumber != 0) {
+                int x = packedNumber / 10000;
+                int y = packedNumber % 10000;
+                Flame.creatFlame(x, y);
+            }
+        }
+    }
+
+    public static void bombRenderPVP1(){
+        Iterator<Bomb> iterator = Player.players.get(0).bombs.iterator();
+        while (iterator.hasNext()) {
+            Bomb bomb = iterator.next();
+            int packedNumber = bomb.update();
+            if (bomb.showed) {
+                bomb.render();
+            } else {
+                iterator.remove();  // 删除showed为false的元素
+            }
+            if (packedNumber != 0) {
+                int x = packedNumber / 10000;
+                int y = packedNumber % 10000;
+                Flame.creatFlame(x, y);
+            }
+        }
+    }
+
+    public static void bombRenderPVP2(){
+        Iterator<Bomb> iterator = Player.players.get(1).bombs.iterator();
         while (iterator.hasNext()) {
             Bomb bomb = iterator.next();
             int packedNumber = bomb.update();
