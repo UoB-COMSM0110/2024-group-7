@@ -100,8 +100,11 @@ public class GameLoop extends PApplet{
         //generate walls
         Obstacle.walls = Wall.generateWalls(rows, cols, this);
         //generate rocks
-        Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);
+        Obstacle.lessRocks.clear();
+        Obstacle.rocks.clear();
+        /*Obstacle.rocks = BreakableRock.generateRocks(rows,cols, this, 0.5f);*/
         Obstacle.lessRocks = BreakableRock.generateLessRocks(rows,cols, this, 0.3f);
+        Obstacle.rocks = Obstacle.lessRocks;
 
         Flame.initializeFlames(this);
 
@@ -111,6 +114,7 @@ public class GameLoop extends PApplet{
 
     public void draw() {
         if (menu) {
+            m = 0;
             if(reset){
                 Character.players.get(0).isHavingTheKey = false;
 
@@ -595,7 +599,9 @@ public class GameLoop extends PApplet{
 
     public void keyPressed() {
         if(key == '1'){
-            ESCpressed = !ESCpressed;
+            if(!menu) {
+                ESCpressed = !ESCpressed;
+            }
             if(m == 1 && !ESCpressed){
                 PVE =true;
             }else if (m == 2 && !ESCpressed){

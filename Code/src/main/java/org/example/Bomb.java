@@ -63,7 +63,7 @@ public class Bomb extends Objects{
                 int playerCenterX = Character.players.get(1).x() + tile / 2 - 15;
                 int playerCenterY = Character.players.get(1).y() + tile / 2 - 15;
                 Character.players.get(1).bombs.add(new Bomb(playerCenterX, playerCenterY, parent, ResourceManager.basicBomb));
-                Player.players.get(0).setBombTime = parent.millis();
+                Player.players.get(1).setBombTime = parent.millis();
             }
             Player.players.get(1).bomb = false;
         }
