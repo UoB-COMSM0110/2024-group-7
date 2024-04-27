@@ -13,8 +13,9 @@ public class UltimateAbilities extends GameLoop{
         Player.players.get(0).speed = 3;
         Player.players.get(0).health = 300;
         Player.players.get(0).isHavingTheKey = true;
+        Player.players.get(0).maxBombs = 10;
         for(int i =0;i<100;i++) {
-            abilitiesList.add(5);
+            abilitiesList.add(2);
         }
 
         if(!player.useAbility || abilitiesList.isEmpty()) {
@@ -52,7 +53,7 @@ public class UltimateAbilities extends GameLoop{
                                 !(i==startX + flameRange && j == startY + flameRange) &&
                                 !(i==startX + flameRange && j == startY - flameRange) &&
                                 !(i==startX - flameRange && j == startY + flameRange)) {
-                            Objects.enemyNoHarmFlames[i][j].duration = 1000;
+                            Objects.enemyNoHarmFlames[i][j].duration = 2000;
                             Objects.ultimateFlames[i][j].appearUltimate();
                         }
                     }
@@ -64,13 +65,13 @@ public class UltimateAbilities extends GameLoop{
     public static void generateFlameVertical1(int startX, int startY) {
         for (int i = 0; i <=cols-1; i++) {
             if (i != startX) {
-                Objects.enemyNoHarmFlames[i][startY].duration = 1000;
+                Objects.enemyNoHarmFlames[i][startY].duration = 2000;
                 Objects.ultimateFlames[i][startY].appearUltimate();
             }
         }
         for (int i = 0; i <=rows-1; i++) {
             if (i != startY) {
-                Objects.enemyNoHarmFlames[startX][i].duration = 1000;
+                Objects.enemyNoHarmFlames[startX][i].duration = 2000;
                 Objects.ultimateFlames[startX][i].appearUltimate();
             }
         }

@@ -21,7 +21,6 @@ public class Bomb extends Objects{
         this.bombImage = bombImage;
         this.bombActive = false;
         this.showed = true;
-        this.timer = 3.0;
         this.setupTime = parent.millis();
 
     }
@@ -39,7 +38,7 @@ public class Bomb extends Objects{
                 int playerCenterX = Character.players.get(0).x() + tile / 2 - 15;
                 int playerCenterY = Character.players.get(0).y() + tile / 2 - 15;
                 Character.players.get(0).bombs.add(new Bomb(playerCenterX, playerCenterY, parent, ResourceManager.basicBomb));
-                Player.players.get(0).setBombTime = parent.millis();
+                Character.players.get(0).setBombTime = parent.millis();
             }
             Player.players.get(0).bomb = false;
         }
@@ -47,9 +46,9 @@ public class Bomb extends Objects{
             for (Bomb bomb : Character.players.get(0).bombs) {
                 if (!bomb.hasExpired()) {
                     bomb.render();
-                } else {
+                } /*else {
                     bomb.showed = false;
-                }
+                }*/
             }
         }
     }
@@ -71,9 +70,9 @@ public class Bomb extends Objects{
             for (Bomb bomb : Character.players.get(1).bombs) {
                 if (!bomb.hasExpired()) {
                     bomb.render();
-                } else {
+                } /*else {
                     bomb.showed = false;
-                }
+                }*/
             }
         }
     }
@@ -154,6 +153,7 @@ public class Bomb extends Objects{
             if (packedNumber != 0) {
                 int x = packedNumber / 10000;
                 int y = packedNumber % 10000;
+                System.out.println("bomb");
                 Flame.creatFlame(x, y);
             }
         }
