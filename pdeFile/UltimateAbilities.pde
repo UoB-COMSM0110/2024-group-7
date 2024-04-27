@@ -5,13 +5,13 @@ public static class UltimateAbilities extends GameLoop{
     public static int k = 0;
     public static ArrayList<Integer> abilitiesList = new ArrayList<>();
     public static void generateUltimateFire(Player player){
-        Player.players.get(0).speed = 3;
-        Player.players.get(0).health = 300;
-        Player.players.get(0).isHavingTheKey = true;
-        Player.players.get(0).maxBombs = 10;
-        for(int i =0;i<100;i++) {
-            abilitiesList.add(2);
-        }
+        //Player.players.get(0).speed = 3;
+        //Player.players.get(0).health = 300;
+        //Player.players.get(0).isHavingTheKey = true;
+        //Player.players.get(0).maxBombs = 10;
+        //for(int i =0;i<100;i++) {
+        //    abilitiesList.add(2);
+        //}
 
         if(!player.useAbility || abilitiesList.isEmpty()) {
             return;

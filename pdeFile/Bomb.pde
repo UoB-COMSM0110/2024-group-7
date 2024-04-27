@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 public static class Bomb extends Objects{
     PApplet parent;
     PImage bombImage;
@@ -32,6 +34,7 @@ public static class Bomb extends Objects{
                 int playerCenterY = Character.players.get(0).y() + tile / 2 - 15;
                 Character.players.get(0).bombs.add(new Bomb(playerCenterX, playerCenterY, parent, ResourceManager.basicBomb));
                 Character.players.get(0).setBombTime = parent.millis();
+                setBomb.play();
             }
             Player.players.get(0).bomb = false;
         }
@@ -56,6 +59,7 @@ public static class Bomb extends Objects{
                 int playerCenterY = Character.players.get(1).y() + tile / 2 - 15;
                 Character.players.get(1).bombs.add(new Bomb(playerCenterX, playerCenterY, parent, ResourceManager.basicBomb));
                 Player.players.get(1).setBombTime = parent.millis();
+                setBomb.play();
             }
             Player.players.get(1).bomb = false;
         }

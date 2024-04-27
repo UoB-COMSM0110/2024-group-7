@@ -1,4 +1,6 @@
 
+    import processing.sound.*;
+    
     PGraphics mask;
     public static final int tile=30;
     public static final int fps=60;
@@ -24,6 +26,9 @@
     static char bombKey2 = 'k';
 
     public static double pvpStartTime;
+    
+    public static SoundFile setBomb;
+    public static SoundFile bomb;
 
     public void settings() {
         size(width, height);
@@ -35,7 +40,9 @@
 
         Character.players = Player.setPlayer1(this);
         Character.players = Player.setPlayer2(this);
-
+       
+        bomb= new SoundFile(this, "bombExplode.mp3");
+        setBomb= new SoundFile(this, "bubbleSound_1.mp3");
     }
 
     public void setupPVE() {

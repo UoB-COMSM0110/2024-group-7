@@ -82,6 +82,7 @@ public static class Flame extends Objects{
     }
 
     public static void creatFlame(int x, int y) {
+        bomb.play();
         int explosionDistance = Character.players.get(0).getExplosionDistance();
 
         int col = (x-15)/tile;
