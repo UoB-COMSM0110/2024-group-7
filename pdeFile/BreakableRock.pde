@@ -1,12 +1,7 @@
-package org.example;
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class BreakableRock extends Obstacle{
+public static class BreakableRock extends Obstacle{
     PImage rock;
     int health;
     boolean rockExist;

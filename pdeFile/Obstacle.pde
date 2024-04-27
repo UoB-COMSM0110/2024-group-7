@@ -1,10 +1,5 @@
-package org.example;
 
-import java.awt.*;
-import java.util.ArrayList;
-import processing.core.PApplet;
-
-public class Obstacle extends GameLoop{
+public static class Obstacle extends GameLoop{
     /*public static ArrayList<Obstacle> obstacle = new ArrayList<>();*/
     PApplet parent;
     int px;

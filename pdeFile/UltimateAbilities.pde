@@ -1,11 +1,6 @@
-package org.example;
 
-import processing.core.PApplet;
-import processing.core.PImage;
 
-import java.util.ArrayList;
-
-public class UltimateAbilities extends GameLoop{
+public static class UltimateAbilities extends GameLoop{
     public static boolean pvpClock;
     public static int k = 0;
     public static ArrayList<Integer> abilitiesList = new ArrayList<>();

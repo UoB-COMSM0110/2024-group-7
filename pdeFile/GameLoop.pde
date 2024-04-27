@@ -1,13 +1,4 @@
-package org.example;
 
-import processing.core.PApplet;
-import processing.core.PConstants;
-import processing.core.PFont;
-import processing.core.PGraphics;
-
-import static org.example.ResourceManager.*;
-
-public class GameLoop extends PApplet{
     PGraphics mask;
     public static final int tile=30;
     public static final int fps=60;
@@ -158,7 +149,7 @@ public class GameLoop extends PApplet{
                 }
                 currentDeepness = 0;
             }
-            background(mainMenu);
+            background(ResourceManager.mainMenu);
             updateButton();
             PFont Daruma = createFont("fonts/DarumadropOne-Regular.ttf", 60);
             stroke(250,250,250);
@@ -183,13 +174,13 @@ public class GameLoop extends PApplet{
             textFont(Daruma, 30);
             fill(236,69,118);
 //            text("Dungeon", 80, 70, width, 100);
-            image(logo,380,-25,200,200);
+            image(ResourceManager.logo,380,-25,200,200);
             textAlign(CENTER);
             text("Single Player-Easy", 330, 170, 300, 40);
             text("Single Player-Hard", 330, 240, 300, 40);
             text("Two Players Duel", 330, 310, 300, 40);
             text("Settings", ((float) width / 4 * 3)+50, 470, ((float) width / 4), 100);
-            image(gear,810,465,30,30);
+            image(ResourceManager.gear,810,465,30,30);
             textSize(100);
             fill(236,69,118);
             textSize(30);
@@ -722,7 +713,7 @@ public class GameLoop extends PApplet{
         }
     }
 
-    private static void gameEndDetectPVE(){
+    private void gameEndDetectPVE(){
         if(gameLost){
             System.out.println("GameOver");
         }
@@ -743,7 +734,7 @@ public class GameLoop extends PApplet{
         }
     }
 
-    private static void gameEndDetectPVP() {
+    private void gameEndDetectPVP() {
         if(Player.players.get(0).otherPlayerWon){
             System.out.println("Player 2 won!");
         }else if(Player.players.get(1).otherPlayerWon){
@@ -770,5 +761,3 @@ public class GameLoop extends PApplet{
         return mouseX >= x && mouseX <= x + width &&
                 mouseY >= y && mouseY <= y + height;
     }
-
-}

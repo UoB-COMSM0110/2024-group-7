@@ -1,11 +1,6 @@
-package org.example;
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
 import java.util.HashSet;
 
-public class ExtraBomb extends Items{
+public static class ExtraBomb extends Items{
     /*int x, y;
     boolean visible = false;*/
     boolean markedForRemoval = false;

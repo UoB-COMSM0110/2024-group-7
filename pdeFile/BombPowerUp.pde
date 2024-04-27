@@ -1,11 +1,5 @@
-package org.example;
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
 import java.util.HashSet;
-
-public class BombPowerUp extends Items{
+public static class BombPowerUp extends Items{
     /*int x, y;
     boolean visible = false;*/
     boolean markedForRemoval = false;
@@ -14,7 +8,7 @@ public class BombPowerUp extends Items{
     public BombPowerUp(int x, int y, PApplet parent) {
         this.x = x;
         this.y = y;
-        this.powerUpImage = parent.loadImage("images/fire_up.PNG");
+        this.powerUpImage = parent.loadImage("images/fire_up.png");
         System.out.println("PowerUp: " + x + ", " + y);
     }
 

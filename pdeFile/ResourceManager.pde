@@ -1,9 +1,5 @@
-package org.example;
 
-import processing.core.PApplet;
-import processing.core.PImage;
-
-public class ResourceManager{
+public static class ResourceManager{
     public static PImage unbreakable;
     public static PImage blueBomber;
     public static PImage pinkBomber;

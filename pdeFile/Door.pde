@@ -1,11 +1,5 @@
-package org.example;
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
 import java.util.HashSet;
-
-public class Door extends Items{
+public static class Door extends Items{
     /*int x, y;
     boolean visible = false;*/
     PImage doorImage;
@@ -13,7 +7,7 @@ public class Door extends Items{
     public Door(int x, int y, PApplet parent) {
         this.x = x;
         this.y = y;
-        this.doorImage = parent.loadImage("images/door.PNG");
+        this.doorImage = parent.loadImage("images/door.png");
         System.out.println("Door: " + x + ", " + y);
     }
 

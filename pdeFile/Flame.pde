@@ -1,12 +1,6 @@
-package org.example;
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
-import java.util.Iterator;
 
 // This class is used to creat the explosion flame after bomb bombs
-public class Flame extends Objects{
+public static class Flame extends Objects{
     PApplet parent;
     PImage frameImage;
     boolean showed;

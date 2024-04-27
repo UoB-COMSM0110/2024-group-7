@@ -1,11 +1,5 @@
-package org.example;
 
-import processing.core.PApplet;
-import processing.core.PImage;
-
-import java.util.HashSet;
-
-public class SpeedUp extends Items{
+public static class SpeedUp extends Items{
     /*int x, y;
     boolean visible = false;*/
     boolean markedForRemoval = false;
@@ -14,7 +8,7 @@ public class SpeedUp extends Items{
     public SpeedUp(int x, int y, PApplet parent) {
         this.x = x;
         this.y = y;
-        this.speedUpImage = parent.loadImage("images/speed_up.PNG");
+        this.speedUpImage = parent.loadImage("images/speed_up.png");
         System.out.println("SpeedUp: " + x + ", " + y);
     }
 

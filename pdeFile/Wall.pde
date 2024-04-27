@@ -1,10 +1,6 @@
-package org.example;
-import processing.core.PApplet;
-import processing.core.PImage;
 
-import java.util.ArrayList;
 
-public class Wall extends Obstacle{
+public static class Wall extends Obstacle{
     /*PApplet parent;*/
     /*int px, py;*/
     PImage uWall;

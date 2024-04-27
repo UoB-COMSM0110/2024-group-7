@@ -1,18 +1,12 @@
-package org.example;
 
-import processing.core.PApplet;
-import processing.core.PImage;
-
-import java.util.HashSet;
-
-public class ExtraLife extends Items{
+public static class ExtraLife extends Items{
     boolean markedForRemoval = false;
     PImage extraLifeImage;
 
     ExtraLife(int x, int y, PApplet parent) {
         this.x = x;
         this.y = y;
-        this.extraLifeImage = parent.loadImage("images/health_up.PNG");
+        this.extraLifeImage = parent.loadImage("images/health_up.png");
         System.out.println("extraLife: " + x + ", " + y);
     }
 

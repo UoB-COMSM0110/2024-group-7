@@ -1,8 +1,5 @@
-package org.example;
 
-import java.util.ArrayList;
-
-public class Objects extends GameLoop{
+public static class Objects extends GameLoop{
     int x, y;
     /*public static int totBombs=0;*/
     //public static boolean bomb=false;

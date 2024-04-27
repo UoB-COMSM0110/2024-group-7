@@ -1,8 +1,5 @@
-package org.example;
 
-import processing.core.PApplet;
-
-    public class Settings extends GameLoop {
+    public static class Settings extends GameLoop {
         PApplet parent; // Reference to the parent PApplet
         boolean visible;
 

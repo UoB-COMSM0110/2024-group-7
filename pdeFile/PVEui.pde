@@ -1,8 +1,6 @@
-package org.example;
 
-import processing.core.PApplet;
 
-public class PVEui {
+public static class PVEui {
     public static int seconds = 10;
     private static PApplet parent;
     static Boolean PVEuivisible = false;

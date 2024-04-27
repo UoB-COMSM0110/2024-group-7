@@ -1,10 +1,5 @@
-package org.example;
-
-import processing.core.PApplet;
-
 import java.util.ArrayList;
-
-public class Character extends GameLoop{
+public static class Character extends GameLoop{
     PApplet parent;
     int px, py;
     int health;

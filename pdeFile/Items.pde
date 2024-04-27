@@ -1,13 +1,5 @@
-package org.example;
 
-import processing.core.PApplet;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import java.util.HashSet;
-
-public class Items extends Objects{
+public static class Items extends Objects{
     boolean visible = false;
     public static DoorKey doorKey;
     public static Door door;

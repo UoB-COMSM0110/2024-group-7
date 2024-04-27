@@ -1,13 +1,8 @@
-package org.example;
-
-import processing.core.PApplet;
-import processing.core.PImage;
-
 import java.util.ArrayList;
 import java.awt.Point;
 import java.util.Collections;
 
-public class Coin extends Items {
+public static class Coin extends Items {
     boolean markedForRemoval = false;
     PImage coinImage;
 
@@ -138,4 +133,3 @@ public class Coin extends Items {
         return this.markedForRemoval;
     }
 }
-

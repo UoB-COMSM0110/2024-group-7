@@ -1,12 +1,5 @@
-package org.example;
-import processing.core.PApplet;
-import processing.core.PImage;
 
-import javax.print.CancelablePrintJob;
-import java.util.ArrayList;
-import java.util.Random;
-
-public class Player extends Character {
+public static class Player extends Character {
     PImage playerImage;
     int timer = 120;
     public boolean useAbility= false;

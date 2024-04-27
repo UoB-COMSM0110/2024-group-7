@@ -1,12 +1,8 @@
-package org.example;
-import processing.core.PApplet;
-import processing.core.PImage;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-public class Enemy extends Character{
+public static class Enemy extends Character{
     /*PApplet parent;*/
     PImage enemyImage;
     double lastChange = 0;

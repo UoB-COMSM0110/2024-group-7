@@ -1,11 +1,6 @@
-package org.example;
 
-import processing.core.PApplet;
-import processing.core.PImage;
 
-import java.util.HashSet;
-
-public class DoorKey extends Items{
+public static class DoorKey extends Items{
     PImage keyImage;
     boolean collected = false;
 

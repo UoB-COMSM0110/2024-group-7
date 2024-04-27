@@ -1,17 +1,10 @@
-package org.example;
-import processing.core.PApplet;
-import processing.core.PImage;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-
-public class Bomb extends Objects{
+public static class Bomb extends Objects{
     PApplet parent;
     PImage bombImage;
     boolean bombActive;
     double timer;
     double setupTime;
-    public static int duration = 2000;
+    public int duration = 2000;
     int attack = 1;
     boolean showed;
     Bomb(int x, int y, PApplet parent, PImage bombImage){
@@ -68,7 +61,7 @@ public class Bomb extends Objects{
         }
         if (findCurrentBombsNumber2()>0) {
             for (Bomb bomb : Character.players.get(1).bombs) {
-                if (!bomb.hasExpired()) {
+                  if (!bomb.hasExpired()) {
                     bomb.render();
                 } /*else {
                     bomb.showed = false;
@@ -95,7 +88,7 @@ public class Bomb extends Objects{
         bombActive = false;
     }
 
-    public static int encodeCoordinate(int x, int y) {
+    public int encodeCoordinate(int x, int y) {
             // Combine x and y coordinates using the delimiter
             return (x * 10000) + y;
     }

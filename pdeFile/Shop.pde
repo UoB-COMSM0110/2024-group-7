@@ -1,13 +1,5 @@
-package org.example;
 
-import processing.core.PApplet;
-import processing.core.PImage;
-
-import java.util.ArrayList;
-import java.awt.Point;
-import java.util.Collections;
-
-public class Shop extends Obstacle {
+public static class Shop extends Obstacle {
     PImage shopImage;
     Shop(int x, int y, PApplet parent, PImage shopImage){
         this.parent =parent;
@@ -86,4 +78,3 @@ public class Shop extends Obstacle {
         }
     }
 }
-
