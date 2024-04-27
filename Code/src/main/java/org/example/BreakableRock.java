@@ -104,6 +104,7 @@ public class BreakableRock extends Obstacle{
                     rock.py = 75 + j * tile;
                     rock.rockExist = true;
                     rock.markedForRemoval = false;
+                    rock.hideCoin = false;
                     validPosition = true;
                 }
             }

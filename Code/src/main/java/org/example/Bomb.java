@@ -31,7 +31,7 @@ public class Bomb extends Objects{
     }
 
     public static void setBombIfPossible1(PApplet parent){
-        if(parent.millis() - Player.players.get(0).setBombTime < 3100){
+        if(parent.millis() - Player.players.get(0).setBombTime < 310){
             return;
         }
         if (Player.players.get(0).bomb) {
