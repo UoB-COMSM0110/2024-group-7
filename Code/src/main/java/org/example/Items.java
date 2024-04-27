@@ -16,7 +16,7 @@ public class Items extends Objects{
     public static ArrayList<ExtraBomb> extraBombs = new ArrayList<>();
     public static int extraBomb_items = 5;
     public static ArrayList<SpeedUp> speedUps = new ArrayList<>();
-    public static int speedUp_items = 5;
+    public static int speedUp_items = 3;
     public static ArrayList<ExtraLife> extraLives = new ArrayList<ExtraLife>();
     public static int extraLife_items = 2;
     public static ArrayList<Coin> coins = new ArrayList<Coin>();

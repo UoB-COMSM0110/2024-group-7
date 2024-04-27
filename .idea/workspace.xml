@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Items.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,6 +146,7 @@
       <workItem from="1714222910040" duration="871000" />
       <workItem from="1714223952004" duration="3000" />
       <workItem from="1714224090784" duration="2102000" />
+      <workItem from="1714226241873" duration="306000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />
