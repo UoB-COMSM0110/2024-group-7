@@ -7,7 +7,7 @@
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Bomb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/BreakableRock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/Obstacle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/Code/src/main/java/org/example/UltimateAbilities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +48,7 @@
     &quot;Application.GameStarter.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;sound&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/2024-group-7&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -147,6 +147,8 @@
       <workItem from="1714097861950" duration="80000" />
       <workItem from="1714210593648" duration="2476000" />
       <workItem from="1714222910040" duration="871000" />
+      <workItem from="1714223952004" duration="3000" />
+      <workItem from="1714224090784" duration="2102000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />

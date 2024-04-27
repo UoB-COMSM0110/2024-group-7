@@ -49,7 +49,7 @@ public class Obstacle extends GameLoop{
     public static void initializeObstacleGridPVP() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                obstacleGrid[j][i] = false;
+                obstacleGridPVP[j][i] = false;
             }
         }
         for (BreakableRock rock : Obstacle.lessRocks) {
