@@ -25,7 +25,7 @@ Our Bomberman game mainly revolves around two game modes: In the single-player m
 
 The group evaluated 5+ options and decided to develop a game based on bomberman as it is a beloved classic that is not devalued by simple 2D graphics. The popularity of roguelite dungeon crawlers like [Hades](https://store.steampowered.com/appp1145360/Hades/) led us to believe that they wuld make a fun twist to Bomberman.
 
-### 3.1 Use Case Diagram  
+### 3.1 Use Case Diagram
 
 <center>
 <figure>
@@ -44,7 +44,7 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 
 >"As a player, I want a clear understanding of the game mechanics."
 
->"As a player, I want achievable yet challenging goals."  
+>"As a player, I want achievable yet challenging goals."
 
 >"As a player, I want a straightforward HUD to efffectively strategize."
 
@@ -197,14 +197,29 @@ The unique interaction method and appropriate system prompts make it easy to get
 - QUANTITATIVE:
 - TESTING:
 
-## PROCESS
+## 7.PROCESS
+### 7.1 Teamwork
+Our team of five members deeply engaged in both game design and coding throughout this project. We operated without clear role assignments, but each member contributed their strengths effectively, ensuring the success of our endeavor.
 
-### TOOLS
+During the brainstorming phase, Lea catalyzed our creativity with a plethora of innovative ideas, inspiring the team significantly. Tianyu then proposed the idea that resonated with all of us, ultimately becoming the foundation of our game.
 
-- [Slack](https://bombermandungeon.slack.com/ssb/redirect)
+In the realm of game design, Lea spearheaded the construction of the fundamental framework, laying the groundwork with initial code and basic art resources. Zilou contributed numerous ideas to enhance our game, including the implementation of a PvP mode and various skills.
+
+During development, Yiguang, Zilou, and Zora were primarily responsible for coding the game logic, while Tianyu focused on UI and interface design. Notably, Zilou refactored our codebase to improve readability, and Yiguang enhanced visual effects for a more aesthetically pleasing experience.
+
+In the documentation phase and the creation of our demo video, Lea recorded our initial project discussions, which Tianyu subsequently organized and edited. Yiguang, Zilou, and Zora contributed to the remaining written content, with Yiguang also producing the demo video.
+
+We unanimously acknowledge the indispensable contributions of each team member, recognizing that the absence of any individual would have made the project significantly more challenging.
+
+### 7.2 TOOLS
+
+- [Slack](https://bombermandungeon.slack.com/ssb/redirect) Served as our initial Instant messager, but we seldom use it then,
 - [Jira](https://bomberman-dungeon.atlassian.net/jira/software/projects/BOM/boards/1)
-- IntelliJ
-- Github Flow
+- Wechat: Serving as our primary instant messenger, Wechat facilitated concise communication for tasks such as bug reporting, meeting invitations, feature notifications, and code reviews.
+- IntelliJ IDEA: As our project initially began in Java and was later converted into Processing, IntelliJ IDEA served as our primary development environment for coding.
+- Git: Utilizing Git for version control, with the remote repository hosted on Github, we followed a workflow where new features were developed in independent branches before undergoing code review by other team members and subsequently merging into the main branch.
+### 7.3 Challenges and Resolutions
+Despite our collective efforts, challenges and conflicts arose throughout our teamwork. There were discrepancies regarding scheduling preferences, with some advocating for completing tasks before the Easter holiday while others favored working during the holiday period. Additionally, although the final game was well-received overall, not every team member was entirely satisfied, as certain deviations from our initial design draft occurred. The introduction of new features during the development phase also sparked discussions within the team, with decisions not always reaching unanimous agreement. However, despite these challenges, we successfully completed the project.
 
 ### CODE STYLE
 
