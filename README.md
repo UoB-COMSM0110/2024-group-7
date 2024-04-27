@@ -194,17 +194,27 @@ The unique interaction method and appropriate system prompts make it easy to get
 During the game development process, we encountered numerous challenges. While the implementation of individual features was relatively straightforward, implementing some features required modifications to other already completed sections. These intertwined issues made implementation particularly difficult. Three challenges stood out.
 ### 5.1 Collision detect
 The initial implementation of the collision detection proceeded very smoothly. When the player pressed a movement key, the destination coordinates for the next frame were calculated. Subsequently, the system would traverse lists of rocks and walls to determine if collisions occurred with any of these obstacles. If a collision was detected, the character would not move. After passing the test in the group, we turned to develop other functions.
+
 During the process of adding character enhancement items, issues with collision detection emerged. When the character picked up a speed-enhancing power-up, his movement speed was supposed to increase. This was a simple implementation involving merely an increase in the character's speed attribute. However, we discovered that no matter how much we increased the character's speed, the actual movement speed in the game hardly changed. Later, we found that the problem lay in the performance of the collision detection system.
+
 The initial implementation required traversing a list of hundreds of obstacles in each frame. Completing a full traversal of the list could take upwards of a dozen frames, significantly slowing down character movement. Our optimization strategy involved creating a new auxiliary two-dimensional Boolean array, marking impassable areas on the map as false. Thus, during character movement, it is only necessary to check the Boolean value at the destination coordinates in the auxiliary array to determine collision presence.
+
 However, by the time these issues were addressed, we had already completed the random map generation and hiding power-ups behind breakable rocks. Modifying the collision detection also required changes to these existing functionalities, substantially increasing the workload. Fortunately, the implementation was highly successful, enabling smooth character movement in response to player commands.
+
 ### 5.2 Power-ups
 This implementation was initially very challenging. The first problem was ensuring that the same rock was not chosen repeatedly for hiding different items during random selection. The second issue involved displaying the items correctly once the rocks were destroyed.
+
 The solution to the first problem involved using a hash set. An index was generated for each item and stored in the hash set, indicating that the item was hidden behind a specific rock. Due to the random and unique nature of hash sets, it prevented any item from being hidden behind the same rock twice.
+
 The second problem seemed straightforward: items simply needed to be displayed when their corresponding rocks were destroyed. However, the existing method for destroying rocks did not support adding such a feature and even required modifications to the code related to bombs and flames. Finally, we introduced an intermediate state before a rock was destroyed, and added a Boolean status to the rock class indicating whether it stored an item. When the rock was in this intermediate state, the item's method was called, and based on the properties of the rock, it was determined which type of item would be generated.
+
 ### 5.3 Restart the game
 Toward the end of game development, we needed to implement a restart feature to ensure that players could replay the game after returning to the main menu. This involved regenerating the map and resetting the character's enhancement states. The challenge arose because the generation of the map, enemies, and the hiding of enhancement items were all done in the setup section of Processing, where statements are executed only once. Figuring out how to correctly reset the game within the draw loop became a significant issue.
+
 To implement this functionality, it was necessary to adjust a vast amount of code related to the map, enemies, items, and players. We wrote a separate reset method for each related list (such as rocks, enemies, each type of item, etc.) and executed these methods when the player clicked the button to enter the game.
+
 For instance, regarding breakable rocks, first clear the rocks list at the start and then re-populate it with randomly placed rocks. Subsequently, the collision detection array must be updated according to the new rock placements. Finally, items are added to this new list of rocks. The interdependence of these lists presents considerable challenges in game development.
+
 The volume of code added was considerable and required a significant amount of time. This approach ensured that every aspect of the game could be reset properly, allowing for a seamless experience when restarting the game.
 
 ## EVALUATION
