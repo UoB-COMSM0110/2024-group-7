@@ -1,3 +1,5 @@
+.vscode
+.notes
 .DS_Store
 applet
 application.linux-arm64

@@ -1,0 +1,80 @@
+@startuml useCase
+left to right direction
+actor "Gamer" as gmr
+rectangle Menu {
+  usecase "Exit" as M5
+  usecase "Settings" as M4
+  usecase "Select Character" as M2
+  usecase "Achievements" as M3
+  usecase "Reset" as M6
+  usecase "Mode" as S1
+  usecase "Resolution" as S2
+  usecase "Keybindings" as S3
+  usecase "Play" as M1
+}
+
+rectangle Action {
+  usecase "Walk" as A1
+  usecase "Bomb" as A2
+}
+
+rectangle Target {
+  usecase "Bomb Walls" as C1
+  usecase "Bomb Enemy" as C2
+  usecase "Bomb Yourself" as C3
+  usecase "Walk into Enemy" as C4
+}
+
+
+rectangle "Power Up"{
+  usecase "Bomb Range" as P1
+  usecase "Bomb Strength" as P2
+  usecase "Bomb Timer" as P3
+  usecase "Extra Bomb" as P4
+  usecase "Extra Speed" as P5
+  usecase "Extra Life" as P6
+}
+
+rectangle Rewards{
+  usecase "Key" as R1
+  usecase "Door" as R2
+  usecase "Points" as R3
+}
+
+gmr --> M1
+gmr --> M2
+gmr --> M3
+gmr --> M4
+gmr --> M5
+M3 --> M6
+
+M4 --> S1
+M4 --> S2
+M4 --> S3
+
+M1 --> A1
+M1 --> A2
+
+A1 --> C4
+A2 --> C1
+A2 --> C2
+A2 --> C3
+
+C3 --> (Lose Life) #line:red;line.bold
+C4 --> (Lose Life) #line:red;line.bold
+(Lose Life) --> (Game Over) #red;line.dashed
+
+C2 --> R1
+C2 --> R3
+C1 --> R2
+R1 ..> R2 
+
+R2 --> P1
+R2 --> P2
+R2 --> P3
+R2 --> P4
+R2 --> P5
+R2 --> P6
+
+note right of S1: Timed games end after 5 minutes. Untimed games spawn harder enemies as time progresses.
+@enduml
