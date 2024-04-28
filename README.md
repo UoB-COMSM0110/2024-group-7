@@ -245,6 +245,8 @@ The average SUS score for single-play mode and two-player mode are 78 and 79.5, 
 <figure>
     <img src="Assets/Images/SUS_single.png"
             alt="System Usability Survey (Single-Player easy mode)">
+    <img src="Assets/Images/SUS_two.png"
+            alt="System Usability Survey (Two-Player mode)">
 </figure>
 </center>
 
