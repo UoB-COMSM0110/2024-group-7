@@ -323,6 +323,6 @@ However, we encounted several challenges while we were developing our game. Whil
 
 Moreover, to ensure the game was user-oriented, in the later stages of game development, we collected player feedback through the Think Aloud method and quantitative survey, then we optimized our game based on those constructive comments.
 
-To sum up, we are all proud the game we have developed. In terms of innovation, fun, and usability, we believe our game has reached an impressive level. However, due to time limit, there are some feeatures that could be optimize and impove in the future, For instance, a feature where players would return to the starting position and lose all items and skills they had upon death could make the game more challanging. Additionally, the bomb’s firepower and timing of their explosions may be affected by nearby explosives, so that it would increase the thill and competition in the two-player mode.
+To sum up, we are all proud the game we have developed. In terms of innovation, fun, and usability, we believe our game has reached an impressive level. However, due to the time limit, there are some feeatures that could be optimized and impoved in the future, For instance, a feature where players would return to the starting position and lose all items and skills they had upon death could make the game more challanging. Additionally, the bomb’s firepower and timing of their explosions may be affected by nearby explosives, so that it would increase the thill and competition in the two-player mode.
 
 
