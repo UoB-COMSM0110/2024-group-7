@@ -238,6 +238,15 @@ Analyse the NASA-TLX scores for single-player and two-player modes, the Wilcoxon
 
 It is worth noting that Temporal Demand is significantly higher in two-player mode compared to single-player mode, revealing that time pressure is obvious in the two-play mode. This is making sense because there is a countdown timer in two-player mode, users have to response quickly within a limited timeframe. This is also reflected in the Performance aspect, where the added time pressure and competitive element of playing against other players may more readily impact performance.
 
+<center>
+<figure>
+    <img src="Assets/Images/NASA_single.png"
+            alt="NASA-TLX (Single-Player easy mode)">
+    <img src="Assets/Images/NASA_two.png"
+            alt="NASA-TLXy (Two-Player mode)">
+</figure>
+</center>
+
 SUS:
 The average SUS score for single-play mode and two-player mode are 78 and 79.5, respectively, both over the general usability benchmark of 68. Moreover, most of the users’ scores are all above this threshold, indicating that users gave positive feedback on usability. We also conducted a Wilcoxon Significance Test to evaluate if there is a significant difference in usability between these two modes. The resulting W test statistic is 23.5. According to the Wilcoxon critical values table, it does not denote a significant difference at a 95% confidence level for a sample size N=10. This outcome aligns with our expectations, the reason is that the operation methods between the different modes are very similar, with only game design variations, thus not significantly impacting usability assessments.
 
