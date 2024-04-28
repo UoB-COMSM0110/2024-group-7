@@ -1,4 +1,8 @@
-
+import ddf.minim.*;
+    public static Minim minim;
+    public static AudioPlayer menuBGM;
+    public static AudioPlayer battleSmoothBGM;
+    public static AudioPlayer battleFierceBGM;
     PGraphics mask;
     public static final int tile=30;
     public static final int fps=60;
@@ -32,10 +36,14 @@
         frameRate(fps);
 
         ResourceManager.loadAllImages(this);
+        minim = new Minim(this);
+        menuBGM = minim.loadFile("sound/mainmenu.mp3");
+        battleSmoothBGM = minim.loadFile("sound/battleSmooth.mp3");
+        battleFierceBGM = minim.loadFile("sound/battleFierce.mp3");
 
         Character.players = Player.setPlayer1(this);
         Character.players = Player.setPlayer2(this);
-
+        //menuBGM.loop();
     }
 
     public void setupPVE() {
@@ -108,6 +116,9 @@
 
     public void draw() {
         if (menu) {
+          playBGM(menuBGM);
+          battleFierceBGM.pause();
+          battleSmoothBGM.pause();
             m = 0;
             if(reset){
                 Character.players.get(0).isHavingTheKey = false;
@@ -223,6 +234,8 @@
 
         if (PVE) {
             menu = false;
+            menuBGM.pause();
+            playBGM(battleSmoothBGM);
             background(9, 84, 159);
 
             if (!openShop && !gameWon && !gameLost && difficulty) {
@@ -385,6 +398,8 @@
 
         if(PVP){
             menu = false;
+            menuBGM.pause();
+            playBGM(battleFierceBGM);
             background(87, 108, 164);
             PVPui pvpui = new PVPui(this);
             background(165, 165, 165);
@@ -760,4 +775,10 @@
     public boolean overRectButton(int x, int y, int width, int height)  {
         return mouseX >= x && mouseX <= x + width &&
                 mouseY >= y && mouseY <= y + height;
+    }
+    
+    public void playBGM(AudioPlayer player){
+      if (!player.isPlaying()){
+            player.loop(); // Resume playing if paused
+       }
     }
