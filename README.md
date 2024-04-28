@@ -246,7 +246,7 @@ It is worth noting that Temporal Demand is significantly higher in two-player mo
 </figure>
 </center>
 
-In SUS, the average score for single-play mode and two-player mode are 76.5 and 79.5, respectively, both over the general usability benchmark of 68. Moreover, most of the users’ scores are all above this threshold, indicating that users gave positive feedback on usability. We also conducted a Wilcoxon Significance Test to evaluate if there is a significant difference in usability between these two modes. The resulting W test statistic is 23.5. According to the Wilcoxon critical values table, it does not denote a significant difference at a 95% confidence level for a sample size N=10. This outcome aligns with our expectations, the reason is that the operation methods between the different modes are very similar, with only game design variations, thus not significantly impacting usability assessments.
+In SUS, the average score for single-play mode and two-player mode are 76.5 and 79.5, respectively, both over the general usability benchmark of 68. Moreover, most of the users’ scores are all above this threshold, indicating that users gave positive feedback on usability. We also conducted a Wilcoxon Significance Test to evaluate if there is a significant difference in usability between these two modes. The resulting W test statistic is 21.0. According to the Wilcoxon critical values table, it does not denote a significant difference at a 95% confidence level for a sample size N=10. This outcome aligns with our expectations, the reason is that the operation methods between the different modes are very similar, with only game design variations, thus not significantly impacting usability assessments.
 
 <center>
 <figure>
@@ -314,11 +314,15 @@ public class Bomberman extends PApplet {
 
 </center>
 
-## CONCLUSION
+## 8. CONCLUSION
+In conclusion, we based our game on the iconic Bomberman, but infused lots of innovative ideas to enrich the gaming experience throughout our development process. For example, in the single-player mode, the primary goal for players is to enter as more as possible round of the game by getting the key to enter the door. So we innovatively introduced coins, shops and five special skills, players can buy skills in the shop by collocting coins to achieve higher achievements. In the two-player mode, the main purpose for player is to eliminate the opponent to win the game. To increase the tension and excitement of the game, we creatively added a countdown feature to narrow the combat zone. All these innovations not only set our game apart from the traditional Bomberman but also enhance the game’s enjoyment and novelty.  
 
-<center>
+During the process of the game development, to align the agile principles, we used Jira to assign tasks and effectively monitor team progress. We communicated in the real time via WeChat. And code updated and maintenance were conducted through GitHub.
 
-| LESSONS | CHALLENGES | FUTURE WORK |
-| -----| ----- | -----|
+However, we encounted several challenges while we were developing our game. While the implementation of individual features was relatively straightforward, implementing some features required modifications to other already completed sections. These intertwined issues made implementation particularly difficult. Collison detect, power-ups and game restarts are the main challenges that we faced. Nevertheless, due to our exceptional teamwork, we successfully overcame all obstacles and significantly enhanced team members’ game development capabilitie.
 
-</center>
+Moreover, to ensure the game was user-oriented, in the later stages of game development, we collected player feedback through the Think Aloud method and quantitative survey, then we optimized our game based on those constructive comments.
+
+To sum up, we are all proud the game we have developed. In terms of innovation, fun, and usability, we believe our game has reached an impressive level. However, due to time limit, there are some feeatures that could be optimize and impove in the future, For instance, a feature where players would return to the starting position and lose all items and skills they had upon death could make the game more challanging. Additionally, the bomb’s firepower and timing of their explosions may be affected by nearby explosives, so that it would increase the thill and competition in the two-player mode.
+
+
