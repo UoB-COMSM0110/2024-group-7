@@ -1,8 +1,11 @@
-import ddf.minim.*;
+
+    import ddf.minim.*;
+    import processing.sound.*;
     public static Minim minim;
     public static AudioPlayer menuBGM;
     public static AudioPlayer battleSmoothBGM;
     public static AudioPlayer battleFierceBGM;
+    
     PGraphics mask;
     public static final int tile=30;
     public static final int fps=60;
@@ -28,6 +31,9 @@ import ddf.minim.*;
     static char bombKey2 = 'k';
 
     public static double pvpStartTime;
+    
+    public static SoundFile setBomb;
+    public static SoundFile bomb;
 
     public void settings() {
         size(width, height);
@@ -43,7 +49,10 @@ import ddf.minim.*;
 
         Character.players = Player.setPlayer1(this);
         Character.players = Player.setPlayer2(this);
-        //menuBGM.loop();
+
+       
+        bomb= new SoundFile(this, "sound/bombExplode.mp3");
+        setBomb= new SoundFile(this, "sound/bubbleSound_1.mp3");
     }
 
     public void setupPVE() {

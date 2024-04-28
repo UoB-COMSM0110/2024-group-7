@@ -1,3 +1,4 @@
+
 import ddf.minim.*;
 public static class ResourceManager{
     public static PImage unbreakable;
@@ -12,6 +13,7 @@ public static class ResourceManager{
     public static PImage logo;
     public static PImage gear;
     public static PImage floor;
+    
     public static void loadAllImages(PApplet app) {
         unbreakable = app.loadImage("images/unbreakable_wall.png");
         blueBomber = app.loadImage("images/player.png");
