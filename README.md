@@ -217,11 +217,34 @@ For instance, regarding breakable rocks, first clear the rocks list at the start
 
 The volume of code added was considerable and required a significant amount of time. This approach ensured that every aspect of the game could be reset properly, allowing for a seamless experience when restarting the game.
 
-## EVALUATION
+## 6.EVALUATION
 
-- QUALITATIVE:
-- QUANTITATIVE:
-- TESTING:
+We invited a total of 10 users to participate in game testing to understand the navigability, usability, and appropriate difficulty level of our game. We hope to improve the game through user feedback, making it both challenging and enjoyable.
+
+### 6.1 Qualitative evaluation
+We used the Think Aloud method to perform qualitative analysis during our game testing. We invited ten users to join this test, and half of them had related playing experience, and rest of them are first time playing bomber man. For the test, users are asked to verbalize their thoughts, feeling and experiences while playing the game. 
+
+Based on the results of the qualitative evaluation, we have organized several dimensions for improvement: First, player instruction. We have added simply operating instructions on the main page to help novice users quickly understand the basic rules and control method of the game, so that they can easily to get started. Second, movement fluency of the character in the game. We have enhanced the collision detection mechanism to avoid inaccuracies that may cause the risk of unnatural movement, so that we can ensuring the movement action of the character including turning, stopping, and acceleration are smooth and no delay. Furthermore, we ensured a proper balance between the number of items and enemies to maintain an appropriate level of game challenge through multiple test plays by our team members.
+
+Regarding the difficulty levels in the single-player mode, we introduced a hard mode to offer greater challenges, meeting the needs of experienced players for higher difficulty and more complex strategies while retaining an easy mode to allow novice players to start more comfortably and reduce beginner frustration.
+
+Additionally, testers provided not only dimensions for improvement but also positive feedback. Users generally found the two-player mode to be very interesting, innovative, and exciting, marking a significant difference from the traditional Bomberman game. Besides, the shop design in the single-player mode was also highly praised. And through implementing various skills also further enhances the player experience.
+
+### 6.2 Quantitative evaluation
+In terms of quantitative evaluation, users had to fill out forms for NASA-TLX and SUS after they completed experienced the whole game including single-player mode and two-play model.
+
+NASA-TLX:
+Analyse the NASA-TLX scores for single-player and two-player modes, the Wilcoxon Significance Test at a 95% confidence interval revealed no significant difference as well(W test statistic = 15). However, take a detailed look across these six dimensions, indiciating the scores between these two modes are quite similar for Mental Demand, Physical Demand, Effort, and Frustration. We could have a conclusion that users are required to put a considerable amount of effort while playing the game without experiencing excessive mental or physical burden. Additionally, low to moderate frustration scores show that most players do not feel overly discouraged by the game.
+
+It is worth noting that Temporal Demand is significantly higher in two-player mode compared to single-player mode, revealing that time pressure is obvious in the two-play mode. This is making sense because there is a countdown timer in two-player mode, users have to response quickly within a limited timeframe. This is also reflected in the Performance aspect, where the added time pressure and competitive element of playing against other players may more readily impact performance.
+
+SUS:
+The average SUS score for single-play mode and two-player mode are 78 and 79.5, respectively, both over the general usability benchmark of 68. Moreover, most of the users’ scores are all above this threshold, indicating that users gave positive feedback on usability. We also conducted a Wilcoxon Significance Test to evaluate if there is a significant difference in usability between these two modes. The resulting W test statistic is 23.5. According to the Wilcoxon critical values table, it does not denote a significant difference at a 95% confidence level for a sample size N=10. This outcome aligns with our expectations, the reason is that the operation methods between the different modes are very similar, with only game design variations, thus not significantly impacting usability assessments.
+
+### 6.3 How code was tested
+We used Processing for our game development software, which has limited support for unit testing. So our code testing has mainly focused on user testing and developer testing, which our team member conducted playtesting while developed a new feature, and also executed countless playtests upon the completion of the game.
+
+For the user testing, we employed the Think Aloud method throughout the development phase to gather user feedback and optimize the game based on these insights. In the subsequent phase, we collected user opinions through quantitative questionnaires. The results indicated that our game performs well in terms of usability, and the workloads were not burdensome for players. We also received positive feedback regarding the game experience and challenges.
 
 ## 7.PROCESS
 ### 7.1 Teamwork
