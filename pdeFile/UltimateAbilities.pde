@@ -6,11 +6,11 @@ public static class UltimateAbilities extends GameLoop{
     public static ArrayList<Integer> abilitiesList = new ArrayList<>();
     public static double time = 0;
     public static void generateUltimateFire(Player player, PApplet parent){
-        Player.players.get(0).speed = 3;
-        Player.players.get(0).health = 300;
-        Player.players.get(0).isHavingTheKey = true;
-        Player.players.get(0).maxBombs = 10;
-        removeTheRocks5();
+        //Player.players.get(0).speed = 3;
+        //Player.players.get(0).health = 300;
+        //Player.players.get(0).isHavingTheKey = true;
+        //Player.players.get(0).maxBombs = 10;
+        //removeTheRocks5();
         //for(int i =0;i<1;i++) {
         //    abilitiesList.add(5);
         //}
