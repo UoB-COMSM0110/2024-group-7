@@ -241,6 +241,13 @@ It is worth noting that Temporal Demand is significantly higher in two-player mo
 SUS:
 The average SUS score for single-play mode and two-player mode are 78 and 79.5, respectively, both over the general usability benchmark of 68. Moreover, most of the users’ scores are all above this threshold, indicating that users gave positive feedback on usability. We also conducted a Wilcoxon Significance Test to evaluate if there is a significant difference in usability between these two modes. The resulting W test statistic is 23.5. According to the Wilcoxon critical values table, it does not denote a significant difference at a 95% confidence level for a sample size N=10. This outcome aligns with our expectations, the reason is that the operation methods between the different modes are very similar, with only game design variations, thus not significantly impacting usability assessments.
 
+<center>
+<figure>
+    <img src="Assets/Images/SUS_single.png"
+            alt="System Usability Survey (Single-Player easy mode)">
+</figure>
+</center>
+
 ### 6.3 How code was tested
 We used Processing for our game development software, which has limited support for unit testing. So our code testing has mainly focused on user testing and developer testing, which our team member conducted playtesting while developed a new feature, and also executed countless playtests upon the completion of the game.
 
