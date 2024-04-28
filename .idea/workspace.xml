@@ -5,8 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a683fc8-e8f6-4824-9159-43b357d9bcf5" name="Changes" comment="deleted unused variable">
-      <change afterPath="$PROJECT_DIR$/pdeFile/bombExplode.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pdeFile/bubbleSound_1.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -150,6 +148,8 @@
       <workItem from="1714224090784" duration="2102000" />
       <workItem from="1714226241873" duration="306000" />
       <workItem from="1714228911139" duration="1200000" />
+      <workItem from="1714264084058" duration="859000" />
+      <workItem from="1714304534703" duration="10000" />
     </task>
     <task id="LOCAL-00001" summary="smooth motion, better variable names">
       <option name="closed" value="true" />

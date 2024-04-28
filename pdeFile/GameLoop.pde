@@ -295,7 +295,7 @@
 
             Bomb.setBombIfPossible1(this);
 
-            UltimateAbilities.generateUltimateFire(Player.players.get(0));
+            UltimateAbilities.generateUltimateFire(Player.players.get(0), this);
 
             Player.players.get(0).ifEnterTheNextWorld();
 
@@ -388,7 +388,7 @@
             fill(0); // Set color for dropdown text
             text("VerticalFlames", 250, 100, (float) width / 4, height);
             text("RoundFlames", 250, 165, (float) width / 4, height);
-            text("MoveToTheDoor", 250, 230, (float) width / 4, height);
+            text("HiddenDoorFlash", 250, 230, (float) width / 4, height);
             text("KillAllEnemies", 250, 295, (float) width / 4, height);
             text("RemoveAllRocks", 250, 360, (float) width / 4, height);
             text("Key", 250, 425, (float) width / 4, height);

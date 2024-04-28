@@ -30,9 +30,11 @@ public static class Bomb extends Objects{
         }
         if (Player.players.get(0).bomb) {
             if (findCurrentBombsNumber1() < Character.players.get(0).getMaxBombs()) {
-                int playerCenterX = Character.players.get(0).x() + tile / 2 - 15;
-                int playerCenterY = Character.players.get(0).y() + tile / 2 - 15;
-                Character.players.get(0).bombs.add(new Bomb(playerCenterX, playerCenterY, parent, ResourceManager.basicBomb));
+                //int playerCenterX = Character.players.get(0).x() + tile / 2 - 15;
+                //int playerCenterY = Character.players.get(0).y() + tile / 2 - 15;
+                int playerCenterX = (Character.players.get(0).x()) / tile;
+                int playerCenterY = (Character.players.get(0).y()) / tile;
+                Character.players.get(0).bombs.add(new Bomb(playerCenterX * tile + 15, playerCenterY * tile + 15, parent, ResourceManager.basicBomb));
                 Character.players.get(0).setBombTime = parent.millis();
                 setBomb.play();
             }

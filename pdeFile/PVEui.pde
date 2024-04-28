@@ -114,7 +114,7 @@ public static class PVEui {
         switch(UltimateAbilities.abilitiesList.get(0)){
             case 1: return "VerticalFlames";
             case 2: return "RoundFlames";
-            case 3: return "MoveToTheDoor";
+            case 3: return "HiddenDoorFlash";
             case 4: return "KillAllEnemies";
             case 5: return "RemoveAllRocks";
             default: return "None";
