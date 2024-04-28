@@ -185,7 +185,7 @@ The unique interaction method and appropriate system prompts make it easy to get
 [//]: # (This exercise has helped us structure our codeand assgign tasks )
 [//]: # (within the group.)
 
-## 5.IMPLEMENTATION
+## 5. IMPLEMENTATION
 
 - CHALLENGE 1:Collision detect
 - CHALLENGE 2:Power-ups
@@ -217,7 +217,7 @@ For instance, regarding breakable rocks, first clear the rocks list at the start
 
 The volume of code added was considerable and required a significant amount of time. This approach ensured that every aspect of the game could be reset properly, allowing for a seamless experience when restarting the game.
 
-## 6.EVALUATION
+## 6. EVALUATION
 
 We invited a total of 10 users to participate in game testing to understand the navigability, usability, and appropriate difficulty level of our game. We hope to improve the game through user feedback, making it both challenging and enjoyable.
 
@@ -262,7 +262,7 @@ We used Processing for our game development software, which has limited support 
 
 For the user testing, we employed the Think Aloud method throughout the development phase to gather user feedback and optimize the game based on these insights. In the subsequent phase, we collected user opinions through quantitative questionnaires. The results indicated that our game performs well in terms of usability, and the workloads were not burdensome for players. We also received positive feedback regarding the game experience and challenges.
 
-## 7.PROCESS
+## 7. PROCESS
 ### 7.1 Teamwork
 Our team of five members deeply engaged in both game design and coding throughout this project. We operated without clear role assignments, but each member contributed their strengths effectively, ensuring the success of our endeavor.
 
