@@ -47,6 +47,7 @@ public static class SpeedUp extends Items{
                 if (distanceToSpeedUp < 30) {
                     speedUp.setVisible(false);
                     Character.players.get(0).increaseSpeed();
+                    pick.play();
                 }
             }
         }

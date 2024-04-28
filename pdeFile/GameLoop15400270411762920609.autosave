@@ -2,6 +2,7 @@
     import ddf.minim.*;
     import processing.sound.*;
     public static Minim minim;
+    
     public static AudioPlayer menuBGM;
     public static AudioPlayer battleSmoothBGM;
     public static AudioPlayer battleFierceBGM;
@@ -34,9 +35,6 @@
     
     public static SoundFile setBomb;
     public static SoundFile bomb;
-    public static SoundFile pick;
-    public static SoundFile blow;
-    public static SoundFile twinkleSparkle;
 
     public void settings() {
         size(width, height);
@@ -56,9 +54,6 @@
        
         bomb= new SoundFile(this, "sound/bombExplode.mp3");
         setBomb= new SoundFile(this, "sound/bubbleSound_1.mp3");
-        pick =  new SoundFile(this,"sound/pick.mp3");
-        blow = new SoundFile(this,"sound/blow.mp3");
-        twinkleSparkle = new SoundFile(this,"sound/twinkleSparkle.mp3");
     }
 
     public void setupPVE() {
@@ -301,7 +296,7 @@
 
             Bomb.setBombIfPossible1(this);
 
-            UltimateAbilities.generateUltimateFire(Player.players.get(0), this);
+            UltimateAbilities.generateUltimateFire(Player.players.get(0));
 
             Player.players.get(0).ifEnterTheNextWorld();
 
@@ -394,7 +389,7 @@
             fill(0); // Set color for dropdown text
             text("VerticalFlames", 250, 100, (float) width / 4, height);
             text("RoundFlames", 250, 165, (float) width / 4, height);
-            text("HiddenDoorFlash", 250, 230, (float) width / 4, height);
+            text("MoveToTheDoor", 250, 230, (float) width / 4, height);
             text("KillAllEnemies", 250, 295, (float) width / 4, height);
             text("RemoveAllRocks", 250, 360, (float) width / 4, height);
             text("Key", 250, 425, (float) width / 4, height);

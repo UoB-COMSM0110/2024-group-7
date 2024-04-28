@@ -49,6 +49,7 @@ public static class BombPowerUp extends Items{
                 if (distanceToPowerUp < 30) {
                     powerUp.setVisible(false);
                     Character.players.get(0).increasePower();
+                    pick.play();
                 }
             }
         }

@@ -104,6 +104,7 @@ public static class Coin extends Items {
                 if (distanceToCoin < 30) {
                     coin.setVisible(false);
                     Character.players.get(0).increaseCoin();
+                    pick.play();
                 }
             }
         }

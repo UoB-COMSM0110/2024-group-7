@@ -63,6 +63,7 @@ public static class ExtraLife extends Items{
                 if (distanceToExtraLife < 30) {
                     extraLife.setVisible(false);
                     Character.players.get(0).increaseLife();
+                    pick.play();
                 }
             }
         }

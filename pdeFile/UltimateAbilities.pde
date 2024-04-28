@@ -56,6 +56,7 @@ public static class UltimateAbilities extends GameLoop{
                                 !(i==startX - flameRange && j == startY + flameRange)) {
                             Objects.enemyNoHarmFlames[i][j].duration = 2000;
                             Objects.ultimateFlames[i][j].appearUltimate();
+                            blow.play();
                         }
                     }
                 }
@@ -74,6 +75,7 @@ public static class UltimateAbilities extends GameLoop{
             if (i != startY) {
                 Objects.enemyNoHarmFlames[startX][i].duration = 2000;
                 Objects.ultimateFlames[startX][i].appearUltimate();
+                blow.play();
             }
         }
     }
@@ -88,6 +90,7 @@ public static class UltimateAbilities extends GameLoop{
                 Objects.ultimateFlames[x][y].appearUltimate();
                 player.px = rock.px;
                 player.py = rock.py;
+                twinkleSparkle.play();
                 break;
             }
         }
@@ -99,6 +102,7 @@ public static class UltimateAbilities extends GameLoop{
                 int x = (enemy.px - 15) / tile;
                 int y = (enemy.py - 75) / tile;
                 Objects.ultimateFlames[x][y].appearUltimate();
+                blow.play();
             }
         }
     }
@@ -110,6 +114,7 @@ public static class UltimateAbilities extends GameLoop{
                 int y = (rock.py - 75) / tile;
                 Objects.enemyNoHarmFlames[x][y].duration = 3000;
                 Objects.enemyNoHarmFlames[x][y].appearUltimate();
+                blow.play();
             }
         }
     }
@@ -135,6 +140,7 @@ public static class UltimateAbilities extends GameLoop{
                 Objects.flames[cols - 1 - k][j].appear();
             }
             pvpClock = false;
+            blow.play();
         }
     }
 }

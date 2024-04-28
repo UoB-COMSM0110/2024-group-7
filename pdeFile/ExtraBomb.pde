@@ -49,6 +49,7 @@ public static class ExtraBomb extends Items{
                 if (distanceToExtraBomb < 30) {
                     extraBomb.setVisible(false);
                     Character.players.get(0).increaseMaxBomb();
+                    pick.play();
                 }
             }
         }
