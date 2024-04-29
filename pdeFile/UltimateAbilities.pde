@@ -10,8 +10,8 @@ public static class UltimateAbilities extends GameLoop{
         //Player.players.get(0).health = 3;
         //Player.players.get(0).isHavingTheKey = true;
         //Player.players.get(0).maxBombs = 10;
-        //removeTheRocks5();
-        //killTheEnemies4();
+        ////removeTheRocks5();
+        ////killTheEnemies4();
         //for(int i =1;i<6;i++) {
         //    abilitiesList.add(i);
         //}
@@ -47,6 +47,7 @@ public static class UltimateAbilities extends GameLoop{
     }
 
     public static void generateFlameAround2(int startX, int startY, int flameRange) {
+      blow.play();
         for (int i = Math.max(0, startX - flameRange); i <= Math.min(cols - 1, startX + flameRange); i++) {
             for (int j = Math.max(0, startY - flameRange); j <= Math.min(rows - 1, startY + flameRange); j++) {
                 if (i != startX || j != startY) {
@@ -57,7 +58,6 @@ public static class UltimateAbilities extends GameLoop{
                                 !(i==startX - flameRange && j == startY + flameRange)) {
                             Objects.enemyNoHarmFlames[i][j].duration = 2000;
                             Objects.ultimateFlames[i][j].appearUltimate();
-                            blow.play();
                         }
                     }
                 }
@@ -66,6 +66,7 @@ public static class UltimateAbilities extends GameLoop{
     }
 
     public static void generateFlameVertical1(int startX, int startY) {
+      blow.play();
         for (int i = 0; i <=cols-1; i++) {
             if (i != startX) {
                 Objects.enemyNoHarmFlames[i][startY].duration = 2000;
@@ -76,7 +77,6 @@ public static class UltimateAbilities extends GameLoop{
             if (i != startY) {
                 Objects.enemyNoHarmFlames[startX][i].duration = 2000;
                 Objects.ultimateFlames[startX][i].appearUltimate();
-                blow.play();
             }
         }
     }
