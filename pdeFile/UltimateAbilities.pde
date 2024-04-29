@@ -30,7 +30,7 @@ public static class UltimateAbilities extends GameLoop{
                 generateFlameVertical1(startX,startY);
                 break;
             case 2:
-                generateFlameAround2(startX,startY, 3);
+                generateFlameAround2(startX,startY, 2);
                 break;
             case 3:
                 moveToTheDoor3(player);
@@ -56,7 +56,7 @@ public static class UltimateAbilities extends GameLoop{
                                 !(i==startX + flameRange && j == startY + flameRange) &&
                                 !(i==startX + flameRange && j == startY - flameRange) &&
                                 !(i==startX - flameRange && j == startY + flameRange)) {
-                            Objects.enemyNoHarmFlames[i][j].duration = 2000;
+                            Objects.enemyNoHarmFlames[i][j].duration = 3000;
                             Objects.ultimateFlames[i][j].appearUltimate();
                         }
                     }
@@ -69,13 +69,13 @@ public static class UltimateAbilities extends GameLoop{
       blow.play();
         for (int i = 0; i <=cols-1; i++) {
             if (i != startX) {
-                Objects.enemyNoHarmFlames[i][startY].duration = 2000;
+                Objects.enemyNoHarmFlames[i][startY].duration = 3000;
                 Objects.ultimateFlames[i][startY].appearUltimate();
             }
         }
         for (int i = 0; i <=rows-1; i++) {
             if (i != startY) {
-                Objects.enemyNoHarmFlames[startX][i].duration = 2000;
+                Objects.enemyNoHarmFlames[startX][i].duration = 3000;
                 Objects.ultimateFlames[startX][i].appearUltimate();
             }
         }
@@ -114,7 +114,7 @@ public static class UltimateAbilities extends GameLoop{
             if(rock.rockExist) {
                 int x = (rock.px - 15) / tile;
                 int y = (rock.py - 75) / tile;
-                Objects.enemyNoHarmFlames[x][y].duration = 3000;
+                Objects.enemyNoHarmFlames[x][y].duration = 4000;
                 Objects.enemyNoHarmFlames[x][y].appearUltimate();
             }
         }

@@ -37,6 +37,8 @@
     public static SoundFile pick;
     public static SoundFile blow;
     public static SoundFile twinkleSparkle;
+    public static SoundFile coinDrop;
+    public static SoundFile click;
 
     public void settings() {
         size(width, height);
@@ -59,6 +61,8 @@
         pick =  new SoundFile(this,"sound/pick.mp3");
         blow = new SoundFile(this,"sound/blow.mp3");
         twinkleSparkle = new SoundFile(this,"sound/twinkleSparkle.mp3");
+        coinDrop = new SoundFile(this,"sound/coin-drop-38750.mp3");
+        click = new SoundFile(this,"sound/click.mp3");
     }
 
     public void setupPVE() {
@@ -546,6 +550,7 @@
     }
 
     public void mouseClicked() {
+        click.play();
         System.out.println(mouseX);
         System.out.println(mouseY);
         if (mouseX>=330 && mouseX<630 && mouseY>=160 && mouseY<200 && menu) {

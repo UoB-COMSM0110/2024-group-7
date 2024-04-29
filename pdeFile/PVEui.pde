@@ -60,6 +60,7 @@ public static class PVEui {
                 if(Character.players.get(0).getCoin() >= 1){
                     UltimateAbilities.abilitiesList.add(1);
                     Character.players.get(0).coin -= 1;
+                    coinDrop.play();
                 }
                     break;
 
@@ -68,6 +69,7 @@ public static class PVEui {
                 if(Character.players.get(0).getCoin() >= 2){
                     UltimateAbilities.abilitiesList.add(2);
                     Character.players.get(0).coin -= 2;
+                    coinDrop.play();
                 }
                 break;
 
@@ -76,6 +78,7 @@ public static class PVEui {
                 if(Character.players.get(0).getCoin() >= 3){
                     UltimateAbilities.abilitiesList.add(3);
                     Character.players.get(0).coin -= 3;
+                    coinDrop.play();
                 }
                 break;
 
@@ -84,6 +87,7 @@ public static class PVEui {
                 if(Character.players.get(0).getCoin() >= 4){
                     UltimateAbilities.abilitiesList.add(4);
                     Character.players.get(0).coin -= 4;
+                    coinDrop.play();
                 }
                 break;
 
@@ -92,6 +96,7 @@ public static class PVEui {
                 if(Character.players.get(0).getCoin() >= 5){
                     UltimateAbilities.abilitiesList.add(5);
                     Character.players.get(0).coin -= 5;
+                    coinDrop.play();
                 }
                 break;
 
@@ -100,6 +105,7 @@ public static class PVEui {
                 if(Character.players.get(0).getCoin() >= 6){
                     Character.players.get(0).coin -= 6;
                     Character.players.get(0).isHavingTheKey = true;
+                    coinDrop.play();
                 }
                 break;
 
