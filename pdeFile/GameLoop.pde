@@ -639,6 +639,17 @@
                 PVP =true;
             }
         }
+        if(key == '6'){
+            if(PVE){
+                  Player.players.get(0).speed = 3;
+                  Player.players.get(0).health = 100;
+                  Player.players.get(0).isHavingTheKey = true;
+                  Player.players.get(0).maxBombs = 10; 
+                  for(int i =1;i<6;i++) {
+                      UltimateAbilities.abilitiesList.add(i);
+                  }
+              }
+        }
         if (key == upKey1) {
             if (Shop.isShopAt((Player.players.get(0).px-15) / tile, ((Player.players.get(0).py-75) / tile) - 1)) {
                 enterShop();  // 如果上方有商店，则进入商店
