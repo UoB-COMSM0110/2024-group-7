@@ -7,12 +7,13 @@ public static class UltimateAbilities extends GameLoop{
     public static double time = 0;
     public static void generateUltimateFire(Player player, PApplet parent){
         //Player.players.get(0).speed = 3;
-        //Player.players.get(0).health = 300;
+        //Player.players.get(0).health = 3;
         //Player.players.get(0).isHavingTheKey = true;
         //Player.players.get(0).maxBombs = 10;
         //removeTheRocks5();
-        //for(int i =0;i<1;i++) {
-        //    abilitiesList.add(5);
+        //killTheEnemies4();
+        //for(int i =1;i<6;i++) {
+        //    abilitiesList.add(i);
         //}
 
         if(!player.useAbility || abilitiesList.isEmpty()) {
@@ -108,13 +109,13 @@ public static class UltimateAbilities extends GameLoop{
     }
 
     public static void removeTheRocks5() {
-        for(BreakableRock rock : Obstacle.rocks){
+      blow.play();  
+      for(BreakableRock rock : Obstacle.rocks){
             if(rock.rockExist) {
                 int x = (rock.px - 15) / tile;
                 int y = (rock.py - 75) / tile;
                 Objects.enemyNoHarmFlames[x][y].duration = 3000;
                 Objects.enemyNoHarmFlames[x][y].appearUltimate();
-                blow.play();
             }
         }
     }
