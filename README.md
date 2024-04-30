@@ -153,7 +153,7 @@ Created with PlantUML
 
 ### 4.3 Behavioural Diagram
 
-![Behavioural Diagram]("Assets/Diagrams/behavioural.png")
+![Behavioural Diagram](Assets/Diagrams/behavioural.png)
 
 ## 5. IMPLEMENTATION
 
