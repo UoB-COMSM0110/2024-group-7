@@ -38,7 +38,7 @@ We evaluated 4+ options and decided to develop a game based on [Bomberman]( http
 
 During the week 3 workshop we quickly made a firm decision to go ahead with 'Bomberman Dungeon' and created a rudimentary paper prototype. As we received positive feedback from other groups exploring our prototype, we did not create a second prototype and instead dove straight into creating sprites and other assets to make a digital prototype. The digital prototype aimed to both identify elements in need of implementation as well as provide sprites/assets to aid testing the playability of the game early on.
 
-![Digital Prototype Animation](Assets/Prototype.mp4)
+https://github.com/UoB-COMSM0110/2024-group-7/tree/main/Assets/Videos/prototype.mp4
 
 ### 3.3 Stakeholder Stories
 
@@ -140,28 +140,16 @@ The game's economic system is a reward mode. Players can purchase powerful skill
 #### 4.1.8 Map Generation
 
 The project contains unused code that allows for a grid-based map to be procedurally generated according to specifications such as number and size of rooms. Objects and enemies can be included in the generation process with customisable spawn rates. A data structure containing the status and description of each tile on the map is returned and can be used to update the game state, conduct collision detection, and easily render a select number of game elements to improve game performance.
-![Example Map](Assets/Images/map.png)
 
-### 4.2 Class Diagrams
+![Example Map](Assets/Images/map.PNG)
+
+### 4.2 Class Diagram
 
 ![Class Diagram](Assets/Diagrams/class.png)
 
-### 4.3 Behavioural diagrams
-![Behavioural diagrams](Assets/Diagrams/Behavioural diagrams.png)
+### 4.3 Behavioural Diagram
 
-[//]: # (### communication Diagrams)
-
-[//]: # (<center>)
-[//]: # (<figure>)
-[//]: # (    <img src="Assets/Diagrams/communication.png")
-[//]: # (            alt="Communication Diagram">)
-[//]: # (</figure>)
-[//]: # (</center>)
-
-[//]: # (### RREFLECTION)
-
-[//]: # (This exercise has helped us structure our codeand assgign tasks )
-[//]: # (within the group.)
+![Behavioural Diagram]("Assets/Diagrams/Behavioural diagrams.png")
 
 ## 5. IMPLEMENTATION
 
