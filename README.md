@@ -1,21 +1,17 @@
 # GROUP 7 💣  BOMBERMAN DUNGEON
 
 ## 1. TEAM
-<center>
-<figure>
-    <img src="Assets/Images/group_meeting.png"
-            alt="Group members sitting behind a paper prototype of the game">
-    <figcaption>05.02.2024</figcaption>
-</figure>
 
-| MEMBER | CONTACT |
+![Group members sitting behind a paper prototype of the game](Assets/Images/group_meeting.png)
+05.02.2024
+
+| MEMBER | EMAIL |
 | -----| ----- |
 |[Tianyu Liu](https://github.com/bv23164) | [bv23164@bristol.ac.uk](mailto:bv23164@bristol.ac.uk)|
 |[Lea Lewis](htps://github.com/le2310al) | [px23592@bristol.ac.uk](mailto:px23592@bristol.ac.uk)|
 |[Yiguang Chen](htps://github.com/dcchenyg) | [te23143@bristol.ac.uk](mailto:te23143@bristol.ac.uk)|
 |[Zilou Li](htps://github.com/ne23594g) | [ne23594@bristol.ac.uk](mailto:ne23594@bristol.ac.uk)|
 |[Zora Chen](htps://github.com/fg23262) | [fg23262@bristol.ac.uk](mailto:fg23262@bristol.ac.uk)|
-</center>
 
 ## 2. INTRODUCTION
 
@@ -34,11 +30,13 @@ We evaluated 4+ options and decided to develop a game based on [Bomberman]( http
 | 3. [Lith]( https://apps.apple.com/us/app/lith/id897768601): An ice slide puzzle game. This game would have required us to hand craft levels, and we were unable to think of a fun twist on the underlying mechanics that hadn’t already been explored in the game. |
 | 4. [Downwell]( https://store.steampowered.com/app/360740/Downwell/): A precision platformer in which the player must clear their way of enemies and obstacles while in free fall. As the gameplay is a twist on [Doodle Jump](https://en.wikipedia.org/wiki/Doodle_Jump) and introduces many new mechanics, introducing our own twist would not improve upon the game. |
 
-### 3.2 Early Stages Design
+### 3.2 Early Stage Design
 
 During the week 3 workshop we quickly made a firm decision to go ahead with 'Bomberman Dungeon' and created a rudimentary paper prototype. As we received positive feedback from other groups exploring our prototype, we did not create a second prototype and instead dove straight into creating sprites and other assets to make a digital prototype. The digital prototype aimed to both identify elements in need of implementation as well as provide sprites/assets to aid testing the playability of the game early on.
 
 https://github.com/UoB-COMSM0110/2024-group-7/tree/main/Assets/Videos/prototype.mp4
+
+![Sprite Sheet](Assets/Sprites/spriteSheet.png)
 
 ### 3.3 Stakeholder Stories
 
@@ -82,6 +80,8 @@ https://github.com/UoB-COMSM0110/2024-group-7/tree/main/Assets/Videos/prototype.
 
 ![Use Case Diagram](Assets/Diagrams/useCase.png)
 
+Created with PlantUML
+
 ### 3.5 CASE SPECIFICATIONS
 
 | Basic Flow | Alternative Flow |
@@ -90,7 +90,7 @@ https://github.com/UoB-COMSM0110/2024-group-7/tree/main/Assets/Videos/prototype.
 | | Change Character |
 | | Choose Mode |
 | | Reset Achievements |
-| Play Untimed| Exit |
+| Play Untimed Mode| Exit |
 | Explore Dungeon | Walk into Wall|
 | Bomb Breakable Wall | <span style="color:red;"> Bomb Yourself: Game over </span> |
 | <span style="color:green;"> Find Door </span> | |
@@ -102,7 +102,7 @@ https://github.com/UoB-COMSM0110/2024-group-7/tree/main/Assets/Videos/prototype.
 | Choose ' Health Up' Power up | Choose other Power Up ~~or none~~ |
 | <span style="color:orange;"> Walk into Enemy: Lose Life </span> | Spot Enemy |
 | <span style="color:red;"> Bomb Yourself: Game Over </span> | ~~Or be better at the Game~~ |
-| Restart with Meta Progression  | Try other Mode instead ~~or exit~~|
+| Restart with Meta Progression  | Try other Timed Mode instead ~~or exit~~|
 
 ## 4. DESIGN
 
@@ -142,21 +142,24 @@ The game's economic system is a reward mode. Players can purchase powerful skill
 The project contains unused code that allows for a grid-based map to be procedurally generated according to specifications such as number and size of rooms. Objects and enemies can be included in the generation process with customisable spawn rates. A data structure containing the status and description of each tile on the map is returned and can be used to update the game state, conduct collision detection, and easily render a select number of game elements to improve game performance.
 
 ![Example Map](Assets/Images/map.PNG)
+
 Legend: # Unbreakable Wall
 
 ### 4.2 Class Diagram
 
 ![Class Diagram](Assets/Diagrams/class.png)
 
+Created with PlantUML
+
 ### 4.3 Behavioural Diagram
 
-![Behavioural Diagram]("Assets/Diagrams/Behavioural diagrams.png")
+![Behavioural Diagram]("Assets/Diagrams/behavioural.png")
 
 ## 5. IMPLEMENTATION
 
-- CHALLENGE 1:Collision detect
-- CHALLENGE 2:Power-ups
-- CHALLENGE 3:Restart the game
+- CHALLENGE 1: Collision Detection
+- CHALLENGE 2: Power-Ups
+- CHALLENGE 3: Restarting the Game
 
 During the game development process, we encountered numerous challenges. While the implementation of individual features was relatively straightforward, implementing some features required modifications to other already completed sections. These intertwined issues made implementation particularly difficult. Three challenges stood out.
 ### 5.1 Collision detect
@@ -188,7 +191,7 @@ The volume of code added was considerable and required a significant amount of t
 
 We invited a total of 10 users to participate in game testing to understand the navigability, usability, and appropriate difficulty level of our game. We hope to improve the game through user feedback, making it both challenging and enjoyable.
 
-### 6.1 Qualitative evaluation
+### 6.1 Qualitative
 We used the Think Aloud method to perform qualitative analysis during our game testing. We invited ten users to join this test, and half of them had related playing experience, and rest of them are first time playing bomber man. For the test, users are asked to verbalize their thoughts, feeling and experiences while playing the game. 
 
 Based on the results of the qualitative evaluation, we have organized several dimensions for improvement: First, player instruction. We have added simply operating instructions on the main page to help novice users quickly understand the basic rules and control method of the game, so that they can easily to get started. Second, movement fluency of the character in the game. We have enhanced the collision detection mechanism to avoid inaccuracies that may cause the risk of unnatural movement, so that we can ensuring the movement action of the character including turning, stopping, and acceleration are smooth and no delay. Furthermore, we ensured a proper balance between the number of items and enemies to maintain an appropriate level of game challenge through multiple test plays by our team members.
@@ -197,39 +200,30 @@ Regarding the difficulty levels in the single-player mode, we introduced a hard 
 
 Additionally, testers provided not only dimensions for improvement but also positive feedback. Users generally found the two-player mode to be very interesting, innovative, and exciting, marking a significant difference from the traditional Bomberman game. Besides, the shop design in the single-player mode was also highly praised. And through implementing various skills also further enhances the player experience.
 
-### 6.2 Quantitative evaluation
+### 6.2 Quantitative
+
 In terms of quantitative evaluation, users had to fill out forms for NASA-TLX and SUS after they completed experienced the whole game including single-player mode and two-play model.
 
 In NASA-TLX, we analyse the NASA-TLX scores for single-player and two-player modes, the Wilcoxon Significance Test at a 95% confidence interval revealed no significant difference as well(W test statistic = 15). However, take a detailed look across these six dimensions, indiciating the scores between these two modes are quite similar for Mental Demand, Physical Demand, Effort, and Frustration. We could have a conclusion that users are required to put a considerable amount of effort while playing the game without experiencing excessive mental or physical burden. Additionally, low to moderate frustration scores show that most players do not feel overly discouraged by the game.
 
 It is worth noting that Temporal Demand is significantly higher in two-player mode compared to single-player mode, revealing that time pressure is obvious in the two-player mode. This is making sense because there is a countdown timer in two-player mode, users have to response quickly within a limited timeframe. This is also reflected in the Performance aspect, where the added time pressure and competitive element of playing against other players may more readily impact performance.
 
-<center>
-<figure>
-    <img src="Assets/Images/NASA_single.png"
-            alt="NASA-TLX (Single-Player easy mode)">
-    <img src="Assets/Images/NASA_two.png"
-            alt="NASA-TLXy (Two-Player mode)">
-</figure>
-</center>
+![NASA-TLX: Single-Player mode](Assets/Images/NASA_single.png)
+![NASA-TLX: Two-Player mode](Assets/Images/NASA_two.png)
 
 In SUS, the average score for single-player mode and two-player mode are 76.5 and 79.5, respectively, both over the general usability benchmark of 68. Moreover, most of the users’ scores are all above this threshold, indicating that users gave positive feedback on usability. We also conducted a Wilcoxon Significance Test to evaluate if there is a significant difference in usability between these two modes. The resulting W test statistic is 21.0. According to the Wilcoxon critical values table, it does not denote a significant difference at a 95% confidence level for a sample size N=10. This outcome aligns with our expectations, the reason is that the operation methods between the different modes are very similar, with only game design variations, thus not significantly impacting usability assessments.
 
-<center>
-<figure>
-    <img src="Assets/Images/SUS_single.png"
-            alt="System Usability Survey (Single-Player easy mode)">
-    <img src="Assets/Images/SUS_two.png"
-            alt="System Usability Survey (Two-Player mode)">
-</figure>
-</center>
 
-### 6.3 How code was tested
+![SUS: Single-Player mode](Assets/Images/SUS_single.png)
+![SUS: Two-Player mode](Assets/Images/SUS_two.png)
+
+### 6.3 Code Testing
 We used Processing for our game development software, which has limited support for unit testing. So our code testing has mainly focused on user testing and developer testing, which our team member conducted playtesting while developed a new feature, and also executed countless playtests upon the completion of the game.
 
 For the user testing, we employed the Think Aloud method throughout the development phase to gather user feedback and optimize the game based on these insights. In the subsequent phase, we collected user opinions through quantitative questionnaires. The results indicated that our game performs well in terms of usability, and the workloads were not burdensome for players. We also received positive feedback regarding the game experience and challenges.
 
 ## 7. PROCESS
+
 ### 7.1 Teamwork
 Our team of five members deeply engaged in both game design and coding throughout this project. We operated without clear role assignments, but each member contributed their strengths effectively, ensuring the success of our endeavor.
 
@@ -251,10 +245,11 @@ We unanimously acknowledge the indispensable contributions of each team member, 
 - Wechat: Serving as our primary instant messenger, Wechat facilitated concise communication for tasks such as bug reporting, meeting invitations, feature notifications, and code reviews.
 - IntelliJ IDEA: As our project initially began in Java and was later converted into Processing, IntelliJ IDEA served as our primary development environment for coding.
 - Git: Utilizing Git for version control, with the remote repository hosted on Github, we followed a workflow where new features were developed in independent branches before undergoing code review by other team members and subsequently merging into the main branch.
+- 
 ### 7.3 Challenges and Resolutions
 Despite our collective efforts, challenges and conflicts arose throughout our teamwork. There were discrepancies regarding scheduling preferences, with some advocating for completing tasks before the Easter holiday while others favored working during the holiday period. Additionally, although the final game was well-received overall, not every team member was entirely satisfied, as certain deviations from our initial design draft occurred. The introduction of new features during the development phase also sparked discussions within the team, with decisions not always reaching unanimous agreement. However, despite these challenges, we successfully completed the project.
 
-### CODE STYLE
+### 7.3 Code Style
 
 ```java
 public class Bomberman extends PApplet {
@@ -266,20 +261,6 @@ public class Bomberman extends PApplet {
    }
 }
 ```
-
-### MEMBERS
-
-<center>
-
-| MEMBER | ROLE | CONTRIBUTIONS |
-| -----| ----- | -----|
-| Tianyu Liu | | |
-| Lea Lewis | | |
-| Yiguang Chen | | |
-| Zilou Li | | |
-| Zora Chen | | |
-
-</center>
 
 ## 8. CONCLUSION
 In conclusion, we based our game on the iconic Bomberman, but infused lots of innovative ideas to enrich the gaming experience throughout our development process. For example, in the single-player mode, the primary goal for players is to enter as more as possible round of the game by getting the key to enter the door. So we innovatively introduced coins, shops and five special skills, players can buy skills in the shop by collocting coins to achieve higher achievements. In the two-player mode, the main purpose for player is to eliminate the opponent to win the game. To increase the tension and excitement of the game, we creatively added a countdown feature to narrow the combat zone. All these innovations not only set our game apart from the traditional Bomberman but also enhance the game’s enjoyment and novelty.  
