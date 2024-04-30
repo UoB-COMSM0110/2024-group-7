@@ -142,6 +142,7 @@ The game's economic system is a reward mode. Players can purchase powerful skill
 The project contains unused code that allows for a grid-based map to be procedurally generated according to specifications such as number and size of rooms. Objects and enemies can be included in the generation process with customisable spawn rates. A data structure containing the status and description of each tile on the map is returned and can be used to update the game state, conduct collision detection, and easily render a select number of game elements to improve game performance.
 
 ![Example Map](Assets/Images/map.PNG)
+Legend: # Unbreakable Wall
 
 ### 4.2 Class Diagram
 
