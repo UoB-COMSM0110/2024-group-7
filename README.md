@@ -23,18 +23,24 @@ Our Bomberman game mainly revolves around two game modes: In the single-player m
 
 ## 3. REQUIREMENTS
 
-The group evaluated 5+ options and decided to develop a game based on bomberman as it is a beloved classic that is not devalued by simple 2D graphics. The popularity of roguelite dungeon crawlers like [Hades](https://store.steampowered.com/appp1145360/Hades/) led us to believe that they wuld make a fun twist to Bomberman.
+### 3.1 Ideation Process
 
-### 3.1 Use Case Diagram
+We evaluated 4+ options and decided to develop a game based on [Bomberman]( https://en.wikipedia.org/wiki/Bomberman) as it is a beloved classic that is not devalued by simple 2D graphics. It’s winning formula has remained largely unchanged throughout the years which allows for a variety of possible twists. The popularity of rogue-lite dungeon crawlers like [Hades](https://store.steampowered.com/appp1145360/Hades/) led us to believe that randomised maps and meta progression would be the best course of action, although platform level design such as in [Spelunky]( https://en.wikipedia.org/wiki/Spelunky) was considered. Working through the Stakeholder Strories and Case Specifications helped us explore actions and options that needed implementing in our game.
 
-<center>
-<figure>
-    <img src="Assets/Diagrams/useCase.png"
-            alt="Use Case Diagram">
-</figure>
-</center>
+| Selection of Other Games Considered |
+| --- |
+| 1. [Pokémon Showdown]( https://pokemonshowdown.com/): A Pokémon battle simulator. The underlying mechanics for this game are too simple to recreate and its enjoyability is overly reliant on monster design and associated nostalgia. Creating balanced and challenging powers would prove too difficult and overshadow other parts of the development process. |
+| 2. [Crossy Road]( https://www.crossyroad.com/): An 2.5D endless runner version of the arcade classic [Frogger](https://en.wikipedia.org/wiki/Frogger) in which a chicken must cross the road ad infinitum. Unfortunately, this game has already been recreated in Processing. |
+| 3. [Lith]( https://apps.apple.com/us/app/lith/id897768601): An ice slide puzzle game. This game would have required us to hand craft levels, and we were unable to think of a fun twist on the underlying mechanics that hadn’t already been explored in the game. |
+| 4. [Downwell]( https://store.steampowered.com/app/360740/Downwell/): A precision platformer in which the player must clear their way of enemies and obstacles while in free fall. As the gameplay is a twist on [Doodle Jump](https://en.wikipedia.org/wiki/Doodle_Jump) and introduces many new mechanics, introducing our own twist would not improve upon the game. |
 
-### 3.2 User Stories
+### 3.2 Early Stages Design
+
+During the week 3 workshop we quickly made a firm decision to go ahead with 'Bomberman Dungeon' and created a rudimentary paper prototype. As we received positive feedback from other groups exploring our prototype, we did not create a second prototype and instead dove straight into creating sprites and other assets to make a digital prototype. The digital prototype aimed to both identify elements in need of implementation as well as provide sprites/assets to aid testing the playability of the game early on.
+
+![Digital Prototype Animation](Assets/Prototype.mp4)
+
+### 3.3 Stakeholder Stories
 
 >"As a player, I want intuitive and reconfigurable controls." (Physical Impairment)
 
@@ -71,24 +77,12 @@ The group evaluated 5+ options and decided to develop a game based on bomberman 
 >"As a marker, I want to feel compelled to play the game in my own time."
 
 >"As a marker, I want to not be bored by a generic game clone."
->
 
-### 3.3 Early Stages Design
+### 3.4 Use Case Diagram
 
-We first used brainstorming methods to come up with some ideas in the group, and then discussed these ideas. We conducted in-depth discussions mainly on technical issues, playability issues, innovative issues and reliability issues, and analyzed the innovative points of each idea. and challenges, and finally chose two options.
-
-### 3.4 Ideation Process
-
-We used the methods we learned in class to make props to demonstrate the game, and drew a prototype of the game. After many discussions and game deductions, we had a relatively clear understanding of our project.Then we divided the tasks and used project management tools such as stack and jira.Finally, we started the project development, demo recording and other work.
-
-[//]: # (### STAKEHOLDERS)
-[//]: # (- Players)
-[//]: # (- Developers)
-[//]: # (- Markers)
+![Use Case Diagram](Assets/Diagrams/useCase.png)
 
 ### 3.5 CASE SPECIFICATIONS
-
-<center>
 
 | Basic Flow | Alternative Flow |
 | ----- | ----- |
@@ -109,12 +103,6 @@ We used the methods we learned in class to make props to demonstrate the game, a
 | <span style="color:orange;"> Walk into Enemy: Lose Life </span> | Spot Enemy |
 | <span style="color:red;"> Bomb Yourself: Game Over </span> | ~~Or be better at the Game~~ |
 | Restart with Meta Progression  | Try other Mode instead ~~or exit~~|
-
-</center>
-
-[//]: # (### RREFLECTION)
-[//]: # (This exercise has helped us explore actions and options that need )
-[//]: # (to be implemented within our game.)
 
 ## 4. DESIGN
 
@@ -147,29 +135,19 @@ In the simple single-player mode, players need to pick up gold coins to improve 
 
 #### 4.1.7 Progress and Reward
 
-The game's economic system is a reward mode. Players can purchase powerful skills and keys by accumulating gold coins, such as destructible walls that can clear the screen, clear monsters, teleport to the door, super large bomb flames, etc. This can Speed up the progress of the game and enter deeper levels faster. This result will be recorded on the menu, which can satisfy those players who like to challenge themselves. In the confrontation mode, we use the joy of winning when players defeat each other as a reward mode.
+The game's economic system is a reward mode. Players can purchase powerful skills and keys by accumulating gold coins, such as destructible walls that can clear the screen, clear monsters, teleport to the door, super large bomb flames, etc. This can Speed up the progress of the game and enter deeper levels faster. This result will be recorded on the menu, which can satisfy those players who like to challenge themselves. In the confrontation mode, we use the joy of winning when players defeat each other as a reward mode. The unique interaction method and appropriate system prompts make it easy to get started with the game; achievements can be displayed on the desktop, giving users a sense of satisfaction after completing the level. The addition of skills and stores makes the game playable.
 
-#### 4.1.8 Other features
+#### 4.1.8 Map Generation
 
-The unique interaction method and appropriate system prompts make it easy to get started with the game; achievements can be displayed on the desktop, giving users a sense of satisfaction after completing the level. The addition of skills and stores makes the game playable.
+The project contains unused code that allows for a grid-based map to be procedurally generated according to specifications such as number and size of rooms. Objects and enemies can be included in the generation process with customisable spawn rates. A data structure containing the status and description of each tile on the map is returned and can be used to update the game state, conduct collision detection, and easily render a select number of game elements to improve game performance.
+![Example Map](Assets/Images/map.png)
 
 ### 4.2 Class Diagrams
 
-<center>
-<figure>
-    <img src="Assets/Diagrams/class.png"
-            alt="Class Diagram">
-</figure>
-</center>
+![Class Diagram](Assets/Diagrams/class.png)
 
 ### 4.3 Behavioural diagrams
-
-<center>
-<figure>
-    <img src="Assets/Diagrams/Behavioural diagrams.png"
-            alt="Behavioural diagrams">
-</figure>
-</center>
+![Behavioural diagrams](Assets/Diagrams/Behavioural diagrams.png)
 
 [//]: # (### communication Diagrams)
 
