@@ -3,6 +3,7 @@
 ## 1. TEAM
 
 ![Group members sitting behind a paper prototype of the game](Assets/Images/group_meeting.png)
+
 05.02.2024
 
 | MEMBER | EMAIL |
