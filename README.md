@@ -1,5 +1,5 @@
 # GROUP 7 💣  BOMBERMAN DUNGEON
-[Come and see the amazing experience of Bomberman and Group 7 ! Ｏ(≧口≦)Ｏ]([https://www.github.com](https://www.youtube.com/watch?v=ispMEXkR_t4))
+[Come and see the amazing experience of Bomberman and Group 7 ! Ｏ(≧口≦)Ｏ](https://www.youtube.com/watch?v=ispMEXkR_t4)
 
 ## 1. TEAM
 
