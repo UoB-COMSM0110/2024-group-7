@@ -21,7 +21,7 @@
 ## 2. INTRODUCTION
 
 Our game ‘Bomberman Dungeon’ is based on NES and SNES era [Bomberman]( https://en.wikipedia.org/wiki/Bomberman) games. Like it’s namesake our game offers a single player as well as a multiplayer mode in which players clear their way through a grid-based map with the help of their trusty bombs.
-Both modes feature the established combat mechanics of bombs being able to blast through breakable walls,  enemies as well as the players themselves. Multiplayer mode largely remains true to its inspiration, offering a two-player death match on a map that dwindles as time progresses. Single player mode however adds two exciting new features. Not only is the player now able to collect coins instead of points, which they can then trade for all-new single or multi-use power ups in the store. But they can also find hidden doors leading deeper into the dungeon increasing the difficulty of gameplay. 
+Both modes feature the established combat mechanics of bombs being able to blast through breakable walls,  enemies as well as the players themselves. Multiplayer mode largely remains true to its inspiration, offering a two-player death match on a map that dwindles as time progresses. Single player mode however adds two exciting new features. Not only is the player now able to collect coins instead of points, which they can then trade for all-new single or multi-use power ups in the store. But they can also find hidden doors leading deeper into the dungeon. 
 
 ## 3. REQUIREMENTS
 
@@ -112,77 +112,62 @@ Created with PlantUML
 
 ## 4. DESIGN
 
-### 4.1 System Architecture
-
-#### 4.1.1 Game Overview
-
-Our game has two modes, single-player mode and two-player mode. The single-player mode is divided into two difficulties. Players can get the key to find the door and enter the next level. Players aim to enter a deeper level; in the two-player mode , two players will compete against each other to defeat each other and achieve victory.
-
-#### 4.1.2 Game world
-
-Bomberman is a two-dimensional game. The game map has destructible and non-destructible walls as well as monsters and various props. It is very playable and has many innovations compared to the original version, such as various skills. The game is generally more casual and entertaining. The game may be a little difficult at the beginning, but as the game progresses, players will become stronger and stronger. Players can not only attack deeper levels in the game, but also enjoy the fun of confrontation with friends.
-
-#### 4.1.3 Game Characters
-
-The game character has some basic values, namely health and movement speed. The bombs placed by the character have bomb range and bomb quantity. These values can be improved by obtaining props in the single-player mode. However, for the sake of fair confrontation, in the two-player mode Fixed value. In addition, there is also the addition of a store, where keys and skills can be purchased, and the required gold coins need to be picked up by the characters on the map.
-
-#### 4.1.4 Game Mechanics
-
-In addition to operating the character to move up, down, left, and right, the player also has two keys. One is to place a bomb. The bomb will explode after a period of time. It can clear the monsters and destructible walls that the player comes into contact with. The health value will also be deducted. The other key is the skill key. Pressing it can trigger powerful effects, such as killing all monsters.
-In single-player mode, players need to get the key and enter the door. In the process, they can pick up props and purchase props in the mall. In two-player mode, players need to kill each other to win the game
-
-#### 4.1.5 Game system
-
-The game's prop system can improve the various values ​​of characters and bombs, making players continuously stronger; the monster system is designed with action AI to make monsters move logically; in the combat system, players can place bombs and use skills to kill monsters or destroy them. Wall; in the economic system, players can pick up gold coins, which can be used to buy powerful skills and keys in the store; in the confrontation system, players from both sides can compete, and in order to ensure fairness, the values ​​are constant; Game key positions can be changed in the system settings. The prop system and combat system ensure the strength of the characters, and the economic system adds playability to the game.
-
-#### 4.1.6 Game content
-
-In the simple single-player mode, players need to pick up gold coins to improve the economy and pick up props to improve their own values. The props and gold coins are hidden in destructible walls. Different props can make each game experience different. At the same time, players should also avoid the pursuit of monsters or place bombs to kill monsters. Monsters will continue to move and cause interference to players. When the player accumulates enough gold coins and finds the location of the door, he can go to the store to buy a key and enter the door to enter the next level. If you want to play quickly, you can use accumulated gold coins to purchase powerful skills to speed up the game progress. In the difficult single-player mode, the player's field of view becomes smaller, which increases the difficulty of the game. In the two-player mode, the confrontation range will shrink every 10 seconds. If you step out of this range, your life will be reduced, and the party whose life value reaches zero first will lose.
-
-#### 4.1.7 Progress and Reward
-
-The game's economic system is a reward mode. Players can purchase powerful skills and keys by accumulating gold coins, such as destructible walls that can clear the screen, clear monsters, teleport to the door, super large bomb flames, etc. This can Speed up the progress of the game and enter deeper levels faster. This result will be recorded on the menu, which can satisfy those players who like to challenge themselves. In the confrontation mode, we use the joy of winning when players defeat each other as a reward mode. The unique interaction method and appropriate system prompts make it easy to get started with the game; achievements can be displayed on the desktop, giving users a sense of satisfaction after completing the level. The addition of skills and stores makes the game playable.
-
-#### 4.1.8 Map Generation
-
-The project contains unused code that allows for a grid-based map to be procedurally generated according to specifications such as number and size of rooms. Objects and enemies can be included in the generation process with customisable spawn rates. A data structure containing the status and description of each tile on the map is returned and can be used to update the game state, conduct collision detection, and easily render a select number of game elements to improve game performance.
-
-![Example Map](Assets/Images/map.PNG)
-
-Legend: # Unbreakable Wall
-
-### 4.2 Class Diagram
+### 4.1 Class Diagram
 
 ![Class Diagram](Assets/Diagrams/class.png)
 
 Created with PlantUML
 
-### 4.3 Behavioural Diagram
+### 4.2 System Architecture
 
-![Behavioural Diagram](Assets/Diagrams/behavioural.png)
+#### 4.2.1 Main Menu
+
+Upon entering the world of  ‘Bomberman Dungeon’ the player can choose between one of three game modes, single player easy, single player hard and two player duel or use the settings menu change the key bindings. In hard mode, the player's FOV is reduced whereas in duel mode the map shrinks every 10 seconds. 
+
+#### 4.1.2 Map
+
+The map is based on 30x30px tiles which the player views top-down. It consists of non-destructible walls enclosing the dungeon as well as additional walls placed in a checkerboard pattern. In multiplayer mode map RNG is limited to  breakable rocks. In singleplayer mode rocks and enemies as well as two shops are randomly distributed throughout the map. Rocks furthermore have the potential to hide powerups, coins, keys, and the door until they are destroyed. The door requires a key to open and leads to the next level. 
+
+#### 4.1.3 Player and Combat System
+
+The player is attributed with a modifiable health state, movement speed and coin inventory. They are equipped with bombs that blast away enemies and breakable rocks both horizontally and vertically. The players own bombs however can also cause them to lose a health state. In multiplayer mode this also extends to the enemy player.
+
+#### 4.1.5 Powerups and Skills
+
+The player can obtain classic powerups such as ‘speedup’ which increases player speed, ‘bombup’ for an increased bomb carrying capacity, ‘fireup’ for an increased bomb range and ‘healthup’ for increased player health.
+5 novel single use skills can be purchased with coins in the shop. ‘RemoveAllRocks’  removes all breakable rocks on the level, whereas ‘KillAllEnemies’ removes all enemies and ‘MoveToTheDoor’ teleports the player to the door. ‘VerticalFlames’ and ‘RoundFlames’ further increase the destructive range of bombs.
 
 ## 5. IMPLEMENTATION
 
+### 5.1 Three Challenges
+
 During the development process, we encountered numerous challenges. While the implementation of individual features was relatively straightforward, integrating them often required modifications to the existing code base. Three challenges stood out.
 
-### 5.1 Smooth Player Movement
+### 5.1.1 Smooth Player Movement
 
 Prior to populating the map with additional items, collisions were detected by comparing the players goal coordinates with the coordinates of all walls and rocks present.
 Adding new items initially did not affect framerates, however once the powerup increasing player speed was introduced, we were baffled to see that player movement would not increase regardless of the chosen speed value. Once we identified the culprit to be a lack of optimization of collision detection, we were able to tackle this challenge. Our solution took the form of a 2D Boolean Array that marks impassable areas on the map as false. Subsequently goal coordinates must now only be checked against their corresponding Boolean value within the array.
+
 However, by the time this issue had been addressed, we had already implemented map RNG and the association of powerups with breakable rocks. Modifying the collision detection therefore also required changes to the aforementioned features, substantially increasing the workload. 
 
-### 5.2 Power-ups
+### 5.1.2 Power-ups
 
 Adding powerups to the game revealed itself to be a compound of two challenges.
+
 The first challenge involved ensuring that the same rock was not repeatedly chosen to hide different powerups during random map generation. This was solved by first assigning each item a unique index and then storing the index within a Hash Set to indicate that the item was hiding behind a specific rock. Due to the random and unique nature of Hash Set values, this approach prevented an item from being hidden behind the same rock twice.
+
 The second challenge involved displaying the correct item once their associated rocks were destroyed. Unfortunately, the existing approach to destroying rocks did not support adding this feature requiring modifications to both classes for bombs and flames. We chose to introduce an intermediate state between the destruction and disappearance of the rock. Furthermore, we added a Boolean flag to the rock class indicating whether or not it stored an item. When the rock was put in the intermediate state, its other properties determined which item to generate, and an instance of the item was created.
 
 
-### 5.3 Resetting the Game State
+### 5.1.3 Resetting the Game State
 
 Nearing completion of the game, we were missing a feature that would allow the player to reset the map and any progress made. Unfortunately map RNG was bound to the setup section of Processing, where statements are executed only once at the start of the game.
+
 Implementing this feature required adjustments to vast amounts of code pertaining to the map, enemies, items, and players. We ended up writing individual reset functions for each class, which were executed upon starting the game.
+
 For instance, in order to reset breakable rocks, the map must first be cleared of and repopulated with rocks. Then the collision detection array must be updated according to the placement of the new rocks. Finally, new items need to be associated with the rocks.
+
+### 5.2 Three Challenges
 
 ## 6. EVALUATION
 
@@ -210,6 +195,7 @@ We asked users to fill out both SUS and NASA-TLX questionaiires after immersinng
 ### 6.2.1 NASA-TLX
 
 Analysing survey results using the Wilcoxon Signed-Rank Test with a significance level of 5%, indicates no significant difference between the single and multiplayer modes (W Test Statistic = 15). Taking a detailed look at all six dimensions of the test, reveals that scores for Mental Demand, Physical Demand, Effort, and Frustration are similar in both game modes. Therefore, we can conclude a balanced user experience in which the player can leisurely play without experiencing pronounced levels of frustration.
+
 It is worth noting that Temporal Demand is significantly higher in the multiplayer mode than in the singleplayer mode. This confirms the intended effect of the countdown timer in multiplayer mode that restricts player movement and encourages them to approach and defeat their enemy. This feature seemingly also impacts Performance scores leaving players less satisfied due to the competitive element.
 
 ![NASA-TLX: Single-Player mode](Assets/Images/NASA_single.png)
@@ -232,10 +218,15 @@ As our codebase was in constant flux and was refactored multiple times, we did n
 ### 7.1.1 Game
 
 Due to the small size of our team, we never assigned ourselves clear roles as multifaceted contributions were required from all team members. Initiative as a team lead alone was based on availability, with Lea directing efforts prior to the easter break and Zilou from the easter break onwards.
+
 The main concepts represented by our game title ‘Bomberman Dungeon’ were devised by Tianyu and Lea. Yiguang and Lea were the first to familiarise themselves with Processing and wrote a skeleton covering a basic UI, player movement and collision mechanics.
+
 Due to an unfortunate miscommunication, further improvements made to the code by Lea were accidently discarded. These improvements included procedural map generation and predictive correction of user input for smooth player movement.
+
 The remaining fundamental mechanics were split between Yiguang, Zora and Zilou. Yiguang handled bomb mechanics such as the explosion radius and its interactions with the player, enemies, and breakable rocks. Zora implemented a variety of classic power-ups that improve the players walking speed and the capabilities of the bombs in terms of range, firing power, and carrying capacity. Zilou devised the enemy AI and refactored code for readability.
+
 With an agile approach in mind additional mechanics deviated from our initial plans. Further functionality to the skill system was added by Zora who implemented coins as a reward system, and Zilou who crafted original skills which can be purchased in a shop. Zilou additionally introduced the option to enter a new level by respawning the map as well as the multiplayer mode.
+
 The game is tied together by Tianyu’s work on the UI allowing players to rebind keys, seamlessly transition between menu options and be up to date on the game state at all times. 
 Finishing touches in the form of sound effects and updated assets were made by Yiguang.
 
