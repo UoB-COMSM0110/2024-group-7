@@ -195,38 +195,46 @@ The volume of code added was considerable and required a significant amount of t
 
 ## 6. EVALUATION
 
-We invited a total of 10 users to participate in game testing to understand the navigability, usability, and appropriate difficulty level of our game. We hope to improve the game through user feedback, making it both challenging and enjoyable.
+We invited a total of 10 users to participate in user testing in order to gain a better understanding of the functionality, usability, and reliability of our game. Insights gained were used for further optimization of our game.
 
 ### 6.1 Qualitative
-We used the Think Aloud method to perform qualitative analysis during our game testing. We invited ten users to join this test, and half of them had related playing experience, and rest of them are first time playing bomber man. For the test, users are asked to verbalize their thoughts, feeling and experiences while playing the game. 
 
-Based on the results of the qualitative evaluation, we have organized several dimensions for improvement: First, player instruction. We have added simply operating instructions on the main page to help novice users quickly understand the basic rules and control method of the game, so that they can easily to get started. Second, movement fluency of the character in the game. We have enhanced the collision detection mechanism to avoid inaccuracies that may cause the risk of unnatural movement, so that we can ensuring the movement action of the character including turning, stopping, and acceleration are smooth and no delay. Furthermore, we ensured a proper balance between the number of items and enemies to maintain an appropriate level of game challenge through multiple test plays by our team members.
+We used the Think Aloud method to perform a qualitative analysis. Half of the participants had prior experience playing games within the Bomberman franchise, whereas the others didn’t. Participants were asked to verbalize their thoughts, feeling and experiences while playing our game. 
 
-Regarding the difficulty levels in the single-player mode, we introduced a hard mode to offer greater challenges, meeting the needs of experienced players for higher difficulty and more complex strategies while retaining an easy mode to allow novice players to start more comfortably and reduce beginner frustration.
+| Areas of Improvement Identified |
+| --- |
+| 1. Missing Player Instructions: Keybinding are now visible on the main menu |
+| 2. Unreliable Movement Control: Collision Detection was refined, allowing for turning, stopping, and acceleration of the player to be handled more smoothly |
+| 3. Unbalanced Difficulty Level: Number of Items and Enemies was adjusted and an addition hard game mode was introduced |
 
-Additionally, testers provided not only dimensions for improvement but also positive feedback. Users generally found the two-player mode to be very interesting, innovative, and exciting, marking a significant difference from the traditional Bomberman game. Besides, the shop design in the single-player mode was also highly praised. And through implementing various skills also further enhances the player experience.
+| Positive Feedback Received |
+| --- |
+| 1. Multiplayer mode is very enjoyable |
+| 2. Original powers greatly add to the user experience |
 
 ### 6.2 Quantitative
 
-In terms of quantitative evaluation, users had to fill out forms for NASA-TLX and SUS after they completed experienced the whole game including single-player mode and two-play model.
+We asked users to fill out both SUS and NASA-TLX questionaiires after immersinng themselves in both the single and multiplayer mode of our game.
 
-In NASA-TLX, we analyse the NASA-TLX scores for single-player and two-player modes, the Wilcoxon Significance Test at a 95% confidence interval revealed no significant difference as well(W test statistic = 15). However, take a detailed look across these six dimensions, indiciating the scores between these two modes are quite similar for Mental Demand, Physical Demand, Effort, and Frustration. We could have a conclusion that users are required to put a considerable amount of effort while playing the game without experiencing excessive mental or physical burden. Additionally, low to moderate frustration scores show that most players do not feel overly discouraged by the game.
+### 6.2.1 NASA-TLX
 
-It is worth noting that Temporal Demand is significantly higher in two-player mode compared to single-player mode, revealing that time pressure is obvious in the two-player mode. This is making sense because there is a countdown timer in two-player mode, users have to response quickly within a limited timeframe. This is also reflected in the Performance aspect, where the added time pressure and competitive element of playing against other players may more readily impact performance.
+Analysing survey results using the Wilcoxon Signed-Rank Test with a significance level of 5%, indicates no significant difference between the single and multiplayer modes (W Test Statistic = 15). Taking a detailed look at all six dimensions of the test, reveals that scores for Mental Demand, Physical Demand, Effort, and Frustration are similar in both game modes. Therefore, we can conclude a balanced user experience in which the player can leisurely play without experiencing pronounced levels of frustration.
+It is worth noting that Temporal Demand is significantly higher in the multiplayer mode than in the singleplayer mode. This confirms the intended effect of the countdown timer in multiplayer mode that restricts player movement and encourages them to approach and defeat their enemy. This feature seemingly also impacts Performance scores leaving players less satisfied due to the competitive element.
 
 ![NASA-TLX: Single-Player mode](Assets/Images/NASA_single.png)
 ![NASA-TLX: Two-Player mode](Assets/Images/NASA_two.png)
 
-In SUS, the average score for single-player mode and two-player mode are 76.5 and 79.5, respectively, both over the general usability benchmark of 68. Moreover, most of the users’ scores are all above this threshold, indicating that users gave positive feedback on usability. We also conducted a Wilcoxon Significance Test to evaluate if there is a significant difference in usability between these two modes. The resulting W test statistic is 21.0. According to the Wilcoxon critical values table, it does not denote a significant difference at a 95% confidence level for a sample size N=10. This outcome aligns with our expectations, the reason is that the operation methods between the different modes are very similar, with only game design variations, thus not significantly impacting usability assessments.
+### 6.2.2 SUS
+
+The average score for singleplayer and multiplayer mode are 76.5 and 79.5, respectively. Both of which are higher than the general usability benchmark of 68. Results of a Wilcoxon Signed-Rank Test at 5% Significance level further indicated no significant difference in usability between single and multiplayer mode (W Test Statistic = 21). This outcome aligns with our expectations, as fundamental mechanics as well as assets do not differ between modes.
 
 
 ![SUS: Single-Player mode](Assets/Images/SUS_single.png)
 ![SUS: Two-Player mode](Assets/Images/SUS_two.png)
 
 ### 6.3 Code Testing
-We used Processing for our game development software, which has limited support for unit testing. So our code testing has mainly focused on user testing and developer testing, which our team member conducted playtesting while developed a new feature, and also executed countless playtests upon the completion of the game.
 
-For the user testing, we employed the Think Aloud method throughout the development phase to gather user feedback and optimize the game based on these insights. In the subsequent phase, we collected user opinions through quantitative questionnaires. The results indicated that our game performs well in terms of usability, and the workloads were not burdensome for players. We also received positive feedback regarding the game experience and challenges.
+As our codebase was in constant flux and was refactored multiple times, we did not conduct unit testing but rather focused our efforts on playtesting during the development of new features as well as after their integration. This has allowed us to identify numerous bugs ranging from errors in the HUD to dead zones within the map. With the addition of user testing, we are confident in the reliability of our game.
 
 ## 7. PROCESS
 
@@ -236,7 +244,7 @@ Due to the small size of our team, we never assigned ourselves clear roles as mu
 The main concepts represented by our game title ‘Bomberman Dungeon’ were devised by Tianyu and Lea. Yiguang and Lea were the first to familiarise themselves with Processing and wrote a skeleton covering a basic UI, player movement and collision mechanics.
 Due to an unfortunate miscommunication, further improvements made to the code by Lea were accidently discarded. These improvements included procedural map generation and predictive correction of user input for smooth player movement.
 The remaining fundamental mechanics were split between Yiguang, Zora and Zilou. Yiguang handled bomb mechanics such as the explosion radius and its interactions with the player, enemies, and breakable rocks. Zora implemented a variety of classic power-ups that improve the players walking speed and the capabilities of the bombs in terms of range, firing power, and carrying capacity. Zilou devised the enemy AI and refactored code for readability.
-With an agile approach in mind additional mechanics deviated from our initial plans. Further functionality to the skill system was added by Zora who implemented coins as a reward system, and Zilou who crafted original skills which can be purchased in a shop. Zilou additionally introduced the multiplayer mode.
+With an agile approach in mind additional mechanics deviated from our initial plans. Further functionality to the skill system was added by Zora who implemented coins as a reward system, and Zilou who crafted original skills which can be purchased in a shop. Zilou additionally introduced the option to enter a new level by respawning the map as well as the multiplayer mode.
 The game is tied together by Tianyu’s work on the UI allowing players to rebind keys, seamlessly transition between menu options and be up to date on the game state at all times. 
 Finishing touches in the form of sound effects and updated assets were made by Yiguang.
 
