@@ -54,6 +54,7 @@ During the week 3 workshop we quickly made a firm decision to go ahead with 'Bom
 
 [![Prototype](Assets/Images/prototypeMainMenu.PNG)]()
 
+![Sprite Sheet](Assets/Images/spriteSheet.PNG)
 
 ### 3.3 Stakeholder Stories
 
@@ -167,6 +168,8 @@ Upon entering the world of  ‘Bomberman Dungeon’ the player can choose betwee
 #### 4.3.2 Map
 
 The map is based on 30x30px tiles which the player views top-down. It consists of non-destructible walls enclosing the dungeon as well as additional walls placed in a checkerboard pattern. In multiplayer mode map RNG is limited to  breakable rocks. In singleplayer mode rocks and enemies as well as two shops are randomly distributed throughout the map. Rocks furthermore have the potential to hide powerups, coins, keys, and the door until they are destroyed. The door requires a key to open and leads to the next level. 
+
+![Example Map](Assets/Images/map.PNG)
 
 #### 4.3.3 Player and Combat System
 
