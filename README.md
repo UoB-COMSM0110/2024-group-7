@@ -54,7 +54,6 @@ During the week 3 workshop we quickly made a firm decision to go ahead with 'Bom
 
 [![Prototype](Assets/Images/prototypeMainMenu.PNG)]()
 
-![Sprite Sheet](Assets/Sprites/spriteSheet.png)
 
 ### 3.3 Stakeholder Stories
 
@@ -152,7 +151,6 @@ The main `GameLoop` class outsources most functionality to other classes such as
 
 When called, `Map.generate()` populates a 2D array in the main class with Instances of `Tile` that each contain information on the type of object placed on the map as well as its position and sprite. At present the only objects spawned are floor, rock and inner as well as outer wall. Map RNG can not only be customized by defining the size and number of rooms but also by including additional types of objects or further specialising present objects. Iterating over rocks could therefore assign them items such as coins or powerups to hide. As the map exceeds the screen size, `Map.render()` saves resources by only addressing tiles contained within the game window. 
 
-![Example Map](Assets/Images/map.PNG)
 
 Legend: # Unbreakable Wall, R Rock, C Crystal
 
