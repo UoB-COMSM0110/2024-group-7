@@ -1,5 +1,7 @@
 # GROUP 7 💣  BOMBERMAN DUNGEON
 
+## 🎥 PROMOTIONAL VIDEO
+
 [![Promotional Video](Assets/Images/mainMenu9.PNG)](https://www.youtube.com/watch?v=ispMEXkR_t4)
 
 ## 1. TEAM
@@ -18,7 +20,6 @@
 
 ## 2. INTRODUCTION
 
-Describe your game, what is based on, what makes it novel?
 Our game ‘Bomberman Dungeon’ is based on NES and SNES era [Bomberman]( https://en.wikipedia.org/wiki/Bomberman) games. Like it’s namesake our game offers a single player as well as a multiplayer mode in which players clear their way through a grid-based map with the help of their trusty bombs.
 Both modes feature the established combat mechanics of bombs being able to blast through breakable walls,  enemies as well as the players themselves. Multiplayer mode largely remains true to its inspiration, offering a two-player death match on a map that dwindles as time progresses. Single player mode however adds two exciting new features. Not only is the player now able to collect coins instead of points, which they can then trade for all-new single or multi-use power ups in the store. But they can also find hidden doors leading deeper into the dungeon increasing the difficulty of gameplay. 
 
@@ -229,30 +230,39 @@ For the user testing, we employed the Think Aloud method throughout the developm
 
 ## 7. PROCESS
 
-### 7.1 Teamwork
-Our team of five members deeply engaged in both game design and coding throughout this project. We operated without clear role assignments, but each member contributed their strengths effectively, ensuring the success of our endeavor.
+### 7.1.1 Game
 
-During the brainstorming phase, Lea catalyzed our creativity with a plethora of innovative ideas, inspiring the team significantly. Tianyu then proposed the idea that resonated with all of us, ultimately becoming the foundation of our game.
+Due to the small size of our team, we never assigned ourselves clear roles as multifaceted contributions were required from all team members. Initiative as a team lead alone was based on availability, with Lea directing efforts prior to the easter break and Zilou from the easter break onwards.
+The main concepts represented by our game title ‘Bomberman Dungeon’ were devised by Tianyu and Lea. Yiguang and Lea were the first to familiarise themselves with Processing and wrote a skeleton covering a basic UI, player movement and collision mechanics.
+Due to an unfortunate miscommunication, further improvements made to the code by Lea were accidently discarded. These improvements included procedural map generation and predictive correction of user input for smooth player movement.
+The remaining fundamental mechanics were split between Yiguang, Zora and Zilou. Yiguang handled bomb mechanics such as the explosion radius and its interactions with the player, enemies, and breakable rocks. Zora implemented a variety of classic power-ups that improve the players walking speed and the capabilities of the bombs in terms of range, firing power, and carrying capacity. Zilou devised the enemy AI and refactored code for readability.
+With an agile approach in mind additional mechanics deviated from our initial plans. Further functionality to the skill system was added by Zora who implemented coins as a reward system, and Zilou who crafted original skills which can be purchased in a shop. Zilou additionally introduced the multiplayer mode.
+The game is tied together by Tianyu’s work on the UI allowing players to rebind keys, seamlessly transition between menu options and be up to date on the game state at all times. 
+Finishing touches in the form of sound effects and updated assets were made by Yiguang.
 
-In the realm of game design, Lea spearheaded the construction of the fundamental framework, laying the groundwork with initial code and basic art resources. Zilou contributed numerous ideas to enhance our game, including the implementation of a PvP mode and various skills.
+### 7.1.2 Video
 
-During development, Yiguang, Zilou, and Zora were primarily responsible for coding the game logic, while Tianyu focused on UI and interface design. Notably, Zilou refactored our codebase to improve readability, and Yiguang enhanced visual effects for a more aesthetically pleasing experience.
+The Video was scripted, directed and edited by Zilou.
 
-In the documentation phase and the creation of our demo video, Lea recorded our initial project discussions, which Tianyu subsequently organized and edited. Yiguang, Zilou, and Zora contributed to the remaining written content, with Yiguang also producing the demo video.
+### 7.1.3 Report
 
-We unanimously acknowledge the indispensable contributions of each team member, recognizing that the absence of any individual would have made the project significantly more challenging.
+-	Section 2: Tianyu
+-	Section 3: Lea 
+-	Section 4.1 + 4.3: Zilou
+-	Section 4.2: Lea
+-	Section 5: Yiguang
+-	Section 6: Zora
+-	Section 7: Lea
+-	Section 8: Tianyu
 
 ### 7.2 TOOLS
 
-- [Slack](https://bombermandungeon.slack.com/ssb/redirect) Served as our initial Instant messager, but we seldom use it then,
-- [Jira](https://bomberman-dungeon.atlassian.net/jira/software/projects/BOM/boards/1) We employed Jira as a Kanban board to monitor our progress effectively.
+- [WeChat](https://www.wechat.com/): As every team member was already familiar with this instant messenger, it was used to organise meetings and share progress reports
+- [Slack]( https://slack.com/intl/en-gb): During the research phase different channels were used to effectively organise and share materials. Unfortunately, usage did not gain traction and WeChat remained the sole communication platform.
+- [Jira]( https://www.atlassian.com/software/jira): We utilized a classic Kanban Board split into sections ‘In Progress’, ‘To-Do’ and ‘Done’. During in person meetings members would review proposed tasks and assign themselves those they preferred doing and matched their schedules best.
+- [IntelliJ IDEA]( https://www.jetbrains.com/idea/): We mistakenly started developing in Java, instead importing Processing as a library. Therefore, a majority of development was undertaken in IntelliJ. We later switched to [PDE]( https://processing.org/) to verify that our .pde files ran correctly.
+- [Git]( https://docs.github.com/en/get-started/using-github/github-flow): We aimed to and for the most part succeeded in using ‘GitHub flow’ workflow in which features are developed in their own short lived branches before being merged back into main.
 
-- Wechat: Serving as our primary instant messenger, Wechat facilitated concise communication for tasks such as bug reporting, meeting invitations, feature notifications, and code reviews.
-- IntelliJ IDEA: As our project initially began in Java and was later converted into Processing, IntelliJ IDEA served as our primary development environment for coding.
-- Git: Utilizing Git for version control, with the remote repository hosted on Github, we followed a workflow where new features were developed in independent branches before undergoing code review by other team members and subsequently merging into the main branch.
-- 
-### 7.3 Challenges and Resolutions
-Despite our collective efforts, challenges and conflicts arose throughout our teamwork. There were discrepancies regarding scheduling preferences, with some advocating for completing tasks before the Easter holiday while others favored working during the holiday period. Additionally, although the final game was well-received overall, not every team member was entirely satisfied, as certain deviations from our initial design draft occurred. The introduction of new features during the development phase also sparked discussions within the team, with decisions not always reaching unanimous agreement. However, despite these challenges, we successfully completed the project.
 
 ### 7.3 Code Style
 
