@@ -6,16 +6,17 @@
 
 ## TABLE OF CONTENTS
 
-- [1. TEAM](#1.-TEAM)
-- [2. INTRODUCTION](#2.-INTRODUCTION)
-- [3. REQUIREMENTS](#3.-REQUIREMENTS)
-- [4. DESIGN](#4.-DESIGN)
-- [5. IMPLEMENTATION](#5.-IMPLEMENTATIONs)
-- [6. EVALUATION](#6.-EVALUATION)
-- [7. PROCESS](#7.-PROCESS)
-- [8. CONCLUSION](#8.-CONCLUSION)
+1. [TEAM](#team)  
+2. [INTRODUCTION](#intro)  
+3. [REQUIREMENTS](#req)  
+4. [DESIGN](#des)  
+5. [IMPLEMENTATION](#imp)  
+6. [EVALUATION](#eval)  
+7. [PROCESS](#pro)
+8. [CONCLUSION](#con)    
 
-## 1. TEAM
+
+<h2 id="team">1. TEAM</h2>
 
 ![Group Picture](Assets/Images/videoStill.PNG)
 
@@ -29,12 +30,12 @@
 |[Zilou Li](htps://github.com/ne23594g) | [ne23594@bristol.ac.uk](mailto:ne23594@bristol.ac.uk)|
 |[Zora Chen](htps://github.com/fg23262) | [fg23262@bristol.ac.uk](mailto:fg23262@bristol.ac.uk)|
 
-## 2. INTRODUCTION
+<h2 id="intro">2. INTRODUCTION</h2>
 
 Our game *Bomberman Dungeon* is based on NES and SNES era [Bomberman]( https://en.wikipedia.org/wiki/Bomberman) games. Like it’s namesake our game offers a single player as well as a multiplayer mode in which players clear their way through a grid-based map with the help of their trusty bombs.
 Both modes feature the established combat mechanics of bombs being able to blast through breakable walls,  enemies as well as the players themselves. Multiplayer mode largely remains true to its inspiration, offering a two-player death match on a map that dwindles as time progresses. Single player mode however adds two exciting new features. Not only is the player now able to collect coins instead of points, which they can then trade for all-new single or multi-use power ups in the store. But they can also find hidden doors leading deeper into the dungeon. 
 
-## 3. REQUIREMENTS
+<h2 id="req">3. REQUIREMENTS</h2>
 
 ### 3.1 Ideation Process
 
@@ -135,7 +136,7 @@ Created with PlantUML
 | <span style="color:red;"> Bomb Yourself: Game Over </span> | ~~Or be better at the Game~~ |
 | Restart with Meta Progression  | Try other Timed Mode instead ~~or exit~~|
 
-## 4. DESIGN
+<h2 id="des">4. DESIGN</h2>
 
 ### 4.1 Class Diagram
 
@@ -153,7 +154,7 @@ When called, `Map.generate()` populates a 2D array in the main class with Instan
 
 ![Example Map](Assets/Images/map.PNG)
 
-Legend: # Unbreakable Wall
+Legend: # Unbreakable Wall, R Rock, C Crystal
 
 #### 4.2.2 Collision & Player Class
 
@@ -178,7 +179,7 @@ The player is attributed with a modifiable health state, movement speed and coin
 The player can obtain classic powerups such as ‘speedup’ which increases player speed, ‘bombup’ for an increased bomb carrying capacity, ‘fireup’ for an increased bomb range and ‘healthup’ for increased player health.
 5 novel single use skills can be purchased with coins in the shop. ‘RemoveAllRocks’  removes all breakable rocks on the level, whereas ‘KillAllEnemies’ removes all enemies and ‘MoveToTheDoor’ teleports the player to the door. ‘VerticalFlames’ and ‘RoundFlames’ further increase the destructive range of bombs.
 
-## 5. IMPLEMENTATION
+<h2 id="imp">5. IMPLEMENTATION</h2>
 
 During the development process, we encountered numerous challenges. While the implementation of individual features was relatively straightforward, integrating them often required modifications to the existing code base. Three challenges stood out.
 
@@ -206,7 +207,7 @@ Implementing this feature required adjustments to vast amounts of code pertainin
 
 For instance, in order to reset breakable rocks, the map must first be cleared of and repopulated with rocks. Then the collision detection array must be updated according to the placement of the new rocks. Finally, new items need to be associated with the rocks.
 
-## 6. EVALUATION
+<h2 id="eval">6. EVALUATION</h2>
 
 We invited a total of 10 users to participate in user testing in order to gain a better understanding of the functionality, usability, and reliability of our game. Insights gained were used for further optimization of our game.
 
@@ -250,7 +251,7 @@ The average score for singleplayer and multiplayer mode are 76.5 and 79.5, respe
 
 As our codebase was in constant flux and was refactored multiple times, we did not conduct unit testing but rather focused our efforts on playtesting during the development of new features as well as after their integration. This has allowed us to identify numerous bugs ranging from errors in the HUD to dead zones within the map. With the addition of user testing, we are confident in the reliability of our game.
 
-## 7. PROCESS
+<h2 id="pro">PROCESS</h2>
 
 ### 7.1.1 Game
 
@@ -304,7 +305,7 @@ public class Bomberman extends PApplet {
 }
 ```
 
-## 8. CONCLUSION
+<h2 id="con">8. CONCLUSION</h2>
 
 Developing *Bomberman Dungeon* was our first official introduction to using libraries and excellently complemented our journey of learning Java and OOP throughout the term. It additionally gave us a creative outlet for digital art and videography among other disciplines. For those of us looking to work in industry, learning the agile approach and associated techniques provides great soft skills. 
 
