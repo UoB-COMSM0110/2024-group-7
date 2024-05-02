@@ -144,6 +144,8 @@ Created with PlantUML
 
 Created with PlantUML
 
+We adhere to the principles of object-oriented programming (OOP) to implement various functionalities. Entities such as walls, destructible rocks, players, and power-up items are represented as distinct classes. By employing inheritance, we extract common methods from these basic classes. For instance, both the player and enemies are sub-classes of the 'character' class, sharing methods such as damage from flames; similarly, various power-up items are grouped under the 'items' class, sharing methods for generation and rendering. This approach enhances the clarity of our code's hierarchy, rendering it more amenable to modifications and debugging.
+
 ### 4.2 Discarded System Architecture
 
 The main `GameLoop` class outsources most functionality to other classes such as dedicated Event Listener classes `Keyboard` and `Mouse` and the `Assets` class which at present loads fonts and sprites. The `Settings` class aims to provide a centralised place to adjust values influencing the game state such as Boolean Variables representing whether powerups have been acquired. 
