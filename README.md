@@ -52,6 +52,9 @@ We evaluated 4+ options and decided to develop a game based on [Bomberman]( http
 
 During the week 3 workshop we quickly made a firm decision to go ahead with 'Bomberman Dungeon' and created a rudimentary paper prototype. As we received positive feedback from other groups exploring our prototype, we did not create a second prototype and instead dove straight into creating sprites and other assets to make a digital prototype. The digital prototype aimed to both identify elements in need of implementation as well as provide sprites/assets to aid testing the playability of the game early on.
 
+### 🎥 PROTOTYPE
+
+[![Prototype](Assets/Images/prototypeMainMenu.PNG)](Assets/Images/prototype.MP4)
 
 ![Sprite Sheet](Assets/Images/spriteSheet.PNG)
 
