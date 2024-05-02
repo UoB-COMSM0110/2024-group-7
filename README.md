@@ -261,8 +261,6 @@ Due to the small size of our team, we never assigned ourselves clear roles as mu
 
 The main concepts represented by our game title ‘Bomberman Dungeon’ were devised by Tianyu and Lea. Yiguang and Lea were the first to familiarise themselves with Processing and wrote a skeleton covering a basic UI, player movement and collision mechanics.
 
-Due to an unfortunate miscommunication, further improvements made to the code by Lea were accidently discarded. These improvements included procedural map generation and predictive correction of user input for smooth player movement.
-
 The remaining fundamental mechanics were split between Yiguang, Zora and Zilou. Yiguang handled bomb mechanics such as the explosion radius and its interactions with the player, enemies, and breakable rocks. Zora implemented a variety of classic power-ups that improve the players walking speed and the capabilities of the bombs in terms of range, firing power, and carrying capacity. Zilou devised the enemy AI and refactored code for readability.
 
 With an agile approach in mind additional mechanics deviated from our initial plans. Further functionality to the skill system was added by Zora who implemented coins as a reward system, and Zilou who crafted original skills which can be purchased in a shop. Zilou additionally introduced the option to enter a new level by respawning the map as well as the multiplayer mode.
@@ -307,13 +305,22 @@ public class Bomberman extends PApplet {
 }
 ```
 
+### 7.4 Individual Contribution Table
+
+| MEMBER | Individual Contribution |
+| -----| ----- |
+| Tianyu Liu | 1 |
+| Lea Lewis | 1 |
+| Yiguang Chen | 1 |
+| Zilou Li | 1 |
+| Zora Chen | 1 |
+
+
 <h2 id="con">8. CONCLUSION</h2>
 
 Developing *Bomberman Dungeon* was our first official introduction to using libraries and excellently complemented our journey of learning Java and OOP throughout the term. It additionally gave us a creative outlet for digital art and videography among other disciplines. For those of us looking to work in industry, learning the agile approach and associated techniques provides great soft skills. 
 
 Reflecting on our project as a whole, reveals how far the game has come compared to initial predictions made in the Use Case and Class Diagrams. With our newfound knowledge of System Architecture however, it is clear that drafting more detailed Class and Behavioural Diagrams would allow for a smoother development experience as features could be integrated more easily.
-
-Along the way we have certainly improved our individual problem-solving skills but as a group we lacked effective communication. Separating the workload based on individual features discouraged active involvement of other members leading to a longer and less efficient development process. Using an instant messenger as opposed to a teamwork centric platform caused crucial bits of information to be overlooked. This in turn led to accidently discarding and having to recreate large sections of code, putting strain on the group overall.
 
 If we were to continue work on our game, then refactoring and documenting our code to create a modular and legible code base would be a top priority. This would allow for previously discarded code to be integrated and enrichen the dungeon with exciting new maps and an even smoother gameplay. These new, larger maps would highlight the need to rework the game balance which would provide us with an opportunity to add new enemy types and perhaps ‘power-downs’. Furthermore, we could revisit Jira tickets filed as optional such as providing online multiplayer via web sockets and transforming Singleplayer easy mode into an untimed mode that increases in difficulty the longer the player remains in the game and hard mode into a timed mode in which the player aims to reach high scores by killing enemies under a time constraint. Last but not least a refactored code base would allow for selective resetting of achievements, which could open up an opportunity for a meta progression system.
 
