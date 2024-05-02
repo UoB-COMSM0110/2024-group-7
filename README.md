@@ -152,6 +152,7 @@ The main `GameLoop` class outsources most functionality to other classes such as
 
 When called, `Map.generate()` populates a 2D array in the main class with Instances of `Tile` that each contain information on the type of object placed on the map as well as its position and sprite. At present the only objects spawned are floor, rock and inner as well as outer wall. Map RNG can not only be customized by defining the size and number of rooms but also by including additional types of objects or further specialising present objects. Iterating over rocks could therefore assign them items such as coins or powerups to hide. As the map exceeds the screen size, `Map.render()` saves resources by only addressing tiles contained within the game window. 
 
+![Example Map](Assets/Images/map.PNG)
 
 Legend: # Unbreakable Wall, R Rock, C Crystal
 
@@ -168,8 +169,6 @@ Upon entering the world of  ‘Bomberman Dungeon’ the player can choose betwee
 #### 4.3.2 Map
 
 The map is based on 30x30px tiles which the player views top-down. It consists of non-destructible walls enclosing the dungeon as well as additional walls placed in a checkerboard pattern. In multiplayer mode map RNG is limited to  breakable rocks. In singleplayer mode rocks and enemies as well as two shops are randomly distributed throughout the map. Rocks furthermore have the potential to hide powerups, coins, keys, and the door until they are destroyed. The door requires a key to open and leads to the next level. 
-
-![Example Map](Assets/Images/map.PNG)
 
 #### 4.3.3 Player and Combat System
 
