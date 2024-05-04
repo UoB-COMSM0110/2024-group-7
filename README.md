@@ -146,8 +146,6 @@ Created with PlantUML
 
 Created with PlantUML
 
-We adhere to the principles of object-oriented programming (OOP) to implement various functionalities. Entities such as walls, destructible rocks, players, and power-up items are represented as distinct classes. By employing inheritance, we extract common methods from these basic classes. For instance, both the player and enemies are sub-classes of the 'character' class, sharing methods such as damage from flames; similarly, various power-up items are grouped under the 'items' class, sharing methods for generation and rendering. This approach enhances the clarity of our code's hierarchy, rendering it more amenable to modifications and debugging.
-
 ### 4.2 Discarded System Architecture
 
 The main `GameLoop` class outsources most functionality to other classes such as dedicated Event Listener classes `Keyboard` and `Mouse` and the `Assets` class which at present loads fonts and sprites. The `Settings` class aims to provide a centralised place to adjust values influencing the game state such as Boolean Variables representing whether powerups have been acquired. 
@@ -165,6 +163,8 @@ Legend: # Unbreakable Wall, R Rock, C Crystal
 The player may get stuck in ‘dead corners’ of junctions between inner walls if they over- or undershoot the centre of the junction while attempting to make a turn. `Collision.check()` is fed a snapshot of the current user input due to the discrepancy between the game refresh rate and the speed at which the event listener registers keypresses. The function sanitizes user input,  and cascades  into further functions that assign the attempted movement to one of 12 categories which either allow for a direct execution on movement if no collision is involved or task the autopilot to reposition the player to the nearest junction prior to execution if the centre has been just barely over- or undershot. If the tiles between the player and their goal are of type ‘floor’, then no collision has occurred. In order to traverse the map, player movement affects translation of the map along a 2D axis, displacing it within the display window, making the player appear stationary.
 
 ### 4.3 Present System Architecture
+
+We adhere to the principles of object-oriented programming (OOP) to implement various functionalities. Entities such as walls, destructible rocks, players, and power-up items are represented as distinct classes. By employing inheritance, we extract common methods from these basic classes. For instance, both the player and enemies are sub-classes of the 'character' class, sharing methods such as damage from flames; similarly, various power-up items are grouped under the 'items' class, sharing methods for generation and rendering. This approach enhances the clarity of our code's hierarchy, rendering it more amenable to modifications and debugging.
 
 #### 4.3.1 Main Menu
 
